@@ -1,13 +1,14 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import static com.example.jangwon.welcomeseoullo.R.id.byCar;
 
 public class PathInfoActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class PathInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_path_info);
 
-        final Button byCarButton = (Button) findViewById(byCar);
+        final Button byCarButton = (Button) findViewById(R.id.byCar);
         final Button byBusButton = (Button) findViewById(R.id.byBus);
         final Button onFootButton = (Button) findViewById(R.id.onFoot);
         byCarButton.setTextColor(Color.parseColor("#FF0000"));
@@ -26,6 +27,7 @@ public class PathInfoActivity extends AppCompatActivity {
                 byCarButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
+                switchFragment(view);
             }
 
         });
@@ -35,6 +37,7 @@ public class PathInfoActivity extends AppCompatActivity {
                 byBusButton.setTextColor(Color.parseColor("#FF0000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
+                switchFragment(view);
             }
 
         });
@@ -44,8 +47,28 @@ public class PathInfoActivity extends AppCompatActivity {
                 onFootButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
+                switchFragment(view);
             }
 
         });
     }
+
+    public void switchFragment(View view){
+        Fragment fr;
+
+        if(view == findViewById(R.id.byCar)){
+            fr = new CarFragment();
+        }else if(view == findViewById(R.id.byBus)){
+            fr = new BusFragment();
+        }else{
+            fr = new FootFragment();
+        }
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_place, fr);
+        fragmentTransaction.commit();
+    }
+
+
 }

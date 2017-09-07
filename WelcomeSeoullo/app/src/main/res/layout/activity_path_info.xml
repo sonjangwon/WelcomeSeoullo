@@ -95,10 +95,13 @@
             android:text="도보"
             android:textStyle="bold" />
     </LinearLayout>
-    <RelativeLayout
-        android:id="@+id/mapview"
+    <fragment
+        android:id="@+id/fragment_place"
+        android:name="com.example.jangwon.welcomeseoullo.CarFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10">
-    </RelativeLayout>
+        tools:layout="@layout/activity_main"
+        android:layout_weight="8.5" />
+
+
 </LinearLayout>

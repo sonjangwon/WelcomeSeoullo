@@ -9,10 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".PathInfoActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".PathInfoActivity" />
         <activity android:name=".TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CarFragment" />
+        <activity android:name=".BusFragment" />
+        <activity android:name=".FootActivity" />
+        <activity android:name=".FootFragment" />
+        <activity android:name=".GuideInfoActivity"></activity>
     </application>
 
 </manifest>
