@@ -10,7 +10,7 @@ public class BusFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
-        return inflater.inflate(R.layout.activity_bus_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_bus, container, false);
     }
 
 

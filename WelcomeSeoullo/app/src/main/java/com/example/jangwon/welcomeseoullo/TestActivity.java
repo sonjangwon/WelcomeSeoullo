@@ -28,7 +28,7 @@ public class TestActivity extends AppCompatActivity {
         button2.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(TestActivity.this, PathInfoActivity.class));
+                startActivity(new Intent(TestActivity.this, GuideInfoActivity.class));
             }
 
         });
