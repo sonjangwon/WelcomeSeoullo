@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">WelcomeSeoullo</string>
+
+    <string name="text_home">Home</string>
+    <string name="text_route">Route</string>
+    <string name="text_AR">AR</string>
+    <string name="text_facility">Facility</string>
+    <string name="text_settings">Settings</string>
 </resources>
