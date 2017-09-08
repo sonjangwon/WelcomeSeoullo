@@ -7,15 +7,11 @@
     tools:context="com.example.jangwon.welcomeseoullo.FootFragment"
     android:background="#FFFFFF">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_weight="1"
-        android:text="도보경로 맵뷰"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="15dp"
+    <RelativeLayout
+        android:id="@+id/footMapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#ACACAC"/>
 
 
 

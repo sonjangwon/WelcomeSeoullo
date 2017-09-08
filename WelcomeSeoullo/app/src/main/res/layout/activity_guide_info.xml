@@ -14,6 +14,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/categoryLinearLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
@@ -34,6 +35,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/rangeLinearLayout"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.6"
@@ -59,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="70dp"
-        android:background="#FFFFFF">
+        android:background="#ACACAC">
 
         <TextView
             android:id="@+id/textView1"

@@ -53,15 +53,55 @@ public class PathInfoActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        final Button byCarButton = (Button) findViewById(R.id.byCar);
+        final Button byBusButton = (Button) findViewById(R.id.byBus);
+        final Button onFootButton = (Button) findViewById(R.id.onFoot);
+        byCarButton.setTextColor(Color.parseColor("#FF0000"));
+        byCarButton.setOnClickListener(new EditText.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                byCarButton.setTextColor(Color.parseColor("#FF0000"));
+                byBusButton.setTextColor(Color.parseColor("#000000"));
+                onFootButton.setTextColor(Color.parseColor("#000000"));
+                switchFragment(view);
+            }
+
+        });
+        byBusButton.setOnClickListener(new EditText.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                byBusButton.setTextColor(Color.parseColor("#FF0000"));
+                byCarButton.setTextColor(Color.parseColor("#000000"));
+                onFootButton.setTextColor(Color.parseColor("#000000"));
+                switchFragment(view);
+            }
+
+        });
+        onFootButton.setOnClickListener(new EditText.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onFootButton.setTextColor(Color.parseColor("#FF0000"));
+                byBusButton.setTextColor(Color.parseColor("#000000"));
+                byCarButton.setTextColor(Color.parseColor("#000000"));
+                switchFragment(view);
+            }
+
+        });
+    }
+
     public void switchFragment(View view){
-        Fragment fr;
+        Fragment fr = new Fragment();
 
         if(view == findViewById(R.id.byCar)){
-            fr = new CarFragment();
+                fr = new CarFragment();
+
         }else if(view == findViewById(R.id.byBus)){
-            fr = new BusFragment();
+                fr = new BusFragment();
         }else{
-            fr = new FootFragment();
+                fr = new FootFragment();
         }
 
         FragmentManager fm = getFragmentManager();
