@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
 
     <TextView
@@ -45,7 +46,12 @@
         android:text="@string/text_settings"
         android:visibility="gone"/>
 
-
+    <fragment
+        android:id="@+id/main_fragment_place"
+        android:name="com.example.jangwon.welcomeseoullo.CarFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/activity_main" />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -53,26 +59,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/white"
+        app:itemBackground="@color/white"
+        app:itemIconTint="@drawable/select_bottom_navigation"
+        app:itemTextColor="@drawable/select_bottom_navigation"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:menu="@menu/bottom_navigation_main" />
-
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/container"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
-
-    <!--<android.support.design.widget.BottomNavigationView-->
-        <!--android:id="@+id/bottom_navigation"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:itemBackground="@color/colorPrimary"-->
-        <!--app:itemIconTint="@color/white"-->
-        <!--app:itemTextColor="@color/white"-->
-        <!--app:layout_anchor="@id/container"-->
-        <!--app:layout_anchorGravity="bottom"-->
-        <!--app:menu="@menu/bottom_navigation_main" />-->
 
 </android.support.design.widget.CoordinatorLayout>

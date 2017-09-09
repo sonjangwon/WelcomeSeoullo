@@ -1,7 +1,7 @@
 package com.example.jangwon.welcomeseoullo;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class GuideInfoActivity extends AppCompatActivity {
 
@@ -10,4 +10,5 @@ public class GuideInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_info);
     }
+
 }

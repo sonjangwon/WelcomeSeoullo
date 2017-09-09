@@ -1,0 +1,19 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jangwon.welcomeseoullo.RouteFragment"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_weight="1"
+        android:text="jae test start from here"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

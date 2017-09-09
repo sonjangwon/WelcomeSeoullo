@@ -49,7 +49,6 @@ public class PathInfoActivity extends AppCompatActivity {
                 byCarButton.setTextColor(Color.parseColor("#000000"));
                 switchFragment(view);
             }
-
         });
     }
 
@@ -69,6 +68,5 @@ public class PathInfoActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment_place, fr);
         fragmentTransaction.commit();
     }
-
 
 }
