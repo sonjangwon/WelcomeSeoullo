@@ -22,10 +22,11 @@ public class PathTracker {
 
     int totalTime =0;
     int totalDistance =0;
+    int taxiFare =0;
 
 
 
-    public PathTracker(final TMapPoint startpoint, final TMapPoint endpoint) {  //final TMapData.TMapPathType type,
+    public PathTracker(final String pathType, final TMapPoint startpoint, final TMapPoint endpoint) {  //final TMapData.TMapPathType type,
         (new Thread() {
             public void run() {
                 try {
@@ -33,11 +34,11 @@ public class PathTracker {
                     TMapPolyLine polyline = new TMapPolyLine();
                     StringBuilder uri = new StringBuilder();
                     uri.append("https://apis.skplanetx.com/tmap/");
-//                    if(TMapData.TMapPathType.CAR_PATH == type) {
+                    if(pathType == "carPath") {
                         uri.append("routes?version=1");
-//                    } else if(TMapData.TMapPathType.PEDESTRIAN_PATH == type) {
-//                        uri.append("routes/pedestrian?version=1");
-//                    }
+                    } else if(pathType == "footPath") {
+                        uri.append("routes/pedestrian?version=1");
+                    }
                     StringBuilder content = new StringBuilder();
                     content.append("reqCoordType=WGS84GEO&resCoordType=WGS84GEO&format=xml");
                     content.append("&startY=").append(startpoint.getLatitude());
@@ -60,15 +61,19 @@ public class PathTracker {
                     if(e != null) {
                         NodeList list = e.getElementsByTagName("tmap:totalTime");
                         NodeList list2 = e.getElementsByTagName("tmap:totalDistance");
-                        int mm =0;
+                        NodeList list3 = e.getElementsByTagName("tmap:taxiFare");
+
                         Node timeItem = list.item(0);
                         Node distanceItem = list2.item(0);
+                        Node taxiFareItem = list3.item(0);
                         totalDistance = Integer.parseInt(distanceItem.getTextContent());
                         totalTime = Integer.parseInt(timeItem.getTextContent());
+                        taxiFare = Integer.parseInt(taxiFareItem.getTextContent());
 
                         Integer bun = Integer.parseInt(timeItem.getTextContent()) / 60;
                         Log.e(" 총 시간 ",":  "+ bun/60 + "시간 " + bun%60 + "분");
                         Log.e(" 총 거리 ",":  " + Integer.parseInt(distanceItem.getTextContent()));
+                        Log.e(" 택시 요금 ",":  " + Integer.parseInt(taxiFareItem.getTextContent()));
                     }
                 } catch (Exception e) {
                     Log.i("error","error");
@@ -83,6 +88,10 @@ public class PathTracker {
 
     public int getTotalTime(){
         return totalTime;
+    }
+
+    public int getTaxiFare(){
+        return taxiFare;
     }
 
 

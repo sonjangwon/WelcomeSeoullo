@@ -64,7 +64,7 @@ public class FootFragment extends Fragment {
         TMapPoint startPoint = new TMapPoint(37.5502596,127.07313899999997);    //세종대학교
         TMapPoint endPoint = new TMapPoint(37.5536067,126.96961950000002);  //서울로7017
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
-        PathTracker pathTracker = new PathTracker(startPoint,endPoint);
+        PathTracker pathTracker = new PathTracker("footPath",startPoint,endPoint);
 //        pathData.findPathTime();
 
         int totalDistance = pathTracker.getTotalDistance();

@@ -63,11 +63,12 @@ public class CarFragment extends Fragment {
         TMapPoint startPoint = new TMapPoint(37.5502596,127.07313899999997);    //세종대학교
         TMapPoint endPoint = new TMapPoint(37.5536067,126.96961950000002);  //서울로7017
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
-        PathTracker pathTracker = new PathTracker(startPoint,endPoint);
+        PathTracker pathTracker = new PathTracker("carPath",startPoint,endPoint);
 //        pathData.findPathTime();
 
         int totalDistance = pathTracker.getTotalDistance();
         int totalTime = pathTracker.getTotalTime();
+        int taxiFare = pathTracker.getTaxiFare();
 
 //        totalTimeTextView.setText(String.valueOf(totalTime));
 //        totalDistanceTextView.setText(String.valueOf(totalDistance));
@@ -75,6 +76,7 @@ public class CarFragment extends Fragment {
         Log.e(" 총 시간 ","true");
         Log.e(" 총 시간 ",":  " + totalTime);
         Log.e(" 총 거리 ",":  " + totalDistance);
+        Log.e(" 택시 요금 ",":  " + taxiFare);
 
         tmapdata.findPathDataWithType(TMapData.TMapPathType.CAR_PATH, startPoint, endPoint,  new TMapData.FindPathDataListenerCallback() {
             @Override
