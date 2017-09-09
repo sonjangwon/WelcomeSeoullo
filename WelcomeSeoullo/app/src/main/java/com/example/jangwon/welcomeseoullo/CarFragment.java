@@ -1,12 +1,19 @@
 package com.example.jangwon.welcomeseoullo;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,6 +30,11 @@ public class CarFragment extends Fragment {
     TextView totalTimeTextView;
     TextView totalDistanceTextView;
     TextView totalPaymentTextView;
+    LinearLayout startTmap;
+
+    TelephonyManager telephonyManager;
+    String networkoper;
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -31,7 +43,14 @@ public class CarFragment extends Fragment {
         totalTimeTextView = (TextView) view.findViewById(R.id.totalTime);
         totalDistanceTextView = (TextView) view.findViewById(R.id.totalDistance);
         totalPaymentTextView = (TextView) view.findViewById(R.id.totalPayment);
+        startTmap = (LinearLayout) view.findViewById(R.id.startTmap) ;
+        startTmap.setOnClickListener(new LinearLayout.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                TmapNavigation();
+            }
 
+        });
         mapView(view);
         drawLine();
 
@@ -88,5 +107,48 @@ public class CarFragment extends Fragment {
         });
 
 
+    }
+    private void TmapNavigation() {
+        showTmapInstallDialog();
+    }
+
+    private void showTmapInstallDialog() {
+
+        telephonyManager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
+        networkoper = telephonyManager.getNetworkOperatorName();
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                getActivity());
+
+        alertDialogBuilder
+                .setMessage(getString(R.string.alertTmapInstall))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.install),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                if (networkoper.equals("SKTelecom")) {
+                                    Log.i("통신사", "skt");
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://onesto.re/0000163382"));
+                                    startActivity(intent);
+                                } else {
+                                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.skt.tmap.ku"));
+                                    startActivity(intent);
+                                }
+                            }
+                        })
+                .setNegativeButton(getString(R.string.no),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                // 다이얼로그를 취소한다
+                                dialog.cancel();
+                            }
+                        });
+
+        // 다이얼로그 생성
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // 다이얼로그 보여주기
+        alertDialog.show();
     }
 }

@@ -85,25 +85,27 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/startTmap"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:paddingRight="10dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingRight="10dp">
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
-                android:layout_weight="6"/>
+                android:layout_weight="6" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:textSize="11dp"
                 android:gravity="top|center"
                 android:text="안내시작"
-                android:textColor="#024987"/>
+                android:textColor="#024987"
+                android:textSize="11dp" />
         </LinearLayout>
 
     </LinearLayout>
