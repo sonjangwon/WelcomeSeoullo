@@ -6,31 +6,31 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/text_home"
+        android:title="홈"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_route"
         android:enabled="true"
         android:icon="@drawable/ic_directions_black_24dp"
-        android:title="@string/text_route"
+        android:title="경로안내"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_AR"
         android:enabled="true"
         android:icon="@drawable/ic_linked_camera_black_24dp"
-        android:title="@string/text_AR"
+        android:title="AR메세지"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_facility"
         android:enabled="true"
-        android:icon="@drawable/ic_loyalty_black_24dp"
-        android:title="@string/text_facility"
+        android:icon="@drawable/ic_pin_drop_black_24dp"
+        android:title="편의시설"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
         android:enabled="true"
         android:icon="@drawable/ic_more_horiz_black_24dp"
-        android:title="@string/text_settings"
+        android:title="세팅"
         app:showAsAction="ifRoom" />
 
 </menu>
