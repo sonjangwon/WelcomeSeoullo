@@ -79,7 +79,7 @@ public class CarFragment extends Fragment {
     //경로 나타내기
     public void drawLine()
     {
-        TMapPoint startPoint = new TMapPoint(37.5502596,127.07313899999997);    //세종대학교
+        TMapPoint startPoint = new TMapPoint(37.5089833,126.8915131);    //세종대학교
         TMapPoint endPoint = new TMapPoint(37.5536067,126.96961950000002);  //서울로7017
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
         PathTracker pathTracker = new PathTracker("carPath",startPoint,endPoint);
