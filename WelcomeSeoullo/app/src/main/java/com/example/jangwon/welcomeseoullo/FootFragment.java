@@ -3,6 +3,7 @@ package com.example.jangwon.welcomeseoullo;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,9 @@ public class FootFragment extends Fragment {
     TMapView tmapview;
     TextView totalTimeTextView;
     TextView totalDistanceTextView;
-    TextView totalPaymentTextView;
+    TextView calorieTextView;
+    int hour=0;
+    int min=0;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -30,9 +33,7 @@ public class FootFragment extends Fragment {
 
         totalTimeTextView = (TextView) view.findViewById(R.id.footTotalTime);
         totalDistanceTextView = (TextView) view.findViewById(R.id.footTotalDistance);
-        totalPaymentTextView = (TextView) view.findViewById(R.id.footTotalPayment);
-
-
+        calorieTextView = (TextView) view.findViewById(R.id.footCalorie);
         mapView(view);
         drawLine();
 
@@ -61,18 +62,30 @@ public class FootFragment extends Fragment {
     //경로 나타내기
     public void drawLine()
     {
-        TMapPoint startPoint = new TMapPoint(37.5089833,126.8915131);    //세종대학교
+        TMapPoint startPoint = new TMapPoint(37.5502596,127.07313899999997);    //세종대학교
         TMapPoint endPoint = new TMapPoint(37.5536067,126.96961950000002);  //서울로7017
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
         PathTracker pathTracker = new PathTracker("footPath",startPoint,endPoint);
 //        pathData.findPathTime();
-
+        SystemClock.sleep(2000);
         int totalDistance = pathTracker.getTotalDistance();
         int totalTime = pathTracker.getTotalTime();
 
 //        totalTimeTextView.setText(String.valueOf(totalTime));
 //        totalDistanceTextView.setText(String.valueOf(totalDistance));
-
+        if(totalTime>=3600)
+        {
+            hour=(totalTime/3600);
+            min=(totalTime/60)-(hour*60);
+            totalTimeTextView.setText(String.valueOf(hour)+"시간"+String.valueOf(min)+"분");
+        }
+        else
+        {
+            min=(totalTime/60);
+            totalTimeTextView.setText(String.valueOf(min)+"분");
+        }
+        totalDistanceTextView.setText(String.valueOf(totalDistance/(double)1000)+"km");
+        calorieTextView.setText(String.valueOf((totalTime/60)*6)+"kcal");
         Log.e(" 총 시간 ","true");
         Log.e(" 총 시간 ",":  " + totalTime);
         Log.e(" 총 거리 ",":  " + totalDistance);

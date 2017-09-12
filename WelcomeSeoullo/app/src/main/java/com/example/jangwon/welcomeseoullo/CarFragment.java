@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -22,6 +23,10 @@ import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapPolyLine;
 import com.skp.Tmap.TMapView;
 
+import java.util.TimerTask;
+
+import static com.example.jangwon.welcomeseoullo.R.id.totalPayment;
+
 public class CarFragment extends Fragment {
 
     View view;
@@ -31,10 +36,14 @@ public class CarFragment extends Fragment {
     TextView totalDistanceTextView;
     TextView totalPaymentTextView;
     LinearLayout startTmap;
-
+    int totalDistance;
+    int totalTime;
+    int taxiFare;
+    int hour=0;
+    int min=0;
     TelephonyManager telephonyManager;
     String networkoper;
-
+    TimerTask tt;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -42,7 +51,7 @@ public class CarFragment extends Fragment {
 
         totalTimeTextView = (TextView) view.findViewById(R.id.totalTime);
         totalDistanceTextView = (TextView) view.findViewById(R.id.totalDistance);
-        totalPaymentTextView = (TextView) view.findViewById(R.id.totalPayment);
+        totalPaymentTextView = (TextView) view.findViewById(totalPayment);
         startTmap = (LinearLayout) view.findViewById(R.id.startTmap) ;
         startTmap.setOnClickListener(new LinearLayout.OnClickListener(){
             @Override
@@ -53,10 +62,18 @@ public class CarFragment extends Fragment {
         });
         mapView(view);
         drawLine();
+        tt = new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        };
+
+
+
 
         return view;
     }
-
     //맵 띄우기
     public void mapView(View view)
     {
@@ -79,18 +96,31 @@ public class CarFragment extends Fragment {
     //경로 나타내기
     public void drawLine()
     {
-        TMapPoint startPoint = new TMapPoint(37.5089833,126.8915131);    //세종대학교
+        TMapPoint startPoint = new TMapPoint(37.5502596,127.07313899999997);    //세종대학교
         TMapPoint endPoint = new TMapPoint(37.5536067,126.96961950000002);  //서울로7017
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
         PathTracker pathTracker = new PathTracker("carPath",startPoint,endPoint);
 //        pathData.findPathTime();
+        SystemClock.sleep(1500);
+        totalDistance = pathTracker.getTotalDistance();
+        totalTime = pathTracker.getTotalTime();
+        taxiFare = pathTracker.getTaxiFare();
 
-        int totalDistance = pathTracker.getTotalDistance();
-        int totalTime = pathTracker.getTotalTime();
-        int taxiFare = pathTracker.getTaxiFare();
+        if(totalTime>=3600)
+        {
+            hour=(totalTime/3600);
+            min=(totalTime/60)-(hour*60);
+            totalTimeTextView.setText(String.valueOf(hour)+"시간"+String.valueOf(min)+"분");
+        }
+        else
+        {
+            min=(totalTime/60);
+            totalTimeTextView.setText(String.valueOf(min)+"분");
+        }
 
-//        totalTimeTextView.setText(String.valueOf(totalTime));
-//        totalDistanceTextView.setText(String.valueOf(totalDistance));
+        totalDistanceTextView.setText(String.valueOf(totalDistance/(double)1000)+"km");
+        totalPaymentTextView.setText(String.valueOf(taxiFare)+"원");
+
 
         Log.e(" 총 시간 ","true");
         Log.e(" 총 시간 ",":  " + totalTime);

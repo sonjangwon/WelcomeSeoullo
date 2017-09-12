@@ -15,45 +15,36 @@
 
         <LinearLayout
             android:id="@+id/categoryLinearLayout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="카테고리 ｖ"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:text="모든 시설"/>
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="#ACACAC"
+            android:orientation="horizontal">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:background="#FFFFFF"
+                android:layout_gravity="center"
+                android:text="지역선택  >"
+                android:textColor="#000000" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center"
+                android:background="#FFFFFF"
+                android:text="분류선택  >"
+                android:textColor="#000000" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"/>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/rangeLinearLayout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.6"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="범위 ｖ"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textColor="#000000"
-                android:text="전체 범위"/>
-        </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout

@@ -66,7 +66,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#ACACAC">
 
         <Button
             android:id="@+id/byCar"
@@ -97,11 +98,12 @@
     </LinearLayout>
     <fragment
         android:id="@+id/fragment_place"
-        android:name="com.example.jangwon.welcomeseoullo.BusFragment"
         android:layout_width="match_parent"
+        android:name="com.example.jangwon.welcomeseoullo.CarFragment"
         android:layout_height="0dp"
         tools:layout="@layout/activity_main"
         android:layout_weight="8.5" />
+
 
 
 </LinearLayout>

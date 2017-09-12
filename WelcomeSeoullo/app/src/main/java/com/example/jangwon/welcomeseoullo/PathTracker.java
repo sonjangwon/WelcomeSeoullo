@@ -20,9 +20,9 @@ import java.net.URLEncoder;
 
 public class PathTracker {
 
-    int totalTime =0;
-    int totalDistance =0;
-    int taxiFare =0;
+    int totalTime ;
+    int totalDistance ;
+    int taxiFare ;
 
 
 

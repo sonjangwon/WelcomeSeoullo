@@ -25,8 +25,8 @@ public class GuideInfoActivity extends AppCompatActivity {
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
         tmapview.setZoomLevel(15);
-//        tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
-        tmapview.setMapType(TMapView.MAPTYPE_TRAFFIC); //실시간 교통지도
+        tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
+//        tmapview.setMapType(TMapView.MAPTYPE_TRAFFIC); //실시간 교통지도
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
         tmapview.setTrackingMode(true);
         tmapview.setSightVisible(true);

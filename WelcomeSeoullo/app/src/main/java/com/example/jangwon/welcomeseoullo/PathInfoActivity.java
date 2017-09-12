@@ -3,6 +3,7 @@ package com.example.jangwon.welcomeseoullo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,15 +14,37 @@ import android.widget.Toast;
 
 public class PathInfoActivity extends AppCompatActivity {
 
+    String getString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_path_info);
 
+        Intent intent = getIntent();
+        getString = intent.getStringExtra("carPath");
+        getString = intent.getStringExtra("footPath");
+
         final Button byCarButton = (Button) findViewById(R.id.byCar);
         final Button byBusButton = (Button) findViewById(R.id.byBus);
         final Button onFootButton = (Button) findViewById(R.id.onFoot);
-        byCarButton.setTextColor(Color.parseColor("#FF0000"));
+//        final Button test = (Button) findViewById(R.id.test);
+        if(getString=="carPath")
+        {
+            byCarButton.setTextColor(Color.parseColor("#FF0000"));
+            byBusButton.setTextColor(Color.parseColor("#000000"));
+            onFootButton.setTextColor(Color.parseColor("#000000"));
+            switchFragment("carPath");
+        }
+        else if(getString=="footPath")
+        {
+            onFootButton.setTextColor(Color.parseColor("#FF0000"));
+            byBusButton.setTextColor(Color.parseColor("#000000"));
+            byCarButton.setTextColor(Color.parseColor("#000000"));
+            switchFragment("footPath");
+        }
+        else {
+            byCarButton.setTextColor(Color.parseColor("#FF0000"));
+        }
         byCarButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -38,7 +61,9 @@ public class PathInfoActivity extends AppCompatActivity {
                 byBusButton.setTextColor(Color.parseColor("#FF0000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
-                switchFragment(view);
+                startActivity(new Intent(PathInfoActivity.this, Test2Activity.class));
+                finish();
+//                switchFragment(view);
             }
 
         });
@@ -52,6 +77,13 @@ public class PathInfoActivity extends AppCompatActivity {
             }
 
         });
+//        test.setOnClickListener(new EditText.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                startActivity(new Intent(PathInfoActivity.this, Test2Activity.class));
+//            }
+//
+//        });
     }
 
 //    @Override
@@ -114,6 +146,23 @@ public class PathInfoActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    public void switchFragment(String path){
+        Fragment fr = new CarFragment();
+
+        if(path == "carPath"){
+            fr = new CarFragment();
+            Toast.makeText(getApplicationContext(),"byCar",Toast.LENGTH_SHORT).show();
+
+        }else{
+            fr = new FootFragment();
+            Toast.makeText(getApplicationContext(),"onFoot",Toast.LENGTH_SHORT).show();
+        }
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_place, fr);
+        fragmentTransaction.commit();
+    }
 
 
 
