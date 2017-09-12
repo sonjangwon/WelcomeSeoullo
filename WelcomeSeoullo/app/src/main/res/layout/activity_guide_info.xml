@@ -9,41 +9,83 @@
     <LinearLayout
         android:id="@+id/filter"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="90dp"
         android:background="#FFFFFF"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/categoryLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="#ACACAC"
-            android:orientation="horizontal">
+            android:layout_height="50dp"
+            android:background="#F4F4F4">
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_marginLeft="10dp"
+                android:layout_height="40dp"
                 android:background="#FFFFFF"
-                android:layout_gravity="center"
-                android:text="지역선택  >"
-                android:textColor="#000000" />
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_vertical"
+                android:text=" 지역선택  > "
+                android:textColor="#000000"
+                android:id="@+id/button"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/button3"
+                android:layout_toEndOf="@+id/button3"
+                android:layout_alignParentTop="true" />
 
             <Button
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginLeft="10dp"
-                android:layout_gravity="center"
+                android:layout_gravity="center_vertical"
                 android:background="#FFFFFF"
-                android:text="분류선택  >"
-                android:textColor="#000000" />
+                android:text=" 분류선택  > "
+                android:textColor="#000000"
+                android:id="@+id/button3" />
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"/>
+                android:id="@+id/imageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/mappoint" />
 
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="35dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_format_list_bulleted_black_24dp"
+                android:layout_alignBottom="@+id/button"
+                android:layout_toLeftOf="@+id/imageButton"
+                android:layout_toStartOf="@+id/imageButton" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+            <ImageView
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/ic_my_location_black_24dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="서울시 광진구 군자동"/>
         </LinearLayout>
+
 
     </LinearLayout>
 
@@ -51,8 +93,8 @@
         android:id="@+id/mapview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp"
-        android:background="#ACACAC">
+        android:background="#ACACAC"
+        android:layout_below="@+id/filter">
 
         <TextView
             android:id="@+id/textView1"
@@ -64,96 +106,96 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <FrameLayout
-            android:id="@+id/zoonInFrameLayout"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="11dp"
-            android:layout_marginRight="11dp"
-            android:layout_marginTop="33dp">
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/zoominFloating"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:elevation="10dp"
-                android:layout_gravity="center"
-                android:scaleType="fitXY"
-                app:backgroundTint="#F4F4F4" />
-
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_add_black_24dp"
-                android:elevation="8dp"
-                android:onClick="btnZoomIn"
-                android:scaleType="fitXY" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/zoomOutFrameLayout"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_alignLeft="@+id/zoonInFrameLayout"
-            android:layout_alignStart="@+id/zoonInFrameLayout"
-            android:layout_below="@+id/zoonInFrameLayout">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/zoomOutFloating"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:elevation="10dp"
-                android:layout_gravity="top|center"
-                android:scaleType="fitXY"
-                app:backgroundTint="#F4F4F4" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="7dp"
-                android:background="@drawable/ic_remove_black_24dp"
-                android:elevation="8dp"
-                android:onClick="btnZoomOut"
-                android:scaleType="fitXY" />
-        </FrameLayout>
-
-        <FrameLayout
-            android:id="@+id/gpsFrameLayout"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_marginBottom="31dp"
-            android:layout_marginLeft="21dp"
-            android:layout_marginStart="21dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/gpsFloating"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:elevation="10dp"
-                android:scaleType="fitXY"
-                app:backgroundTint="#F4F4F4" />
-
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_my_location_black_24dp"
-                android:elevation="8dp"
-                android:onClick="btnNowLocation"
-                android:scaleType="fitXY" />
-
-        </FrameLayout>
 
     </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/zoonInFrameLayout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_marginTop="123dp">
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/zoominFloating"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:elevation="10dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:backgroundTint="#F4F4F4" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_add_black_24dp"
+            android:elevation="8dp"
+            android:onClick="btnZoomIn"
+            android:scaleType="fitXY" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/zoomOutFrameLayout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_alignLeft="@+id/zoonInFrameLayout"
+        android:layout_alignStart="@+id/zoonInFrameLayout"
+        android:layout_below="@+id/zoonInFrameLayout">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/zoomOutFloating"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:elevation="10dp"
+            android:layout_gravity="top|center"
+            android:scaleType="fitXY"
+            app:backgroundTint="#F4F4F4" />
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/ic_remove_black_24dp"
+            android:elevation="8dp"
+            android:onClick="btnZoomOut"
+            android:scaleType="fitXY" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/gpsFrameLayout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="31dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/gpsFloating"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:elevation="10dp"
+            android:scaleType="fitXY"
+            app:backgroundTint="#F4F4F4" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_my_location_black_24dp"
+            android:elevation="8dp"
+            android:onClick="btnNowLocation"
+            android:scaleType="fitXY" />
+
+    </FrameLayout>
 </RelativeLayout>
