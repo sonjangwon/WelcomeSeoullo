@@ -30,7 +30,7 @@
         android:id="@+id/action_settings"
         android:enabled="true"
         android:icon="@drawable/ic_more_horiz_black_24dp"
-        android:title="세팅"
+        android:title="the보기"
         app:showAsAction="ifRoom" />
 
 </menu>
