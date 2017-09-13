@@ -102,13 +102,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    textHome.setVisibility(View.GONE);
-                                    textRoute.setVisibility(View.GONE);
-                                    textAR.setVisibility(View.GONE);
-                                    textFacility.setVisibility(View.VISIBLE);
-                                    textSettings.setVisibility(View.GONE);
-
-                                    fragment = new BusFragment();
+                                    fragment = new FacilityFragment();
                                     currentMenu = item.getItemId();
                                     switchFragment();
                                 }
@@ -121,10 +115,10 @@ public class MainActivity extends AppCompatActivity {
                                     textHome.setVisibility(View.GONE);
                                     textRoute.setVisibility(View.GONE);
                                     textAR.setVisibility(View.GONE);
-                                    textFacility.setVisibility(View.GONE);
-                                    textSettings.setVisibility(View.VISIBLE);
+                                    textFacility.setVisibility(View.VISIBLE);
+                                    textSettings.setVisibility(View.GONE);
 
-                                    fragment = new FootFragment();
+                                    fragment = new BusFragment();
                                     currentMenu = item.getItemId();
                                     switchFragment();
                                 }

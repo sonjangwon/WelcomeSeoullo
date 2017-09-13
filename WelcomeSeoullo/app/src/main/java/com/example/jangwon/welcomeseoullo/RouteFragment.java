@@ -15,8 +15,6 @@ import android.widget.EditText;
 public class RouteFragment extends Fragment {
 
     View view;
-    View selectedFragment;
-
     Fragment fr;
 
     @Override
@@ -30,45 +28,6 @@ public class RouteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-//        if(savedInstanceState == null){
-//            view = inflater.inflate(R.layout.activity_path_info, container, false);
-//
-//            final Button byCarButton = (Button) view.findViewById(R.id.byCar);
-//            final Button byBusButton = (Button) view.findViewById(R.id.byBus);
-//            final Button onFootButton = (Button) view.findViewById(R.id.onFoot);
-//            byCarButton.setTextColor(Color.parseColor("#FF0000"));
-//            byCarButton.setOnClickListener(new EditText.OnClickListener(){
-//                @Override
-//                public void onClick(View view) {
-//                    byCarButton.setTextColor(Color.parseColor("#FF0000"));
-//                    byBusButton.setTextColor(Color.parseColor("#000000"));
-//                    onFootButton.setTextColor(Color.parseColor("#000000"));
-//                    switchFragment(view);
-//                }
-//            });
-//            byBusButton.setOnClickListener(new EditText.OnClickListener(){
-//                @Override
-//                public void onClick(View view) {
-//                    byBusButton.setTextColor(Color.parseColor("#FF0000"));
-//                    byCarButton.setTextColor(Color.parseColor("#000000"));
-//                    onFootButton.setTextColor(Color.parseColor("#000000"));
-//                    switchFragment(view);
-//                }
-//            });
-//            onFootButton.setOnClickListener(new EditText.OnClickListener(){
-//                @Override
-//                public void onClick(View view) {
-//                    onFootButton.setTextColor(Color.parseColor("#FF0000"));
-//                    byBusButton.setTextColor(Color.parseColor("#000000"));
-//                    byCarButton.setTextColor(Color.parseColor("#000000"));
-//                    switchFragment(view);
-//                }
-//            });
-//            return view;
-//        }
-//        else{
-//            return selectedFragment;
-//        }
         if(savedInstanceState == null){
             view = inflater.inflate(R.layout.activity_path_info, container, false);
 
@@ -104,13 +63,10 @@ public class RouteFragment extends Fragment {
                 }
             });
         }
-
         return view;
-
     }
 
     public void switchFragment(View view){
-        //Fragment fr;
 
         if(view == view.findViewById(R.id.byCar)){
             fr = new CarFragment();
@@ -128,14 +84,6 @@ public class RouteFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
-
-
-
-
-
-
-
 
 }

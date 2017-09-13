@@ -5,4 +5,7 @@
     <string name="text_AR">AR</string>
     <string name="text_facility">Facility</string>
     <string name="text_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -12,5 +12,4 @@ public class CarFragment extends Fragment {
 
         return inflater.inflate(R.layout.fragment_car, container, false);
     }
-
 }
