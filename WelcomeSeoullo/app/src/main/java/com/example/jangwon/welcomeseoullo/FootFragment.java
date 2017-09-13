@@ -13,5 +13,4 @@ public class FootFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_foot, container, false);
     }
 
-
 }
