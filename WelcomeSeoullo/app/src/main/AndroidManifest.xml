@@ -20,6 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".NoticeActivity"/>
+        <activity android:name=".ViewContents"/>
+        <activity android:name="Test"/>
     </application>
 
 </manifest>

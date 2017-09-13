@@ -2,23 +2,39 @@ package com.example.jangwon.welcomeseoullo;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
 /**
  * Created by woga1 on 2017-09-07.
  */
-public class NoticeActivity extends Activity {
+public class NoticeActivity extends AppCompatActivity {
 
     ViewFlipper flipper;
-    static ListView listview;
+    ListView listview ;
+    ArrayList<String> titleList = new ArrayList<String>();
+    ArrayAdapter mAdapter;
     TextView tv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,12 +53,28 @@ public class NoticeActivity extends Activity {
         } );
 
         //ViewFlipper 객체 참조
-
 //
 //
 //        flipper= (ViewFlipper)findViewById(R.id.viewFlipper);
         listview = (ListView) findViewById(R.id.noticeList);
         tv = (TextView) findViewById(R.id.textView);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(position == 1) {
+                    Intent intent = new Intent(NoticeActivity.this, ViewContents.class);
+                    startActivity(intent);
+                    Toast.makeText(getApplicationContext(), titleList.get(position), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Intent intent = new Intent(NoticeActivity.this, Test.class);
+                    intent.putExtra("title", titleList.get(position));
+                    startActivity(intent);
+                }
+            }
+        });
         Log.e("메인","작동끝");
     }
 
@@ -85,12 +117,66 @@ public class NoticeActivity extends Activity {
         flipper.startFlipping();//자동 Flipping 시작
     }
 
-
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
-        GetWebData get = new GetWebData();
-        get.execute();
+
+        NewThread task = new NewThread();
+        try
+        {
+            if (task.getStatus() == AsyncTask.Status.RUNNING)
+            {
+                task.cancel(true);
+            }
+            else
+            {
+                task.execute();
+            }
+        }
+        catch (Exception e)
+        {
+        }
+    }
+    @Override
+    protected  void onDestroy(){
+        super.onDestroy();
+    }
+
+
+    public class NewThread extends AsyncTask<String, Void, String>{
+
+        @Override
+        protected String doInBackground(String... params) {
+            Log.e("NewThreadAsyncTask", "do");
+            Document document = null;
+            try {
+                document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEList.do").get();
+                Log.e("NoticeActivity", "connect");
+                //Elements elements = document.select(".table_list02");
+                Elements elements = document.getElementsByAttributeValue("class", "t_left");
+                Log.e("NoticeActivity", elements.text());
+                String title = elements.select("a").attr("href").toString();
+                Log.e("NoticeActivity", title);
+                //Elements elements = document.select("td.t_left > a");
+                for (Element element : elements) {
+                    titleList.add(element.text());
+                    //result.put("제목"+i,element.text());
+                    Log.e("새소식제목", element.text());
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+
+            mAdapter.notifyDataSetChanged();
+            listview.setAdapter(mAdapter);
+            listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        }
 
     }
 }

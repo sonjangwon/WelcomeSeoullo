@@ -2,6 +2,7 @@ package com.example.jangwon.welcomeseoullo;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,7 +19,10 @@ import java.util.Map;
  */
 
 public class GetWebData extends AsyncTask<Void, Void, Map<String,String>> {
-
+    ArrayAdapter<String> adapter;
+    @Override
+    protected void onPreExecute(){
+    }
     @Override
     protected Map<String,String> doInBackground(Void... params) {
         Log.e("AsyncTask", "do");
@@ -40,19 +44,19 @@ public class GetWebData extends AsyncTask<Void, Void, Map<String,String>> {
             //Elements elements = document.select("td.t_left > a");
             for (Element element : elements) {
                 i++;
-                result.put("제목"+i,element.text());
+                //result.put("제목"+i,element.text());
                 Log.e("새소식제목", element.text());
+                adapter.add(element.text());
             }
             i = 1;
             Elements dayelements = document.select(".table_list02 tr td:eq(3)");
             for (Element element : dayelements) {
                 i++;
-                result.put("날짜"+i,element.text());
+                //result.put("날짜"+i,element.text());
                 Log.e("공지사항업데이트날짜", element.text());
             }
 //                Log.e("AsyncTask", title);
 //                result.put("tv", elements.text());
-
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -60,12 +64,14 @@ public class GetWebData extends AsyncTask<Void, Void, Map<String,String>> {
 
         return result;
     }
+
     @Override
     protected void onPostExecute(Map<String, String> map) {
         Log.e("어싱크태ㅡ크","PostExecute");
         ArrayList<String> arrayList = new ArrayList<String>();
         for (int i = 1; i <= 10; i++) {
             arrayList.add(map.get("제목"+i) + " "+map.get("날짜"+i));
+
             Log.e("어싱크태ㅡ크",arrayList.get(i-1));
         }
     }
