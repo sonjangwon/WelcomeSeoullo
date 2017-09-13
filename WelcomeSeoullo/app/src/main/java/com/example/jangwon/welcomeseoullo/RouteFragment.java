@@ -29,7 +29,7 @@ public class RouteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if(savedInstanceState == null){
-            view = inflater.inflate(R.layout.activity_path_info, container, false);
+            view = inflater.inflate(R.layout.fragment_route, container, false);
 
             final Button byCarButton = (Button) view.findViewById(R.id.byCar);
             final Button byBusButton = (Button) view.findViewById(R.id.byBus);
