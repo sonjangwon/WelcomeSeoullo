@@ -9,10 +9,10 @@
         android:title="홈"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_route"
+        android:id="@+id/action_facility"
         android:enabled="true"
-        android:icon="@drawable/ic_directions_black_24dp"
-        android:title="경로안내"
+        android:icon="@drawable/ic_pin_drop_black_24dp"
+        android:title="편의시설"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_AR"
@@ -21,10 +21,10 @@
         android:title="AR메세지"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_facility"
+        android:id="@+id/action_route"
         android:enabled="true"
-        android:icon="@drawable/ic_pin_drop_black_24dp"
-        android:title="편의시설"
+        android:icon="@drawable/ic_directions_black_24dp"
+        android:title="경로안내"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"

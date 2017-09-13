@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 import com.skp.Tmap.TMapView;
 
-
-
-
 public class GuideInfoActivity extends AppCompatActivity {
 
     @Override

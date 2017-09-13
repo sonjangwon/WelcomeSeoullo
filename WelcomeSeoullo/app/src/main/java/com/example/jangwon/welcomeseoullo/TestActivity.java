@@ -24,7 +24,6 @@ public class TestActivity extends AppCompatActivity {
                 intent.putExtra("Path", "wow");
                 startActivityForResult(intent, 1);
             }
-
         });
 
         button2.setOnClickListener(new EditText.OnClickListener(){
@@ -32,7 +31,6 @@ public class TestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(TestActivity.this, GuideInfoActivity.class));
             }
-
         });
     }
 }

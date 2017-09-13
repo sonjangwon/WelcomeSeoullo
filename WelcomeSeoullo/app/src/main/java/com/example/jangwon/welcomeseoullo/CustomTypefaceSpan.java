@@ -43,6 +43,6 @@ public class CustomTypefaceSpan extends TypefaceSpan {
         }
 
         paint.setTypeface(tf);
-        paint.setTextSize(19);
+        paint.setTextSize(20);
     }
 }

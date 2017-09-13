@@ -69,10 +69,6 @@ public class CarFragment extends Fragment {
 
             }
         };
-
-
-
-
         return view;
     }
     //맵 띄우기
@@ -145,11 +141,9 @@ public class CarFragment extends Fragment {
             }
         });
 
-
     }
     //안내시작버튼을 누른 경우
     private void TmapNavigation() {
-
         //Tmap이 설치되지 않은 경우
         showTmapInstallDialog();
     }
