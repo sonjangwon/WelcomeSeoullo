@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 @SuppressLint("setJavaScriptEnabled")
-public class Test2Activity extends AppCompatActivity {
+public class BusPathActivity extends AppCompatActivity {
 
     StringBuilder busUrl= new StringBuilder("https://m.map.naver.com/directions/?ex=126.96961950000002&ey=37.5536067&eex=126.8915131&eey=37.5089833&edid=11630456&incomeUrl=https%3A%2F%2Fm.map.naver.com%2Fsearch2%2Fsearch.nhn%3Fquery%3D%25EC%2584%259C%25EC%259A%25B8%25EC%2597%25AD%26sm%3Dhty#/publicTransit/list/세종대학교,127.07313899999997,37.5502596,,,false,/서울로7017,126.9697727,37.5580094,,,false,/0");
     View view;
@@ -31,8 +31,8 @@ public class Test2Activity extends AppCompatActivity {
                 byCarButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(Test2Activity.this, PathInfoActivity.class);
-                intent.putExtra("carPath", "carPath");
+                Intent intent = new Intent(BusPathActivity.this, PathInfoActivity.class);
+                intent.putExtra("Path","carPath");
                 startActivityForResult(intent, 1);
                 finish();
             }
@@ -44,7 +44,7 @@ public class Test2Activity extends AppCompatActivity {
 //                byBusButton.setTextColor(Color.parseColor("#FF0000"));
 //                byCarButton.setTextColor(Color.parseColor("#000000"));
 //                onFootButton.setTextColor(Color.parseColor("#000000"));
-//                startActivity(new Intent(PathInfoActivity.this, Test2Activity.class));
+//                startActivity(new Intent(PathInfoActivity.this, BusPathActivity.class));
 //                switchFragment(view);
             }
 
@@ -55,8 +55,8 @@ public class Test2Activity extends AppCompatActivity {
                 onFootButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(Test2Activity.this, PathInfoActivity.class);
-                intent.putExtra("footPath", "footPath");
+                Intent intent = new Intent(BusPathActivity.this, PathInfoActivity.class);
+                intent.putExtra("Path","footPath");
                 startActivityForResult(intent, 1);
                 finish();
             }

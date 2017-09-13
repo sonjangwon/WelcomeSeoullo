@@ -21,21 +21,22 @@ public class PathInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_path_info);
 
         Intent intent = getIntent();
-        getString = intent.getStringExtra("carPath");
-        getString = intent.getStringExtra("footPath");
+        getString = intent.getExtras().getString("Path");
 
+        Toast.makeText(getApplicationContext(),getString,Toast.LENGTH_SHORT).show();
         final Button byCarButton = (Button) findViewById(R.id.byCar);
         final Button byBusButton = (Button) findViewById(R.id.byBus);
         final Button onFootButton = (Button) findViewById(R.id.onFoot);
 //        final Button test = (Button) findViewById(R.id.test);
-        if(getString=="carPath")
+        if(getString.equals("carPath"))
         {
+            Toast.makeText(getApplicationContext(),getString,Toast.LENGTH_SHORT).show();
             byCarButton.setTextColor(Color.parseColor("#FF0000"));
             byBusButton.setTextColor(Color.parseColor("#000000"));
             onFootButton.setTextColor(Color.parseColor("#000000"));
             switchFragment("carPath");
         }
-        else if(getString=="footPath")
+        else if(getString.equals("footPath"))
         {
             onFootButton.setTextColor(Color.parseColor("#FF0000"));
             byBusButton.setTextColor(Color.parseColor("#000000"));
@@ -61,7 +62,7 @@ public class PathInfoActivity extends AppCompatActivity {
                 byBusButton.setTextColor(Color.parseColor("#FF0000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
-                startActivity(new Intent(PathInfoActivity.this, Test2Activity.class));
+                startActivity(new Intent(PathInfoActivity.this, BusPathActivity.class));
                 finish();
 //                switchFragment(view);
             }
@@ -80,7 +81,7 @@ public class PathInfoActivity extends AppCompatActivity {
 //        test.setOnClickListener(new EditText.OnClickListener(){
 //            @Override
 //            public void onClick(View view) {
-//                startActivity(new Intent(PathInfoActivity.this, Test2Activity.class));
+//                startActivity(new Intent(PathInfoActivity.this, BusPathActivity.class));
 //            }
 //
 //        });

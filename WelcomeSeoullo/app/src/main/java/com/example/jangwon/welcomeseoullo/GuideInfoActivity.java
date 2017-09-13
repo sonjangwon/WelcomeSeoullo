@@ -2,7 +2,12 @@ package com.example.jangwon.welcomeseoullo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.skp.Tmap.TMapView;
 
@@ -32,5 +37,46 @@ public class GuideInfoActivity extends AppCompatActivity {
         tmapview.setSightVisible(true);
 
         relativeLayout.addView(tmapview);
+
+        Spinner sortSpinner = (Spinner)findViewById(R.id.sortSpinner);
+        Spinner distanceSpinner = (Spinner)findViewById(R.id.distanceSpinner);
+
+        //스피너 어댑터 설정
+        ArrayAdapter sortAdapter = ArrayAdapter.createFromResource(this,R.array.sort,android.R.layout.simple_spinner_item);
+        ArrayAdapter distanceAdapter = ArrayAdapter.createFromResource(this,R.array.distance,android.R.layout.simple_spinner_item);
+        sortAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortSpinner.setAdapter(sortAdapter);
+
+        //스피너 이벤트 발생
+        sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //각 항목 클릭시 포지션값을 토스트에 띄운다.
+                Toast.makeText(getApplicationContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        distanceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        distanceSpinner.setAdapter(distanceAdapter);
+
+        //스피너 이벤트 발생
+        distanceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //각 항목 클릭시 포지션값을 토스트에 띄운다.
+                Toast.makeText(getApplicationContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
     }
 }

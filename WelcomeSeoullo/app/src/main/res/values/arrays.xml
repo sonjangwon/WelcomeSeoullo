@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sort">
+        <item>분류선택</item>
+        <item>공원</item>
+        <item>화장실</item>
+        <item>음식점</item>
+        <item>카페</item>
+    </string-array>
+
+    <string-array name="distance">
+        <item>거리선택</item>
+        <item>50m</item>
+        <item>100m</item>
+        <item>200m</item>
+        <item>300m</item>
+    </string-array>
+</resources>

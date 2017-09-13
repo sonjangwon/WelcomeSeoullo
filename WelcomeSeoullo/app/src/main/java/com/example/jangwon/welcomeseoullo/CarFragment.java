@@ -23,6 +23,7 @@ import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapPolyLine;
 import com.skp.Tmap.TMapView;
 
+import java.text.DecimalFormat;
 import java.util.TimerTask;
 
 import static com.example.jangwon.welcomeseoullo.R.id.totalPayment;
@@ -101,7 +102,7 @@ public class CarFragment extends Fragment {
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
         PathTracker pathTracker = new PathTracker("carPath",startPoint,endPoint);
 //        pathData.findPathTime();
-        SystemClock.sleep(1500);
+        SystemClock.sleep(2000);
         totalDistance = pathTracker.getTotalDistance();
         totalTime = pathTracker.getTotalTime();
         taxiFare = pathTracker.getTaxiFare();
@@ -119,7 +120,17 @@ public class CarFragment extends Fragment {
         }
 
         totalDistanceTextView.setText(String.valueOf(totalDistance/(double)1000)+"km");
-        totalPaymentTextView.setText(String.valueOf(taxiFare)+"원");
+
+        if(taxiFare>=1000)
+        {
+            DecimalFormat df = new DecimalFormat("###,###.####");
+            totalPaymentTextView.setText(String.valueOf( String.format(df.format(taxiFare))+"원"));
+        }
+        else
+        {
+            totalPaymentTextView.setText(String.valueOf(taxiFare)+"원");
+        }
+
 
 
         Log.e(" 총 시간 ","true");

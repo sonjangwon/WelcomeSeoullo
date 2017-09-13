@@ -31,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".GuideInfoActivity" />
-        <activity android:name=".Test2Activity"></activity>
+        <activity android:name=".BusPathActivity"></activity>
     </application>
 
 </manifest>
