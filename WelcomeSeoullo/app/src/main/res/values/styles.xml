@@ -12,11 +12,7 @@
         <item name="android:background">@color/white</item>
 
         <item name="android:textColorPrimary">@color/black</item>
-        <item name="android:actionBarItemBackground">@color/black25PercentColor</item>>
-        <item name="windowActionBarOverlay">true</item>
     </style>
-
-
 
     <!-- Splash Screen theme. -->
     <style name="SplashTheme" parent="AppTheme">
