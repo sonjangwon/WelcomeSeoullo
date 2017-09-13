@@ -19,12 +19,13 @@ public class BusPathActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test2);
+        setContentView(R.layout.activity_bus_path);
         webView();
         final Button byCarButton = (Button) findViewById(R.id.byCar);
         final Button byBusButton = (Button) findViewById(R.id.byBus);
         final Button onFootButton = (Button) findViewById(R.id.onFoot);
         byBusButton.setTextColor(Color.parseColor("#FF0000"));
+        //버스경로안내에서 자동차경로를 클릭한 경우
         byCarButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -41,14 +42,10 @@ public class BusPathActivity extends AppCompatActivity {
         byBusButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
-//                byBusButton.setTextColor(Color.parseColor("#FF0000"));
-//                byCarButton.setTextColor(Color.parseColor("#000000"));
-//                onFootButton.setTextColor(Color.parseColor("#000000"));
-//                startActivity(new Intent(PathInfoActivity.this, BusPathActivity.class));
-//                switchFragment(view);
             }
 
         });
+        //버스경로안내에서 도보경로를 클릭한 경우
         onFootButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -64,6 +61,7 @@ public class BusPathActivity extends AppCompatActivity {
         });
     }
 
+    //busUrl로 받은 웹주소를 웹뷰를 이용하여 띄운다.
     private void webView() {
 
         WebView webViewTest=(WebView)findViewById(R.id.webViewTest);

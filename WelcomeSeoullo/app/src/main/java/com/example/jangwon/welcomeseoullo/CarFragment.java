@@ -107,12 +107,14 @@ public class CarFragment extends Fragment {
         totalTime = pathTracker.getTotalTime();
         taxiFare = pathTracker.getTaxiFare();
 
+        //총 시간이 1시간이 넘을 경우
         if(totalTime>=3600)
         {
             hour=(totalTime/3600);
             min=(totalTime/60)-(hour*60);
             totalTimeTextView.setText(String.valueOf(hour)+"시간"+String.valueOf(min)+"분");
         }
+        //총 시간이 1시간 미만일 경우
         else
         {
             min=(totalTime/60);
@@ -121,6 +123,7 @@ public class CarFragment extends Fragment {
 
         totalDistanceTextView.setText(String.valueOf(totalDistance/(double)1000)+"km");
 
+        //택시요금이 천원 이상일 경우
         if(taxiFare>=1000)
         {
             DecimalFormat df = new DecimalFormat("###,###.####");
@@ -132,12 +135,7 @@ public class CarFragment extends Fragment {
         }
 
 
-
-        Log.e(" 총 시간 ","true");
-        Log.e(" 총 시간 ",":  " + totalTime);
-        Log.e(" 총 거리 ",":  " + totalDistance);
-        Log.e(" 택시 요금 ",":  " + taxiFare);
-
+        //자동차 경로를 polyLine을 이용하여 그린다.
         tmapdata.findPathDataWithType(TMapData.TMapPathType.CAR_PATH, startPoint, endPoint,  new TMapData.FindPathDataListenerCallback() {
             @Override
             public void onFindPathData(TMapPolyLine tMapPolyLine) {
@@ -149,10 +147,14 @@ public class CarFragment extends Fragment {
 
 
     }
+    //안내시작버튼을 누른 경우
     private void TmapNavigation() {
+
+        //Tmap이 설치되지 않은 경우
         showTmapInstallDialog();
     }
 
+    //Tmap설치로 인도하는 부분
     private void showTmapInstallDialog() {
 
         telephonyManager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);

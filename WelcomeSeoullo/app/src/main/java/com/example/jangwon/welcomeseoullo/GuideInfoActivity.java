@@ -26,6 +26,7 @@ public class GuideInfoActivity extends AppCompatActivity {
         final TMapView tmapview = new TMapView(this);
 
         tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
+        //지정 위치 설정
         tmapview.setLocationPoint(126.96961950000002,37.5536067);
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
