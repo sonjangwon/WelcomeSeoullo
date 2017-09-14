@@ -2,9 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.jangwon.welcomeseoullo">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:allowBackup="true"
         android:fitsSystemWindows="false"
@@ -13,16 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme">
-
-        </activity>
-        <activity android:name=".MainActivity"/>
+            android:theme="@style/SplashTheme" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".PathInfoActivity" />
-        <activity android:name=".TestActivity" >
+        <activity android:name=".TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,9 +28,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".GuideInfoActivity" />
-        <activity android:name=".BusPathActivity">
-
-        </activity>
+        <activity android:name=".BusPathActivity" />
+        <activity android:name=".MapGuideFragment" />
+        <activity android:name=".ListGuideFragment"></activity>
     </application>
 
 </manifest>

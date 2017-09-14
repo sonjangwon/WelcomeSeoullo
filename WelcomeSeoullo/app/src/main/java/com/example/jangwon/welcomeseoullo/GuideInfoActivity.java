@@ -1,20 +1,23 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
-
-import com.skp.Tmap.TMapView;
 
 
 
 
 public class GuideInfoActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,25 +25,31 @@ public class GuideInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_guide_info);
 
 
-        RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.mapview);
-        final TMapView tmapview = new TMapView(this);
 
-        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
-        //지정 위치 설정
-        tmapview.setLocationPoint(126.96961950000002,37.5536067);
-        tmapview.setCompassMode(true);
-        tmapview.setIconVisibility(true);
-        tmapview.setZoomLevel(15);
-        tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
-//        tmapview.setMapType(TMapView.MAPTYPE_TRAFFIC); //실시간 교통지도
-        tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
-        tmapview.setTrackingMode(true);
-        tmapview.setSightVisible(true);
-
-        relativeLayout.addView(tmapview);
 
         Spinner sortSpinner = (Spinner)findViewById(R.id.sortSpinner);
         Spinner distanceSpinner = (Spinner)findViewById(R.id.distanceSpinner);
+        final ImageButton listImageButton = (ImageButton)findViewById(R.id.listImageButton);
+        final ImageButton mapPointImageButton = (ImageButton)findViewById(R.id.mapPointImageButton);
+
+        listImageButton.setOnClickListener(new EditText.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                switchFragment(view);
+                mapPointImageButton.setBackgroundResource(R.drawable.reversemappoint);
+//                listImageButton.setBackgroundResource(R.drawable.list);
+            }
+
+        });
+        mapPointImageButton.setOnClickListener(new EditText.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                switchFragment(view);
+                mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
+//                listImageButton.setBackgroundResource(R.drawable.list);
+            }
+
+        });
 
         //스피너 어댑터 설정
         ArrayAdapter sortAdapter = ArrayAdapter.createFromResource(this,R.array.sort,android.R.layout.simple_spinner_item);
@@ -79,5 +88,46 @@ public class GuideInfoActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //버튼으로 리스트뷰, 맵포인트를 클릭한 경우 각 프레그먼트가 실행된다.
+    public void switchFragment(View view){
+        Fragment fr = new MapGuideFragment();
+
+        if(view == findViewById(R.id.mapPointImageButton)){
+            fr = new MapGuideFragment();
+            Toast.makeText(getApplicationContext(),"mapPointImageButton",Toast.LENGTH_SHORT).show();
+        }
+        else if(view == findViewById(R.id.listImageButton)){
+            fr = new ListGuideFragment();
+            Toast.makeText(getApplicationContext(),"listImageButton",Toast.LENGTH_SHORT).show();
+
+        }
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
+        fragmentTransaction.commit();
+    }
+    //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
+    public void switchFragments(View view){
+        Fragment fr = new CarFragment();
+
+        if(view == findViewById(R.id.byCar)){
+            fr = new CarFragment();
+            Toast.makeText(getApplicationContext(),"byCar",Toast.LENGTH_SHORT).show();
+
+        }else if(view == findViewById(R.id.byBus)){
+            fr = new BusFragment();
+            Toast.makeText(getApplicationContext(),"byBus",Toast.LENGTH_SHORT).show();
+        }else{
+            fr = new FootFragment();
+            Toast.makeText(getApplicationContext(),"onFoot",Toast.LENGTH_SHORT).show();
+        }
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_place, fr);
+        fragmentTransaction.commit();
     }
 }

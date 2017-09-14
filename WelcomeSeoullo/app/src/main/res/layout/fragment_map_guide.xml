@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.jangwon.welcomeseoullo.MapGuideFragment">
+
+    <RelativeLayout
+        android:id="@+id/guideMapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ACACAC"
+        android:layout_below="@+id/filter">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="현재 위치 기반, 주변 시설 안내"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/zoonInFrameLayout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/filter"
+        android:background="#00FF0000"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="#4D4D4D"
+            android:elevation="8dp"
+            android:onClick="btnZoomIn"
+            android:scaleType="fitXY" />
+
+        <ImageButton
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/add"
+            android:elevation="8dp"
+            android:onClick="btnZoomIn"
+            android:scaleType="fitXY" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/zoomOutFrameLayout"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/zoonInFrameLayout"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true">
+
+        <ImageButton
+            android:id="@+id/imageButton4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:background="#4D4D4D"
+            android:elevation="8dp"
+            android:onClick="btnZoomIn"
+            android:scaleType="fitXY" />
+
+        <ImageButton
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:background="@drawable/minus"
+            android:elevation="8dp"
+            android:onClick="btnZoomIn"
+            android:scaleType="fitXY" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/gpsFrameLayout"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="10dp">
+
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="#FFFFFF"
+            android:elevation="8dp"
+            android:onClick="btnZoomIn"
+            android:scaleType="fitXY" />
+
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_my_location_black_24dp"
+            android:elevation="8dp"
+            android:onClick="btnNowLocation"
+            android:scaleType="fitXY" />
+
+    </FrameLayout>
+
+</RelativeLayout>

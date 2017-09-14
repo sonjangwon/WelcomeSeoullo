@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapPolyLine;
+import com.skp.Tmap.TMapTapi;
 import com.skp.Tmap.TMapView;
 
 import java.text.DecimalFormat;
@@ -149,9 +150,11 @@ public class CarFragment extends Fragment {
     }
     //안내시작버튼을 누른 경우
     private void TmapNavigation() {
-
+        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
+        TMapTapi tmaptapi = new TMapTapi(getActivity());
+        tmaptapi.invokeRoute("서울로7017",(float)126.96961950000002,(float)37.5536067);
         //Tmap이 설치되지 않은 경우
-        showTmapInstallDialog();
+//        showTmapInstallDialog();
     }
 
     //Tmap설치로 인도하는 부분
