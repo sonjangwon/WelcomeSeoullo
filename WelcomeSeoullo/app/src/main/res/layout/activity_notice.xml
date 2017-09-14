@@ -8,16 +8,7 @@
     android:layout_width="match_parent"
     android:layout_height="228dp"
     android:layout_weight="0.11">
-    <ImageView
-        android:id="@+id/img1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/image1"/>
-    <ImageView
-        android:id="@+id/img2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/image2"/>
+
 
 </ViewFlipper>
 

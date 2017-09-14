@@ -3,10 +3,12 @@ package com.example.jangwon.welcomeseoullo;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -29,13 +31,23 @@ import java.util.ArrayList;
 /**
  * Created by woga1 on 2017-09-07.
  */
-public class NoticeActivity extends AppCompatActivity {
+public class NoticeActivity extends AppCompatActivity implements View.OnTouchListener{
 
     ViewFlipper flipper;
     ListView listview ;
     ArrayList<String> titleList = new ArrayList<String>();
+    ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayAdapter mAdapter;
     TextView tv;
+    int count =0;
+    int countIndexes = 0;
+    //현재화면인덱스
+    int currentIndex =0;
+    //터치시작 x좌표
+    float downX =0;
+    //터치끝 x좌표
+    float upX =0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,24 +67,17 @@ public class NoticeActivity extends AppCompatActivity {
         //ViewFlipper 객체 참조
 //
 //
-//        flipper= (ViewFlipper)findViewById(R.id.viewFlipper);
+        flipper= (ViewFlipper)findViewById(R.id.viewFlipper);
+        startImageSlide();
         listview = (ListView) findViewById(R.id.noticeList);
         tv = (TextView) findViewById(R.id.textView);
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position == 1) {
                     Intent intent = new Intent(NoticeActivity.this, ViewContents.class);
+                    intent.putExtra("urlNum", urlNumList.get(position));
                     startActivity(intent);
-                    Toast.makeText(getApplicationContext(), titleList.get(position), Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Intent intent = new Intent(NoticeActivity.this, Test.class);
-                    intent.putExtra("title", titleList.get(position));
-                    startActivity(intent);
-                }
             }
         });
         Log.e("메인","작동끝");
@@ -85,11 +90,13 @@ public class NoticeActivity extends AppCompatActivity {
         //ImageView 7개를 만들어서 ViewFlipper에게 추가함
         //layout_width와 layout_height에 대한 특별한 지정이 없다면
         //기본적으로 'match_parent'로 설정됨.
-        for(int i=0;i<2;i++){
+        for(int i=0;i<4;i++){
 
             ImageView img= new ImageView(this);
 //            ViewPager.LayoutParams params = (ViewPager.LayoutParams) img.getLayoutParams();
-            img.setImageResource(R.drawable.image3+i);
+            img.setImageResource(R.drawable.image1+i);
+            img.setOnTouchListener(this);
+
             flipper.addView(img);
         }
         //ViewFlipper가 View를 교체할 때 애니메이션이 적용되도록 설정
@@ -101,7 +108,7 @@ public class NoticeActivity extends AppCompatActivity {
         //두번재 파라미터 : 트윈(Tween) Animation 리소스 파일(여기서는 안드로이드 시스템의 리소스 파일을 사용
         //                    (왼쪽에서 슬라이딩되며 등장)
 
-        Animation showIn= AnimationUtils.loadAnimation(this, android.R.anim.slide_out_right);
+        Animation showIn= AnimationUtils.loadAnimation(this, R.anim.push_right_in);
 
         //ViewFlipper에게 등장 애니메이션 적용
         flipper.setInAnimation(showIn);
@@ -111,31 +118,89 @@ public class NoticeActivity extends AppCompatActivity {
         //위와 다른 방법으로 애니메이션을 적용해봅니다.
         //첫번째 파라미터 : Context
         //두번재 파라미터 : 트윈(Tween) Animation 리소스 파일(오른쪽으로 슬라이딩되며 퇴장)
-        flipper.setOutAnimation(this, android.R.anim.slide_out_right);
-        flipper.setFlipInterval(2000);//플리핑 간격(1000ms)
+        flipper.setOutAnimation(this, R.anim.push_right_in);
+        flipper.setFlipInterval(6000);//플리핑 간격(1000ms)
 
         flipper.startFlipping();//자동 Flipping 시작
     }
+    public boolean onTouch(View v, MotionEvent event)
+    {
+        if(event.getAction()==MotionEvent.ACTION_DOWN){
+            downX = event.getX();
+        }
+        //터치종료
+        else if(event.getAction()==MotionEvent.ACTION_UP){
+            upX = event.getX();
 
+            //왼쪽 -> 오른쪽
+            if(upX < downX){
+                //애니메이션
+                flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_in));
+                flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_out));
+
+                //인덱스체크 - 마지막화면이면 동작없음
+                if(currentIndex < (countIndexes-1)){
+                    flipper.showNext();
+
+                    currentIndex++;
+                    //인덱스 업데이트
+                }
+            }
+            //오른쪽 -> 왼쪽
+            else if(upX > downX){
+                //애니메이션 설정
+                flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_in));
+                flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_out));
+
+                //인덱스체크 - 첫번째화면이면 동작없음
+                if(currentIndex > 0){
+                    flipper.showPrevious();
+
+                    currentIndex--;
+                    //인덱스 업데이트
+                }
+            }
+            else if(upX == downX)
+            {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("http://www.naver.com"));
+                startActivity(intent);
+                Toast.makeText(getApplicationContext(),"이동", Toast.LENGTH_SHORT).show();
+            }
+        }
+        return true;
+    }
     @Override
     protected void onResume() {
         super.onResume();
 
         NewThread task = new NewThread();
-        try
+        if(count ==0)
         {
-            if (task.getStatus() == AsyncTask.Status.RUNNING)
-            {
-                task.cancel(true);
-            }
-            else
-            {
-                task.execute();
-            }
+            task.execute();
+            Log.e("어싱크실행", task.getStatus().toString());
+            count++;
         }
-        catch (Exception e)
+        else
         {
+            task.cancel(true);
         }
+//        try
+//        {
+//            if (task.getStatus() == AsyncTask.Status.RUNNING)
+//            {
+//                task.cancel(true);
+//            }
+//            else
+//            {
+//                task.execute();
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//        }
     }
     @Override
     protected  void onDestroy(){
@@ -155,14 +220,16 @@ public class NoticeActivity extends AppCompatActivity {
                 //Elements elements = document.select(".table_list02");
                 Elements elements = document.getElementsByAttributeValue("class", "t_left");
                 Log.e("NoticeActivity", elements.text());
-                String title = elements.select("a").attr("href").toString();
-                Log.e("NoticeActivity", title);
                 //Elements elements = document.select("td.t_left > a");
                 for (Element element : elements) {
                     titleList.add(element.text());
                     //result.put("제목"+i,element.text());
                     Log.e("새소식제목", element.text());
-
+                    String title = element.select("a").attr("href").toString();
+                    String titleNum = title.substring(26,29);
+                    urlNumList.add(titleNum);
+                    //result.put("제목"+i,element.text());
+                    Log.e("새소식제목 번호", titleNum);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
