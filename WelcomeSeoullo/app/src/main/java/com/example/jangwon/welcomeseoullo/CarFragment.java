@@ -150,11 +150,30 @@ public class CarFragment extends Fragment {
     }
     //안내시작버튼을 누른 경우
     private void TmapNavigation() {
-        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
-        TMapTapi tmaptapi = new TMapTapi(getActivity());
-        tmaptapi.invokeRoute("서울로7017",(float)126.96961950000002,(float)37.5536067);
-        //Tmap이 설치되지 않은 경우
-//        showTmapInstallDialog();
+        Intent startLink1 = getActivity().getPackageManager().getLaunchIntentForPackage("com.skt.skaf.l001mtm091");
+        Intent startLink2 = getActivity().getPackageManager().getLaunchIntentForPackage("com.skt.tmap.ku");
+        Intent startLink3 = getActivity().getPackageManager().getLaunchIntentForPackage("com.skt.skaf.l001mtm092");
+        if(startLink1 == null)
+        {
+            Log.e("startLink1","null");
+        }
+        if(startLink2 == null)
+        {
+            Log.e("startLink2","null");
+        }
+        if(startLink3 == null)
+        {
+            Log.e("startLink3","null");
+        }
+        if (startLink1 != null || startLink2 != null || startLink3 != null) {
+            tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
+            TMapTapi tmaptapi = new TMapTapi(getActivity());
+            tmaptapi.invokeRoute("서울로7017", (float) 126.96961950000002, (float) 37.5536067);
+        } else {
+//        Tmap이 설치되지 않은 경우
+            Log.e("showTmapInstallDialog","null");
+            showTmapInstallDialog();
+        }
     }
 
     //Tmap설치로 인도하는 부분
@@ -187,14 +206,11 @@ public class CarFragment extends Fragment {
                         new DialogInterface.OnClickListener() {
                             public void onClick(
                                     DialogInterface dialog, int id) {
-                                // 다이얼로그를 취소한다
                                 dialog.cancel();
                             }
                         });
 
-        // 다이얼로그 생성
         AlertDialog alertDialog = alertDialogBuilder.create();
-        // 다이얼로그 보여주기
         alertDialog.show();
     }
 }
