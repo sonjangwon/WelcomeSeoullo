@@ -18,7 +18,6 @@ public class GuideInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_info);
 
-
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.mapview);
         final TMapView tmapview = new TMapView(this);
 

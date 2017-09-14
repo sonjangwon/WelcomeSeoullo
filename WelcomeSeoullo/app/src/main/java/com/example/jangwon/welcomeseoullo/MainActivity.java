@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    fragment = new FacilityFragment();
+                                    fragment = new GuideInfoFragment();
                                     currentMenu = item.getItemId();
                                     switchFragment();
                                 }
@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    fragment = new RouteFragment();
+                                    fragment = new PathInfoFragment();
                                     currentMenu = item.getItemId();
                                     switchFragment();
                                 }

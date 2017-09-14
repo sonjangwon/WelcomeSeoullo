@@ -32,8 +32,9 @@ public class BusPathActivity extends AppCompatActivity {
                 byCarButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(BusPathActivity.this, PathInfoActivity.class);
-                intent.putExtra("Path","carPath");
+                Intent intent = new Intent(BusPathActivity.this, PathInfoFragment.class);
+//                intent.putExtra("Path","carPath");
+                PathInfoFragment.test="carPath";
                 startActivityForResult(intent, 1);
                 finish();
             }
@@ -52,8 +53,9 @@ public class BusPathActivity extends AppCompatActivity {
                 onFootButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(BusPathActivity.this, PathInfoActivity.class);
-                intent.putExtra("Path","footPath");
+                Intent intent = new Intent(BusPathActivity.this, PathInfoFragment.class);
+//                intent.putExtra("Path","footPath");
+                PathInfoFragment.test="footPath";
                 startActivityForResult(intent, 1);
                 finish();
             }

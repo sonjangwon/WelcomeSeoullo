@@ -134,6 +134,21 @@ public class FacilityFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+//        ParsePublicToilet task = new ParsePublicToilet();
+//        try
+//        {
+//            if (task.getStatus() == AsyncTask.Status.RUNNING)
+//            {
+//                task.cancel(true);
+//            }
+//            else
+//            {
+//                task.execute();
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//        }
     }
 
     public boolean calculateCoordinates(String latitude, String longitude){
@@ -186,6 +201,7 @@ public class FacilityFragment extends Fragment {
                                             publicToiletVOArrayList.add(new PublicToiletVO(publicToiletVO.getToiletName(), publicToiletVO.getToiletCategory(), publicToiletVO.getToiletLatitude(), publicToiletVO.getToiletLongitude()));
                                             Log.v("test", publicToiletVOArrayList.get(publicToiletVOArrayList.size() - 1).getToiletName());
                                         }
+
                                         break;
                                 }
                                 bSet = false;

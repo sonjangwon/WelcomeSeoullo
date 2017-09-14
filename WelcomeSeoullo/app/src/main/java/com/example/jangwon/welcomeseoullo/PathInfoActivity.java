@@ -21,8 +21,8 @@ public class PathInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_path_info);
 
         //BusActivity에서 자동차경로 혹은 도보경로의 버튼을 누를때를 구분하기 위하여 값을 전달받아 구분한다.
-        Intent intent = getIntent();
-        getString = intent.getExtras().getString("Path");
+        //Intent intent = getIntent();
+        //getString = intent.getExtras().getString("Path");
 
         Toast.makeText(getApplicationContext(),getString,Toast.LENGTH_SHORT).show();
         final Button byCarButton = (Button) findViewById(R.id.byCar);
@@ -49,6 +49,7 @@ public class PathInfoActivity extends AppCompatActivity {
         else {
             byCarButton.setTextColor(Color.parseColor("#FF0000"));
         }
+
         byCarButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -83,13 +84,6 @@ public class PathInfoActivity extends AppCompatActivity {
             }
 
         });
-//        test.setOnClickListener(new EditText.OnClickListener(){
-//            @Override
-//            public void onClick(View view) {
-//                startActivity(new Intent(PathInfoActivity.this, BusPathActivity.class));
-//            }
-//
-//        });
     }
 
     //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
