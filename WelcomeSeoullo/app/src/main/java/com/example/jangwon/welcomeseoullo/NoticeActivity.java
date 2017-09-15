@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,7 +48,9 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
     float downX =0;
     //터치끝 x좌표
     float upX =0;
-
+    //화면 스크린 높이 넓이
+    int height=0;
+    int width=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +66,11 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
                 Toast.makeText(getApplicationContext(), "인터넷 권한이 필요합니다.", Toast.LENGTH_SHORT).show(); activity.finish();
             }
         } );
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
 
-        //ViewFlipper 객체 참조
-//
-//
         flipper= (ViewFlipper)findViewById(R.id.viewFlipper);
         startImageSlide();
         listview = (ListView) findViewById(R.id.noticeList);
@@ -96,7 +100,8 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
 //            ViewPager.LayoutParams params = (ViewPager.LayoutParams) img.getLayoutParams();
             img.setImageResource(R.drawable.image1+i);
             img.setOnTouchListener(this);
-
+            img.setMaxWidth(width);
+            img.setMaxHeight(height);
             flipper.addView(img);
         }
         //ViewFlipper가 View를 교체할 때 애니메이션이 적용되도록 설정

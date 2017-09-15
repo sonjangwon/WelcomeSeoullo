@@ -13,16 +13,15 @@
 </ViewFlipper>
 
     <TextView
-        android:layout_marginTop="50dp"
         android:id="@+id/textView"
-        android:layout_width="306dp"
+        android:layout_width="372dp"
         android:layout_height="wrap_content"
-        android:layout_weight="0.09"
-        android:text="서울로 새소식"
+        android:text="asdfsdf"
         android:textSize="20dp" />
 
     <ListView
         android:id="@+id/noticeList"
         android:layout_width="match_parent"
-        android:layout_height="170dp"/>
+        android:layout_height="256dp"
+        android:layout_weight="0.32" />
 </LinearLayout>
