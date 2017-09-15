@@ -32,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+//        ViewPager vp = (ViewPager)findViewById(R.id.main_fragment_place);
+//        pagerAdapter pagerAdapter = new pagerAdapter(getFragmentManager());
+//        vp.setAdapter(pagerAdapter);
+
+
+
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
@@ -104,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
     public void switchFragment(){
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_left, R.animator.enter_from_right, R.animator.exit_to_right);
         fragmentTransaction.replace(R.id.main_fragment_place, fragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         fragmentTransaction.commit();
@@ -143,6 +153,36 @@ public class MainActivity extends AppCompatActivity {
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
-
     }
+
+
+
+//    private class pagerAdapter extends android.support.v13.app.FragmentStatePagerAdapter {
+//        int menuItem[] = {R.id.action_home, R.id.action_facility, R.id.action_AR, R.id.action_route, R.id.action_settings};
+//
+//        public pagerAdapter(FragmentManager fm) {
+//            super(fm);
+//        }
+//        @Override
+//        public Fragment getItem(int position) {
+//            switch(position) {
+//                case 0:
+//                    //bottomNavigationView.getMenu().getItem(R.id.action_home).setChecked(true);
+//                    return new BlankFragment();
+//                case 1:
+//                    //bottomNavigationView.getMenu().getItem(R.id.action_facility).setChecked(true);
+//                    return new GuideInfoFragment();
+//                case 2:
+//                    return new BlankFragment();
+//                default:
+//                    return null;
+//            }
+//        }
+//        @Override
+//        public int getCount() {
+//            return 5;
+//        }
+//    }
+
+
 }

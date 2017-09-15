@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 
 public class BlankFragment extends Fragment {
 
+    public BlankFragment(){
+
+    }
+
     View view;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 

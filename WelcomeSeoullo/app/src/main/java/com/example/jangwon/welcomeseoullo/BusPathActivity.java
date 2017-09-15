@@ -1,7 +1,6 @@
 package com.example.jangwon.welcomeseoullo;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +24,7 @@ public class BusPathActivity extends AppCompatActivity {
         final Button byBusButton = (Button) findViewById(R.id.byBus);
         final Button onFootButton = (Button) findViewById(R.id.onFoot);
         byBusButton.setTextColor(Color.parseColor("#FF0000"));
+
         //버스경로안내에서 자동차경로를 클릭한 경우
         byCarButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
@@ -32,20 +32,19 @@ public class BusPathActivity extends AppCompatActivity {
                 byCarButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(BusPathActivity.this, PathInfoFragment.class);
-//                intent.putExtra("Path","carPath");
-                PathInfoFragment.test="carPath";
-                startActivityForResult(intent, 1);
-                finish();
-            }
 
+                PathInfoFragment.byCarButton.callOnClick();
+                onBackPressed();
+            }
         });
+
         byBusButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
             }
 
         });
+
         //버스경로안내에서 도보경로를 클릭한 경우
         onFootButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
@@ -53,11 +52,9 @@ public class BusPathActivity extends AppCompatActivity {
                 onFootButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(BusPathActivity.this, PathInfoFragment.class);
-//                intent.putExtra("Path","footPath");
-                PathInfoFragment.test="footPath";
-                startActivityForResult(intent, 1);
-                finish();
+
+                PathInfoFragment.onFootButton.callOnClick();
+                onBackPressed();
             }
 
         });
@@ -71,4 +68,5 @@ public class BusPathActivity extends AppCompatActivity {
         webViewTest.setWebViewClient(new WebViewClient());
         webViewTest.loadUrl(busUrl.toString());
     }
+
 }

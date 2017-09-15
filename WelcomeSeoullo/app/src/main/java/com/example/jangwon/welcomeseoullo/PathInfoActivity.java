@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class PathInfoActivity extends AppCompatActivity {
     //현재위치에서 서울로7017까지 경로안내를 제공하는 Activity
     String getString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

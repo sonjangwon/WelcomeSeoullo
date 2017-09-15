@@ -12,15 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class PathInfoFragment extends Fragment {
 
     View view;
-    String getString;
     Fragment fr;
-    View currentView;
-    static String test="";
+
+    static Button byCarButton;
+    static Button byBusButton;
+    static Button onFootButton;
+
+    public PathInfoFragment(){
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,12 +41,9 @@ public class PathInfoFragment extends Fragment {
 
             view = inflater.inflate(R.layout.fragment_path_info, container, false);
 
-            final Button byCarButton = (Button) view.findViewById(R.id.byCar);
-            final Button byBusButton = (Button) view.findViewById(R.id.byBus);
-            final Button onFootButton = (Button) view.findViewById(R.id.onFoot);
-
-            byCarButton.setTextColor(Color.parseColor("#FF0000"));
-            switchFragment(byCarButton);
+            byCarButton = (Button) view.findViewById(R.id.byCar);
+            byBusButton = (Button) view.findViewById(R.id.byBus);
+            onFootButton = (Button) view.findViewById(R.id.onFoot);
 
             byCarButton.setOnClickListener(new EditText.OnClickListener(){
                 @Override
@@ -51,6 +52,7 @@ public class PathInfoFragment extends Fragment {
                     byCarButton.setTextColor(Color.parseColor("#FF0000"));
                     byBusButton.setTextColor(Color.parseColor("#000000"));
                     onFootButton.setTextColor(Color.parseColor("#000000"));
+
                     switchFragment(view);
                 }
             });
@@ -63,8 +65,6 @@ public class PathInfoFragment extends Fragment {
                     onFootButton.setTextColor(Color.parseColor("#000000"));
 
                     startActivity(new Intent(getActivity(), BusPathActivity.class));
-                    getActivity().finish();
-
                 }
             });
             onFootButton.setOnClickListener(new EditText.OnClickListener(){
@@ -74,36 +74,16 @@ public class PathInfoFragment extends Fragment {
                     onFootButton.setTextColor(Color.parseColor("#FF0000"));
                     byBusButton.setTextColor(Color.parseColor("#000000"));
                     byCarButton.setTextColor(Color.parseColor("#000000"));
+
                     switchFragment(view);
                 }
             });
 
-            //getString = intent.getExtras().getString("Path");
-//            Intent intent = getActivity().getIntent();
-//            getString = intent.getExtras().getString("Path");
-//
-//            getString = "";
+            byCarButton.callOnClick();
 
+        }
+        else{
 
-            if(test.equals("carPath"))
-            {
-                Toast.makeText(getActivity().getApplicationContext(),getString,Toast.LENGTH_SHORT).show();
-                byCarButton.setTextColor(Color.parseColor("#FF0000"));
-                byBusButton.setTextColor(Color.parseColor("#000000"));
-                onFootButton.setTextColor(Color.parseColor("#000000"));
-                switchFragment("carPath");
-            }
-            //BusActivity에서 전달받은 값이 footPath 경우
-            else if(test.equals("footPath"))
-            {
-                onFootButton.setTextColor(Color.parseColor("#FF0000"));
-                byBusButton.setTextColor(Color.parseColor("#000000"));
-                byCarButton.setTextColor(Color.parseColor("#000000"));
-                switchFragment("footPath");
-            }
-            else {
-                byCarButton.setTextColor(Color.parseColor("#FF0000"));
-            }
         }
         return view;
     }
@@ -126,24 +106,7 @@ public class PathInfoFragment extends Fragment {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_place, fr);
-        fragmentTransaction.commit();
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
-    //대중경로Activity에서 자동차경로 혹은 도보경로를 클릭한 경우
-    public void switchFragment(String path){
-
-        if(path == "carPath"){
-            fr = new CarFragment();
-            //Toast.makeText(getApplicationContext(),"byCar",Toast.LENGTH_SHORT).show();
-
-        }else{
-            fr = new FootFragment();
-            //Toast.makeText(getApplicationContext(),"onFoot",Toast.LENGTH_SHORT).show();
-        }
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_place, fr);
-        fragmentTransaction.commit();
-    }
 }

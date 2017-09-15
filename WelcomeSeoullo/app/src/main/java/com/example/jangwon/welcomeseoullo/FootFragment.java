@@ -27,6 +27,10 @@ public class FootFragment extends Fragment {
     int hour=0;
     int min=0;
 
+    public FootFragment(){
+
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_foot, container, false);

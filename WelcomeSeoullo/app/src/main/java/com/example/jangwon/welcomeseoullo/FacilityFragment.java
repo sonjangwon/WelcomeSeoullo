@@ -21,6 +21,10 @@ public class FacilityFragment extends Fragment {
 
     ManagePublicData managePublicData = ManagePublicData.getInstance();
 
+    public FacilityFragment(){
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

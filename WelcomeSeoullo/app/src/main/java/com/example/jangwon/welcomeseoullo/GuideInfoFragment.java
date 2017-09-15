@@ -17,6 +17,10 @@ public class GuideInfoFragment extends Fragment {
 
     View view;
 
+    public GuideInfoFragment(){
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

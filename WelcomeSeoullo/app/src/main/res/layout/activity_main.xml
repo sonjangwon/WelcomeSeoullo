@@ -15,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+
         <FrameLayout
             android:id="@+id/main_fragment_place"
             android:layout_width="match_parent"
