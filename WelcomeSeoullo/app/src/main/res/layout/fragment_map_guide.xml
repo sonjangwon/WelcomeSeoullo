@@ -43,16 +43,16 @@
             android:layout_gravity="center"
             android:background="#4D4D4D"
             android:elevation="8dp"
-            android:onClick="btnZoomIn"
+            android:onClick="zoomInClick"
             android:scaleType="fitXY" />
 
         <ImageButton
+            android:id="@+id/zoomInButton"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center"
             android:background="@drawable/add"
             android:elevation="8dp"
-            android:onClick="btnZoomIn"
             android:scaleType="fitXY" />
     </FrameLayout>
 
@@ -72,16 +72,15 @@
             android:layout_gravity="center"
             android:background="#4D4D4D"
             android:elevation="8dp"
-            android:onClick="btnZoomIn"
             android:scaleType="fitXY" />
 
         <ImageButton
+            android:id="@+id/zoomOutButton"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_gravity="center"
             android:background="@drawable/minus"
             android:elevation="8dp"
-            android:onClick="btnZoomIn"
             android:scaleType="fitXY" />
     </FrameLayout>
 
@@ -102,16 +101,15 @@
             android:layout_gravity="center"
             android:background="#FFFFFF"
             android:elevation="8dp"
-            android:onClick="btnZoomIn"
             android:scaleType="fitXY" />
 
         <ImageButton
+            android:id="@+id/gpsButton"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:background="@drawable/ic_my_location_black_24dp"
             android:elevation="8dp"
-            android:onClick="btnNowLocation"
             android:scaleType="fitXY" />
 
     </FrameLayout>

@@ -3,100 +3,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context="com.example.jangwon.welcomeseoullo.GuideInfoActivity">
 
-    <LinearLayout
-        android:id="@+id/filter"
+    <RelativeLayout
+        android:id="@+id/categoryLinearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
+        android:background="#F4F4F4">
+
+        <Spinner
+            android:id="@+id/sortSpinner"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="11dp"
+            android:layout_marginTop="5dp"
+            android:background="#FFFFFF" />
+
+        <Spinner
+            android:id="@+id/distanceSpinner"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignTop="@+id/sortSpinner"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@+id/sortSpinner"
+            android:layout_toRightOf="@+id/sortSpinner"
+            android:background="#FFFFFF" />
+
+        <ImageButton
+            android:id="@+id/mapPointImageButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/mappoint" />
+
+        <ImageButton
+            android:id="@+id/listImageButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/mapPointImageButton"
+            android:layout_toStartOf="@+id/mapPointImageButton"
+            android:background="@drawable/ic_format_list_bulleted_black_24dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/categoryLinearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="#FFFFFF"
-        android:orientation="vertical">
+        android:id="@+id/linearLayout3">
 
-        <RelativeLayout
-            android:id="@+id/categoryLinearLayout"
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/holder" />
+
+        <TextView
+            android:id="@+id/addressTextView"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="#F4F4F4">
-
-            <Spinner
-                android:id="@+id/sortSpinner"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="11dp"
-                android:layout_marginTop="5dp"
-                android:background="#FFFFFF" />
-
-            <Spinner
-                android:id="@+id/distanceSpinner"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_alignTop="@+id/sortSpinner"
-                android:layout_marginLeft="8dp"
-                android:layout_toEndOf="@+id/sortSpinner"
-                android:layout_toRightOf="@+id/sortSpinner"
-                android:background="#FFFFFF" />
-
-            <ImageButton
-                android:id="@+id/mapPointImageButton"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginRight="5dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/mappoint" />
-
-            <ImageButton
-                android:id="@+id/listImageButton"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="5dp"
-                android:layout_toLeftOf="@+id/mapPointImageButton"
-                android:layout_toStartOf="@+id/mapPointImageButton"
-                android:background="@drawable/ic_format_list_bulleted_black_24dp" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.8">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/holder" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="서울특별시 중구 회현동" />
-        </LinearLayout>
-
-        <fragment
-            android:id="@+id/fagment_mapGuide"
-            android:name="com.example.jangwon.welcomeseoullo.MapGuideFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentTop="true"
-            android:layout_weight="10"
-            tools:layout="@layout/activity_guide_info" />
-
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="서울특별시 중구 회현동" />
     </LinearLayout>
 
+    <fragment
+        android:id="@+id/fagment_mapGuide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linearLayout3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:name="com.example.jangwon.welcomeseoullo.MapGuideFragment"
+        tools:layout="@layout/fragment_map_guide" />
 
 
 </RelativeLayout>
