@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
@@ -48,12 +49,15 @@ public class MapGuideFragment extends Fragment {
     // 사용자 위치 수신기
     private LocationManager locationManager;
     private LocationListener locationListener;
-
+    Location currentLocation=null;
+    double currentLatitude;
+    double currentLongitude;
+    TextView addressTextView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
         view = inflater.inflate(R.layout.fragment_map_guide, container, false);
 
-
+        addressTextView = (TextView) view.findViewById(R.id.addressTextView);
         zoonInFrameLayout = (FrameLayout) view.findViewById(R.id.zoonInFrameLayout);
         zoomOutFrameLayout = (FrameLayout) view.findViewById(R.id.zoomOutFrameLayout);
         zoomInButton = (ImageButton) view.findViewById(R.id.zoomInButton);
@@ -67,21 +71,14 @@ public class MapGuideFragment extends Fragment {
         longitude[2]= Double.valueOf("127.00776500000006");
 
 
-        Location location;
         // 사용자의 위치 수신을 위한 세팅 //
         settingGPS();
 
         // 사용자의 현재 위치 //
-        Location userLocation = getMyLocation();
+        getMyLocation();
 
-        if( userLocation != null ) {
-            // TODO 위치를 처음 얻어왔을 때 하고 싶은 것
-            double latitude = userLocation.getLatitude();
-            double longitude = userLocation.getLongitude();
-            Log.e("Latitude3", String.valueOf(latitude));
-            Log.e("Longitude3", String.valueOf(longitude));
-        }
-        test();
+        //위도경도를 상세주소로 변경
+        reverseGeocoder();
         mapView(view);
 
 
@@ -132,17 +129,15 @@ public class MapGuideFragment extends Fragment {
 
     }
 
-    public void test()
+    //역 지오코딩(위도경도를 상세주소로 변경)
+    public void reverseGeocoder()
     {
         final Geocoder geocoder = new Geocoder(getActivity());
         List<Address> list = null;
         try {
-            double d1 = 37.4969447;
-            double d2 = 126.9015382;
-
             list = geocoder.getFromLocation(
-                    d1, // 위도
-                    d2, // 경도
+                    currentLatitude, // 위도
+                    currentLongitude, // 경도
                     10); // 얻어올 값의 개수
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,17 +148,16 @@ public class MapGuideFragment extends Fragment {
                 Log.e("noList", String.valueOf(latitude));
             } else {
 //                tv.setText(list.get(0).toString());
-                Log.e("listGet", list.get(0).toString());
-
+                Log.e("listGet", list.get(0).getAddressLine(0).toString());
+                ((GuideInfoActivity)getActivity()).changeCurrentLoationText(list.get(0).getAddressLine(0).toString());
             }
         }
 
 
     }
 
-
-    private Location getMyLocation() {
-        Location currentLocation = null;
+    //현재위치 받아오기
+    private void getMyLocation() {
         // Register the listener with the Location Manager to receive location updates
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) !=
@@ -179,17 +173,15 @@ public class MapGuideFragment extends Fragment {
             String locationProvider = LocationManager.GPS_PROVIDER;
             currentLocation = locationManager.getLastKnownLocation(locationProvider);
             if (currentLocation != null) {
-                double lng = currentLocation.getLongitude();
-                double lat = currentLocation.getLatitude();
-                Log.d("Main", "longtitude=" + lng + ", latitude=" + lat);
+                currentLongitude = currentLocation.getLongitude();
+                currentLatitude = currentLocation.getLatitude();
+                Log.d("Main", "longtitude=" + currentLongitude + ", latitude=" + currentLatitude);
             }
         }
-        return currentLocation;
     }
 
-    /**
-     * GPS 를 받기 위한 매니저와 리스너 설정
-     */
+
+    // GPS 를 받기 위한 매니저와 리스너 설정
     private void settingGPS() {
         // Acquire a reference to the system Location Manager
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -200,8 +192,8 @@ public class MapGuideFragment extends Fragment {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
                 // TODO 위도, 경도로 하고 싶은 것
-                Log.e("Latitude2", String.valueOf(latitude));
-                Log.e("Longitude2", String.valueOf(longitude));
+//                Log.e("Latitude2", String.valueOf(latitude));
+//                Log.e("Longitude2", String.valueOf(longitude));
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -226,7 +218,7 @@ public class MapGuideFragment extends Fragment {
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.guideMapView);  //getActivity().findViewByID 아니다 ㅅㅂ
 
         tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
-
+        tmapview.setLocationPoint(currentLongitude,currentLatitude);
         tmapview.setCompassMode(true);
         tmapview.setIconVisibility(true);
         tmapview.setZoomLevel(11);
