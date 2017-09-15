@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     int currentMenu;
     BottomNavigationView bottomNavigationView;
 
+    ManagePublicData managePublicData = ManagePublicData.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
-                                    fragment = new BusFragment();
+                                    fragment = new FacilityFragment();
                                     currentMenu = item.getItemId();
                                     switchFragment();
                                 }
