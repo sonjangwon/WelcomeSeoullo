@@ -29,9 +29,9 @@ public class GuideAppInfo extends AppCompatActivity {
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
-    private Button btnSkip, btnNext;
+    private Button btnSkip, btnNext, btnStart;
     private PrefManager prefManager;
-
+    int count = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +50,12 @@ public class GuideAppInfo extends AppCompatActivity {
 
         setContentView(R.layout.activity_guide2);
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager2);
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots2);
-        //btnSkip = (Button) findViewById(R.id.btn_skip);
-        btnNext = (Button) findViewById(R.id.btn_next2);
-        btnNext.setVisibility(View.INVISIBLE);
+        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
+        btnSkip = (Button) findViewById(R.id.btn_skip);
+        btnNext =(Button) findViewById(R.id.btn_next);
+        btnStart = (Button) findViewById(R.id.btn_start);
+        btnStart.setVisibility(View.INVISIBLE);
 
 
         // layouts of all welcome sliders
@@ -74,13 +75,12 @@ public class GuideAppInfo extends AppCompatActivity {
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-//        btnSkip.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                launchHomeScreen();
-//            }
-//        });
-
+        btnSkip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                launchHomeScreen();
+            }
+        });
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,9 +90,14 @@ public class GuideAppInfo extends AppCompatActivity {
                 if (current < layouts.length) {
                     // move to next screen
                     viewPager.setCurrentItem(current);
-                } else {
-                    launchHomeScreen();
                 }
+            }
+        });
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    launchHomeScreen();
             }
         });
     }
@@ -105,11 +110,17 @@ public class GuideAppInfo extends AppCompatActivity {
         int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
         dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
+        for (int i = 0; i < dots.length; i++) { //이부분 -1이라고 고침
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setTextSize(35);
+//            if(i == dots.length-1)
+//            {
+//                dots[i].setTextColor(Color.TRANSPARENT);
+//            }
+//            else{
             dots[i].setTextColor(colorsInactive[currentPage]);
+//        }
             dotsLayout.addView(dots[i]);
         }
 
@@ -137,14 +148,16 @@ public class GuideAppInfo extends AppCompatActivity {
             // changing the next button text 'NEXT' / 'GOT IT'
             if (position == layouts.length - 1) {
                 // last page. make button text to GOT IT
-                btnNext.setVisibility(View.VISIBLE);
-                //btnNext.setText("시작하기");
-//                btnSkip.setVisibility(View.GONE);
+                btnStart.setVisibility(View.VISIBLE);
+                btnSkip.setVisibility(View.GONE);
+                btnNext.setVisibility(View.INVISIBLE);
+                //dotsLayout.setVisibility(View.INVISIBLE); //밑에 닷 안보이게
             } else {
                 // still pages are left
-                btnNext.setVisibility(View.INVISIBLE);
-//                btnNext.setText("다음");
-//                btnSkip.setVisibility(View.VISIBLE);
+                btnStart.setVisibility(View.INVISIBLE);
+                btnSkip.setVisibility(View.VISIBLE);
+                btnNext.setVisibility(View.VISIBLE);
+               // dotsLayout.setVisibility(View.VISIBLE); //닷 보이게
             }
         }
 
@@ -205,5 +218,9 @@ public class GuideAppInfo extends AppCompatActivity {
             View view = (View) object;
             container.removeView(view);
         }
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

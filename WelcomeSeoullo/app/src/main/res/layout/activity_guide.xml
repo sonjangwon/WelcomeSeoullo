@@ -3,12 +3,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/view_pager3"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <LinearLayout
-        android:id="@+id/layoutDots"
+        android:id="@+id/layoutDots4"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dots_height"
         android:gravity="center"
@@ -19,11 +19,11 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:alpha=".5"
-        android:layout_above="@id/layoutDots"
+        android:layout_above="@id/layoutDots4"
         android:background="@android:color/white" />
 
     <Button
-        android:id="@+id/btn_next"
+        android:id="@+id/btn_next4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -34,12 +34,13 @@
         android:textColor="#3AAB53" />
 
     <Button
-        android:id="@+id/btn_skip"
+        android:id="@+id/btn_skip4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="@null"
-        android:text="Skip"
-        android:textColor="@android:color/white" />
+        android:text="건너뛰기"
+        android:textColor="#3AAB53" />
+
 </RelativeLayout>

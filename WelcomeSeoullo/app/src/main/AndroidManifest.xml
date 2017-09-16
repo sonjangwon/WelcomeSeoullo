@@ -5,10 +5,10 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:hardwareAccelerated="false"
-        android:largeHeap="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -19,13 +19,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Guide2">
+
+        </activity>
         <activity android:name=".MainActivity">
 
         </activity>
+        <activity android:name=".Test">
 
-        <activity android:name=".NoticeActivity"/>
-        <activity android:name=".ViewContents"/>
-        <activity android:name="Test"/>
+        </activity>
+        <activity android:name=".NoticeActivity">
+
+        </activity>
+        <activity android:name=".ViewContents" />
     </application>
 
 </manifest>

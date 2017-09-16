@@ -1,35 +1,296 @@
 package com.example.jangwon.welcomeseoullo;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ViewFlipper;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by woga1 on 2017-09-13.
  */
 
-public class Test extends Activity {
+public class Test extends AppCompatActivity {
+    private ViewPager pager;
+    private MyViewPagerAdapter myViewPagerAdapter;
+    ViewFlipper flipper;
+    ListView listview ;
+    ArrayList<String> titleList = new ArrayList<String>();
+    ArrayList<String> urlNumList = new ArrayList<String>();
+    ArrayAdapter mAdapter;
+    int count =0;
+    int countIndexes = 0;
+    //현재화면인덱스
+    int currentIndex =0;
+    //터치시작 x좌표
+    float downX =0;
+    //터치끝 x좌표
+    float upX =0;
+    //화면 스크린 높이 넓이
+    int height=0;
+    int width=0;
+    private int[] layouts;
+    private TextView[] dots;
+    private LinearLayout dotsLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-        Intent intent = getIntent();
-        String n = intent.getExtras().getString("title");
-        String n2 = "윤이상 탄생 100주년 기념 '프롬나드 콘서트' 공연 안내"+
+        setContentView(R.layout.test);
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        height = displayMetrics.heightPixels;
+        width = displayMetrics.widthPixels;
 
-        "세계적인 작곡가 윤이상 선생님 탄생 100주년을 맞아 서울문화재단 주관하에 윤이상 탄생 100주년 기념 프롬나드 콘서트가 개최됩니다."+
+        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots3);
+        pager= (ViewPager) findViewById(R.id.viewPager);
+        startImageSlide();
+        listview = (ListView) findViewById(R.id.noticeList2);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(Test.this, ViewContents.class);
+                intent.putExtra("urlNum", urlNumList.get(position));
+                startActivity(intent);
+            }
+        });
+        Log.e("메인","작동끝");
+    }
 
-                "여러 행사중 저희 서울로7017 윤슬에서 '윤슬음'행사도 진행되니 많은 참여 바랍니다."+
+    public void startImageSlide()
+    {
+        for(int i=0;i<4;i++){
 
-                "- 프로그램명 : 윤슬음(音)"+
-                "- 일시 : 2017. 9. 15.(금) 20시~20시 30분"+
-                "- 장소 : 윤슬 ( 서울로7017 만리동광장 남측 위치)"+
-                "- 관람인원 : 150명(선착순 마감)"+
-                "- 내용 : 윤이상의 네곡의 오페라 중 마지막 곡이었던 <심청>에 담긴 자기 희생과 구원, 박애의 가치를 국악과 힙합의 사운드로 재해석하여 장르를 넘나드는 새로운 형태의 야외 음악 공연";
-        TextView tv1 = (TextView) findViewById(R.id.title);
-        TextView tv2 = (TextView) findViewById(R.id.content);
-        tv1.setText(n);
-        tv2.setText(n2);
+            ImageView img= new ImageView(this);
+//            ViewPager.LayoutParams params = (ViewPager.LayoutParams) img.getLayoutParams();
+            img.setImageResource(R.drawable.image1+i);
+            //img.setOnTouchListener(this);
+            img.setMaxWidth(width);
+            img.setMaxHeight(height);
+            pager.addView(img);
+        }
+
+    }
+//    public boolean onTouch(View v, MotionEvent event)
+//    {
+//        if(event.getAction()==MotionEvent.ACTION_DOWN){
+//            downX = event.getX();
+//        }
+//        //터치종료
+//        else if(event.getAction()==MotionEvent.ACTION_UP){
+//            upX = event.getX();
+//
+//            //왼쪽 -> 오른쪽
+//            if(upX < downX){
+//                //애니메이션
+//                flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_in));
+//                flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_out));
+//
+//                //인덱스체크 - 마지막화면이면 동작없음
+//                if(currentIndex < (countIndexes-1)){
+//                    flipper.showNext();
+//
+//                    currentIndex++;
+//                    //인덱스 업데이트
+//                }
+//            }
+//            //오른쪽 -> 왼쪽
+//            else if(upX > downX){
+//                //애니메이션 설정
+//                flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_in));
+//                flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_out));
+//
+//                //인덱스체크 - 첫번째화면이면 동작없음
+//                if(currentIndex > 0){
+//                    flipper.showPrevious();
+//
+//                    currentIndex--;
+//                    //인덱스 업데이트
+//                }
+//            }
+//            else if(upX == downX)
+//            {
+//                Intent intent = new Intent();
+//                intent.setAction(Intent.ACTION_VIEW);
+//                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+//                intent.setData(Uri.parse("http://www.naver.com"));
+//                startActivity(intent);
+//                Toast.makeText(getApplicationContext(),"이동", Toast.LENGTH_SHORT).show();
+//            }
+//        }
+//        return true;
+//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        NewThread task = new NewThread();
+        if(count ==0)
+        {
+            task.execute();
+            Log.e("어싱크실행", task.getStatus().toString());
+            count++;
+        }
+        else
+        {
+            task.cancel(true);
+        }
+    }
+    @Override
+    protected  void onDestroy(){
+        super.onDestroy();
+    }
+
+
+    public class NewThread extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            Document document = null;
+            try {
+                document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEList.do").get();
+                Elements elements = document.getElementsByAttributeValue("class", "t_left");
+                //Elements elements = document.select("td.t_left > a");
+                for (Element element : elements) {
+                    titleList.add(element.text());
+                    String title = element.select("a").attr("href").toString();
+                    String titleNum = title.substring(26,29);
+                    urlNumList.add(titleNum);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+
+            mAdapter.notifyDataSetChanged();
+            listview.setAdapter(mAdapter);
+            listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        }
+    }
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[layouts.length];
+        //해당화면 일때
+        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
+        //해당화면 아닐때
+        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
+
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(this);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(colorsInactive[currentPage]);
+            dotsLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(colorsActive[currentPage]);
+    }
+
+    private int getItem(int i) {
+        return pager.getCurrentItem() + i;
+    }
+
+    private void launchHomeScreen() {
+        startActivity(new Intent(getApplicationContext(), NoticeActivity.class));
+        finish();
+    }
+
+    //	viewpager change listener
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+
+        @Override
+        public void onPageSelected(int position) {
+            addBottomDots(position);
+
+        }
+
+        @Override
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int arg0) {
+
+        }
+    };
+
+    /**
+     * Making notification bar transparent
+     */
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    private class MyViewPagerAdapter extends PagerAdapter {
+
+        private LayoutInflater layoutInflater;
+
+        public MyViewPagerAdapter() {
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            View view = layoutInflater.inflate(layouts[position], container, false);
+            container.addView(view);
+
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return layouts.length;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object obj) {
+            return view == obj;
+        }
+
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            View view = (View) object;
+            container.removeView(view);
+        }
     }
 }

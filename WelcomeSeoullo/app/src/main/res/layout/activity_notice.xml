@@ -6,22 +6,20 @@
 <ViewFlipper
     android:id="@+id/viewFlipper"
     android:layout_width="match_parent"
-    android:layout_height="228dp"
-    android:layout_weight="0.11">
+    android:layout_height="212dp"
+    android:layout_weight="0.92">
 
 
 </ViewFlipper>
 
-    <TextView
+    <ImageView
         android:id="@+id/textView"
-        android:layout_width="372dp"
-        android:layout_height="wrap_content"
-        android:text="asdfsdf"
-        android:textSize="20dp" />
+        android:layout_width="wrap_content"
+        android:layout_height="67dp"
+        android:background="@drawable/banner3" />
 
     <ListView
         android:id="@+id/noticeList"
         android:layout_width="match_parent"
-        android:layout_height="256dp"
-        android:layout_weight="0.32" />
+        android:layout_height="301dp" />
 </LinearLayout>

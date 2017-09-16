@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -17,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
@@ -39,7 +39,6 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayAdapter mAdapter;
-    TextView tv;
     int count =0;
     int countIndexes = 0;
     //현재화면인덱스
@@ -49,8 +48,8 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
     //터치끝 x좌표
     float upX =0;
     //화면 스크린 높이 넓이
-    int height=0;
-    int width=0;
+    int screenheight=0;
+    int screenwidth=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,13 +67,12 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
         } );
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        height = displayMetrics.heightPixels;
-        width = displayMetrics.widthPixels;
+        screenheight = displayMetrics.heightPixels;
+        screenwidth = displayMetrics.widthPixels;
 
         flipper= (ViewFlipper)findViewById(R.id.viewFlipper);
         startImageSlide();
         listview = (ListView) findViewById(R.id.noticeList);
-        tv = (TextView) findViewById(R.id.textView);
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -100,8 +98,16 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
 //            ViewPager.LayoutParams params = (ViewPager.LayoutParams) img.getLayoutParams();
             img.setImageResource(R.drawable.image1+i);
             img.setOnTouchListener(this);
-            img.setMaxWidth(width);
-            img.setMaxHeight(height);
+
+            float px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 212, getResources().getDisplayMetrics());
+            Log.e("플립퍼높이", String.valueOf(px));
+            //img.setMaxHeight((int)px);
+            img.setScaleType(ImageView.ScaleType.FIT_XY);
+            android.view.ViewGroup.LayoutParams layoutParams = img.getLayoutParams();
+//            layoutParams.width = screenwidth;
+//            layoutParams.height =(int)px;
+//            Log.e("dd", String.valueOf(screenwidth) +  String.valueOf(layoutParams.height));
+            //img.setLayoutParams(new ViewGroup.LayoutParams(700, (int)px));
             flipper.addView(img);
         }
         //ViewFlipper가 View를 교체할 때 애니메이션이 적용되도록 설정
@@ -123,8 +129,9 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
         //위와 다른 방법으로 애니메이션을 적용해봅니다.
         //첫번째 파라미터 : Context
         //두번재 파라미터 : 트윈(Tween) Animation 리소스 파일(오른쪽으로 슬라이딩되며 퇴장)
-        flipper.setOutAnimation(this, R.anim.push_right_in);
-        flipper.setFlipInterval(6000);//플리핑 간격(1000ms)
+        flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_in));
+        flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_out));
+        flipper.setFlipInterval(2000);//플리핑 간격(1000ms)
 
         flipper.startFlipping();//자동 Flipping 시작
     }
@@ -140,30 +147,32 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
             //왼쪽 -> 오른쪽
             if(upX < downX){
                 //애니메이션
+                flipper.stopFlipping();
                 flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_in));
                 flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_out));
-
+                flipper.showNext();
                 //인덱스체크 - 마지막화면이면 동작없음
-                if(currentIndex < (countIndexes-1)){
-                    flipper.showNext();
-
-                    currentIndex++;
-                    //인덱스 업데이트
-                }
+//                if(currentIndex < (countIndexes-1)){
+//                    flipper.showNext();
+//
+//                    currentIndex++;
+//                    //인덱스 업데이트
+//                }
             }
             //오른쪽 -> 왼쪽
             else if(upX > downX){
                 //애니메이션 설정
+                flipper.stopFlipping();
                 flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_in));
                 flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_out));
-
+                flipper.showPrevious();
                 //인덱스체크 - 첫번째화면이면 동작없음
-                if(currentIndex > 0){
-                    flipper.showPrevious();
-
-                    currentIndex--;
-                    //인덱스 업데이트
-                }
+//                if(currentIndex > 0){
+//                    flipper.showPrevious();
+//
+//                    currentIndex--;
+//                    //인덱스 업데이트
+//                }
             }
             else if(upX == downX)
             {
@@ -174,6 +183,9 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"이동", Toast.LENGTH_SHORT).show();
             }
+
+            flipper.startFlipping();
+
         }
         return true;
     }
@@ -192,20 +204,6 @@ public class NoticeActivity extends AppCompatActivity implements View.OnTouchLis
         {
             task.cancel(true);
         }
-//        try
-//        {
-//            if (task.getStatus() == AsyncTask.Status.RUNNING)
-//            {
-//                task.cancel(true);
-//            }
-//            else
-//            {
-//                task.execute();
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//        }
     }
     @Override
     protected  void onDestroy(){
