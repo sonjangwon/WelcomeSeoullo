@@ -25,20 +25,10 @@ public class MainActivity extends AppCompatActivity {
     int currentMenu;
     BottomNavigationView bottomNavigationView;
 
-    ManagePublicData managePublicData = ManagePublicData.getInstance();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
-//        ViewPager vp = (ViewPager)findViewById(R.id.main_fragment_place);
-//        pagerAdapter pagerAdapter = new pagerAdapter(getFragmentManager());
-//        vp.setAdapter(pagerAdapter);
-
-
 
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -47,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         fragment = new BlankFragment();
         switchFragment();
         currentMenu = bottomNavigationView.getSelectedItemId();
+
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -96,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
                             case R.id.action_settings:
                                 if(currentMenu == item.getItemId()){
+                                    //scrollView.fullScroll(ScrollView.FOCUS_UP);
                                     Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
                                 }
                                 else {
@@ -157,27 +149,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-//    private class pagerAdapter extends android.support.v13.app.FragmentStatePagerAdapter {
+//    private class PagerAdapter extends android.support.v13.app.FragmentStatePagerAdapter {
 //        int menuItem[] = {R.id.action_home, R.id.action_facility, R.id.action_AR, R.id.action_route, R.id.action_settings};
 //
-//        public pagerAdapter(FragmentManager fm) {
+//        public PagerAdapter(FragmentManager fm) {
 //            super(fm);
 //        }
+//
 //        @Override
 //        public Fragment getItem(int position) {
 //            switch(position) {
 //                case 0:
-//                    //bottomNavigationView.getMenu().getItem(R.id.action_home).setChecked(true);
-//                    return new BlankFragment();
+//                    bottomNavigationView.setSelectedItemId(R.id.action_home);
+//                    return fragment;
 //                case 1:
-//                    //bottomNavigationView.getMenu().getItem(R.id.action_facility).setChecked(true);
-//                    return new GuideInfoFragment();
-//                case 2:
-//                    return new BlankFragment();
+//                    bottomNavigationView.setSelectedItemId(R.id.action_facility);
+//                    return fragment;
 //                default:
 //                    return null;
 //            }
 //        }
+//
 //        @Override
 //        public int getCount() {
 //            return 5;
