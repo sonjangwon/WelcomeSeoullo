@@ -1,28 +1,22 @@
 package com.example.jangwon.welcomeseoullo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import org.jsoup.Jsoup;
@@ -32,6 +26,10 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by woga1 on 2017-09-13.
@@ -39,16 +37,14 @@ import java.util.ArrayList;
 
 public class Test extends AppCompatActivity {
     private ViewPager pager;
-    private MyViewPagerAdapter myViewPagerAdapter;
     ViewFlipper flipper;
     ListView listview ;
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayAdapter mAdapter;
     int count =0;
-    int countIndexes = 0;
     //현재화면인덱스
-    int currentIndex =0;
+    int currentPage =0;
     //터치시작 x좌표
     float downX =0;
     //터치끝 x좌표
@@ -56,10 +52,8 @@ public class Test extends AppCompatActivity {
     //화면 스크린 높이 넓이
     int height=0;
     int width=0;
-    private int[] layouts;
-    private TextView[] dots;
-    private LinearLayout dotsLayout;
-
+    private Integer[] Images = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4 };
+    private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +62,13 @@ public class Test extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
-
-        dotsLayout = (LinearLayout) findViewById(R.id.layoutDots3);
         pager= (ViewPager) findViewById(R.id.viewPager);
-        startImageSlide();
+        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), ImgArray);
+      // MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(getFragmentManager());
+        pager.setAdapter(myAdapter);
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+
         listview = (ListView) findViewById(R.id.noticeList2);
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,6 +80,33 @@ public class Test extends AppCompatActivity {
             }
         });
         Log.e("메인","작동끝");
+    }
+    public void init()
+    {
+        for(int i=0;i<Images.length;i++){
+            ImgArray.add(Images[i]);
+        }
+        pager.setAdapter(new MyAdapter(Test.this, ImgArray));
+        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        indicator.setViewPager(pager);
+
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == Images.length) {
+                    currentPage = 0;
+                }
+                pager.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 2500, 2500);
     }
 
     public void startImageSlide()
@@ -199,33 +223,15 @@ public class Test extends AppCompatActivity {
             listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         }
     }
-    private void addBottomDots(int currentPage) {
-        dots = new TextView[layouts.length];
-        //해당화면 일때
-        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
-        //해당화면 아닐때
-        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
-        dotsLayout.removeAllViews();
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new TextView(this);
-            dots[i].setText(Html.fromHtml("&#8226;"));
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(colorsInactive[currentPage]);
-            dotsLayout.addView(dots[i]);
-        }
-
-        if (dots.length > 0)
-            dots[currentPage].setTextColor(colorsActive[currentPage]);
-    }
 
     private int getItem(int i) {
         return pager.getCurrentItem() + i;
     }
 
     private void launchHomeScreen() {
-        startActivity(new Intent(getApplicationContext(), NoticeActivity.class));
-        finish();
+//        startActivity(new Intent(getApplicationContext(), NoticeActivity.class));
+//        finish();
     }
 
     //	viewpager change listener
@@ -233,7 +239,6 @@ public class Test extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
-            addBottomDots(position);
 
         }
 
@@ -259,38 +264,5 @@ public class Test extends AppCompatActivity {
         }
     }
 
-    private class MyViewPagerAdapter extends PagerAdapter {
 
-        private LayoutInflater layoutInflater;
-
-        public MyViewPagerAdapter() {
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            View view = layoutInflater.inflate(layouts[position], container, false);
-            container.addView(view);
-
-            return view;
-        }
-
-        @Override
-        public int getCount() {
-            return layouts.length;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object obj) {
-            return view == obj;
-        }
-
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            View view = (View) object;
-            container.removeView(view);
-        }
-    }
 }
