@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -25,88 +26,101 @@ public class MainActivity extends AppCompatActivity {
     int currentMenu;
     BottomNavigationView bottomNavigationView;
 
+    private ViewPager viewPager;
+    ViewPagerAdapter adapter;
+    MenuItem prevMenuItem;
+
+    BlankFragment homeFragment;
+    GuideInfoFragment guideInfoFragment;
+    BlankFragment arFragment;
+    PathInfoFragment pathInfoFragment;
+    FacilityFragment facilityFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setOffscreenPageLimit(5);
 
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
-        fragment = new BlankFragment();
-        switchFragment();
-        currentMenu = bottomNavigationView.getSelectedItemId();
+        currentMenu = R.id.action_home;
+        setupViewPager(viewPager);
+        prevMenuItem = bottomNavigationView.getMenu().getItem(0);
 
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_home:
+                        currentMenu = R.id.action_home;
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case R.id.action_facility:
+                        currentMenu = R.id.action_facility;
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case R.id.action_AR:
+                        currentMenu = R.id.action_AR;
+                        viewPager.setCurrentItem(2);
+                        break;
+                    case R.id.action_route:
+                        currentMenu = R.id.action_route;
+                        viewPager.setCurrentItem(3);
+                        break;
+                    case R.id.action_settings:
+                        currentMenu = R.id.action_settings;
+                        viewPager.setCurrentItem(4);
+                        break;
+                }
+                return true;
+            }
+        });
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        fragment = null;
-                        switch (item.getItemId()) {
-                            case R.id.action_home:
-                                if(currentMenu == item.getItemId()){
-                                    Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
-                                }
-                                else{
-                                    fragment = new BlankFragment();
-                                    currentMenu = item.getItemId();
-                                    switchFragment();
-                                }
-                                break;
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                            case R.id.action_facility:
-                                if(currentMenu == item.getItemId()){
-                                    Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    fragment = new GuideInfoFragment();
-                                    currentMenu = item.getItemId();
-                                    switchFragment();
-                                }
-                                break;
+            }
+            @Override
+            public void onPageSelected(int position) {
+                currentMenu = bottomNavigationView.getMenu().getItem(position).getItemId();
+                bottomNavigationView.getMenu().getItem(position).setChecked(true);
+                prevMenuItem = bottomNavigationView.getMenu().getItem(position);
+            }
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
-                            case R.id.action_AR:
-                                Toast.makeText(getApplicationContext(), "AR 기능 예정", Toast.LENGTH_SHORT).show();
-                                fragment = new BlankFragment();
-                                currentMenu = item.getItemId();
-                                switchFragment();
-                                break;
+            }
+        });
+    }
 
-                            case R.id.action_route:
-                                if(currentMenu == item.getItemId()){
-                                    Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    fragment = new PathInfoFragment();
-                                    currentMenu = item.getItemId();
-                                    switchFragment();
-                                }
-                                break;
+    private void setupViewPager(ViewPager viewPager) {
+        adapter = new ViewPagerAdapter(getFragmentManager());
 
-                            case R.id.action_settings:
-                                if(currentMenu == item.getItemId()){
-                                    //scrollView.fullScroll(ScrollView.FOCUS_UP);
-                                    Toast.makeText(getApplicationContext(), "이미 고른 메뉴", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    fragment = new FacilityFragment();
-                                    currentMenu = item.getItemId();
-                                    switchFragment();
-                                }
-                                break;
-                        }
-                        return true;
-                    }
-                });
+        homeFragment = new BlankFragment();
+        guideInfoFragment = new GuideInfoFragment();
+        arFragment = new BlankFragment();
+        pathInfoFragment = new PathInfoFragment();
+        facilityFragment = new FacilityFragment();
+
+        adapter.addFragment(homeFragment);
+        adapter.addFragment(guideInfoFragment);
+        adapter.addFragment(arFragment);
+        adapter.addFragment(pathInfoFragment);
+        adapter.addFragment(facilityFragment);
+
+        viewPager.setAdapter(adapter);
     }
 
     public void switchFragment(){
         fragmentManager = getFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_left, R.animator.enter_from_right, R.animator.exit_to_right);
-        fragmentTransaction.replace(R.id.main_fragment_place, fragment);
+        //fragmentTransaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_left, R.animator.enter_from_right, R.animator.exit_to_right);
+        fragmentTransaction.replace(R.id.viewPager, fragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
         fragmentTransaction.commit();
     }
@@ -129,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
             bottomNavigationView.setSelectedItemId(R.id.action_home);
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 //        MenuInflater inflater = getMenuInflater();
@@ -146,35 +161,4 @@ public class MainActivity extends AppCompatActivity {
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
-
-
-
-//    private class PagerAdapter extends android.support.v13.app.FragmentStatePagerAdapter {
-//        int menuItem[] = {R.id.action_home, R.id.action_facility, R.id.action_AR, R.id.action_route, R.id.action_settings};
-//
-//        public PagerAdapter(FragmentManager fm) {
-//            super(fm);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            switch(position) {
-//                case 0:
-//                    bottomNavigationView.setSelectedItemId(R.id.action_home);
-//                    return fragment;
-//                case 1:
-//                    bottomNavigationView.setSelectedItemId(R.id.action_facility);
-//                    return fragment;
-//                default:
-//                    return null;
-//            }
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return 5;
-//        }
-//    }
-
-
 }

@@ -3,4 +3,7 @@
     <item>
         <bitmap android:src="@mipmap/name_test" android:gravity="center" />
     </item>
+    <item>
+        <bitmap android:src="@mipmap/iseoulu" android:gravity="bottom" />
+    </item>>
 </layer-list>
