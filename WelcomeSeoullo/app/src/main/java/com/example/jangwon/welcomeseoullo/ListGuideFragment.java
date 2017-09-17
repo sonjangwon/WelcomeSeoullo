@@ -9,17 +9,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListGuideFragment extends Fragment {
 
 //    static final String[] LIST_MENU = {"LIST1","LIST2","LIST3"};
     ArrayAdapter adapter;
+    ListView listview;
+    List<String> LIST_MENU = new ArrayList();
 
     View view;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_list_guide, container, false);
 
-        final String[] LIST_MENU = {"LIST1","LIST2","LIST3"};
-        ListView listview = (ListView) view.findViewById(R.id.guideListView) ;
+        listview = (ListView) view.findViewById(R.id.guideListView) ;
+        listview(view);
+
         adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, LIST_MENU) ;
 
         listview.setAdapter(adapter) ;
@@ -35,13 +41,33 @@ public class ListGuideFragment extends Fragment {
         }) ;
 
 
-//        listview(view);
+
         return view;
 
     }
 
     //리스트뷰 띄우기
     public void listview(View view) {
-        ListView listView = (ListView) view.findViewById(R.id.guideListView);
+
+        if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
+            for (int i = 0; i < 2; i++) {
+                LIST_MENU.add("공공화장실");
+            }
+        }
+            if (ManagementLocation.getInstance().getSortSpinner() == "전체" | ManagementLocation.getInstance().getSortSpinner() == "주차장") {
+                for (int i = 0; i < 3; i++) {
+                    LIST_MENU.add("주차장");
+                }
+        }
+        if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="공원") {
+            for (int i = 0; i < 3; i++) {
+                LIST_MENU.add("공원");
+            }
+        }
+        if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
+            for (int i = 0; i < 3; i++) {
+                LIST_MENU.add("전통시장");
+            }
+        }
     }
 }

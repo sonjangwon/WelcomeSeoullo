@@ -1,5 +1,6 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.skp.Tmap.TMapPoint;
@@ -60,7 +61,7 @@ public class PathTracker {
                         HttpURLConnection ez = (HttpURLConnection)con;
                         e = HttpConnect.getDocument(con);
                     } catch (Exception ezx) {
-                        Log.i("error","에러남ㅋㅋ");
+                        Log.i("error","에러남");
                     }
                     if(e != null) {
                         NodeList list = e.getElementsByTagName("tmap:totalTime");

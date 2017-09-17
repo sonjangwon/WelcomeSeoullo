@@ -146,6 +146,15 @@ public class FacilityFragment extends Fragment {
         }
     }
 
+    public boolean checkDuplication(String ParkingLotName){
+        for(int i=0;i<publicParkingLotVOArrayList.size();i++){
+            if(publicParkingLotVOArrayList.get(i).getParkingLotName().equals(ParkingLotName)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     private class ParsePublicToilet extends AsyncTask<String, Integer, String> {
 
         @Override
@@ -346,7 +355,6 @@ public class FacilityFragment extends Fragment {
             }
         }
     }
-
 
 
     private class ParseTraditionalMarket extends AsyncTask<String, Integer, String> {

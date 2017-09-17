@@ -73,7 +73,6 @@ public class CarFragment extends Fragment {
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
 
         mapView(view);
-        drawLine();
         tt = new TimerTask() {
             @Override
             public void run() {
@@ -114,6 +113,7 @@ public class CarFragment extends Fragment {
         tmapview.setMapPosition(TMapView.POSITION_DEFAULT);
 //        tmapview.setSightVisible(true);
         relativeLayout.addView(tmapview);
+        drawLine();
     }
 
     //경로 나타내기
@@ -123,7 +123,7 @@ public class CarFragment extends Fragment {
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
         PathTracker pathTracker = new PathTracker("carPath",startPoint,endPoint);
 //        pathData.findPathTime();
-        SystemClock.sleep(2000);
+        SystemClock.sleep(3000);
         totalDistance = pathTracker.getTotalDistance();
         totalTime = pathTracker.getTotalTime();
         taxiFare = pathTracker.getTaxiFare();

@@ -34,10 +34,9 @@ public class GuideInfoActivity extends AppCompatActivity {
     double currentLatitude;
     double currentLongitude;
     String currentAddress;
+    String nowFragment="map";
     TextView addressTextView;
 
-    static String sortContent="전체";
-    static String distantContent="2km";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,24 +51,30 @@ public class GuideInfoActivity extends AppCompatActivity {
 
         Spinner sortSpinner = (Spinner)findViewById(R.id.sortSpinner);
         Spinner distanceSpinner = (Spinner)findViewById(R.id.distanceSpinner);
+        ManagementLocation.getInstance().setSortSpinner("전체");
+        ManagementLocation.getInstance().setDistanceSpinner("2km");
         final ImageButton listImageButton = (ImageButton)findViewById(R.id.listImageButton);
         final ImageButton mapPointImageButton = (ImageButton)findViewById(R.id.mapPointImageButton);
 
         listImageButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
+                nowFragment="list";
                 switchFragment(view);
                 mapPointImageButton.setBackgroundResource(R.drawable.reversemappoint);
                 listImageButton.setBackgroundResource(R.drawable.reverselistpoint);
+
             }
 
         });
         mapPointImageButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
+                nowFragment="map";
                 switchFragment(view);
                 mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
                 listImageButton.setBackgroundResource(R.drawable.listpoint);
+
             }
 
         });
@@ -89,25 +94,26 @@ public class GuideInfoActivity extends AppCompatActivity {
                 switch (parent.getItemAtPosition(position).toString()) {
                     case "전체":
                         Toast.makeText(getApplicationContext(), "전체", Toast.LENGTH_SHORT).show();
-                        sortContent="전체";
+                        ManagementLocation.getInstance().setSortSpinner("전체");
                         break;
                     case "공공화장실":
                         Toast.makeText(getApplicationContext(), "공공화장실", Toast.LENGTH_SHORT).show();
-                        sortContent="공공화장실";
+                        ManagementLocation.getInstance().setSortSpinner("공공화장실");
                         break;
                     case "주차장":
                         Toast.makeText(getApplicationContext(), "주차장", Toast.LENGTH_SHORT).show();
-                        sortContent="주차장";
+                        ManagementLocation.getInstance().setSortSpinner("주차장");
                         break;
                     case "공원":
                         Toast.makeText(getApplicationContext(), "공원", Toast.LENGTH_SHORT).show();
-                        sortContent="공원";
+                        ManagementLocation.getInstance().setSortSpinner("공원");
                         break;
                     case "전통시장":
                         Toast.makeText(getApplicationContext(), "전통시장", Toast.LENGTH_SHORT).show();
-                        sortContent="전통시장";
+                        ManagementLocation.getInstance().setSortSpinner("전통시장");
                         break;
                 }
+                switchFragments(nowFragment);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -127,21 +133,22 @@ public class GuideInfoActivity extends AppCompatActivity {
                 switch (parent.getItemAtPosition(position).toString()) {
                     case "500m":
                         Toast.makeText(getApplicationContext(), "500m", Toast.LENGTH_SHORT).show();
-                        distantContent="500m";
+                        ManagementLocation.getInstance().setDistanceSpinner("500m");
                         break;
                     case "1km":
                         Toast.makeText(getApplicationContext(), "1km", Toast.LENGTH_SHORT).show();
-                        distantContent="1km";
+                        ManagementLocation.getInstance().setDistanceSpinner("1km");
                         break;
                     case "1.5km":
                         Toast.makeText(getApplicationContext(), "1.5km", Toast.LENGTH_SHORT).show();
-                        distantContent="1.5km";
+                        ManagementLocation.getInstance().setDistanceSpinner("1.5km");
                         break;
                     case "2km":
                         Toast.makeText(getApplicationContext(), "2km", Toast.LENGTH_SHORT).show();
-                        distantContent="2km";
+                        ManagementLocation.getInstance().setDistanceSpinner("2km");
                         break;
                 }
+                switchFragments(nowFragment);
             }
 
             @Override
@@ -180,26 +187,22 @@ public class GuideInfoActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
     //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
-    public void switchFragments(View view){
-        Fragment fr = new CarFragment();
+    public void switchFragments(String nowFragment){
+        Fragment fr = new MapGuideFragment();
 
-        if(view == findViewById(R.id.byCar)){
-            fr = new CarFragment();
-            Toast.makeText(getApplicationContext(),"byCar",Toast.LENGTH_SHORT).show();
+        if(nowFragment == "map"){
+            fr = new MapGuideFragment();
 
-        }else if(view == findViewById(R.id.byBus)){
-            fr = new BusFragment();
-            Toast.makeText(getApplicationContext(),"byBus",Toast.LENGTH_SHORT).show();
-        }else{
-            fr = new FootFragment();
-            Toast.makeText(getApplicationContext(),"onFoot",Toast.LENGTH_SHORT).show();
+        }else if(nowFragment == "list") {
+            fr = new ListGuideFragment();
         }
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_place, fr);
+        fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
         fragmentTransaction.commit();
     }
+
     //에러걸린부분
     public void changeCurrentLoationText(String location)
     {

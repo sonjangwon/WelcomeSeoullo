@@ -19,6 +19,8 @@ public class ManagementLocation {
     double currentLatitude;
     double currentLongitude;
     String currentAddress;
+    String sortSpinner;
+    double distanceSpinner;
 
     public static ManagementLocation getInstance(){
         if(managementLocation == null){
@@ -58,5 +60,29 @@ public class ManagementLocation {
         return currentAddress;
     }
 
+    public void setSortSpinner(String sortSpinner){
+        this.sortSpinner = sortSpinner;
+    }
+
+    public String getSortSpinner()
+    {
+        return sortSpinner;
+    }
+
+    public void setDistanceSpinner(String distanceSpinnerText){
+        if(distanceSpinnerText=="2km")
+            this.distanceSpinner=2000;
+        else if(distanceSpinnerText=="1.5km")
+            this.distanceSpinner=1500;
+        else if(distanceSpinnerText=="1km")
+            this.distanceSpinner=1000;
+        else if(distanceSpinnerText=="500m")
+            this.distanceSpinner=5000;
+    }
+
+    public double getDistanceSpinner()
+    {
+        return distanceSpinner;
+    }
 }
 
