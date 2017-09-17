@@ -2,17 +2,18 @@
 <resources>
     <string-array name="sort">
         <item>분류선택</item>
+        <item>전체</item>
+        <item>공공화장실</item>
+        <item>주차장</item>
         <item>공원</item>
-        <item>화장실</item>
-        <item>음식점</item>
-        <item>카페</item>
+        <item>전통시장</item>
     </string-array>
 
     <string-array name="distance">
         <item>거리선택</item>
-        <item>50m</item>
-        <item>100m</item>
-        <item>200m</item>
-        <item>300m</item>
+        <item>500m</item>
+        <item>1km</item>
+        <item>1.5km</item>
+        <item>2km</item>
     </string-array>
 </resources>

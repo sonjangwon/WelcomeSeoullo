@@ -10,8 +10,7 @@
         android:id="@+id/guideMapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ACACAC"
-        android:layout_below="@+id/filter">
+        android:background="#ACACAC">
 
         <TextView
             android:id="@+id/textView1"
@@ -31,7 +30,6 @@
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="14dp"
-        android:layout_below="@+id/filter"
         android:background="#00FF0000"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
@@ -43,7 +41,6 @@
             android:layout_gravity="center"
             android:background="#4D4D4D"
             android:elevation="8dp"
-            android:onClick="zoomInClick"
             android:scaleType="fitXY" />
 
         <ImageButton

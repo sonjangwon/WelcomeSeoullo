@@ -1,18 +1,12 @@
 package com.example.jangwon.welcomeseoullo;
 
-import android.Manifest;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,11 +21,6 @@ import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
-
-import java.io.IOException;
-import java.util.List;
-
-import static com.example.jangwon.welcomeseoullo.R.drawable.test;
 
 public class MapGuideFragment extends Fragment {
 
@@ -52,6 +41,7 @@ public class MapGuideFragment extends Fragment {
     Location currentLocation=null;
     double currentLatitude;
     double currentLongitude;
+    String currentAddress;
     TextView addressTextView;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
@@ -70,15 +60,12 @@ public class MapGuideFragment extends Fragment {
         longitude[1]= Double.valueOf("127.12338350000005");
         longitude[2]= Double.valueOf("127.00776500000006");
 
+        currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
+        currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
+        currentAddress = ManagementLocation.getInstance().getCurrentAddress();
 
-        // 사용자의 위치 수신을 위한 세팅 //
-        settingGPS();
 
-        // 사용자의 현재 위치 //
-        getMyLocation();
 
-        //위도경도를 상세주소로 변경
-        reverseGeocoder();
         mapView(view);
 
 
@@ -129,87 +116,6 @@ public class MapGuideFragment extends Fragment {
 
     }
 
-    //역 지오코딩(위도경도를 상세주소로 변경)
-    public void reverseGeocoder()
-    {
-        final Geocoder geocoder = new Geocoder(getActivity());
-        List<Address> list = null;
-        try {
-            list = geocoder.getFromLocation(
-                    currentLatitude, // 위도
-                    currentLongitude, // 경도
-                    10); // 얻어올 값의 개수
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
-        }
-        if (list != null) {
-            if (list.size()==0) {
-                Log.e("noList", String.valueOf(latitude));
-            } else {
-//                tv.setText(list.get(0).toString());
-                Log.e("listGet", list.get(0).getAddressLine(0).toString());
-                ((GuideInfoActivity)getActivity()).changeCurrentLoationText(list.get(0).getAddressLine(0).toString());
-            }
-        }
-
-
-    }
-
-    //현재위치 받아오기
-    private void getMyLocation() {
-        // Register the listener with the Location Manager to receive location updates
-        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED) {
-            // 사용자 권한 요청
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-        else {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-
-            // 수동으로 위치 구하기
-            String locationProvider = LocationManager.GPS_PROVIDER;
-            currentLocation = locationManager.getLastKnownLocation(locationProvider);
-            if (currentLocation != null) {
-                currentLongitude = currentLocation.getLongitude();
-                currentLatitude = currentLocation.getLatitude();
-                Log.d("Main", "longtitude=" + currentLongitude + ", latitude=" + currentLatitude);
-            }
-        }
-    }
-
-
-    // GPS 를 받기 위한 매니저와 리스너 설정
-    private void settingGPS() {
-        // Acquire a reference to the system Location Manager
-        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-
-        //위치가 바뀔경우
-        locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                // TODO 위도, 경도로 하고 싶은 것
-//                Log.e("Latitude2", String.valueOf(latitude));
-//                Log.e("Longitude2", String.valueOf(longitude));
-            }
-
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-            }
-
-            public void onProviderEnabled(String provider) {
-            }
-
-            public void onProviderDisabled(String provider) {
-            }
-        };
-    }
-
-
-
-
     //맵 띄우기
     public void mapView(View view)
     {
@@ -232,29 +138,77 @@ public class MapGuideFragment extends Fragment {
 
     //마커 추가하기
     private void addMarker() {
-        double lat = 37.537145;
-        double lng = 127.08613500000001;
+        double lat1 = 37.537145;
+        double lng1 = 127.08613500000001;
+        double lat2 = 37.52989;
+        double lng2 = 126.96477500000003;
+        double lat3 = 37.545593;
+        double lng3 = 126.97980329999996;
 
-        for(int i=0; i<3; i++) {
-            TMapPoint point = new TMapPoint(lat, lng);
-            TMapMarkerItem marker = new TMapMarkerItem();
-            marker.setTMapPoint(point);
-            tmapview.addMarkerItem("marker", marker);
+        if(GuideInfoActivity.sortContent.equals("전체")|GuideInfoActivity.sortContent.equals("공공화장실")) {
+            for (int i = 0; i < 1; i++) {
+                TMapPoint tpoint = new TMapPoint(lat1, lng1);
+                TMapMarkerItem tItem1 = new TMapMarkerItem();
+                tItem1.setTMapPoint(tpoint);
+                tItem1.setName("SKT타워");
+                tItem1.setVisible(TMapMarkerItem.VISIBLE);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
+                tItem1.setIcon(bitmap);
+                tmapview.bringMarkerToFront(tItem1);
+                tmapview.addMarkerItem(String.valueOf(i) + "1번", tItem1);
+            }
         }
-        for(int i=0; i<3; i++) {
-            TMapPoint tpoint = new TMapPoint(latitude[i], longitude[i]);
-            TMapMarkerItem tItem = new TMapMarkerItem();
-            tItem.setTMapPoint(tpoint);
-            tItem.setName("SKT타워");
-            tItem.setVisible(TMapMarkerItem.VISIBLE);
-            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), test);
-            tItem.setIcon(bitmap);
-// 핀모양으로 된 마커를 사용할 경우 마커 중심을 하단 핀 끝으로 설정.
-            tItem.setPosition((float) 0.5, (float) 0.9); // 마커의 중심점을 하단, 중앙으로 설정
-            tmapview.bringMarkerToFront(tItem);
-            tmapview.addMarkerItem(String.valueOf(i), tItem);
+        if(GuideInfoActivity.sortContent.equals("전체")|GuideInfoActivity.sortContent.equals("주차장")) {
+            for (int i = 0; i < 3; i++) {
+                TMapPoint tpoint = new TMapPoint(latitude[i], longitude[i]);
+                TMapMarkerItem tItem2 = new TMapMarkerItem();
+                tItem2.setTMapPoint(tpoint);
+                tItem2.setName("SKT타워");
+                tItem2.setVisible(TMapMarkerItem.VISIBLE);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
+                tItem2.setIcon(bitmap);
+                tmapview.bringMarkerToFront(tItem2);
+                tmapview.addMarkerItem(String.valueOf(i) + "2번", tItem2);
+            }
         }
-
+        if(GuideInfoActivity.sortContent.equals("전체")|GuideInfoActivity.sortContent.equals("공원")) {
+            for (int i = 0; i < 3; i++) {
+                TMapPoint tpoint = new TMapPoint(lat2, lng2);
+                TMapMarkerItem tItem3 = new TMapMarkerItem();
+                tItem3.setTMapPoint(tpoint);
+                tItem3.setName("SKT타워");
+                tItem3.setVisible(TMapMarkerItem.VISIBLE);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder3);
+                tItem3.setIcon(bitmap);
+                tmapview.bringMarkerToFront(tItem3);
+                tmapview.addMarkerItem(String.valueOf(i) + "3번", tItem3);
+            }
+        }
+        if(GuideInfoActivity.sortContent.equals("전체")|GuideInfoActivity.sortContent.equals("전통시장")) {
+            for (int i = 0; i < 3; i++) {
+                TMapPoint tpoint = new TMapPoint(lat3, lng3);
+                TMapMarkerItem tItem4 = new TMapMarkerItem();
+                tItem4.setTMapPoint(tpoint);
+                tItem4.setName("SKT타워");
+                tItem4.setVisible(TMapMarkerItem.VISIBLE);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder4);
+                tItem4.setIcon(bitmap);
+                tmapview.bringMarkerToFront(tItem4);
+                tmapview.addMarkerItem(String.valueOf(i) + "4번", tItem4);
+            }
+        }
+    }
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        Log.d(this.getClass().getSimpleName(), "onActivityCreated()");
+        addMarker();
+        super.onActivityCreated(savedInstanceState);
+    }
+    @Override
+    public void onStart() {
+        Log.d(this.getClass().getSimpleName(), "onStart()");
+        addMarker();
+        super.onStart();
     }
 
 
