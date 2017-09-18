@@ -71,7 +71,6 @@ public class RouteFragment extends Fragment {
         if(view == view.findViewById(R.id.byCar)){
             fr = new CarFragment();
         }else if(view == view.findViewById(R.id.byBus)){
-            fr = new BusFragment();
         }else{
             fr = new FootFragment();
         }
