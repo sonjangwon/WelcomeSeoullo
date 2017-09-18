@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class ListGuideFragment extends Fragment {
             public void onItemClick(AdapterView parent, View v, int position, long id) {
 
                 String strText = (String) parent.getItemAtPosition(position) ;
-
+                Toast.makeText(getActivity(),strText,Toast.LENGTH_SHORT).show();
                 // TODO : use strText
             }
         }) ;

@@ -162,12 +162,12 @@ public class GuideInfoFragment extends Fragment {
         return view;
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        settingGPS();
-//        reverseGeocoder();
-//    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        settingGPS();
+        reverseGeocoder();
+    }
 
     //버튼으로 리스트뷰, 맵포인트를 클릭한 경우 각 프레그먼트가 실행된다.
     public void switchFragment(View view){
@@ -206,7 +206,7 @@ public class GuideInfoFragment extends Fragment {
     }
 
     //역 지오코딩(위도경도를 상세주소로 변경)
-
+    public void reverseGeocoder()
     {
         final Geocoder geocoder = new Geocoder(getActivity());
         List<Address> list = null;
