@@ -2,7 +2,6 @@ package com.example.jangwon.welcomeseoullo;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -28,6 +27,8 @@ class ManagePublicData {
     ParsePublicParkingLot parsePublicParkingLot;
     ParsePublicPark parsePublicPark;
     ParseTraditionalMarket parseTraditionalMarket;
+
+    LoadingDialog loadingDialog;
 
     String tag_name = null;
     boolean bSet = false;
@@ -55,6 +56,7 @@ class ManagePublicData {
         parsePublicPark = new ParsePublicPark();
         parseTraditionalMarket = new ParseTraditionalMarket();
 
+        loadingDialog = LoadingDialog.getInstance();
     }
 
     public ArrayList<PublicToiletVO> getPublicToiletVOArrayList(){
@@ -167,7 +169,7 @@ class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.progressBar.setVisibility(View.GONE);
+            FacilityFragment.publicDataTextView.setText("");
             for (int i = 0; i < managePublicData.getPublicToiletVOArrayList().size(); i++) {
                 FacilityFragment.publicDataTextView.append("\n");
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletName() + " ");
@@ -175,6 +177,7 @@ class ManagePublicData {
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLatitude() + " ");
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLongitude() + " ");
             }
+            loadingDialog.progressOFF();
         }
 
     }
@@ -241,7 +244,7 @@ class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.progressBar.setVisibility(View.GONE);
+            FacilityFragment.publicDataTextView.setText("");
             for (int i = 0; i < managePublicData.getPublicParkingLotVOArrayList().size(); i++) {
                 FacilityFragment.publicDataTextView.append("\n");
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotName() + " ");
@@ -249,6 +252,7 @@ class ManagePublicData {
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude() + " ");
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude() + " ");
             }
+            loadingDialog.progressOFF();
         }
 
     }
@@ -308,13 +312,14 @@ class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.progressBar.setVisibility(View.GONE);
+            FacilityFragment.publicDataTextView.setText("");
             for (int i = 0; i < managePublicData.getPublicParkVOArrayList().size(); i++) {
                 FacilityFragment.publicDataTextView.append("\n");
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkName() + " ");
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkLatitude() + " ");
                 FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkLongitude() + " ");
             }
+            loadingDialog.progressOFF();
         }
     }
 
@@ -373,13 +378,14 @@ class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.progressBar.setVisibility(View.GONE);
+            FacilityFragment.publicDataTextView.setText("");
             for (int i = 0; i < managePublicData.getTraditionalMarketVOArrayList().size(); i++) {
                 FacilityFragment.publicDataTextView.append("\n");
                 FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketName() + " ");
                 FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketLatitude() + " ");
                 FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketLongitude() + " ");
             }
+            loadingDialog.progressOFF();
         }
     }
 }

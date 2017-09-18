@@ -20,6 +20,7 @@ public class FacilityFragment extends Fragment {
     static ProgressBar progressBar;
 
     ManagePublicData managePublicData = ManagePublicData.getInstance();
+    LoadingDialog loadingDialog = LoadingDialog.getInstance();
 
     public FacilityFragment(){
 
@@ -42,11 +43,13 @@ public class FacilityFragment extends Fragment {
             publicDataTextView = (TextView) view.findViewById(R.id.publicDataTextView);
             progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
 
+            progressBar.setVisibility(View.GONE);
+
+            loadingDialog.progressON(getActivity(), "Loading...");
             if(managePublicData.getPublicToiletVOArrayList().isEmpty()){
                 managePublicData.parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             }
             else{
-                publicDataTextView.setText("");
                 managePublicData.parsePublicToilet.onPostExecute("");
             }
 
@@ -65,8 +68,7 @@ public class FacilityFragment extends Fragment {
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
-                    progressBar.setVisibility(View.VISIBLE);
-                    publicDataTextView.setText("");
+                    loadingDialog.progressON(getActivity(), "Loading...");
                     managePublicData.parsePublicToilet.onPostExecute("");
                 }
             });
@@ -78,12 +80,15 @@ public class FacilityFragment extends Fragment {
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
-                    progressBar.setVisibility(View.VISIBLE);
+
+                    loadingDialog.progressON(getActivity(), "Loading...");
+
                     if(managePublicData.getPublicParkingLotVOArrayList().isEmpty()){
                         managePublicData.parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     }
-                    publicDataTextView.setText("");
-                    managePublicData.parsePublicParkingLot.onPostExecute("");
+                    else{
+                        managePublicData.parsePublicParkingLot.onPostExecute("");
+                    }
                 }
             });
             publicParkButton.setOnClickListener(new EditText.OnClickListener(){
@@ -94,12 +99,14 @@ public class FacilityFragment extends Fragment {
                     publicParkButton.setTextColor(Color.parseColor("#FF0000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
-                    progressBar.setVisibility(View.VISIBLE);
+                    loadingDialog.progressON(getActivity(), "Loading...");
+
                     if(managePublicData.getPublicParkVOArrayList().isEmpty()){
                         managePublicData.parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     }
-                    publicDataTextView.setText("");
-                    managePublicData.parsePublicPark.onPostExecute("");
+                    else{
+                        managePublicData.parsePublicPark.onPostExecute("");
+                    }
                 }
             });
             traditionalMarketButton.setOnClickListener(new EditText.OnClickListener(){
@@ -110,12 +117,14 @@ public class FacilityFragment extends Fragment {
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#FF0000"));
 
-                    progressBar.setVisibility(View.VISIBLE);
+                    loadingDialog.progressON(getActivity(), "Loading...");
+
                     if(managePublicData.getTraditionalMarketVOArrayList().isEmpty()){
                         managePublicData.parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     }
-                    publicDataTextView.setText("");
-                    managePublicData.parseTraditionalMarket.onPostExecute("");
+                    else{
+                        managePublicData.parseTraditionalMarket.onPostExecute("");
+                    }
                 }
             });
 
