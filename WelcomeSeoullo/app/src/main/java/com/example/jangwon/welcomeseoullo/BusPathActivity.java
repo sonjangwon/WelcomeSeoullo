@@ -77,7 +77,6 @@ public class BusPathActivity extends AppCompatActivity {
                 PathInfoFragment.onFootButton.callOnClick();
                 onBackPressed();
             }
-
         });
     }
 

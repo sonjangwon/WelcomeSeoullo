@@ -29,8 +29,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.TimerTask;
 
-import static com.example.jangwon.welcomeseoullo.R.id.totalPayment;
-
 public class CarFragment extends Fragment {
     //자동차 경로안내
 
@@ -74,7 +72,6 @@ public class CarFragment extends Fragment {
             public void onClick(View view) {
                 TmapNavigation();
             }
-
         });
 
         //현재 위도경도 받아오기
