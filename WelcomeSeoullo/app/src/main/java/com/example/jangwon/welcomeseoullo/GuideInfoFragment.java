@@ -9,6 +9,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -63,6 +64,14 @@ public class GuideInfoFragment extends Fragment {
             currentAddress = ManagementLocation.getInstance().getCurrentAddress();
 
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
+
+            ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+
+
 
             Spinner sortSpinner = (Spinner) view.findViewById(R.id.sortSpinner);
             Spinner distanceSpinner = (Spinner) view.findViewById(R.id.distanceSpinner);

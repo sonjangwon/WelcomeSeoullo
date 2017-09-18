@@ -45,12 +45,12 @@ public class FacilityFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
 
             loadingDialog.progressON(getActivity(), "Loading...");
-            if(managePublicData.getPublicToiletVOArrayList().isEmpty()){
-                managePublicData.parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            }
-            else{
-                managePublicData.parsePublicToilet.onPostExecute("");
-            }
+//            if(managePublicData.getPublicToiletVOArrayList().isEmpty()){
+////                managePublicData.parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            }
+//            else{
+//                managePublicData.parsePublicToilet.onPostExecute("");
+//            }
 
             final Button publicToiletButton = (Button) view.findViewById(R.id.publicToiletButton);
             final Button publicParkingLotButton = (Button) view.findViewById(R.id.publicParkingLotButton);

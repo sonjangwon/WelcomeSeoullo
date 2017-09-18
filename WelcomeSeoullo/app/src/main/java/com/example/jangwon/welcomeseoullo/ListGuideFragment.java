@@ -51,23 +51,23 @@ public class ListGuideFragment extends Fragment {
     public void listview(View view) {
 
         if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
-            for (int i = 0; i < 2; i++) {
-                LIST_MENU.add("공공화장실");
+            for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
+                LIST_MENU.add(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName());
             }
         }
             if (ManagementLocation.getInstance().getSortSpinner() == "전체" | ManagementLocation.getInstance().getSortSpinner() == "주차장") {
-                for (int i = 0; i < 3; i++) {
-                    LIST_MENU.add("주차장");
+                for (int i = 0; i < ManagePublicData.getInstance().getPublicParkingLotVOArrayList().size(); i++) {
+                    LIST_MENU.add(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotName());
                 }
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="공원") {
-            for (int i = 0; i < 3; i++) {
-                LIST_MENU.add("공원");
+            for (int i = 0; i < ManagePublicData.getInstance().getPublicParkVOArrayList().size(); i++) {
+                LIST_MENU.add(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName());
             }
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
-            for (int i = 0; i < 3; i++) {
-                LIST_MENU.add("전통시장");
+            for (int i = 0; i < ManagePublicData.getInstance().getTraditionalMarketVOArrayList().size(); i++) {
+                LIST_MENU.add(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName());
             }
         }
     }
