@@ -210,7 +210,7 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         else {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
+            //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
 
             // 수동으로 위치 구하기
