@@ -183,10 +183,10 @@ public class GuideInfoActivity extends AppCompatActivity {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
+        fragmentTransaction.add(R.id.fagment_mapGuide, fr);
         fragmentTransaction.commit();
     }
-    //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
+    //Spinner로 fragment가 재생성 될 때
     public void switchFragments(String nowFragment){
         Fragment fr = new MapGuideFragment();
 

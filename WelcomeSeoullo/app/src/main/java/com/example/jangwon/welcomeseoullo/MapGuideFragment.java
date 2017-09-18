@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
@@ -79,6 +80,15 @@ public class MapGuideFragment extends Fragment {
         mapView(view);
         addMarker();
 
+        tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
+            @Override
+            public void onCalloutRightButton(TMapMarkerItem markerItem) {
+                String strMessage = "";
+                strMessage = "ID: " + markerItem.getID() + " " + "Title " + markerItem.getCalloutTitle();
+                Toast.makeText(getActivity(),strMessage,Toast.LENGTH_LONG).show();
+//                .showAlertDialog(MapGuideFragment.this, "Callout Right Button", strMessage);
+            }
+        });
         zoonInFrameLayout.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -145,6 +155,7 @@ public class MapGuideFragment extends Fragment {
         tmapview.setSightVisible(true);
         relativeLayout.addView(tmapview);
 
+
     }
 
     //마커 추가하기
@@ -160,7 +171,17 @@ public class MapGuideFragment extends Fragment {
                 {
                     TMapMarkerItem tItem1 = new TMapMarkerItem();
                     tItem1.setTMapPoint(tpoint);
-                    tItem1.setVisible(TMapMarkerItem.VISIBLE);
+                    tItem1.setVisible(tItem1.VISIBLE);
+                    tItem1.setName("tlem1");
+
+
+                    tItem1.setCalloutTitle(tItem1.getName());
+                    tItem1.setCalloutSubTitle("서울");
+                    tItem1.setCanShowCallout(true);
+                    tItem1.setAutoCalloutVisible(true);
+
+
+                    tItem1.setCalloutTitle( String.valueOf(i) );
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
                     tItem1.setIcon(bitmap);
                     tmapview.bringMarkerToFront(tItem1);
@@ -177,11 +198,21 @@ public class MapGuideFragment extends Fragment {
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner()) {
                     TMapMarkerItem tItem2 = new TMapMarkerItem();
                     tItem2.setTMapPoint(tpoint);
-                    tItem2.setVisible(TMapMarkerItem.VISIBLE);
+//                    tItem2.setCalloutTitle("신재혁");
+
+                    tItem2.setVisible(tItem2.VISIBLE);
+                    tItem2.setName("tlem2");
+                    tItem2.setCalloutTitle(tItem2.getName());
+                    tItem2.setCalloutSubTitle("서울");
+                    tItem2.setCanShowCallout(true);
+                    tItem2.setAutoCalloutVisible(true);
+
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
                     tItem2.setIcon(bitmap);
                     tmapview.bringMarkerToFront(tItem2);
                     tmapview.addMarkerItem("주차장" + String.valueOf(i), tItem2);
+
+
                 }
             }
         }
@@ -192,7 +223,11 @@ public class MapGuideFragment extends Fragment {
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner()) {
                     TMapMarkerItem tItem3 = new TMapMarkerItem();
                     tItem3.setTMapPoint(tpoint);
+                    tItem3.setCanShowCallout(true);
+                    tItem3.setAutoCalloutVisible(true);
+                    tItem3.setCalloutTitle( String.valueOf(i) );
                     tItem3.setVisible(TMapMarkerItem.VISIBLE);
+                    tItem3.setName("tlem3");
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder3);
                     tItem3.setIcon(bitmap);
                     tmapview.bringMarkerToFront(tItem3);
@@ -207,7 +242,11 @@ public class MapGuideFragment extends Fragment {
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner()) {
                     TMapMarkerItem tItem4 = new TMapMarkerItem();
                     tItem4.setTMapPoint(tpoint);
+                    tItem4.setCanShowCallout(true);     //풍선뷰 사용여부결정
+                    tItem4.setAutoCalloutVisible(true);
+                    tItem4.setCalloutTitle( String.valueOf(i) );
                     tItem4.setVisible(TMapMarkerItem.VISIBLE);
+                    tItem4.setName("tlem4");
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder4);
                     tItem4.setIcon(bitmap);
                     tmapview.bringMarkerToFront(tItem4);
@@ -228,6 +267,8 @@ public class MapGuideFragment extends Fragment {
         addMarker();
         super.onStart();
     }
+
+
 
 
 }

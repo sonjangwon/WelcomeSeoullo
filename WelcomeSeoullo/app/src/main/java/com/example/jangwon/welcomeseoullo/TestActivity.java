@@ -4,7 +4,6 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -39,6 +38,8 @@ public class TestActivity extends AppCompatActivity {
         settingGPS();
         // 사용자의 현재 위치 //
         getMyLocation();
+        //위도경도를 상세주소로 변경
+        reverseGeocoder();
 
         ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
         ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
@@ -65,8 +66,7 @@ public class TestActivity extends AppCompatActivity {
 
         });
 
-        //위도경도를 상세주소로 변경
-        reverseGeocoder();
+
     }
 
 
@@ -74,6 +74,7 @@ public class TestActivity extends AppCompatActivity {
     //현재위치 받아오기
     private void getMyLocation() {
         // Register the listener with the Location Manager to receive location updates
+        Log.e("getMyLocation", "ok!");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -81,12 +82,13 @@ public class TestActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         else {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);   //연결된 인터넷으로 현 위치 파악(실내일때 유용)
+//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);     //gps로 현 위치 파악
 
             // 수동으로 위치 구하기
             String locationProvider = LocationManager.GPS_PROVIDER;
             currentLocation = locationManager.getLastKnownLocation(locationProvider);
+            Log.e("currentLocation", String.valueOf(currentLocation));
             if (currentLocation != null) {
                 currentLongitude = currentLocation.getLongitude();
                 currentLatitude = currentLocation.getLatitude();
@@ -97,7 +99,31 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
+    //역 지오코딩(위도경도를 상세주소로 변경)
+    public void reverseGeocoder()
+    {
+        final Geocoder geocoder = new Geocoder(this);
+        List<android.location.Address> list = null;
+        try {
+            list = geocoder.getFromLocation(currentLatitude, currentLongitude, 1); // 위도,경도,얻어올 값의 개수
+            Log.e("latitude", String.valueOf(currentLatitude));
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+        }
+        if (list != null) {
+            if (list.size()==0) {
+                Log.e("noList", "noList");
 
+            } else {
+//                tv.setText(list.get(0).toString());
+                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
+                Log.e("currentAddress2", currentAddress);
+            }
+        }
+
+
+    }
     // GPS 를 받기 위한 매니저와 리스너 설정
     private void settingGPS() {
         // Acquire a reference to the system Location Manager
@@ -126,31 +152,5 @@ public class TestActivity extends AppCompatActivity {
             }
         };
     }
-    //역 지오코딩(위도경도를 상세주소로 변경)
-    public void reverseGeocoder()
-    {
-        final Geocoder geocoder = new Geocoder(this);
-        List<Address> list = null;
-        try {
-            list = geocoder.getFromLocation(
-                    currentLatitude, // 위도
-                    currentLongitude, // 경도
-                    10); // 얻어올 값의 개수
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
-        }
-        if (list != null) {
-            if (list.size()==0) {
-                Log.e("noList", "noList");
 
-            } else {
-//                tv.setText(list.get(0).toString());
-                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
-                Log.e("currentAddress2", currentAddress);
-            }
-        }
-
-
-    }
 }

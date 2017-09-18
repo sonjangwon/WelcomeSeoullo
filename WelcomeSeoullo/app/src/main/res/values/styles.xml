@@ -9,7 +9,7 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <!--<item name="android:textColor">@color/colorPrimary</item>-->
-        <item name="android:background">@color/white</item>
+        <!--<item name="android:background"></item>-->
 
         <item name="android:textColorPrimary">@color/black</item>
     </style>

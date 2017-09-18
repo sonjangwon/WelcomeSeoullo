@@ -62,7 +62,7 @@ public class CarFragment extends Fragment {
 
         totalTimeTextView = (TextView) view.findViewById(R.id.totalTime);
         totalDistanceTextView = (TextView) view.findViewById(R.id.totalDistance);
-        totalPaymentTextView = (TextView) view.findViewById(totalPayment);
+        totalPaymentTextView = (TextView) view.findViewById(R.id.totalPayment);
         startTmap = (LinearLayout) view.findViewById(R.id.startTmap) ;
         startTmap.setOnClickListener(new LinearLayout.OnClickListener(){
             @Override
