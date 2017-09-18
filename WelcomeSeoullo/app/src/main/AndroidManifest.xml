@@ -32,8 +32,6 @@
         </activity>
         <activity android:name=".GuideInfoActivity" />
         <activity android:name=".BusPathActivity" />
-        <activity android:name=".MapGuideFragment" />
-        <activity android:name=".ListGuideFragment"></activity>
     </application>
 
 </manifest>

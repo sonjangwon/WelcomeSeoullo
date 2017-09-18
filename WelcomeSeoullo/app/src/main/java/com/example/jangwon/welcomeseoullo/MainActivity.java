@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
                                     textFacility.setVisibility(View.VISIBLE);
                                     textSettings.setVisibility(View.GONE);
 
-                                    fragment = new BusFragment();
                                     currentMenu = item.getItemId();
                                     switchFragment();
                                 }

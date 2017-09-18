@@ -39,8 +39,6 @@ public class TestActivity extends AppCompatActivity {
         settingGPS();
         // 사용자의 현재 위치 //
         getMyLocation();
-        //위도경도를 상세주소로 변경
-        reverseGeocoder();
 
         ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
         ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
@@ -66,32 +64,11 @@ public class TestActivity extends AppCompatActivity {
             }
 
         });
-    }
-    //역 지오코딩(위도경도를 상세주소로 변경)
-    public void reverseGeocoder()
-    {
-        final Geocoder geocoder = new Geocoder(this);
-        List<Address> list = null;
-        try {
-            list = geocoder.getFromLocation(
-                    currentLatitude, // 위도
-                    currentLongitude, // 경도
-                    10); // 얻어올 값의 개수
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
-        }
-        if (list != null) {
-            if (list.size()==0) {
-                Log.e("noList", "noList");
-            } else {
-//                tv.setText(list.get(0).toString());
-                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
-            }
-        }
 
-
+        //위도경도를 상세주소로 변경
+        reverseGeocoder();
     }
+
 
 
     //현재위치 받아오기
@@ -105,7 +82,7 @@ public class TestActivity extends AppCompatActivity {
         }
         else {
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 0, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
 
             // 수동으로 위치 구하기
             String locationProvider = LocationManager.GPS_PROVIDER;
@@ -149,5 +126,31 @@ public class TestActivity extends AppCompatActivity {
             }
         };
     }
+    //역 지오코딩(위도경도를 상세주소로 변경)
+    public void reverseGeocoder()
+    {
+        final Geocoder geocoder = new Geocoder(this);
+        List<Address> list = null;
+        try {
+            list = geocoder.getFromLocation(
+                    currentLatitude, // 위도
+                    currentLongitude, // 경도
+                    10); // 얻어올 값의 개수
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+        }
+        if (list != null) {
+            if (list.size()==0) {
+                Log.e("noList", "noList");
 
+            } else {
+//                tv.setText(list.get(0).toString());
+                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
+                Log.e("currentAddress2", currentAddress);
+            }
+        }
+
+
+    }
 }

@@ -9,6 +9,7 @@ import android.location.LocationManager;
  */
 
 public class ManagementLocation {
+    //현재위치,상세주소 관리하는 싱글톤 클래스
 
     private static ManagementLocation managementLocation;
 

@@ -26,7 +26,7 @@ import java.util.List;
 
 
 public class GuideInfoActivity extends AppCompatActivity {
-
+    //주변 경로안내 Activity
 
     // 사용자 위치 수신기
     private LocationManager locationManager;
@@ -42,7 +42,7 @@ public class GuideInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_info);
 
-
+        //현재 위도경도,상세주소 받아오기
         currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
         currentAddress = ManagementLocation.getInstance().getCurrentAddress();
@@ -203,13 +203,6 @@ public class GuideInfoActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
-    //에러걸린부분
-    public void changeCurrentLoationText(String location)
-    {
-//        TextView addressTextView2 = (TextView)findViewById(R.id.addressTextView);
-//        Log.e("GuideInfoActivity",location);
-//        addressTextView2.setText(location);
-    }
 
     //역 지오코딩(위도경도를 상세주소로 변경)
     public void reverseGeocoder()

@@ -20,7 +20,7 @@ import java.util.List;
 
 @SuppressLint("setJavaScriptEnabled")
 public class BusPathActivity extends AppCompatActivity {
-
+    //버스 경로안내
     String busUrl;
     View view;
 

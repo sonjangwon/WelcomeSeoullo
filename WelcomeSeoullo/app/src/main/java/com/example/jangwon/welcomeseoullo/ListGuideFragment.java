@@ -13,16 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListGuideFragment extends Fragment {
+    //주변경로안내 리스트뷰 Fragment
 
-//    static final String[] LIST_MENU = {"LIST1","LIST2","LIST3"};
+
     ArrayAdapter adapter;
     ListView listview;
-    List<String> LIST_MENU = new ArrayList();
+    List<String> LIST_MENU ;
 
     View view;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_list_guide, container, false);
 
+        LIST_MENU = new ArrayList();
         listview = (ListView) view.findViewById(R.id.guideListView) ;
         listview(view);
 
@@ -33,7 +35,6 @@ public class ListGuideFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
 
-                // get TextView's Text.
                 String strText = (String) parent.getItemAtPosition(position) ;
 
                 // TODO : use strText
@@ -45,7 +46,6 @@ public class ListGuideFragment extends Fragment {
         return view;
 
     }
-
     //리스트뷰 띄우기
     public void listview(View view) {
 

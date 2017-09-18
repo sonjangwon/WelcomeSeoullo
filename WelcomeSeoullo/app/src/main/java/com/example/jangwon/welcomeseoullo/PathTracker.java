@@ -1,6 +1,5 @@
 package com.example.jangwon.welcomeseoullo;
 
-import android.os.SystemClock;
 import android.util.Log;
 
 import com.skp.Tmap.TMapPoint;
@@ -55,6 +54,7 @@ public class PathTracker {
                     StringBuilder StringEx1;
                     StringEx1 = new StringBuilder();
                     StringEx1.append(uri.toString());
+//                    StringEx1.append("&appKey=").append("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
                     StringEx1.append("&appKey=").append("500adabd-fcb2-34fd-af42-022c6611b9a7");
                     URLConnection con = HttpConnect.postHttps(StringEx1.toString(), content.toString(), false);
                     try {

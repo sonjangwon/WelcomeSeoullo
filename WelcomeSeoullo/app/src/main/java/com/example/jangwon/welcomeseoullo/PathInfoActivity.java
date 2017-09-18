@@ -110,7 +110,7 @@ public class PathInfoActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"byCar",Toast.LENGTH_SHORT).show();
 
         }else if(view == findViewById(R.id.byBus)){
-            fr = new BusFragment();
+
             Toast.makeText(getApplicationContext(),"byBus",Toast.LENGTH_SHORT).show();
         }else{
             fr = new FootFragment();

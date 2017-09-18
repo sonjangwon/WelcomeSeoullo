@@ -23,6 +23,7 @@ import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapView;
 
 public class MapGuideFragment extends Fragment {
+    //주변경로안내 맵가이드 Fragment
 
     Double[] latitude = new Double[3];
     Double[] longitude = new Double[3];
@@ -68,6 +69,7 @@ public class MapGuideFragment extends Fragment {
         longitude[1]= Double.valueOf("127.12338350000005");
         longitude[2]= Double.valueOf("127.00776500000006");
 
+        //현재위치 받아오는 위도,경도,상세주소
         currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
         currentAddress = ManagementLocation.getInstance().getCurrentAddress();
@@ -131,6 +133,7 @@ public class MapGuideFragment extends Fragment {
         tmapview = new TMapView(getActivity());
         RelativeLayout relativeLayout = (RelativeLayout) view.findViewById(R.id.guideMapView);  //getActivity().findViewByID 아니다 ㅅㅂ
 
+//        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
         tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
         tmapview.setLocationPoint(currentLongitude,currentLatitude);
         tmapview.setCompassMode(true);
@@ -226,46 +229,5 @@ public class MapGuideFragment extends Fragment {
         super.onStart();
     }
 
-//    public double distanceTracker(final TMapPoint endpoint) {  //final TMapData.TMapPathType type,
-//        (new Thread() {
-//            public void run() {
-//                try {
-//                    Document e = null;
-//                    StringBuilder uri = new StringBuilder();
-//                    uri.append("https://apis.skplanetx.com/tmap/");
-//                    uri.append("routes?version=1");
-//                    StringBuilder content = new StringBuilder();
-//                    content.append("reqCoordType=WGS84GEO&resCoordType=WGS84GEO&format=xml");
-//                    content.append("&startY=").append(currentLatitude);
-//                    content.append("&startX=").append(currentLongitude);
-//                    content.append("&endY=").append(endpoint.getLatitude());
-//                    content.append("&endX=").append(endpoint.getLongitude());
-//                    content.append("&startName=").append(URLEncoder.encode("출발지", "UTF-8"));
-//                    content.append("&endName=").append(URLEncoder.encode("도착지", "UTF-8"));
-//                    StringBuilder StringEx1;
-//                    StringEx1 = new StringBuilder();
-//                    StringEx1.append(uri.toString());
-//                    StringEx1.append("&appKey=").append("500adabd-fcb2-34fd-af42-022c6611b9a7");
-//                    URLConnection con = HttpConnect.postHttps(StringEx1.toString(), content.toString(), false);
-//                    try {
-//                        HttpURLConnection ez = (HttpURLConnection)con;
-//                        e = HttpConnect.getDocument(con);
-//                    } catch (Exception ezx) {
-//                        Log.i("error","에러남");
-//                    }
-//                    if(e != null) {
-//                        NodeList list2 = e.getElementsByTagName("tmap:totalDistance");
-//                        Node distanceItem = list2.item(0);
-//                        totalDistance = Integer.parseInt(distanceItem.getTextContent());
-//                        Log.e(" 총 거리 ",":  " + Integer.parseInt(distanceItem.getTextContent()));
-//                    }
-//                } catch (Exception e) {
-//                    Log.i("error","error");
-//                }
-//            }
-//        }).start();
-//
-//        return totalDistance;
-//    }
 
 }
