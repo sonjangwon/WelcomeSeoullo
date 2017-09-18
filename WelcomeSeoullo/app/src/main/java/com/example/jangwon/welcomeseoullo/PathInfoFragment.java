@@ -12,11 +12,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class PathInfoFragment extends Fragment {
 
     View view;
     Fragment fr;
+
+    // 사용자 위치 수신기
+    double currentLatitude;
+    double currentLongitude;
+    String currentAddress;
+    TextView startPointAddress;
 
     static Button byCarButton;
     static Button byBusButton;
@@ -44,6 +51,14 @@ public class PathInfoFragment extends Fragment {
             byCarButton = (Button) view.findViewById(R.id.byCar);
             byBusButton = (Button) view.findViewById(R.id.byBus);
             onFootButton = (Button) view.findViewById(R.id.onFoot);
+
+            startPointAddress = (TextView) view.findViewById(R.id.startPointAddress);
+
+            currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
+            currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
+            currentAddress = ManagementLocation.getInstance().getCurrentAddress();
+
+            startPointAddress.setText(currentAddress);
 
             byCarButton.setOnClickListener(new EditText.OnClickListener(){
                 @Override
@@ -80,7 +95,6 @@ public class PathInfoFragment extends Fragment {
             });
 
             byCarButton.callOnClick();
-
         }
         else{
 
@@ -93,14 +107,10 @@ public class PathInfoFragment extends Fragment {
 
         if(view == view.findViewById(R.id.byCar)){
             fr = new CarFragment();
-            //Toast.makeText(getApplicationContext(),"byCar", Toast.LENGTH_SHORT).show();
-
         }else if(view == view.findViewById(R.id.byBus)){
             fr = new BusFragment();
-            //Toast.makeText(getApplicationContext(),"byBus",Toast.LENGTH_SHORT).show();
         }else{
             fr = new FootFragment();
-            //Toast.makeText(getApplicationContext(),"onFoot",Toast.LENGTH_SHORT).show();
         }
 
         FragmentManager fm = getFragmentManager();

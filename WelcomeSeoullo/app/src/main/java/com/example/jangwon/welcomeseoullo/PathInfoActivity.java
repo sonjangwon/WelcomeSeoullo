@@ -22,6 +22,7 @@ public class PathInfoActivity extends AppCompatActivity {
     double currentLongitude;
     String currentAddress;
     TextView startPointAddress;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +36,8 @@ public class PathInfoActivity extends AppCompatActivity {
         final Button byCarButton = (Button) findViewById(R.id.byCar);
         final Button byBusButton = (Button) findViewById(R.id.byBus);
         final Button onFootButton = (Button) findViewById(R.id.onFoot);
-        startPointAddress = (TextView) findViewById(R.id.startPointAddress);
 
+        startPointAddress = (TextView) findViewById(R.id.startPointAddress);
 
         currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
@@ -62,6 +63,7 @@ public class PathInfoActivity extends AppCompatActivity {
         else {
             byCarButton.setTextColor(Color.parseColor("#FF0000"));
         }
+
         byCarButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -71,7 +73,6 @@ public class PathInfoActivity extends AppCompatActivity {
                 onFootButton.setTextColor(Color.parseColor("#000000"));
                 switchFragment(view);
             }
-
         });
         byBusButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
@@ -83,7 +84,6 @@ public class PathInfoActivity extends AppCompatActivity {
                 startActivity(new Intent(PathInfoActivity.this, BusPathActivity.class));
                 finish();
             }
-
         });
         onFootButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
@@ -94,11 +94,9 @@ public class PathInfoActivity extends AppCompatActivity {
                 byCarButton.setTextColor(Color.parseColor("#000000"));
                 switchFragment(view);
             }
-
         });
 
         startPointAddress.setText(currentAddress);
-
     }
 
     //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
