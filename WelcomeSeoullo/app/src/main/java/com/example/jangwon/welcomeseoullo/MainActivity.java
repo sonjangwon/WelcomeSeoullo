@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment;
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+
     int currentMenu;
     BottomNavigationView bottomNavigationView;
 
@@ -36,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
     BlankFragment arFragment;
     PathInfoFragment pathInfoFragment;
     FacilityFragment facilityFragment;
-
-    LoadingDialog loadingDialog = LoadingDialog.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

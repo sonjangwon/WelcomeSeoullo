@@ -13,7 +13,6 @@ class LoadingDialog {
     AppCompatDialog progressDialog;
     ImageView img_loading_frame;
     AnimationDrawable frameAnimation;
-//    TextView tv_progress_message;
 
     static LoadingDialog getInstance() {
         if(loadingDialog == null){
@@ -58,29 +57,11 @@ class LoadingDialog {
             }
         });
 
-//        tv_progress_message = (TextView) progressDialog.findViewById(tv_progress_message);
-//        if (!TextUtils.isEmpty(message)) {
-//            tv_progress_message.setText(message);
-//        }
-
     }
-
-//    public void progressSET(String message) {
-//
-//        if (progressDialog == null || !progressDialog.isShowing()) {
-//            return;
-//        }
-//
-//        tv_progress_message = (TextView) progressDialog.findViewById(R.id.tv_progress_message);
-//        if (!TextUtils.isEmpty(message)) {
-//            tv_progress_message.setText(message);
-//        }
-//    }
 
     public void progressOFF() {
         if (progressDialog != null && progressDialog.isShowing()) {
             progressDialog.dismiss();
-            //progressDialog.cancel();
         }
     }
 
