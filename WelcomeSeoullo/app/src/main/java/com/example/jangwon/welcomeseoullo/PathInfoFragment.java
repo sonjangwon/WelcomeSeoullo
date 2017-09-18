@@ -3,7 +3,6 @@ package com.example.jangwon.welcomeseoullo;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -79,7 +78,8 @@ public class PathInfoFragment extends Fragment {
                     byCarButton.setTextColor(Color.parseColor("#000000"));
                     onFootButton.setTextColor(Color.parseColor("#000000"));
 
-                    startActivity(new Intent(getActivity(), BusPathActivity.class));
+
+                    //startActivity(new Intent(getActivity(), BusPathActivity.class));
                 }
             });
             onFootButton.setOnClickListener(new EditText.OnClickListener(){
