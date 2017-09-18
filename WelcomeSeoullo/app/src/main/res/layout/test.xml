@@ -2,46 +2,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="212dp"
-        android:layout_weight="0.92"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <me.relex.circleindicator.CircleIndicator
-        android:id="@+id/indicator"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_above="@+id/imageView2"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <View
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha=".5"
-        android:background="@android:color/white"
-        android:id="@+id/view2"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/imageView2" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:background="@drawable/banner3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/noticeList2"
-        android:id="@+id/imageView2"
-        android:layout_below="@+id/viewPager" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <com.example.jangwon.welcomeseoullo.AutoScrollViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="212dp"
+                android:layout_weight="0.92"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_above="@+id/noticeList2"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
-    <ListView
-        android:id="@+id/noticeList2"
-        android:layout_width="match_parent"
-        android:layout_height="301dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:background="@drawable/banner3"
+                android:id="@+id/imageView2"
+                android:layout_below="@+id/viewPager"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <ListView
+                android:id="@+id/noticeList2"
+                android:scrollbars="none"
+                android:ellipsize="end"
+                android:maxLines = "1"
+                android:inputType="text"
+                android:layout_width="match_parent"
+                android:layout_height="301dp"
+                android:layout_marginTop="54dp"
+                android:layout_below="@+id/viewPager"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+            </RelativeLayout>
+    </ScrollView>
+
+
 </RelativeLayout >

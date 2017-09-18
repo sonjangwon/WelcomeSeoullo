@@ -1,16 +1,19 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -26,8 +29,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import me.relex.circleindicator.CircleIndicator;
 
@@ -39,6 +40,7 @@ public class Test extends AppCompatActivity {
     private ViewPager pager;
     ViewFlipper flipper;
     ListView listview ;
+    private MyViewPagerAdapter myViewPagerAdapter;
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayAdapter mAdapter;
@@ -52,8 +54,10 @@ public class Test extends AppCompatActivity {
     //화면 스크린 높이 넓이
     int height=0;
     int width=0;
-    private Integer[] Images = {R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4 };
+    AutoScrollViewPager viewPager;
+    private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,12 +66,21 @@ public class Test extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
-        pager= (ViewPager) findViewById(R.id.viewPager);
-        MyAdapter myAdapter = new MyAdapter(getApplicationContext(), ImgArray);
-      // MyViewPagerAdapter myViewPagerAdapter = new MyViewPagerAdapter(getFragmentManager());
-        pager.setAdapter(myAdapter);
+        viewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
+        ImageAdapter imgadapter = new ImageAdapter(this);
+
+        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter);
+
+        viewPager.setAdapter(wrappedAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
         CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
+        indicator.setViewPager(viewPager);
+        viewPager.startAutoScroll();
+        //pager= (ViewPager) findViewById(viewPager);
+        //myViewPagerAdapter = new MyViewPagerAdapter();
+        //Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
+        //pager.setAdapter(myViewPagerAdapter);
+        //pager.addOnPageChangeListener(viewPagerPageChangeListener);
 
         listview = (ListView) findViewById(R.id.noticeList2);
         mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
@@ -81,97 +94,7 @@ public class Test extends AppCompatActivity {
         });
         Log.e("메인","작동끝");
     }
-    public void init()
-    {
-        for(int i=0;i<Images.length;i++){
-            ImgArray.add(Images[i]);
-        }
-        pager.setAdapter(new MyAdapter(Test.this, ImgArray));
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        indicator.setViewPager(pager);
 
-        // Auto start of viewpager
-        final Handler handler = new Handler();
-        final Runnable Update = new Runnable() {
-            public void run() {
-                if (currentPage == Images.length) {
-                    currentPage = 0;
-                }
-                pager.setCurrentItem(currentPage++, true);
-            }
-        };
-        Timer swipeTimer = new Timer();
-        swipeTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(Update);
-            }
-        }, 2500, 2500);
-    }
-
-    public void startImageSlide()
-    {
-        for(int i=0;i<4;i++){
-
-            ImageView img= new ImageView(this);
-//            ViewPager.LayoutParams params = (ViewPager.LayoutParams) img.getLayoutParams();
-            img.setImageResource(R.drawable.image1+i);
-            //img.setOnTouchListener(this);
-            img.setMaxWidth(width);
-            img.setMaxHeight(height);
-            pager.addView(img);
-        }
-
-    }
-//    public boolean onTouch(View v, MotionEvent event)
-//    {
-//        if(event.getAction()==MotionEvent.ACTION_DOWN){
-//            downX = event.getX();
-//        }
-//        //터치종료
-//        else if(event.getAction()==MotionEvent.ACTION_UP){
-//            upX = event.getX();
-//
-//            //왼쪽 -> 오른쪽
-//            if(upX < downX){
-//                //애니메이션
-//                flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_in));
-//                flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_left_out));
-//
-//                //인덱스체크 - 마지막화면이면 동작없음
-//                if(currentIndex < (countIndexes-1)){
-//                    flipper.showNext();
-//
-//                    currentIndex++;
-//                    //인덱스 업데이트
-//                }
-//            }
-//            //오른쪽 -> 왼쪽
-//            else if(upX > downX){
-//                //애니메이션 설정
-//                flipper.setInAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_in));
-//                flipper.setOutAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.push_right_out));
-//
-//                //인덱스체크 - 첫번째화면이면 동작없음
-//                if(currentIndex > 0){
-//                    flipper.showPrevious();
-//
-//                    currentIndex--;
-//                    //인덱스 업데이트
-//                }
-//            }
-//            else if(upX == downX)
-//            {
-//                Intent intent = new Intent();
-//                intent.setAction(Intent.ACTION_VIEW);
-//                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-//                intent.setData(Uri.parse("http://www.naver.com"));
-//                startActivity(intent);
-//                Toast.makeText(getApplicationContext(),"이동", Toast.LENGTH_SHORT).show();
-//            }
-//        }
-//        return true;
-//    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -263,6 +186,39 @@ public class Test extends AppCompatActivity {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+    public class MyViewPagerAdapter extends PagerAdapter {
+        private LayoutInflater layoutInflater;
 
+        public MyViewPagerAdapter() {
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View view = layoutInflater.inflate(R.layout.imagefragment, container, false);
+            ImageView imageView = (ImageView) view.findViewById(R.id.imagefragment_imageview);
+            imageView.setImageResource(Images[position]);
+            container.addView(view);
+
+            return view;
+        }
+
+        @Override
+        public int getCount() {
+            return Images.length;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object obj) {
+            return view == obj;
+        }
+
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            View view = (View) object;
+            container.removeView(view);
+        }
+    }
 
 }

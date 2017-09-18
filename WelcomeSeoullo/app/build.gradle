@@ -4,6 +4,7 @@ android {
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId "com.example.jangwon.welcomeseoullo"
         minSdkVersion 15
         targetSdkVersion 25
