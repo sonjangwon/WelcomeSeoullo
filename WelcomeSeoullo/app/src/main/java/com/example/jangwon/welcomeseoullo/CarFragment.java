@@ -56,13 +56,18 @@ public class CarFragment extends Fragment {
     double currentLongitude;
     TMapPoint startPoint;
     TMapPoint endPoint;
+
+    public CarFragment(){
+
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_car, container, false);
 
         totalTimeTextView = (TextView) view.findViewById(R.id.totalTime);
         totalDistanceTextView = (TextView) view.findViewById(R.id.totalDistance);
-        totalPaymentTextView = (TextView) view.findViewById(totalPayment);
+        totalPaymentTextView = (TextView) view.findViewById(R.id.totalPayment);
         startTmap = (LinearLayout) view.findViewById(R.id.startTmap) ;
         startTmap.setOnClickListener(new LinearLayout.OnClickListener(){
             @Override
@@ -83,8 +88,6 @@ public class CarFragment extends Fragment {
 
             }
         };
-
-
 
         return view;
     }
@@ -124,7 +127,6 @@ public class CarFragment extends Fragment {
     //경로 나타내기
     public void drawLine()
     {
-
         tmapview.setLocationPoint(startPoint.getLongitude(),startPoint.getLatitude());
         PathTracker pathTracker = new PathTracker("carPath",startPoint,endPoint);
 //        pathData.findPathTime();
@@ -171,7 +173,6 @@ public class CarFragment extends Fragment {
             }
         });
 
-
     }
     //안내시작버튼을 누른 경우
     private void TmapNavigation() {
@@ -199,6 +200,8 @@ public class CarFragment extends Fragment {
             Log.e("showTmapInstallDialog","null");
             showTmapInstallDialog();
         }
+        //Tmap이 설치되지 않은 경우
+        showTmapInstallDialog();
     }
 
     //Tmap설치로 인도하는 부분
@@ -207,8 +210,7 @@ public class CarFragment extends Fragment {
         telephonyManager = (TelephonyManager) getActivity().getSystemService(Context.TELEPHONY_SERVICE);
         networkoper = telephonyManager.getNetworkOperatorName();
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-                getActivity());
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
 
         alertDialogBuilder
                 .setMessage(getString(R.string.alertTmapInstall))
@@ -238,6 +240,5 @@ public class CarFragment extends Fragment {
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
-
 
 }

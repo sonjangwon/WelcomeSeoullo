@@ -39,6 +39,8 @@ public class TestActivity extends AppCompatActivity {
         settingGPS();
         // 사용자의 현재 위치 //
         getMyLocation();
+        //위도경도를 상세주소로 변경
+        reverseGeocoder();
 
         ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
         ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
@@ -54,7 +56,6 @@ public class TestActivity extends AppCompatActivity {
                 intent.putExtra("Path", "wow");
                 startActivityForResult(intent, 1);
             }
-
         });
 
         button2.setOnClickListener(new EditText.OnClickListener(){
@@ -62,11 +63,9 @@ public class TestActivity extends AppCompatActivity {
             public void onClick(View view) {
                 startActivity(new Intent(TestActivity.this, GuideInfoActivity.class));
             }
-
         });
 
-        //위도경도를 상세주소로 변경
-        reverseGeocoder();
+
     }
 
 

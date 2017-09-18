@@ -1,7 +1,6 @@
 package com.example.jangwon.welcomeseoullo;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -46,6 +45,7 @@ public class BusPathActivity extends AppCompatActivity {
         startPointAddress = (TextView) findViewById(R.id.startPointAddress);
         startPointAddress.setText(currentAddress);
         byBusButton.setTextColor(Color.parseColor("#FF0000"));
+
         //버스경로안내에서 자동차경로를 클릭한 경우
         byCarButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
@@ -53,19 +53,19 @@ public class BusPathActivity extends AppCompatActivity {
                 byCarButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(BusPathActivity.this, PathInfoActivity.class);
-                intent.putExtra("Path","carPath");
-                startActivityForResult(intent, 1);
-                finish();
-            }
 
+                PathInfoFragment.byCarButton.callOnClick();
+                onBackPressed();
+            }
         });
+
         byBusButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
             }
 
         });
+
         //버스경로안내에서 도보경로를 클릭한 경우
         onFootButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
@@ -73,10 +73,9 @@ public class BusPathActivity extends AppCompatActivity {
                 onFootButton.setTextColor(Color.parseColor("#FF0000"));
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
-                Intent intent = new Intent(BusPathActivity.this, PathInfoActivity.class);
-                intent.putExtra("Path","footPath");
-                startActivityForResult(intent, 1);
-                finish();
+
+                PathInfoFragment.onFootButton.callOnClick();
+                onBackPressed();
             }
 
         });

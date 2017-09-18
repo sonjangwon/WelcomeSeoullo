@@ -20,15 +20,17 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".PathInfoActivity" />
-        <activity android:name=".TestActivity">
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".PathInfoActivity" />
+        <activity android:name=".TestActivity">
+
         </activity>
         <activity android:name=".GuideInfoActivity" />
         <activity android:name=".BusPathActivity" />

@@ -186,7 +186,7 @@ public class GuideInfoActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
         fragmentTransaction.commit();
     }
-    //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
+    //Spinner로 fragment 재생성 될 때, 자동차경로, 도보경로를 클릭한 경우
     public void switchFragments(String nowFragment){
         Fragment fr = new MapGuideFragment();
 
@@ -227,8 +227,6 @@ public class GuideInfoActivity extends AppCompatActivity {
                 Log.e("addressTextView",list.get(0).getAddressLine(0).toString().substring(5));
             }
         }
-
-
     }
 
     // GPS 를 받기 위한 매니저와 리스너 설정

@@ -14,17 +14,11 @@ import java.net.HttpURLConnection;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-/**
- * Created by Jangwon on 2017-09-09.
- */
-
 public class PathTracker {
     //경로안내 정보를 제공하는 클래스
     int totalTime ;
     int totalDistance ;
     int taxiFare ;
-
-
 
     //클래스가 생성될때 경로유형, 출발지, 도착지를 매개변수로 받음
     public PathTracker(final String pathType, final TMapPoint startpoint, final TMapPoint endpoint) {  //final TMapData.TMapPathType type,
@@ -86,7 +80,6 @@ public class PathTracker {
             }
         }).start();
     }
-
     //총 거리
     public int getTotalDistance(){
         return totalDistance;

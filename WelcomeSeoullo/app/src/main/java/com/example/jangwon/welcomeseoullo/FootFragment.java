@@ -35,6 +35,11 @@ public class FootFragment extends Fragment {
 
     TMapPoint startPoint;
     TMapPoint endPoint;
+
+    public FootFragment(){
+
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_foot, container, false);

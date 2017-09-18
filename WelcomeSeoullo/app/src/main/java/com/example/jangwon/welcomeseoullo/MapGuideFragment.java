@@ -184,6 +184,7 @@ public class MapGuideFragment extends Fragment {
                     tmapview.addMarkerItem("주차장" + String.valueOf(i), tItem2);
                 }
             }
+
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="공원") {
             for (int i = 0; i < 3; i++) {

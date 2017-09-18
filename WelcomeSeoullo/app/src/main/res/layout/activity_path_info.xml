@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:fitsSystemWindows="false">
+    tools:context="com.example.jangwon.welcomeseoullo.PathInfoActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:layout_weight="2"
+        android:layout_height="0dp"
+        android:orientation="vertical"
         android:background="#FFFFFF"
-        android:fitsSystemWindows="false"
-        android:orientation="vertical">
-
+        android:layout_weight="2">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,18 +26,18 @@
                 android:gravity="center"
                 android:text="출발"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/startPointAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.15"
                 android:gravity="center_vertical"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:layout_weight="0.15"
+                android:text="서울특별시 광진구 군자동 능동로 209"
+                android:textSize="15dp"/>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -53,29 +50,25 @@
                 android:gravity="center"
                 android:text="도착"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/departmentAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.15"
                 android:gravity="center_vertical"
-                android:text="서울로7017"
                 android:textColor="#000000"
-                android:textSize="15dp" />
+                android:text="서울로7017"
+                android:textSize="15dp"
+                android:layout_weight="0.15" />
         </LinearLayout>
     </LinearLayout>
-
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#ACACAC">
 
         <Button
             android:id="@+id/byCar"
@@ -104,14 +97,14 @@
             android:text="도보"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <FrameLayout
+    <fragment
         android:id="@+id/fragment_place"
-        android:name="com.example.jangwon.welcomeseoullo.CarFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/linearLayout2" />
+        android:name="com.example.jangwon.welcomeseoullo.CarFragment"
+        android:layout_height="0dp"
+        tools:layout="@layout/activity_main"
+        android:layout_weight="8.5" />
 
-</RelativeLayout>
+
+
+</LinearLayout>
