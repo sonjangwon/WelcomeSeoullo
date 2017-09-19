@@ -7,6 +7,7 @@ import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.Interpolator;
 
@@ -200,6 +201,7 @@ public class AutoScrollViewPager extends ViewPager {
                 downX = touchX;
             }
             int currentItem = getCurrentItem();
+            Log.e("currentItem", String.valueOf(currentItem));
             PagerAdapter adapter = getAdapter();
             int pageCount = adapter == null ? 0 : adapter.getCount();
             /**

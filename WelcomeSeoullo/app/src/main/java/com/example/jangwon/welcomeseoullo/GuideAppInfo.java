@@ -114,13 +114,8 @@ public class GuideAppInfo extends AppCompatActivity {
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226;"));
             dots[i].setTextSize(35);
-//            if(i == dots.length-1)
-//            {
-//                dots[i].setTextColor(Color.TRANSPARENT);
-//            }
-//            else{
+
             dots[i].setTextColor(colorsInactive[currentPage]);
-//        }
             dotsLayout.addView(dots[i]);
         }
 
