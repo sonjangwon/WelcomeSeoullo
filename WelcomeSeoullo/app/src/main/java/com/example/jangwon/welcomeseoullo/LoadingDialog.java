@@ -25,7 +25,7 @@ class LoadingDialog {
 
     }
 
-    public void progressON(Activity activity, String message) {
+    public void progressON(Activity activity) {
 
         if (activity == null || activity.isFinishing()) {
             return;

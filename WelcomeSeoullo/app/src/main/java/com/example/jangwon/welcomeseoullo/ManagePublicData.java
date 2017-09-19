@@ -168,15 +168,15 @@ class ManagePublicData {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.e("화장실확인","True");
-//            FacilityFragment.publicDataTextView.setText("");
-//            for (int i = 0; i < managePublicData.getPublicToiletVOArrayList().size(); i++) {
-//                FacilityFragment.publicDataTextView.append("\n");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletName() + " ");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletCategory() + " ");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLatitude() + " ");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLongitude() + " ");
-//            }
+
+            FacilityFragment.publicDataTextView.setText("");
+            for (int i = 0; i < managePublicData.getPublicToiletVOArrayList().size(); i++) {
+                FacilityFragment.publicDataTextView.append("\n");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletName() + " ");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletCategory() + " ");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLatitude() + " ");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLongitude() + " ");
+            }
             loadingDialog.progressOFF();
         }
 
@@ -243,15 +243,15 @@ class ManagePublicData {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            Log.e("2번째확인","True");
-//            FacilityFragment.publicDataTextView.setText("");
-//            for (int i = 0; i < managePublicData.getPublicParkingLotVOArrayList().size(); i++) {
-//                FacilityFragment.publicDataTextView.append("\n");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotName() + " ");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotType() + " ");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude() + " ");
-//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude() + " ");
-//            }
+
+            FacilityFragment.publicDataTextView.setText("");
+            for (int i = 0; i < managePublicData.getPublicParkingLotVOArrayList().size(); i++) {
+                FacilityFragment.publicDataTextView.append("\n");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotName() + " ");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotType() + " ");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude() + " ");
+                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude() + " ");
+            }
             loadingDialog.progressOFF();
         }
 

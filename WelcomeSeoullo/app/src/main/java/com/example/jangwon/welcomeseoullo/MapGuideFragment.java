@@ -164,7 +164,8 @@ public class MapGuideFragment extends Fragment {
         ManagePublicData.getInstance().getPublicParkVOArrayList();
         ManagePublicData.getInstance().getPublicToiletVOArrayList();
         ManagePublicData.getInstance().getTraditionalMarketVOArrayList();
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
+
+        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
@@ -191,10 +192,9 @@ public class MapGuideFragment extends Fragment {
                     tmapview.bringMarkerToFront(tItem1);
                     tmapview.addMarkerItem("공공화장실" + String.valueOf(i)  , tItem1);
                 }
-
             }
         }
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="주차장") {
+        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="주차장") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkingLotVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude()));
@@ -222,7 +222,7 @@ public class MapGuideFragment extends Fragment {
             }
 
         }
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="공원") {
+        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="공원") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLongitude()));
@@ -242,7 +242,7 @@ public class MapGuideFragment extends Fragment {
                 }
             }
         }
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체"|ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
+        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
             for (int i = 0; i < ManagePublicData.getInstance().getTraditionalMarketVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLongitude()));

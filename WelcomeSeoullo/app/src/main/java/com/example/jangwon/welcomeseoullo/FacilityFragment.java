@@ -44,9 +44,9 @@ public class FacilityFragment extends Fragment {
 
             progressBar.setVisibility(View.GONE);
 
-            loadingDialog.progressON(getActivity(), "Loading...");
+//            loadingDialog.progressON(getActivity(), "Loading...");
 //            if(managePublicData.getPublicToiletVOArrayList().isEmpty()){
-////                managePublicData.parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                managePublicData.parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 //            }
 //            else{
 //                managePublicData.parsePublicToilet.onPostExecute("");
@@ -67,7 +67,7 @@ public class FacilityFragment extends Fragment {
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
-                    loadingDialog.progressON(getActivity(), "Loading...");
+                    loadingDialog.progressON(getActivity());
                     managePublicData.parsePublicToilet.onPostExecute("");
                 }
             });
@@ -80,7 +80,7 @@ public class FacilityFragment extends Fragment {
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
 
-                    loadingDialog.progressON(getActivity(), "Loading...");
+                    loadingDialog.progressON(getActivity());
 
                     if(managePublicData.getPublicParkingLotVOArrayList().isEmpty()){
                         managePublicData.parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -98,7 +98,7 @@ public class FacilityFragment extends Fragment {
                     publicParkButton.setTextColor(Color.parseColor("#FF0000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
-                    loadingDialog.progressON(getActivity(), "Loading...");
+                    loadingDialog.progressON(getActivity());
 
                     if(managePublicData.getPublicParkVOArrayList().isEmpty()){
                         managePublicData.parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -116,7 +116,7 @@ public class FacilityFragment extends Fragment {
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#FF0000"));
 
-                    loadingDialog.progressON(getActivity(), "Loading...");
+                    loadingDialog.progressON(getActivity());
 
                     if(managePublicData.getTraditionalMarketVOArrayList().isEmpty()){
                         managePublicData.parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

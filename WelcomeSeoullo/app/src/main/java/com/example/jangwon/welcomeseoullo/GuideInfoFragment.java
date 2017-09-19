@@ -40,7 +40,12 @@ public class GuideInfoFragment extends Fragment {
     TextView addressTextView;
 
     public GuideInfoFragment(){
-
+//        LoadingDialog.getInstance().progressON(getActivity());
+//
+//        ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//        ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//        ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//        ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     @Override
@@ -65,11 +70,11 @@ public class GuideInfoFragment extends Fragment {
 
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
 
+            LoadingDialog.getInstance().progressON(getActivity());
             ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
 
 
 
@@ -109,8 +114,7 @@ public class GuideInfoFragment extends Fragment {
             sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    //각 항목 클릭시 포지션값을 토스트에 띄운다.
-//                Toast.makeText(getApplicationContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+
                     switch (parent.getItemAtPosition(position).toString()) {
                         case "전체":
                             ManagementLocation.getInstance().setSortSpinner("전체");
@@ -143,8 +147,7 @@ public class GuideInfoFragment extends Fragment {
             distanceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    //각 항목 클릭시 포지션값을 토스트에 띄운다.
-//                Toast.makeText(getApplicationContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
+
                     switch (parent.getItemAtPosition(position).toString()) {
                         case "500m":
                             ManagementLocation.getInstance().setDistanceSpinner("500m");
