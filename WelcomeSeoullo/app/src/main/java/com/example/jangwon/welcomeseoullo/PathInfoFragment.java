@@ -78,7 +78,6 @@ public class PathInfoFragment extends Fragment {
                     byCarButton.setTextColor(Color.parseColor("#000000"));
                     onFootButton.setTextColor(Color.parseColor("#000000"));
 
-                    //startActivity(new Intent(getActivity(), BusPathActivity.class));
                     switchFragment(view);
                 }
             });

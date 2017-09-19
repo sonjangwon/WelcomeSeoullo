@@ -210,8 +210,8 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         else {
-            //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
 
             // 수동으로 위치 구하기
             String locationProvider = LocationManager.GPS_PROVIDER;
@@ -268,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
         }
         if (list != null) {
+
             if (list.size()==0) {
                 Log.e("noList", "noList");
 
