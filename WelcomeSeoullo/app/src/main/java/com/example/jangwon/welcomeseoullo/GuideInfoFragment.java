@@ -39,6 +39,10 @@ public class GuideInfoFragment extends Fragment {
     String nowFragment="map";
     TextView addressTextView;
 
+    ImageButton listImageButton ;
+    ImageButton mapPointImageButton ;
+
+
     public GuideInfoFragment(){
 
     }
@@ -65,6 +69,11 @@ public class GuideInfoFragment extends Fragment {
 
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
 
+            listImageButton = (ImageButton) view.findViewById(R.id.listImageButton);
+            mapPointImageButton = (ImageButton) view.findViewById(R.id.mapPointImageButton);
+
+            mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
+            listImageButton.setBackgroundResource(R.drawable.listpoint);
             ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -72,13 +81,11 @@ public class GuideInfoFragment extends Fragment {
 
 
 
-
             Spinner sortSpinner = (Spinner) view.findViewById(R.id.sortSpinner);
             Spinner distanceSpinner = (Spinner) view.findViewById(R.id.distanceSpinner);
-            ManagementLocation.getInstance().setSortSpinner("전체");
+            ManagementLocation.getInstance().setSortSpinner("공공화장실");
             ManagementLocation.getInstance().setDistanceSpinner("2km");
-            final ImageButton listImageButton = (ImageButton) view.findViewById(R.id.listImageButton);
-            final ImageButton mapPointImageButton = (ImageButton) view.findViewById(R.id.mapPointImageButton);
+
 
             listImageButton.setOnClickListener(new EditText.OnClickListener(){
                 @Override
@@ -112,9 +119,6 @@ public class GuideInfoFragment extends Fragment {
                     //각 항목 클릭시 포지션값을 토스트에 띄운다.
 //                Toast.makeText(getApplicationContext(), Integer.toString(position), Toast.LENGTH_SHORT).show();
                     switch (parent.getItemAtPosition(position).toString()) {
-                        case "전체":
-                            ManagementLocation.getInstance().setSortSpinner("전체");
-                            break;
                         case "공공화장실":
                             ManagementLocation.getInstance().setSortSpinner("공공화장실");
                             break;
