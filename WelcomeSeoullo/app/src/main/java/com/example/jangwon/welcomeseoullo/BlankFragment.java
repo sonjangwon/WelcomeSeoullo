@@ -13,6 +13,7 @@ public class BlankFragment extends Fragment {
     }
 
     View view;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         return view = inflater.inflate(R.layout.fragment_blank, container, false);

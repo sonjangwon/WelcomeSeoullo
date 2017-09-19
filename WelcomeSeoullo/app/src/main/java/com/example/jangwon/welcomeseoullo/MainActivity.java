@@ -1,35 +1,34 @@
 package com.example.jangwon.welcomeseoullo;
 
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
-import android.os.Bundle;
 import android.Manifest;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
@@ -41,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
     int currentMenu;
     BottomNavigationView bottomNavigationView;
 
-    private ViewPager viewPager;
+    private ViewPager mainViewPager;
     ViewPagerAdapter adapter;
     MenuItem prevMenuItem;
 
-    BlankFragment homeFragment;
+    HomeFragment homeFragment;
     GuideInfoFragment guideInfoFragment;
     BlankFragment arFragment;
     PathInfoFragment pathInfoFragment;
@@ -64,17 +63,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0x00000000));
-
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
-        viewPager.setOffscreenPageLimit(5);
+        mainViewPager = (ViewPager) findViewById(R.id.mainViewPager);
+        mainViewPager.setOffscreenPageLimit(5);
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
 
         currentMenu = R.id.action_home;
-        setupViewPager(viewPager);
+        setupViewPager(mainViewPager);
         prevMenuItem = bottomNavigationView.getMenu().getItem(0);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -83,30 +79,30 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()) {
                     case R.id.action_home:
                         currentMenu = R.id.action_home;
-                        viewPager.setCurrentItem(0);
+                        mainViewPager.setCurrentItem(0);
                         break;
                     case R.id.action_facility:
                         currentMenu = R.id.action_facility;
-                        viewPager.setCurrentItem(1);
+                        mainViewPager.setCurrentItem(1);
                         break;
                     case R.id.action_AR:
                         currentMenu = R.id.action_AR;
-                        viewPager.setCurrentItem(2);
+                        mainViewPager.setCurrentItem(2);
                         break;
                     case R.id.action_route:
                         currentMenu = R.id.action_route;
-                        viewPager.setCurrentItem(3);
+                        mainViewPager.setCurrentItem(3);
                         break;
                     case R.id.action_settings:
                         currentMenu = R.id.action_settings;
-                        viewPager.setCurrentItem(4);
+                        mainViewPager.setCurrentItem(4);
                         break;
                 }
                 return true;
             }
         });
 
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mainViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -138,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getFragmentManager());
 
-        homeFragment = new BlankFragment();
+        homeFragment = new HomeFragment();
         guideInfoFragment = new GuideInfoFragment();
         arFragment = new BlankFragment();
         pathInfoFragment = new PathInfoFragment();
@@ -211,7 +207,10 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
+            //실제 어서와 서울로 사용자를 위한 gps로 현재 위치 인식, 야외에 있을 때 더 인식이 잘 됨
+            //locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
+
+            //서울시 앱 공모전 심사를 위한 wifi-network를 통한 현재 위치 인식, 실내 현재위치를 받아올 때 좋음
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
 
             // 수동으로 위치 구하기

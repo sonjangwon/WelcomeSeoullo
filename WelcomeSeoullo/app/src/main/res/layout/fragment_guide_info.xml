@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context="com.example.jangwon.welcomeseoullo.GuideInfoActivity">
+    tools:context=".GuideInfoFragment">
 
     <RelativeLayout
         android:id="@+id/categoryLinearLayout"
@@ -52,7 +52,7 @@
             android:layout_marginTop="5dp"
             android:layout_toLeftOf="@+id/mapPointImageButton"
             android:layout_toStartOf="@+id/mapPointImageButton"
-            android:background="@drawable/ic_format_list_bulleted_black_24dp" />
+            android:background="@drawable/ic_list_black_24dp" />
     </RelativeLayout>
 
     <LinearLayout

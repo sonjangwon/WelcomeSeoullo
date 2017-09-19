@@ -7,10 +7,6 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-/**
- * Created by woga1 on 2017-09-13.
- */
-
 public class ViewContents extends Activity {
     ProgressDialog progressDialog;
     @Override

@@ -40,12 +40,7 @@ public class GuideInfoFragment extends Fragment {
     TextView addressTextView;
 
     public GuideInfoFragment(){
-//        LoadingDialog.getInstance().progressON(getActivity());
-//
-//        ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-//        ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-//        ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-//        ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
     }
 
     @Override
@@ -75,7 +70,6 @@ public class GuideInfoFragment extends Fragment {
             ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-
 
 
             Spinner sortSpinner = (Spinner) view.findViewById(R.id.sortSpinner);

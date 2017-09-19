@@ -29,9 +29,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by woga1 on 2017-09-07.
- */
 public class NoticeActivity extends AppCompatActivity implements View.OnTouchListener{
 
     ViewFlipper flipper;

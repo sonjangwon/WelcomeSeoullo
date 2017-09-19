@@ -3,10 +3,6 @@ package com.example.jangwon.welcomeseoullo;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * Created by woga1 on 2017-09-16.
- */
-
 public class PrefManager {
     SharedPreferences pref;
     SharedPreferences.Editor editor;

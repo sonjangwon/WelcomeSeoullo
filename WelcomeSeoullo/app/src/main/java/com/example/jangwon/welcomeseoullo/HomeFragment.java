@@ -1,5 +1,6 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import org.jsoup.Jsoup;
@@ -36,11 +35,14 @@ import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
 
-public class Test extends AppCompatActivity {
+public class HomeFragment extends Fragment {
+
+    View view;
+
     private ViewPager pager;
     ViewFlipper flipper;
     ListView listview ;
-    private MyViewPagerAdapter myViewPagerAdapter;
+    private Test.MyViewPagerAdapter myViewPagerAdapter;
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayList<String> dateList = new ArrayList<String>();
@@ -58,7 +60,7 @@ public class Test extends AppCompatActivity {
     AutoScrollViewPager viewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
-    InfiniteViewPager view;
+    InfiniteViewPager infiniteViewPager;
 
     //카드뷰 선언--------------------------------
     private RecyclerView mRecyclerView;
@@ -66,33 +68,39 @@ public class Test extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     public ArrayList<MyData> myDataset;
 
+    public HomeFragment(){
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+    }
 
-        viewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
-        ImageAdapter imgadapter = new ImageAdapter(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
+        ImageAdapter imgadapter = new ImageAdapter(getActivity());
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter);
 
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
         viewPager.startAutoScroll();
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         myDataset = new ArrayList<>();
+
+        return view;
     }
+
     public boolean onTouch(View v, MotionEvent event)
     {
         return true;
     }
+
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         NewThread task = new NewThread();
@@ -108,7 +116,7 @@ public class Test extends AppCompatActivity {
         }
     }
     @Override
-    protected  void onDestroy(){
+    public  void onDestroy(){
         super.onDestroy();
     }
 
@@ -178,7 +186,6 @@ public class Test extends AppCompatActivity {
     ViewPager.OnTouchListener viewPagerTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            Toast.makeText(getApplicationContext(),"터치", Toast.LENGTH_SHORT);
             return false;
         }
     };
@@ -202,7 +209,7 @@ public class Test extends AppCompatActivity {
 
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
+            Window window = getActivity().getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
@@ -215,7 +222,7 @@ public class Test extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.imagefragment, container, false);
             ImageView imageView = (ImageView) view.findViewById(R.id.imagefragment_imageview);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -250,21 +257,16 @@ public class Test extends AppCompatActivity {
         if(index ==0){
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),"1이동", Toast.LENGTH_SHORT).show();
         }
         else if(index == 1)
         {
             intent.setData(Uri.parse("http://www.daum.net"));
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),"2이동", Toast.LENGTH_SHORT).show();
-
         }
         else if(index == 2)
         {
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
-
         }
     }
 
@@ -294,7 +296,8 @@ public class Test extends AppCompatActivity {
 
         // Create new views (invoked by the layout manager)
         @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                       int viewType) {
             // create a new view
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_view, parent, false);
             // set the view's size, margins, paddings and layout parameters
