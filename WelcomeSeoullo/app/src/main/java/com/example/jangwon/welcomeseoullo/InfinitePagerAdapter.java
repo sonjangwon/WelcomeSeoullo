@@ -1,11 +1,16 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.content.Context;
 import android.database.DataSetObserver;
+import android.graphics.Color;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * A PagerAdapter that wraps around another PagerAdapter to handle paging wrap-around.
@@ -14,9 +19,11 @@ public class InfinitePagerAdapter extends PagerAdapter {
 
     private static final String TAG = "InfinitePagerAdapter";
     private static final boolean DEBUG = true;
-
+    Integer[] Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
+    private TextView[] dots;
+    private LinearLayout dotsLayout;
     private PagerAdapter adapter;
-
+    Context mContext;
     public InfinitePagerAdapter(PagerAdapter adapter) {
         this.adapter = adapter;
     }
@@ -53,11 +60,30 @@ public class InfinitePagerAdapter extends PagerAdapter {
         int virtualPosition = position % getRealCount();
         debug("destroyItem: real position: " + position);
         debug("destroyItem: virtual position: " + virtualPosition);
-
+        addBottomDots(virtualPosition);
         // only expose virtual position to the inner adapter
         adapter.destroyItem(container, virtualPosition, object);
     }
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[Images.length];
+        //해당화면 일때
+//        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
+//        //해당화면 아닐때
+//        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
 
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) { //이부분 -1이라고 고침
+            dots[i] = new TextView(mContext);
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+
+            dots[i].setTextColor(Color.GRAY);
+            dotsLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(Color.WHITE);
+    }
     /*
      * Delegate rest of methods directly to the inner adapter.
      */

@@ -42,7 +42,6 @@ public class GuideAppInfo extends AppCompatActivity {
         if (!prefManager.isFirstTimeLaunch()) {
             prefManager.setFirstTimeLaunch(true);
         }
-
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -129,7 +128,7 @@ public class GuideAppInfo extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(getApplicationContext(), NoticeActivity.class));
+        startActivity(new Intent(getApplicationContext(), Test.class));
         finish();
     }
 

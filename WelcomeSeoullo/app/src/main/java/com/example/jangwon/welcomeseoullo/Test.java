@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,12 +20,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -34,31 +33,19 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import me.relex.circleindicator.CircleIndicator;
-
 /**
  * Created by woga1 on 2017-09-13.
  */
 
 public class Test extends AppCompatActivity {
-    private ViewPager pager;
-    ViewFlipper flipper;
-    ListView listview ;
+
     private MyViewPagerAdapter myViewPagerAdapter;
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayList<String> dateList = new ArrayList<String>();
-    //ArrayAdapter mAdapter;
     int count =0;
     //현재화면인덱스
-    int currentPage =0;
-    //터치시작 x좌표
-    float downX =0;
-    //터치끝 x좌표
-    float upX =0;
-    //화면 스크린 높이 넓이
-    int height=0;
-    int width=0;
+
     AutoScrollViewPager viewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
@@ -68,8 +55,11 @@ public class Test extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    public ArrayList<MyData> myDataset;
+    public ArrayList<Item> items;
 
+    private TextView[] dots;
+    private int[] layouts;
+    private LinearLayout dotsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,36 +79,43 @@ public class Test extends AppCompatActivity {
 
         viewPager.startAutoScroll();
 //        myViewPagerAdapter = new MyViewPagerAdapter();
-//        Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
+        //Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
 //
 //        pager.setAdapter(myViewPagerAdapter);
 //        pager.addOnPageChangeListener(viewPagerPageChangeListener);
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
+        //CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         //indicator.setViewPager(viewPager);
-//        listview = (ListView) findViewById(R.id.noticeList2);
-//        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, titleList);
-//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(Test.this, ViewContents.class);
-//                intent.putExtra("urlNum", urlNumList.get(position));
-//                startActivity(intent);
-//            }
-//        });
+        //dotsLayout = (LinearLayout) findViewById(R.id.dotLayouts);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
         // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
+        mRecyclerView.addItemDecoration(dividerItemDecoration);
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Intent intent = new Intent(Test.this, ViewContents.class);
+                        intent.putExtra("urlNum", urlNumList.get(position));
+                        startActivity(intent);
+                    }
+
+                    @Override
+                    public void onLongItemClick(View view, int position) {
+                        Toast.makeText(getApplicationContext(),position+"번 째 아이템 롱 클릭",Toast.LENGTH_SHORT).show();
+                    }
+                }));
+
         //mRecyclerView.setNestedScrollingEnabled(false);
-        // specify an adapter (see also next example)
-        myDataset = new ArrayList<>();
-       // mRecyclerView.setAdapter(mAdapter);
+        items = new ArrayList<>();
         Log.e("메인","작동끝");
     }
+
     public boolean onTouch(View v, MotionEvent event)
     {
         return true;
@@ -189,15 +186,12 @@ public class Test extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
 
-//            mAdapter.notifyDataSetChanged();
-//            listview.setAdapter(mAdapter);
-//            listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
             for(int i=0; i<titleList.size(); i++)
             {
-                myDataset.add(new MyData(titleList.get(i), "  "+dateList.get(i)));
+                items.add(new Item(titleList.get(i), "  "+dateList.get(i)));
             }
-            mRecyclerView.setAdapter(new MyAdapter(myDataset));
-            mRecyclerView.getAdapter().notifyDataSetChanged();
+            mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), items, R.layout.test));
+
 
         }
     }
@@ -307,69 +301,4 @@ public class Test extends AppCompatActivity {
         }
     }
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
-        private ArrayList<MyData> mDataset;
-
-        // Provide a reference to the views for each data item
-        // Complex data items may need more than one view per item, and
-        // you provide access to all the views for a data item in a view holder
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            // each data item is just a string in this case
-            public TextView titleTextView;
-            public TextView dateTextView;
-            Button detailView;
-            public ViewHolder(View view) {
-                super(view);
-                titleTextView = (TextView)view.findViewById(R.id.titleText);
-                dateTextView = (TextView)view.findViewById(R.id.dateText);
-                detailView = (Button) view.findViewById(R.id.button2);
-
-            }
-        }
-        @Override
-        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-            super.onAttachedToRecyclerView(recyclerView);
-        }
-        // Provide a suitable constructor (depends on the kind of dataset)
-        public MyAdapter(ArrayList<MyData> myDataset) {
-            this.mDataset = myDataset;
-        }
-
-        // Create new views (invoked by the layout manager)
-        @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                       int viewType) {
-            // create a new view
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.my_view, parent, false);
-            // set the view's size, margins, paddings and layout parameters
-            ViewHolder vh = new ViewHolder(v);
-            return vh;
-        }
-
-        // Replace the contents of a view (invoked by the layout manager)
-        @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
-            // - get element from your dataset at this position
-            // - replace the contents of the view with that element
-            holder.titleTextView.setText(mDataset.get(position).title_text);
-            holder.dateTextView.setText(mDataset.get(position).date_text);
-        }
-
-        // Return the size of your dataset (invoked by the layout manager)
-        @Override
-        public int getItemCount() {
-            return mDataset.size();
-        }
-    }
-
-    class MyData{
-        public String title_text;
-        public String date_text;
-        public int img;
-        public MyData(String text, String text2){
-            this.title_text = text;
-            this.date_text = text2;
-        }
-
-    }
 }

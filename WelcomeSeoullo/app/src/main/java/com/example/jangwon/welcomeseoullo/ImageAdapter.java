@@ -22,6 +22,8 @@ public class ImageAdapter extends PagerAdapter {
         return GalImages.length;
     }
 
+    public int[] getImages(){return GalImages;}
+
     @Override
     public boolean isViewFromObject(View view, Object object) {
         return view == ((ImageView) object);
