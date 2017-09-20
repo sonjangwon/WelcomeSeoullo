@@ -1,5 +1,6 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,8 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -20,11 +19,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ListView;
+import android.widget.ViewFlipper;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -36,92 +33,69 @@ import java.util.ArrayList;
 
 import me.relex.circleindicator.CircleIndicator;
 
-/**
- * Created by woga1 on 2017-09-13.
- */
+public class HomeFragment extends Fragment {
 
-public class Test extends AppCompatActivity {
+    View view;
 
-    private MyViewPagerAdapter myViewPagerAdapter;
+    private ViewPager pager;
+    ViewFlipper flipper;
+    ListView listview ;
+    private Test.MyViewPagerAdapter myViewPagerAdapter;
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayList<String> dateList = new ArrayList<String>();
+    //ArrayAdapter mAdapter;
     int count =0;
     //현재화면인덱스
-
+    int currentPage =0;
+    //터치시작 x좌표
+    float downX =0;
+    //터치끝 x좌표
+    float upX =0;
+    //화면 스크린 높이 넓이
+    int height=0;
+    int width=0;
     AutoScrollViewPager viewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
-    InfiniteViewPager view;
+    InfiniteViewPager infiniteViewPager;
 
     //카드뷰 선언--------------------------------
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    public ArrayList<Item> items;
 
-    private TextView[] dots;
-    private int[] layouts;
-    private LinearLayout dotsLayout;
+    public HomeFragment(){
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.test);
+    }
 
-        viewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
-        ImageAdapter imgadapter = new ImageAdapter(this);
-//        view = new InfiniteViewPager(this);
-//        view = (InfiniteViewPager) findViewById(R.id.viewPager);
-        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getApplicationContext());
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+
+        view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
+        ImageAdapter imgadapter = new ImageAdapter(getActivity());
+        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
 
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
         viewPager.startAutoScroll();
-//        myViewPagerAdapter = new MyViewPagerAdapter();
-        //Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
-//
-//        pager.setAdapter(myViewPagerAdapter);
-//        pager.addOnPageChangeListener(viewPagerPageChangeListener);
-        //CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        //indicator.setViewPager(viewPager);
-        //dotsLayout = (LinearLayout) findViewById(R.id.dotLayouts);
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
 
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-        mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(Test.this, ViewContents.class);
-                        intent.putExtra("urlNum", urlNumList.get(position));
-                        startActivity(intent);
-                    }
 
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-                        Toast.makeText(getApplicationContext(),position+"번 째 아이템 롱 클릭",Toast.LENGTH_SHORT).show();
-                    }
-                }));
-
-        //mRecyclerView.setNestedScrollingEnabled(false);
-        items = new ArrayList<>();
-        Log.e("메인","작동끝");
+        return view;
     }
 
     public boolean onTouch(View v, MotionEvent event)
     {
         return true;
     }
+
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
 
         NewThread task = new NewThread();
@@ -137,7 +111,7 @@ public class Test extends AppCompatActivity {
         }
     }
     @Override
-    protected  void onDestroy(){
+    public  void onDestroy(){
         super.onDestroy();
     }
 
@@ -188,10 +162,7 @@ public class Test extends AppCompatActivity {
 
             for(int i=0; i<titleList.size(); i++)
             {
-                items.add(new Item(titleList.get(i), "  "+dateList.get(i)));
             }
-            mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), items, R.layout.test));
-
 
         }
     }
@@ -201,10 +172,12 @@ public class Test extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
+    private void launchHomeScreen() {
+
+    }
     ViewPager.OnTouchListener viewPagerTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            Toast.makeText(getApplicationContext(),"터치", Toast.LENGTH_SHORT);
             return false;
         }
     };
@@ -228,7 +201,7 @@ public class Test extends AppCompatActivity {
 
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
+            Window window = getActivity().getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
@@ -241,7 +214,7 @@ public class Test extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.imagefragment, container, false);
             ImageView imageView = (ImageView) view.findViewById(R.id.imagefragment_imageview);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -276,21 +249,17 @@ public class Test extends AppCompatActivity {
         if(index ==0){
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),"1이동", Toast.LENGTH_SHORT).show();
         }
         else if(index == 1)
         {
             intent.setData(Uri.parse("http://www.daum.net"));
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),"2이동", Toast.LENGTH_SHORT).show();
-
         }
         else if(index == 2)
         {
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
-            Toast.makeText(getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
-
         }
     }
+
 }

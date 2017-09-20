@@ -21,25 +21,29 @@
 
         </activity>
         <activity android:name=".Test">
+
+
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme" >
 
-        </activity>>
         <activity android:name=".MainActivity" />
-        <activity android:name=".PathInfoActivity" />
-        <activity android:name=".NoticeActivity">
+        <activity android:name=".PathInfoActivity" >
 
         </activity>
+        <activity android:name=".NoticeActivity"/>
         <activity android:name=".ViewContents" />
-        <activity android:name=".GuideInfoActivity" />
+        <activity android:name=".GuideInfoActivity" >
+
+        </activity>
         <activity android:name=".BusPathActivity" />
     </application>
 

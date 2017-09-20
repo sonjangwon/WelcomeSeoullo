@@ -18,11 +18,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-/**
- * Created by woga1 on 2017-09-16.
- */
-
 public class GuideAppInfo extends AppCompatActivity {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;

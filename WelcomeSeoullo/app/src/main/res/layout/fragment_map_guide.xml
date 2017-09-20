@@ -23,8 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-
-
     </RelativeLayout>
     <FrameLayout
         android:id="@+id/zoonInFrameLayout"
@@ -106,7 +104,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_my_location_black_24dp"
+            android:background="@drawable/ic_gps_fixed_black_24dp"
             android:elevation="8dp"
             android:scaleType="fitXY" />
 

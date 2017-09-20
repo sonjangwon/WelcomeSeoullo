@@ -1,5 +1,6 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.text.TextPaint;
