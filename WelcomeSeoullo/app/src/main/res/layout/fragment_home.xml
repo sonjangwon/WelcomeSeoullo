@@ -10,7 +10,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent">
+
             <com.example.jangwon.welcomeseoullo.AutoScrollViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
@@ -19,15 +20,24 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-            <me.relex.circleindicator.CircleIndicator
-                android:id="@+id/indicator"
+
+            <!--<me.relex.circleindicator.CircleIndicator-->
+            <!--android:id="@+id/indicator"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_above="@+id/imageView2"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true" />-->
+            <LinearLayout
+                android:id="@+id/dotLayouts"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/dots_height"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:layout_above="@+id/imageView2"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="10dp"></LinearLayout>
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
@@ -41,26 +51,25 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/my_recycler_view"
                 android:layout_width="match_parent"
-                android:scrollbars="vertical"
-                android:layout_height="150dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="12dp"
                 android:layout_below="@+id/imageView2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-            <!--<ListView-->
-            <!--android:id="@+id/noticeList2"-->
-            <!--android:scrollbars="none"-->
-            <!--android:ellipsize="end"-->
-            <!--android:maxLines = "1"-->
-            <!--android:inputType="text"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="301dp"-->
-            <!--android:layout_marginTop="54dp"-->
-            <!--android:layout_below="@+id/viewPager"-->
-            <!--android:layout_alignParentLeft="true"-->
-            <!--android:layout_alignParentStart="true" />-->
+
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
-
-
 </RelativeLayout >
+
+    <!--<ListView-->
+    <!--android:id="@+id/noticeList2"-->
+    <!--android:scrollbars="none"-->
+    <!--android:ellipsize="end"-->
+    <!--android:maxLines = "1"-->
+    <!--android:inputType="text"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="301dp"-->
+    <!--android:layout_marginTop="54dp"-->
+    <!--android:layout_below="@+id/viewPager"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->

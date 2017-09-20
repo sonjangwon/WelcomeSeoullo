@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,8 +32,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import me.relex.circleindicator.CircleIndicator;
 
 /**
  * Created by woga1 on 2017-09-13.
@@ -52,7 +49,7 @@ public class Test extends AppCompatActivity {
     AutoScrollViewPager viewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
-    InfiniteViewPager view;
+    //InfiniteViewPager view;
 
     //카드뷰 선언--------------------------------
     private RecyclerView mRecyclerView;

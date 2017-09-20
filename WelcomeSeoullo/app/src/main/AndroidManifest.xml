@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".Test">
 
-
         </activity>
         <activity
             android:name=".SplashActivity"

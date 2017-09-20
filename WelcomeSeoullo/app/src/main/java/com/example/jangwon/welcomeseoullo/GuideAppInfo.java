@@ -123,7 +123,7 @@ public class GuideAppInfo extends AppCompatActivity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(getApplicationContext(), Test.class));
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
         finish();
     }
 
