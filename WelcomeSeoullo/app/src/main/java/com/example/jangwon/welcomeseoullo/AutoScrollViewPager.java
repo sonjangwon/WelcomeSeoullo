@@ -200,6 +200,7 @@ public class AutoScrollViewPager extends ViewPager {
             if (ev.getAction() == MotionEvent.ACTION_DOWN) {
                 downX = touchX;
             }
+
             int currentItem = getCurrentItem();
             Log.e("currentItem", String.valueOf(currentItem));
             PagerAdapter adapter = getAdapter();

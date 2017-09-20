@@ -24,7 +24,8 @@ public class InfinitePagerAdapter extends PagerAdapter {
     private LinearLayout dotsLayout;
     private PagerAdapter adapter;
     Context mContext;
-    public InfinitePagerAdapter(PagerAdapter adapter) {
+    public InfinitePagerAdapter(PagerAdapter adapter, Context context) {
+        mContext = context;
         this.adapter = adapter;
     }
 
@@ -50,7 +51,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
         int virtualPosition = position % getRealCount();
         debug("instantiateItem: real position: " + position);
         debug("instantiateItem: virtual position: " + virtualPosition);
-
+        //addBottomDots(position);
         // only expose virtual position to the inner adapter
         return adapter.instantiateItem(container, virtualPosition);
     }
@@ -60,7 +61,6 @@ public class InfinitePagerAdapter extends PagerAdapter {
         int virtualPosition = position % getRealCount();
         debug("destroyItem: real position: " + position);
         debug("destroyItem: virtual position: " + virtualPosition);
-        addBottomDots(virtualPosition);
         // only expose virtual position to the inner adapter
         adapter.destroyItem(container, virtualPosition, object);
     }
@@ -70,7 +70,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
 //        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
 //        //해당화면 아닐때
 //        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
-
+        dotsLayout = (LinearLayout) dotsLayout.findViewById(R.id.dotLayouts);
         dotsLayout.removeAllViews();
         for (int i = 0; i < dots.length; i++) { //이부분 -1이라고 고침
             dots[i] = new TextView(mContext);

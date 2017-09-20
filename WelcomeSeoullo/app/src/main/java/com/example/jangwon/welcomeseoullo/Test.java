@@ -71,7 +71,7 @@ public class Test extends AppCompatActivity {
         ImageAdapter imgadapter = new ImageAdapter(this);
 //        view = new InfiniteViewPager(this);
 //        view = (InfiniteViewPager) findViewById(R.id.viewPager);
-        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter);
+        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getApplicationContext());
 
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
