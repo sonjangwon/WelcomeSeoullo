@@ -1,6 +1,5 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.HomeMenu;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -10,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +25,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.R;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -33,11 +35,13 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+/**
+ * Created by woga1 on 2017-09-13.
+ */
 
-    View view;
+public class Test extends AppCompatActivity {
 
-    private Test.MyViewPagerAdapter myViewPagerAdapter;
+    private MyViewPagerAdapter myViewPagerAdapter;
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayList<String> dateList = new ArrayList<String>();
@@ -59,19 +63,16 @@ public class HomeFragment extends Fragment {
     private int[] layouts;
     private LinearLayout dotsLayout;
 
-    public HomeFragment(){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.test);
 
-    }
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-
-        view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
-        ImageAdapter imgadapter = new ImageAdapter(getActivity());
+        viewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
+        ImageAdapter imgadapter = new ImageAdapter(this);
 //        view = new InfiniteViewPager(this);
 //        view = (InfiniteViewPager) findViewById(R.id.viewPager);
-        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
+        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getApplicationContext());
 
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
@@ -84,36 +85,34 @@ public class HomeFragment extends Fragment {
         //CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         //indicator.setViewPager(viewPager);
         //dotsLayout = (LinearLayout) findViewById(R.id.dotLayouts);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
 
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(getActivity().getApplicationContext(),new LinearLayoutManager(getActivity()).getOrientation());
+                new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity().getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getActivity(), ViewContents.class);
+                        Intent intent = new Intent(Test.this, ViewContents.class);
                         intent.putExtra("urlNum", urlNumList.get(position));
                         startActivity(intent);
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        Toast.makeText(getActivity().getApplicationContext(),position+"번 째 아이템 롱 클릭",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),position+"번 째 아이템 롱 클릭",Toast.LENGTH_SHORT).show();
                     }
                 }));
 
         //mRecyclerView.setNestedScrollingEnabled(false);
         items = new ArrayList<>();
         Log.e("메인","작동끝");
-
-        return view;
     }
 
     public boolean onTouch(View v, MotionEvent event)
@@ -121,7 +120,7 @@ public class HomeFragment extends Fragment {
         return true;
     }
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
 
         NewThread task = new NewThread();
@@ -137,7 +136,7 @@ public class HomeFragment extends Fragment {
         }
     }
     @Override
-    public  void onDestroy(){
+    protected  void onDestroy(){
         super.onDestroy();
     }
 
@@ -190,7 +189,7 @@ public class HomeFragment extends Fragment {
             {
                 items.add(new Item(titleList.get(i), "  "+dateList.get(i)));
             }
-            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
+            mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), items, R.layout.test));
 
 
         }
@@ -204,7 +203,7 @@ public class HomeFragment extends Fragment {
     ViewPager.OnTouchListener viewPagerTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
-            Toast.makeText(getActivity().getApplicationContext(),"터치", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(),"터치", Toast.LENGTH_SHORT);
             return false;
         }
     };
@@ -228,7 +227,7 @@ public class HomeFragment extends Fragment {
 
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getActivity().getWindow();
+            Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
@@ -241,7 +240,7 @@ public class HomeFragment extends Fragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            layoutInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.imagefragment, container, false);
             ImageView imageView = (ImageView) view.findViewById(R.id.imagefragment_imageview);
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -276,22 +275,21 @@ public class HomeFragment extends Fragment {
         if(index ==0){
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
-            Toast.makeText(getActivity().getApplicationContext(),"1이동", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"1이동", Toast.LENGTH_SHORT).show();
         }
         else if(index == 1)
         {
             intent.setData(Uri.parse("http://www.daum.net"));
             startActivity(intent);
-            Toast.makeText(getActivity().getApplicationContext(),"2이동", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"2이동", Toast.LENGTH_SHORT).show();
 
         }
         else if(index == 2)
         {
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
-            Toast.makeText(getActivity().getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
 
         }
     }
-
 }

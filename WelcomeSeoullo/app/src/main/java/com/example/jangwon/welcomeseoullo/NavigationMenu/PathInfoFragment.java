@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.NavigationMenu;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,6 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.jangwon.welcomeseoullo.ManagementLocation;
+import com.example.jangwon.welcomeseoullo.R;
 
 public class PathInfoFragment extends Fragment {
 

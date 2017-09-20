@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.os.AsyncTask;
 import android.util.Log;

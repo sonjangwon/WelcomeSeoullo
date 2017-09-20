@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.content.Context;
 import android.view.animation.Interpolator;

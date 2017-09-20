@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
 import android.location.LocationListener;
 import android.location.LocationManager;

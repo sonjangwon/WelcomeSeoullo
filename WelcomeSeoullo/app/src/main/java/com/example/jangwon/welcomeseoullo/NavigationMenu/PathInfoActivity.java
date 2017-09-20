@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.NavigationMenu;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -12,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.jangwon.welcomeseoullo.ManagementLocation;
+import com.example.jangwon.welcomeseoullo.R;
 
 public class PathInfoActivity extends AppCompatActivity {
     //현재위치에서 서울로7017까지 경로안내를 제공하는 Activity

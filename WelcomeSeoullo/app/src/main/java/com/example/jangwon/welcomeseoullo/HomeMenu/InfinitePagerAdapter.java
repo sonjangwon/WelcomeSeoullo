@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.content.Context;
 import android.database.DataSetObserver;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.jangwon.welcomeseoullo.R;
 
 /**
  * A PagerAdapter that wraps around another PagerAdapter to handle paging wrap-around.

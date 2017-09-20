@@ -20,7 +20,7 @@
         <activity android:name=".GuideAppInfo">
 
         </activity>
-        <activity android:name=".Test">
+        <activity android:name=".HomeMenu.Test">
 
         </activity>
         <activity
@@ -35,15 +35,15 @@
         </activity>
 
         <activity android:name=".MainActivity" />
-        <activity android:name=".PathInfoActivity" >
+        <activity android:name=".NavigationMenu.PathInfoActivity" >
 
         </activity>
         <activity android:name=".NoticeActivity"/>
-        <activity android:name=".ViewContents" />
-        <activity android:name=".GuideInfoActivity" >
+        <activity android:name=".HomeMenu.ViewContents" />
+        <activity android:name=".FacilityMenu.GuideInfoActivity" >
 
         </activity>
-        <activity android:name=".BusPathActivity" />
+        <activity android:name=".NavigationMenu.BusPathActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.NavigationMenu;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
@@ -13,6 +13,9 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.jangwon.welcomeseoullo.ManagementLocation;
+import com.example.jangwon.welcomeseoullo.R;
 
 import java.io.IOException;
 import java.util.List;

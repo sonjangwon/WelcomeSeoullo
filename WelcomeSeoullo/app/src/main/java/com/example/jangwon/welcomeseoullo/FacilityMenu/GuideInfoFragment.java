@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -22,6 +22,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.example.jangwon.welcomeseoullo.LoadingDialog;
+import com.example.jangwon.welcomeseoullo.ManagePublicData;
+import com.example.jangwon.welcomeseoullo.ManagementLocation;
+import com.example.jangwon.welcomeseoullo.R;
 
 import java.io.IOException;
 import java.util.List;

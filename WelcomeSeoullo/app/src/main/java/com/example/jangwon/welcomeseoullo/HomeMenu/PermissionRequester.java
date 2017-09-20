@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.app.Activity;
 import android.app.AlertDialog;

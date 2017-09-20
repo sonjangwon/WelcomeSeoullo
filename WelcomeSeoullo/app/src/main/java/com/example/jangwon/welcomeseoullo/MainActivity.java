@@ -25,6 +25,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
+import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
+import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;
+
 import java.io.IOException;
 import java.util.List;
 

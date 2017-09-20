@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.NavigationMenu;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;

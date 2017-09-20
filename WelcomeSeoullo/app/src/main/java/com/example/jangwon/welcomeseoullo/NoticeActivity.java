@@ -21,6 +21,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.example.jangwon.welcomeseoullo.HomeMenu.PermissionRequester;
+import com.example.jangwon.welcomeseoullo.HomeMenu.ViewContents;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

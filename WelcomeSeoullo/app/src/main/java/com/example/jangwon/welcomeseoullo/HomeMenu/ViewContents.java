@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.example.jangwon.welcomeseoullo.R;
 
 public class ViewContents extends Activity {
     ProgressDialog progressDialog;

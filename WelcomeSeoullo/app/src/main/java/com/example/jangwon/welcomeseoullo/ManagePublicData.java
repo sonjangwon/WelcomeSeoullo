@@ -9,7 +9,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.net.URL;
 import java.util.ArrayList;
 
-class ManagePublicData {
+public class ManagePublicData {
 
     private static ManagePublicData managePublicData;
 
@@ -23,10 +23,10 @@ class ManagePublicData {
     private ArrayList<PublicParkVO> publicParkVOArrayList;
     private ArrayList<TraditionalMarketVO> traditionalMarketVOArrayList;
 
-    ParsePublicToilet parsePublicToilet;
-    ParsePublicParkingLot parsePublicParkingLot;
-    ParsePublicPark parsePublicPark;
-    ParseTraditionalMarket parseTraditionalMarket;
+    public ParsePublicToilet parsePublicToilet;
+    public ParsePublicParkingLot parsePublicParkingLot;
+    public ParsePublicPark parsePublicPark;
+    public ParseTraditionalMarket parseTraditionalMarket;
 
     LoadingDialog loadingDialog;
 

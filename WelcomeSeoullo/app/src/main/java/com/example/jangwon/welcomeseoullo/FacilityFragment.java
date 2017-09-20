@@ -12,6 +12,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.jangwon.welcomeseoullo.LoadingDialog;
+import com.example.jangwon.welcomeseoullo.ManagePublicData;
+import com.example.jangwon.welcomeseoullo.R;
+
 public class FacilityFragment extends Fragment {
     View view;
 

@@ -6,7 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatDialog;
 import android.widget.ImageView;
 
-class LoadingDialog {
+public class LoadingDialog {
 
     private static LoadingDialog loadingDialog;
 
@@ -14,7 +14,7 @@ class LoadingDialog {
     ImageView img_loading_frame;
     AnimationDrawable frameAnimation;
 
-    static LoadingDialog getInstance() {
+    public static LoadingDialog getInstance() {
         if(loadingDialog == null){
             loadingDialog = new LoadingDialog();
         }

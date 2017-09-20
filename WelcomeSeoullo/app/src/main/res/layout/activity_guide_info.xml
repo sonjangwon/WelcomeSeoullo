@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
-    tools:context="com.example.jangwon.welcomeseoullo.GuideInfoActivity">
+    tools:context="com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoActivity">
 
     <RelativeLayout
         android:id="@+id/categoryLinearLayout"
@@ -87,7 +87,7 @@
         android:layout_below="@+id/linearLayout3"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:name="com.example.jangwon.welcomeseoullo.MapGuideFragment"
+        android:name="com.example.jangwon.welcomeseoullo.FacilityMenu.MapGuideFragment"
         tools:layout="@layout/fragment_map_guide" />
 
 </RelativeLayout>
