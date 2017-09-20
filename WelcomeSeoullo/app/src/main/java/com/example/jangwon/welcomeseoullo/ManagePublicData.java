@@ -99,6 +99,16 @@ class ManagePublicData {
         }
     }
 
+    public boolean calculatePublicToiletCoordinates(String latitude, String longitude){
+        if(37.546160 < Double.valueOf(latitude) && Double.valueOf(latitude) < 37.564250 &&
+                126.960205 < Double.valueOf(longitude) && Double.valueOf(longitude) < 126.983023){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public boolean checkDuplication(String ParkingLotName){
         for(int i=0;i<publicParkingLotVOArrayList.size();i++){
             if(publicParkingLotVOArrayList.get(i).getParkingLotName().equals(ParkingLotName)){
@@ -146,7 +156,7 @@ class ManagePublicData {
                                         break;
                                     case "Y_WGS84":
                                         publicToiletVO.setToiletLatitude(data);
-                                        if(calculateCoordinates(publicToiletVO.getToiletLatitude(), publicToiletVO.getToiletLongitude())){
+                                        if(calculatePublicToiletCoordinates(publicToiletVO.getToiletLatitude(), publicToiletVO.getToiletLongitude())){
                                             publicToiletVOArrayList.add(new PublicToiletVO(publicToiletVO.getToiletName(), publicToiletVO.getToiletCategory(), publicToiletVO.getToiletLatitude(), publicToiletVO.getToiletLongitude()));
                                             Log.v("test", publicToiletVOArrayList.get(publicToiletVOArrayList.size() - 1).getToiletName());
                                         }
