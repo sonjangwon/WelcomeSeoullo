@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,7 +30,8 @@ import java.util.List;
 public class GuideInfoFragment extends Fragment {
 
     View view;
-
+//    public static ImageView imageView1;
+//    public static ImageView imageView2;
     // 사용자 위치 수신기
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -59,6 +61,9 @@ public class GuideInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if(savedInstanceState == null){
+
+//            imageView1 = (ImageButton)view.findViewById(R.id.mapPointImageButton);
+//            imageView2 = (ImageButton)view.findViewById(R.id.listImageButton);
 
             view = inflater.inflate(R.layout.fragment_guide_info, container, false);
 
@@ -179,8 +184,25 @@ public class GuideInfoFragment extends Fragment {
     public void onResume() {
         super.onResume();
         settingGPS();
+        ListToMapCheck();
         reverseGeocoder();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        ListToMapCheck();
+    }
+
+    public void ListToMapCheck()
+    {
+        if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
+            Toast.makeText(getActivity(),"map2",Toast.LENGTH_SHORT).show();
+            ManageListToMap.getInstance().setFragmentCondition("list");
+
+        }
+    }
+
 
     //버튼으로 리스트뷰, 맵포인트를 클릭한 경우 각 프레그먼트가 실행된다.
     public void switchFragment(View view){
@@ -196,7 +218,7 @@ public class GuideInfoFragment extends Fragment {
 
         }
 
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getFragmentManager()   ;
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
         fragmentTransaction.commit();

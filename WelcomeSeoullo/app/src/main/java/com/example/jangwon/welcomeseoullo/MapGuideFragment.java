@@ -284,7 +284,7 @@ public class MapGuideFragment extends Fragment {
             TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(),ManageListToMap.getInstance().getClickedLongitude());
             TMapMarkerItem tItem5 = new TMapMarkerItem();
             tItem5.setTMapPoint(tpoint);
-            tItem5.setCalloutTitle(tItem5.getName());
+            tItem5.setCalloutTitle(ManageListToMap.getInstance().getClickedPlaceName());
             tItem5.setCanShowCallout(true);
             tItem5.setAutoCalloutVisible(true);
             if(ManagementLocation.getInstance().getSortSpinner()=="공공화장실"){
@@ -302,6 +302,8 @@ public class MapGuideFragment extends Fragment {
             tItem5.setIcon(bitmap);
             tmapview.bringMarkerToFront(tItem5);
             tmapview.addMarkerItem("ListToMap", tItem5);
+//            GuideInfoFragment.imageView1.setImageResource(R.drawable.reversemappoint);
+//            GuideInfoFragment.imageView2.setImageResource(R.drawable.listpoint);
         }
     }
 

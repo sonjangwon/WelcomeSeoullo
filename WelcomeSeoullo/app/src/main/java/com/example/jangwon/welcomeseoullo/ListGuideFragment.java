@@ -52,7 +52,10 @@ public class ListGuideFragment extends Fragment {
                 switchFragment();
                 ManageListToMap.getInstance().setClickedLatitude(Double.valueOf(descStr.split(",")[0]));
                 ManageListToMap.getInstance().setClickedLongitude(Double.valueOf(descStr.split(",")[1]));
+                ManageListToMap.getInstance().setClickedPlaceName(titleStr);
                 ManageListToMap.getInstance().setFragmentCondition("map");
+//                GuideInfoFragment.imageView1.setImageResource(R.drawable.mappoint);
+//                GuideInfoFragment.imageView2.setImageResource(R.drawable.listpoint);
             }
         }) ;
 

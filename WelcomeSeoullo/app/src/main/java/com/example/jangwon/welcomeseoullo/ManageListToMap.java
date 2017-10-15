@@ -12,13 +12,25 @@ public class ManageListToMap {
 
     double clickedLatitude;
     double clickedLongitude;
+    String clikedPlaceName;
     String fragmentCondition;
+
 
     public static ManageListToMap getInstance(){
         if(manageListToMap == null){
             manageListToMap = new ManageListToMap();
         }
         return manageListToMap;
+    }
+
+    public void setClickedPlaceName(String clikedPlaceName)
+    {
+        this.clikedPlaceName = clikedPlaceName;
+    }
+
+    public String getClickedPlaceName()
+    {
+        return clikedPlaceName;
     }
 
     public void setClickedLatitude(double clickedLatitude)
