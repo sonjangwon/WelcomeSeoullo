@@ -11,6 +11,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,8 +24,10 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.LoadingDialog;
+import com.example.jangwon.welcomeseoullo.ManageListToMap;
 import com.example.jangwon.welcomeseoullo.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
@@ -31,10 +35,13 @@ import com.example.jangwon.welcomeseoullo.R;
 import java.io.IOException;
 import java.util.List;
 
+import static android.R.attr.src;
+
 public class GuideInfoFragment extends Fragment {
 
     View view;
-
+//    public static ImageView imageView1;
+//    public static ImageView imageView2;
     // 사용자 위치 수신기
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -43,6 +50,11 @@ public class GuideInfoFragment extends Fragment {
     String currentAddress;
     String nowFragment="map";
     TextView addressTextView;
+
+    static ImageButton listImageButton ;
+    static ImageButton mapPointImageButton ;
+
+    public static Context mContext;
 
     public GuideInfoFragment(){
 
@@ -53,6 +65,7 @@ public class GuideInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         setHasOptionsMenu(true);
+        mContext = getActivity();
     }
 
     @Nullable
@@ -60,6 +73,9 @@ public class GuideInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         if(savedInstanceState == null){
+
+//            imageView1 = (ImageButton)view.findViewById(R.id.mapPointImageButton);
+//            imageView2 = (ImageButton)view.findViewById(R.id.listImageButton);
 
             view = inflater.inflate(R.layout.fragment_guide_info, container, false);
 
@@ -69,8 +85,12 @@ public class GuideInfoFragment extends Fragment {
             currentAddress = ManagementLocation.getInstance().getCurrentAddress();
 
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
+         LoadingDialog.getInstance().progressON(getActivity());
+            listImageButton = (ImageButton) view.findViewById(R.id.listImageButton);
+            mapPointImageButton = (ImageButton) view.findViewById(R.id.mapPointImageButton);
 
-            LoadingDialog.getInstance().progressON(getActivity());
+            mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
+            listImageButton.setBackgroundResource(R.drawable.listpoint);
             ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -78,10 +98,9 @@ public class GuideInfoFragment extends Fragment {
 
             Spinner sortSpinner = (Spinner) view.findViewById(R.id.sortSpinner);
             Spinner distanceSpinner = (Spinner) view.findViewById(R.id.distanceSpinner);
-            ManagementLocation.getInstance().setSortSpinner("전체");
+            ManagementLocation.getInstance().setSortSpinner("공공화장실");
             ManagementLocation.getInstance().setDistanceSpinner("2km");
-            final ImageButton listImageButton = (ImageButton) view.findViewById(R.id.listImageButton);
-            final ImageButton mapPointImageButton = (ImageButton) view.findViewById(R.id.mapPointImageButton);
+
 
             listImageButton.setOnClickListener(new EditText.OnClickListener(){
                 @Override
@@ -114,9 +133,6 @@ public class GuideInfoFragment extends Fragment {
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     switch (parent.getItemAtPosition(position).toString()) {
-                        case "전체":
-                            ManagementLocation.getInstance().setSortSpinner("전체");
-                            break;
                         case "공공화장실":
                             ManagementLocation.getInstance().setSortSpinner("공공화장실");
                             break;
@@ -175,9 +191,44 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Toast.makeText(getActivity(),"onResume",Toast.LENGTH_SHORT).show();
         settingGPS();
+        ListToMapCheck();
         reverseGeocoder();
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Toast.makeText(getActivity(),"onStart",Toast.LENGTH_SHORT).show();
+        ListToMapCheck();
+    }
+
+
+    public void ChangeListIconToMap()
+    {
+        mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
+        listImageButton.setBackgroundResource(R.drawable.listpoint);
+    }
+
+
+    public void ListToMapCheck()
+    {
+        if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
+            Toast.makeText(getActivity(),"map2",Toast.LENGTH_SHORT).show();
+            ManageListToMap.getInstance().setFragmentCondition("list");
+
+        }
+    }
+
+
+    public static Handler changeButtonIcon = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
+            listImageButton.setBackgroundResource(R.drawable.listpoint);
+        }
+    };
 
     //버튼으로 리스트뷰, 맵포인트를 클릭한 경우 각 프레그먼트가 실행된다.
     public void switchFragment(View view){
@@ -193,7 +244,7 @@ public class GuideInfoFragment extends Fragment {
 
         }
 
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getFragmentManager()   ;
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
         fragmentTransaction.commit();

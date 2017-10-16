@@ -211,14 +211,15 @@ public class MainActivity extends Activity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         else {
-            //실제 어서와 서울로 사용자를 위한 gps로 현재 위치 인식, 야외에 있을 때 더 인식이 잘 됨
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
+//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
 
             //서울시 앱 공모전 심사를 위한 wifi-network를 통한 현재 위치 인식, 실내 현재위치를 받아올 때 좋음
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
 
             // 수동으로 위치 구하기
-            String locationProvider = LocationManager.GPS_PROVIDER;
+//            String locationProvider = LocationManager.GPS_PROVIDER;
+            String locationProvider = LocationManager.NETWORK_PROVIDER;
             currentLocation = locationManager.getLastKnownLocation(locationProvider);
             if (currentLocation != null) {
                 currentLongitude = currentLocation.getLongitude();

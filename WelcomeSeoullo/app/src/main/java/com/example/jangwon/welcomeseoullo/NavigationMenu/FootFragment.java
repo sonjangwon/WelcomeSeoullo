@@ -78,8 +78,8 @@ public class FootFragment extends Fragment {
         point.add(endPoint);
 
         tmapview.getDisplayTMapInfo(point);
-        tmapview.setCompassMode(true);
-        tmapview.setIconVisibility(true);
+        tmapview.setCompassMode(false);
+        tmapview.setIconVisibility(false);
         tmapview.setZoomLevel(11);
         tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);

@@ -82,8 +82,8 @@
 
     <FrameLayout
         android:id="@+id/gpsFrameLayout"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
@@ -95,16 +95,16 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
-            android:background="#FFFFFF"
+            android:background="#4D4D4D"
             android:elevation="8dp"
             android:scaleType="fitXY" />
 
         <ImageButton
             android:id="@+id/gpsButton"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
-            android:background="@drawable/ic_gps_fixed_black_24dp"
+            android:background="@drawable/mylocation"
             android:elevation="8dp"
             android:scaleType="fitXY" />
 

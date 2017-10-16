@@ -18,19 +18,30 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.ManageListToMap;
 import com.example.jangwon.welcomeseoullo.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
 import com.skp.Tmap.TMapPoint;
+import com.skp.Tmap.TMapPolyLine;
 import com.skp.Tmap.TMapView;
+import com.skp.Tmap.util.HttpConnect;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+
+import static android.R.attr.src;
 
 public class MapGuideFragment extends Fragment {
     //주변경로안내 맵가이드 Fragment
 
-    Double[] latitude = new Double[3];
-    Double[] longitude = new Double[3];
     View view;
     TMapData tmapdata = new TMapData();
     TMapView tmapview;
@@ -41,12 +52,6 @@ public class MapGuideFragment extends Fragment {
     ImageButton gpsButton;
     int totalDistance;
     double distance =0;
-    double lat1 = 37.537145;
-    double lng1 = 127.08613500000001;
-    double lat2 = 37.52989;
-    double lng2 = 126.96477500000003;
-    double lat3 = 37.545593;
-    double lng3 = 126.97980329999996;
 
     // 사용자 위치 수신기
     private LocationManager locationManager;
@@ -66,12 +71,6 @@ public class MapGuideFragment extends Fragment {
         zoomInButton = (ImageButton) view.findViewById(R.id.zoomInButton);
         zoomOutButton = (ImageButton) view.findViewById(R.id.zoomOutButton);
         gpsButton = (ImageButton) view.findViewById(R.id.gpsButton);
-        latitude[0] = Double.valueOf("37.540389");
-        latitude[1]= Double.valueOf("37.538289");
-        latitude[2]= Double.valueOf("37.565102");
-        longitude[0] = Double.valueOf("127.06923600000005");
-        longitude[1]= Double.valueOf("127.12338350000005");
-        longitude[2]= Double.valueOf("127.00776500000006");
 
         //현재위치 받아오는 위도,경도,상세주소
         currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
@@ -82,6 +81,8 @@ public class MapGuideFragment extends Fragment {
 
         mapView(view);
         addMarker();
+
+
 
         tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback() {
             @Override
@@ -149,13 +150,14 @@ public class MapGuideFragment extends Fragment {
 //        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
         tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
         tmapview.setLocationPoint(currentLongitude,currentLatitude);
-        tmapview.setCompassMode(true);
+        tmapview.setCenterPoint(126.970325,37.556152);
+        tmapview.setCompassMode(false);
         tmapview.setIconVisibility(true);
-        tmapview.setZoomLevel(11);
+        tmapview.setZoomLevel(16);
         tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
-        tmapview.setTrackingMode(true);
-        tmapview.setSightVisible(true);
+        tmapview.setTrackingMode(false);
+        tmapview.setSightVisible(false);
         relativeLayout.addView(tmapview);
 
 
@@ -167,12 +169,11 @@ public class MapGuideFragment extends Fragment {
         ManagePublicData.getInstance().getPublicParkVOArrayList();
         ManagePublicData.getInstance().getPublicToiletVOArrayList();
         ManagePublicData.getInstance().getTraditionalMarketVOArrayList();
-
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
+        if(ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
-//                double distance = distanceTracker(tpoint);
+                //double distance = distanceTracker(tpoint);f
 //                Log.e("공공화장실",String.valueOf(distance));
 //                Log.e("공공화장실",String.valueOf(ManagementLocation.getInstance().getDistanceSpinner()));
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner())
@@ -180,13 +181,13 @@ public class MapGuideFragment extends Fragment {
                     TMapMarkerItem tItem1 = new TMapMarkerItem();
                     tItem1.setTMapPoint(tpoint);
                     tItem1.setVisible(tItem1.VISIBLE);
-                    tItem1.setName("tlem1");
+                    tItem1.setName(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName());
 
 
                     tItem1.setCalloutTitle(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName());
 //                    tItem1.setCalloutSubTitle("ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude())");
                     tItem1.setCanShowCallout(true);
-                    tItem1.setAutoCalloutVisible(true);
+                    tItem1.setAutoCalloutVisible(false);
 
 
 //                    tItem1.setCalloutTitle( String.valueOf(i) );
@@ -197,11 +198,11 @@ public class MapGuideFragment extends Fragment {
                 }
             }
         }
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="주차장") {
+        if(ManagementLocation.getInstance().getSortSpinner()=="주차장") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkingLotVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude()));
-//                double distance = distanceTracker(tpoint);
+                //double distance = distanceTracker(tpoint);
 //                Log.e("주차장",String.valueOf(distance));
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner()) {
                     TMapMarkerItem tItem2 = new TMapMarkerItem();
@@ -209,11 +210,11 @@ public class MapGuideFragment extends Fragment {
 //                    tItem2.setCalloutTitle("신재혁");
 
                     tItem2.setVisible(tItem2.VISIBLE);
-                    tItem2.setName("tlem2");
+                    tItem2.setName(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotName());
                     tItem2.setCalloutTitle(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotName());
 //                    tItem2.setCalloutSubTitle("서울");
                     tItem2.setCanShowCallout(true);
-                    tItem2.setAutoCalloutVisible(true);
+                    tItem2.setAutoCalloutVisible(false);
 
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
                     tItem2.setIcon(bitmap);
@@ -225,19 +226,19 @@ public class MapGuideFragment extends Fragment {
             }
 
         }
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="공원") {
+        if(ManagementLocation.getInstance().getSortSpinner()=="공원") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLongitude()));
-//                double distance = distanceTracker(tpoint);
+                //double distance = distanceTracker(tpoint);
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner()) {
                     TMapMarkerItem tItem3 = new TMapMarkerItem();
                     tItem3.setTMapPoint(tpoint);
                     tItem3.setCanShowCallout(true);
-                    tItem3.setAutoCalloutVisible(true);
+                    tItem3.setAutoCalloutVisible(false);
                     tItem3.setCalloutTitle(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName());
                     tItem3.setVisible(TMapMarkerItem.VISIBLE);
-                    tItem3.setName("tlem3");
+                    tItem3.setName(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder3);
                     tItem3.setIcon(bitmap);
                     tmapview.bringMarkerToFront(tItem3);
@@ -245,19 +246,19 @@ public class MapGuideFragment extends Fragment {
                 }
             }
         }
-        if(ManagementLocation.getInstance().getSortSpinner()=="전체" | ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
+        if(ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
             for (int i = 0; i < ManagePublicData.getInstance().getTraditionalMarketVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLongitude()));
-//                double distance = distanceTracker(tpoint);
+                //double distance = distanceTracker(tpoint);
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner()) {
                     TMapMarkerItem tItem4 = new TMapMarkerItem();
                     tItem4.setTMapPoint(tpoint);
                     tItem4.setCanShowCallout(true);     //풍선뷰 사용여부결정
-                    tItem4.setAutoCalloutVisible(true);
+                    tItem4.setAutoCalloutVisible(false);
                     tItem4.setCalloutTitle(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName());
                     tItem4.setVisible(TMapMarkerItem.VISIBLE);
-                    tItem4.setName("tlem4");
+                    tItem4.setName(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder4);
                     tItem4.setIcon(bitmap);
                     tmapview.bringMarkerToFront(tItem4);
@@ -276,10 +277,86 @@ public class MapGuideFragment extends Fragment {
     public void onStart() {
         Log.d(this.getClass().getSimpleName(), "onStart()");
         addMarker();
+        ListToMap();
         super.onStart();
     }
 
+    public void ListToMap(){
+        Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
+        if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
+            Toast.makeText(getActivity(),"map",Toast.LENGTH_SHORT).show();
+            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(),ManageListToMap.getInstance().getClickedLatitude());
+            TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(),ManageListToMap.getInstance().getClickedLongitude());
+            TMapMarkerItem tItem5 = new TMapMarkerItem();
+            tItem5.setTMapPoint(tpoint);
+            tItem5.setCalloutTitle(ManageListToMap.getInstance().getClickedPlaceName());
+            tItem5.setCanShowCallout(true);
+            tItem5.setAutoCalloutVisible(true);
+            if(ManagementLocation.getInstance().getSortSpinner()=="공공화장실"){
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
+            }
+            else if(ManagementLocation.getInstance().getSortSpinner()=="주차장"){
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
+            }
+            else if(ManagementLocation.getInstance().getSortSpinner()=="공원"){
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder3);
+            }
+            else if(ManagementLocation.getInstance().getSortSpinner()=="전통시장"){
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder4);
+            }
+            tItem5.setIcon(bitmap);
+            tmapview.bringMarkerToFront(tItem5);
+            tmapview.addMarkerItem("ListToMap", tItem5);
+//            GuideInfoFragment.imageView1.setImageResource(R.drawable.reversemappoint);
+//            GuideInfoFragment.imageView2.setImageResource(R.drawable.listpoint);
+        }
+    }
 
+    //클래스가 생성될때 경로유형, 출발지, 도착지를 매개변수로 받음
+    public double distanceTracker(final TMapPoint endpoint) {  //final TMapData.TMapPathType type,
+        (new Thread() {
+            public void run() {
+                try {
+                    Document e = null;
+                    TMapPolyLine polyline = new TMapPolyLine();
+                    StringBuilder uri = new StringBuilder();
+                    uri.append("https://apis.skplanetx.com/tmap/");
+                    //자동차 경로안내일 경우
+                    uri.append("routes?version=1");
+
+                    StringBuilder content = new StringBuilder();
+                    content.append("reqCoordType=WGS84GEO&resCoordType=WGS84GEO&format=xml");
+                    content.append("&startY=").append(currentLatitude);
+                    content.append("&startX=").append(currentLongitude);
+                    content.append("&endY=").append(endpoint.getLatitude());
+                    content.append("&endX=").append(endpoint.getLongitude());
+                    content.append("&startName=").append(URLEncoder.encode("출발지", "UTF-8"));
+                    content.append("&endName=").append(URLEncoder.encode("도착지", "UTF-8"));
+                    StringBuilder StringEx1;
+                    StringEx1 = new StringBuilder();
+                    StringEx1.append(uri.toString());
+//                    StringEx1.append("&appKey=").append("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
+                    StringEx1.append("&appKey=").append("500adabd-fcb2-34fd-af42-022c6611b9a7");
+                    URLConnection con = HttpConnect.postHttps(StringEx1.toString(), content.toString(), false);
+                    try {
+                        HttpURLConnection ez = (HttpURLConnection)con;
+                        e = HttpConnect.getDocument(con);
+                    } catch (Exception ezx) {
+                        Log.i("error","에러남");
+                    }
+                    if(e != null) {
+                        NodeList list2 = e.getElementsByTagName("tmap:totalDistance");
+                        Node distanceItem = list2.item(0);
+                        totalDistance = Integer.parseInt(distanceItem.getTextContent());
+                        Log.e(" 총 거리 ",":  " + Integer.parseInt(distanceItem.getTextContent()));
+                    }
+                } catch (Exception e) {
+                    Log.i("error","error");
+                }
+            }
+        }).start();
+        return totalDistance;
+    }
 
 
 }
