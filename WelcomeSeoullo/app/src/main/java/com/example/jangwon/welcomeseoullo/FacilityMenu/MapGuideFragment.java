@@ -37,8 +37,6 @@ import java.net.HttpURLConnection;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-import static android.R.attr.src;
-
 public class MapGuideFragment extends Fragment {
     //주변경로안내 맵가이드 Fragment
 
@@ -153,7 +151,7 @@ public class MapGuideFragment extends Fragment {
         tmapview.setCenterPoint(126.970325,37.556152);
         tmapview.setCompassMode(false);
         tmapview.setIconVisibility(true);
-        tmapview.setZoomLevel(16);
+        tmapview.setZoomLevel(15);
         tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
         tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
         tmapview.setTrackingMode(false);

@@ -6,59 +6,145 @@
     android:fitsSystemWindows="false"
     tools:context=".FacilityMenu.GuideInfoFragment">
 
-    <RelativeLayout
-        android:id="@+id/categoryLinearLayout"
+    <LinearLayout
+        android:id="@+id/fragmentCategoryLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#F4F4F4">
+        android:gravity="center">
 
-        <Spinner
-            android:id="@+id/sortSpinner"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="11dp"
-            android:layout_marginTop="5dp"
-            android:background="#FFFFFF" />
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="30dp" >
 
-        <Spinner
-            android:id="@+id/distanceSpinner"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_alignTop="@+id/sortSpinner"
-            android:layout_marginLeft="8dp"
-            android:layout_toEndOf="@+id/sortSpinner"
-            android:layout_toRightOf="@+id/sortSpinner"
-            android:background="#FFFFFF" />
+            <LinearLayout
+                android:id="@+id/listGuideLinearLayout"
+                android:layout_width="110dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right">
+                <Button
+                    android:id="@+id/listGuideButton"
+                    android:layout_width="110dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/nonclickbutton"
+                    android:text="리스트"
+                    android:textColor="#bdbdbd"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/mapGuideLinearLayout"
+                android:layout_width="110dp"
+                android:layout_height="30dp">
+                <Button
+                    android:id="@+id/mapGuideButton"
+                    android:layout_width="110dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/roundbutton"
+                    android:text="지도"
+                    android:textSize="15dp"/>
+            </LinearLayout>
+        </FrameLayout>
 
-        <ImageButton
-            android:id="@+id/mapPointImageButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/mappoint" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/publicDataCategoryLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/fragmentCategoryLinearLayout"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:id="@+id/toiletButton"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:text="공공화장실"
+            android:textStyle="bold"
+            android:textColor="#388E3C"
+            android:gravity="center"/>
+        <Button
+            android:id="@+id/parkinglotButton"
+            android:layout_width="0dp"
+            android:background="@android:color/transparent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="주차장"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <Button
+            android:id="@+id/parkButton"
+            android:layout_width="0dp"
+            android:background="@android:color/transparent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="공원"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <Button
+            android:id="@+id/marketButton"
+            android:layout_width="0dp"
+            android:background="@android:color/transparent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="전통시장"
+            android:gravity="center"/>
+    </LinearLayout>
+    <!--<RelativeLayout-->
 
-        <ImageButton
-            android:id="@+id/listImageButton"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_marginRight="2dp"
-            android:layout_marginTop="5dp"
-            android:layout_toLeftOf="@+id/mapPointImageButton"
-            android:layout_toStartOf="@+id/mapPointImageButton"
-            android:background="@drawable/ic_list_black_24dp" />
-    </RelativeLayout>
+
+        <!--android:id="@+id/categoryLinearLayout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:background="#F4F4F4">-->
+
+        <!--<Spinner-->
+            <!--android:id="@+id/sortSpinner"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_alignParentStart="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_marginLeft="11dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:background="#FFFFFF" />-->
+
+        <!--<Spinner-->
+            <!--android:id="@+id/distanceSpinner"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_alignTop="@+id/sortSpinner"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_toEndOf="@+id/sortSpinner"-->
+            <!--android:layout_toRightOf="@+id/sortSpinner"-->
+            <!--android:background="#FFFFFF" />-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/mapPointImageButton"-->
+            <!--android:layout_width="35dp"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_marginRight="5dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:background="@drawable/mappoint" />-->
+
+        <!--<ImageButton-->
+            <!--android:id="@+id/listImageButton"-->
+            <!--android:layout_width="35dp"-->
+            <!--android:layout_height="35dp"-->
+            <!--android:layout_marginRight="2dp"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_toLeftOf="@+id/mapPointImageButton"-->
+            <!--android:layout_toStartOf="@+id/mapPointImageButton"-->
+            <!--android:background="@drawable/ic_list_black_24dp" />-->
+    <!--</RelativeLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_below="@+id/categoryLinearLayout"
+        android:layout_below="@+id/publicDataCategoryLinearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/linearLayout3">
