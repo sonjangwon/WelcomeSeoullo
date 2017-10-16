@@ -1,4 +1,5 @@
 package com.example.jangwon.welcomeseoullo;
+
 import android.app.Fragment;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -11,10 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.example.jangwon.welcomeseoullo.LoadingDialog;
-import com.example.jangwon.welcomeseoullo.ManagePublicData;
-import com.example.jangwon.welcomeseoullo.R;
 
 public class FacilityFragment extends Fragment {
     View view;
@@ -61,12 +58,12 @@ public class FacilityFragment extends Fragment {
             final Button publicParkButton = (Button) view.findViewById(R.id.publicParkButton);
             final Button traditionalMarketButton = (Button) view.findViewById(R.id.traditionalMarketButton);
 
-            publicToiletButton.setTextColor(Color.parseColor("#FF0000"));
+            publicToiletButton.setTextColor(Color.parseColor("#8BE3CE"));
 
             publicToiletButton.setOnClickListener(new EditText.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-                    publicToiletButton.setTextColor(Color.parseColor("#FF0000"));
+                    publicToiletButton.setTextColor(Color.parseColor("#8BE3CE"));
                     publicParkingLotButton.setTextColor(Color.parseColor("#000000"));
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
@@ -79,7 +76,7 @@ public class FacilityFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     publicToiletButton.setTextColor(Color.parseColor("#000000"));
-                    publicParkingLotButton.setTextColor(Color.parseColor("#FF0000"));
+                    publicParkingLotButton.setTextColor(Color.parseColor("#8BE3CE"));
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
@@ -99,7 +96,7 @@ public class FacilityFragment extends Fragment {
                 public void onClick(View view) {
                     publicToiletButton.setTextColor(Color.parseColor("#000000"));
                     publicParkingLotButton.setTextColor(Color.parseColor("#000000"));
-                    publicParkButton.setTextColor(Color.parseColor("#FF0000"));
+                    publicParkButton.setTextColor(Color.parseColor("#8BE3CE"));
                     traditionalMarketButton.setTextColor(Color.parseColor("#000000"));
 
                     loadingDialog.progressON(getActivity());
@@ -118,7 +115,7 @@ public class FacilityFragment extends Fragment {
                     publicToiletButton.setTextColor(Color.parseColor("#000000"));
                     publicParkingLotButton.setTextColor(Color.parseColor("#000000"));
                     publicParkButton.setTextColor(Color.parseColor("#000000"));
-                    traditionalMarketButton.setTextColor(Color.parseColor("#FF0000"));
+                    traditionalMarketButton.setTextColor(Color.parseColor("#8BE3CE"));
 
                     loadingDialog.progressON(getActivity());
 

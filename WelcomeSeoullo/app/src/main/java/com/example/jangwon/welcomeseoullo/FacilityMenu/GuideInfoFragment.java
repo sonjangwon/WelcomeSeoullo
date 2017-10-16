@@ -9,7 +9,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -23,8 +22,6 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.jangwon.welcomeseoullo.LoadingDialog;
-import com.example.jangwon.welcomeseoullo.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 
@@ -70,11 +67,15 @@ public class GuideInfoFragment extends Fragment {
 
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
 
-            LoadingDialog.getInstance().progressON(getActivity());
-            ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            LoadingDialog.getInstance().progressON(getActivity());
+//            ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            ManagePublicData.getInstance().parsePublicToilet.execute();
+//            ManagePublicData.getInstance().parsePublicPark.execute();
+//            ManagePublicData.getInstance().parsePublicParkingLot.execute();
+//            ManagePublicData.getInstance().parseTraditionalMarket.execute();
 
             Spinner sortSpinner = (Spinner) view.findViewById(R.id.sortSpinner);
             Spinner distanceSpinner = (Spinner) view.findViewById(R.id.distanceSpinner);

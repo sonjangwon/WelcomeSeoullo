@@ -17,6 +17,12 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+
+                ManagePublicData.getInstance().parsePublicToilet.execute();
+                ManagePublicData.getInstance().parsePublicPark.execute();
+                ManagePublicData.getInstance().parsePublicParkingLot.execute();
+                ManagePublicData.getInstance().parseTraditionalMarket.execute();
+
                 overridePendingTransition(0,android.R.anim.fade_in);
                 startActivity(new Intent(SplashActivity.this, GuideAppInfo.class));
                 finish();

@@ -136,6 +136,8 @@ public class MainActivity extends Activity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        LoadingDialog.getInstance().progressON(MainActivity.this);
+
         adapter = new ViewPagerAdapter(getFragmentManager());
 
         homeFragment = new HomeFragment();
