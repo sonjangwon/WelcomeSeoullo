@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,7 @@ public class ListGuideFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 // get item
-                ListItemView item = (ListItemView) parent.getItemAtPosition(position) ;
+                ListViewItem item = (ListViewItem) parent.getItemAtPosition(position) ;
 
                 String titleStr = item.getTitle() ;
                 String descStr = item.getDesc() ;
@@ -54,6 +55,10 @@ public class ListGuideFragment extends Fragment {
                 ManageListToMap.getInstance().setClickedLongitude(Double.valueOf(descStr.split(",")[1]));
                 ManageListToMap.getInstance().setClickedPlaceName(titleStr);
                 ManageListToMap.getInstance().setFragmentCondition("map");
+
+                //한 fragment에서 다른fragment 함수 호출해야한다.
+                GuideInfoFragment.changeButtonIcon.sendEmptyMessage(0);
+//                ((GuideInfoFragment) getActivity().g).ChangeListIconToMap();
 //                GuideInfoFragment.imageView1.setImageResource(R.drawable.mappoint);
 //                GuideInfoFragment.imageView2.setImageResource(R.drawable.listpoint);
             }
@@ -81,24 +86,26 @@ public class ListGuideFragment extends Fragment {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
 //                address = reverseGeocoder(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
 //                        Double.valueOf( ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
-                adapter.addItem(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.toilet),ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
                         ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()+","+ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude());
+//                adapter.addItem(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
+//                        address);
 
             }
         }
-            if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
-                for (int i = 0; i < ManagePublicData.getInstance().getPublicParkingLotVOArrayList().size(); i++) {
-                    adapter.addItem(ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotName(),ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude());
-                }
+        if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
+            for (int i = 0; i < ManagePublicData.getInstance().getPublicParkingLotVOArrayList().size(); i++) {
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.parkinglot),ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotName(),ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude());
+            }
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="공원") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkVOArrayList().size(); i++) {
-                adapter.addItem(ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName(),ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName());
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.park),ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName(),ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName());
             }
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
             for (int i = 0; i < ManagePublicData.getInstance().getTraditionalMarketVOArrayList().size(); i++) {
-                adapter.addItem(ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName(),ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName());
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.shopping),ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName(),ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName());
             }
         }
     }

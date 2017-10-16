@@ -167,7 +167,7 @@ public class MapGuideFragment extends Fragment {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
                         Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
-                //double distance = distanceTracker(tpoint);
+                //double distance = distanceTracker(tpoint);f
 //                Log.e("공공화장실",String.valueOf(distance));
 //                Log.e("공공화장실",String.valueOf(ManagementLocation.getInstance().getDistanceSpinner()));
                 if(distance<ManagementLocation.getInstance().getDistanceSpinner())

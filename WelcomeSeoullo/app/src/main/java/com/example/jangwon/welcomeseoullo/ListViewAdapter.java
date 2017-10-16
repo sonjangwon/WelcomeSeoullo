@@ -1,10 +1,12 @@
 package com.example.jangwon.welcomeseoullo;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 public class ListViewAdapter extends BaseAdapter {
 
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<ListItemView> listViewItemList = new ArrayList<ListItemView>() ;
+    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
 
     // ListViewAdapter의 생성자
     public ListViewAdapter() {
@@ -42,14 +44,16 @@ public class ListViewAdapter extends BaseAdapter {
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.nameTextView) ;
+        ImageView facilityImage = (ImageView) convertView.findViewById(R.id.facilityImage) ;
+        TextView facilityName = (TextView) convertView.findViewById(R.id.facilityName) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.addressTextView) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        ListItemView listViewItem = listViewItemList.get(position);
+        ListViewItem listViewItem = listViewItemList.get(position);
 
         // 아이템 내 각 위젯에 데이터 반영
-        titleTextView.setText(listViewItem.getTitle());
+        facilityImage.setImageDrawable(listViewItem.getIcon());
+        facilityName.setText(listViewItem.getTitle());
         descTextView.setText(listViewItem.getDesc());
 
         return convertView;
@@ -68,9 +72,10 @@ public class ListViewAdapter extends BaseAdapter {
     }
 
     // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String title, String desc) {
-        ListItemView item = new ListItemView();
+    public void addItem(Drawable icon, String title, String desc) {
+        ListViewItem item = new ListViewItem();
 
+        item.setIcon(icon);
         item.setTitle(title);
         item.setDesc(desc);
 

@@ -214,7 +214,8 @@ public class MainActivity extends AppCompatActivity {
 //            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
 
             // 수동으로 위치 구하기
-            String locationProvider = LocationManager.GPS_PROVIDER;
+//            String locationProvider = LocationManager.GPS_PROVIDER;
+            String locationProvider = LocationManager.NETWORK_PROVIDER;
             currentLocation = locationManager.getLastKnownLocation(locationProvider);
             if (currentLocation != null) {
                 currentLongitude = currentLocation.getLongitude();

@@ -11,6 +11,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,9 +43,10 @@ public class GuideInfoFragment extends Fragment {
     String nowFragment="map";
     TextView addressTextView;
 
-    ImageButton listImageButton ;
-    ImageButton mapPointImageButton ;
+    static ImageButton listImageButton ;
+    static ImageButton mapPointImageButton ;
 
+    public static Context mContext;
 
     public GuideInfoFragment(){
 
@@ -54,6 +57,7 @@ public class GuideInfoFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         setHasOptionsMenu(true);
+        mContext = getActivity();
     }
 
     @Nullable
@@ -183,6 +187,7 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Toast.makeText(getActivity(),"onResume",Toast.LENGTH_SHORT).show();
         settingGPS();
         ListToMapCheck();
         reverseGeocoder();
@@ -191,8 +196,17 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Toast.makeText(getActivity(),"onStart",Toast.LENGTH_SHORT).show();
         ListToMapCheck();
     }
+
+
+    public void ChangeListIconToMap()
+    {
+        mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
+        listImageButton.setBackgroundResource(R.drawable.listpoint);
+    }
+
 
     public void ListToMapCheck()
     {
@@ -203,6 +217,14 @@ public class GuideInfoFragment extends Fragment {
         }
     }
 
+
+    public static Handler changeButtonIcon = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
+            listImageButton.setBackgroundResource(R.drawable.listpoint);
+        }
+    };
 
     //버튼으로 리스트뷰, 맵포인트를 클릭한 경우 각 프레그먼트가 실행된다.
     public void switchFragment(View view){
