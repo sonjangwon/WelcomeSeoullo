@@ -2,9 +2,6 @@ package com.example.jangwon.welcomeseoullo;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -36,10 +33,6 @@ public class MainActivity extends Activity {
 
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
-
-    Fragment fragment;
-    FragmentManager fragmentManager;
-    FragmentTransaction fragmentTransaction;
 
     int currentMenu;
     BottomNavigationView bottomNavigationView;
@@ -155,15 +148,6 @@ public class MainActivity extends Activity {
         viewPager.setAdapter(adapter);
     }
 
-//    public void switchFragment(){
-//        fragmentManager = getFragmentManager();
-//        fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.setCustomAnimations(R.animator.enter_from_left, R.animator.exit_to_left, R.animator.enter_from_right, R.animator.exit_to_right);
-//        fragmentTransaction.replace(R.id.viewPager, fragment);
-//        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
-//        fragmentTransaction.commit();
-//    }
-
     @Override
     public void onBackPressed() {
         long tempTime = System.currentTimeMillis();
@@ -185,8 +169,6 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.bottom_navigation_main, menu);
 
         Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMDOHYEON_ttf.ttf");
         for(int i=0;i<5;i++){
