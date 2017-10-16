@@ -9,7 +9,7 @@
         android:text="Notice around POI"
         android:layout_weight="2"
         android:gravity="center"
-        android:textColor="#3AAB53"
+        android:textColor="@color/colorPrimary"
         android:textSize="30dp"
         android:textStyle="bold" />
 </LinearLayout>

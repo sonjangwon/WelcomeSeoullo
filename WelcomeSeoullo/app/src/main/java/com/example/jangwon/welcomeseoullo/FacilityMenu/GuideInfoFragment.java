@@ -9,7 +9,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -85,16 +84,12 @@ public class GuideInfoFragment extends Fragment {
             currentAddress = ManagementLocation.getInstance().getCurrentAddress();
 
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
-         LoadingDialog.getInstance().progressON(getActivity());
+//            LoadingDialog.getInstance().progressON(getActivity());
             listImageButton = (ImageButton) view.findViewById(R.id.listImageButton);
             mapPointImageButton = (ImageButton) view.findViewById(R.id.mapPointImageButton);
 
             mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
             listImageButton.setBackgroundResource(R.drawable.listpoint);
-            ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
             Spinner sortSpinner = (Spinner) view.findViewById(R.id.sortSpinner);
             Spinner distanceSpinner = (Spinner) view.findViewById(R.id.distanceSpinner);

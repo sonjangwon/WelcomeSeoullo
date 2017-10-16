@@ -136,6 +136,8 @@ public class MainActivity extends Activity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
+        LoadingDialog.getInstance().progressON(MainActivity.this);
+
         adapter = new ViewPagerAdapter(getFragmentManager());
 
         homeFragment = new HomeFragment();
@@ -211,9 +213,6 @@ public class MainActivity extends Activity {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
         else {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
-//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, locationListener);
-
             //서울시 앱 공모전 심사를 위한 wifi-network를 통한 현재 위치 인식, 실내 현재위치를 받아올 때 좋음
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, locationListener);
 

@@ -1,5 +1,5 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/white" />
+    <item android:drawable="@color/colorPrimary" />
     <item>
         <bitmap android:src="@mipmap/name_test" android:gravity="center" />
     </item>
