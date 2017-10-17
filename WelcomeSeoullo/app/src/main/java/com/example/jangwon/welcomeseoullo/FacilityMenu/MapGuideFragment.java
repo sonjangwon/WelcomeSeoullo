@@ -287,6 +287,7 @@ public class MapGuideFragment extends Fragment {
             TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(),ManageListToMap.getInstance().getClickedLongitude());
             TMapMarkerItem tItem5 = new TMapMarkerItem();
             tItem5.setTMapPoint(tpoint);
+            tmapview.setZoomLevel(15);
             tItem5.setCalloutTitle(ManageListToMap.getInstance().getClickedPlaceName());
             tItem5.setCanShowCallout(true);
             tItem5.setAutoCalloutVisible(true);

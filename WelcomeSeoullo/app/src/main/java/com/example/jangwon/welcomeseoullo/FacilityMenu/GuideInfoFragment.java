@@ -21,7 +21,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,14 +45,12 @@ public class GuideInfoFragment extends Fragment {
     String currentAddress;
     String nowFragment="map";
     TextView addressTextView;
-    LinearLayout listGuideLinearLayout;
-    LinearLayout mapGuideLinearLayout;
+    static LinearLayout listGuideLinearLayout;
+    static LinearLayout mapGuideLinearLayout;
 
-    static ImageButton listImageButton ;
-    static ImageButton mapPointImageButton ;
 
-    Button mapGuideButton;
-    Button listGuideButton;
+    static Button mapGuideButton;
+    static Button listGuideButton;
     Button toiletButton;
     Button parkinglotButton;
     Button parkButton;
@@ -219,8 +216,14 @@ public class GuideInfoFragment extends Fragment {
     public static Handler changeButtonIcon = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            mapPointImageButton.setBackgroundResource(R.drawable.mappoint);
-            listImageButton.setBackgroundResource(R.drawable.listpoint);
+            listGuideButton.setBackgroundResource(R.drawable.nonclickbutton);
+            listGuideButton.setTextColor(Color.parseColor("#bdbdbd"));
+            mapGuideButton.bringToFront();
+            mapGuideButton.setTextColor(Color.parseColor("#000000"));
+            mapGuideButton.setBackgroundResource(R.drawable.roundbutton);
+            mapGuideButton.invalidate();
+            mapGuideLinearLayout.bringToFront();
+            mapGuideLinearLayout.invalidate();
         }
     };
 
