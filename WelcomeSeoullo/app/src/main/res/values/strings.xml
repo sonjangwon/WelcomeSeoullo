@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">WelcomeSeoullo</string>
+    <string name="app_name">어서와, 서울로</string>
     <string name="text_home">Home</string>
     <string name="text_route">Route</string>
     <string name="text_AR">AR</string>

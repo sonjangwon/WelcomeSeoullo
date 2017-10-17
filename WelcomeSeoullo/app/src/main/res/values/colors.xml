@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#8BE3CE</color>
+    <color name="colorPrimary">#7BA293</color>
     <color name="colorPrimaryLight">#8BE3CE</color>>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FD8BB1</color>
+    <color name="greenNike">#7BA293</color>
+    <color name="orangeGolfwang">#FDA293</color>
+    <color name="pinkGolfwang">#EECEDF</color>
+
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">@color/colorPrimary</color>
     <color name="dot_dark_screen2">@color/colorPrimary</color>
@@ -11,10 +15,10 @@
     <color name="dot_dark_screen4">@color/colorPrimary</color>
 
     <!-- dots active colors -->
-    <color name="dot_light_screen1">@color/colorAccent</color>
-    <color name="dot_light_screen2">@color/colorAccent</color>
-    <color name="dot_light_screen3">@color/colorAccent</color>
-    <color name="dot_light_screen4">@color/colorAccent</color>
+    <color name="dot_light_screen1">@color/white</color>
+    <color name="dot_light_screen2">@color/white</color>
+    <color name="dot_light_screen3">@color/white</color>
+    <color name="dot_light_screen4">@color/white</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>

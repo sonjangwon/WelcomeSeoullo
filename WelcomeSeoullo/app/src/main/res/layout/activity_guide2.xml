@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:text="다음"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:background="@null"
         android:text="건너뛰기"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

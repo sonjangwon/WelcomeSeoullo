@@ -179,14 +179,14 @@ public class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.publicDataTextView.setText("");
-            for (int i = 0; i < managePublicData.getPublicToiletVOArrayList().size(); i++) {
-                FacilityFragment.publicDataTextView.append("\n");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletName() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletCategory() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLatitude() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLongitude() + " ");
-            }
+//            FacilityFragment.publicDataTextView.setText("");
+//            for (int i = 0; i < managePublicData.getPublicToiletVOArrayList().size(); i++) {
+//                FacilityFragment.publicDataTextView.append("\n");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletName() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletCategory() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLatitude() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicToiletVOArrayList().get(i).getToiletLongitude() + " ");
+//            }
 //            loadingDialog.progressOFF();
         }
 
@@ -254,14 +254,14 @@ public class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.publicDataTextView.setText("");
-            for (int i = 0; i < managePublicData.getPublicParkingLotVOArrayList().size(); i++) {
-                FacilityFragment.publicDataTextView.append("\n");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotName() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotType() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude() + " ");
-            }
+//            FacilityFragment.publicDataTextView.setText("");
+//            for (int i = 0; i < managePublicData.getPublicParkingLotVOArrayList().size(); i++) {
+//                FacilityFragment.publicDataTextView.append("\n");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotName() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotType() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude() + " ");
+//            }
 //            loadingDialog.progressOFF();
         }
 
@@ -322,13 +322,13 @@ public class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.publicDataTextView.setText("");
-            for (int i = 0; i < managePublicData.getPublicParkVOArrayList().size(); i++) {
-                FacilityFragment.publicDataTextView.append("\n");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkName() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkLatitude() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkLongitude() + " ");
-            }
+//            FacilityFragment.publicDataTextView.setText("");
+//            for (int i = 0; i < managePublicData.getPublicParkVOArrayList().size(); i++) {
+//                FacilityFragment.publicDataTextView.append("\n");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkName() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkLatitude() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getPublicParkVOArrayList().get(i).getParkLongitude() + " ");
+//            }
 //            loadingDialog.progressOFF();
         }
     }
@@ -388,13 +388,13 @@ public class ManagePublicData {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            FacilityFragment.publicDataTextView.setText("");
-            for (int i = 0; i < managePublicData.getTraditionalMarketVOArrayList().size(); i++) {
-                FacilityFragment.publicDataTextView.append("\n");
-                FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketName() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketLatitude() + " ");
-                FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketLongitude() + " ");
-            }
+//            FacilityFragment.publicDataTextView.setText("");
+//            for (int i = 0; i < managePublicData.getTraditionalMarketVOArrayList().size(); i++) {
+//                FacilityFragment.publicDataTextView.append("\n");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketName() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketLatitude() + " ");
+//                FacilityFragment.publicDataTextView.append(managePublicData.getTraditionalMarketVOArrayList().get(i).getMarketLongitude() + " ");
+//            }
 //            loadingDialog.progressOFF();
         }
     }

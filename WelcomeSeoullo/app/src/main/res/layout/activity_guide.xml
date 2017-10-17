@@ -31,7 +31,7 @@
         android:background="@null"
         android:text="다음"
         android:textStyle="bold"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/white" />
 
     <Button
         android:id="@+id/btn_skip4"
@@ -41,6 +41,6 @@
         android:layout_alignParentLeft="true"
         android:background="@null"
         android:text="건너뛰기"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@color/white" />
 
 </RelativeLayout>
