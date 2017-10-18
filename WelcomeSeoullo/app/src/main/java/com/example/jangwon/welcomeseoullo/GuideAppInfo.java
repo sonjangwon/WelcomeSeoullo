@@ -17,10 +17,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.HomeMenu.PrefManager;
 
 public class GuideAppInfo extends Activity {
+    private final long FINISH_INTERVAL_TIME = 2000;
+    private long backPressedTime = 0;
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private LinearLayout dotsLayout;
@@ -210,8 +213,25 @@ public class GuideAppInfo extends Activity {
             container.removeView(view);
         }
     }
+
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onBackPressed() {
+        long tempTime = System.currentTimeMillis();
+        long intervalTime = tempTime - backPressedTime;
+
+        if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
+            super.onBackPressed();
+            GuideAppInfo.this.finish();
+            System.exit(0);
+        }
+        else {
+            backPressedTime = tempTime;
+            Toast.makeText(getApplicationContext(), "'뒤로' 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

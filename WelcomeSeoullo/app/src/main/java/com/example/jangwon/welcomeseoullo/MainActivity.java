@@ -156,6 +156,8 @@ public class MainActivity extends Activity {
         if(currentMenu == R.id.action_home){
             if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
                 super.onBackPressed();
+                MainActivity.this.finish();
+                System.exit(0);
             }
             else {
                 backPressedTime = tempTime;

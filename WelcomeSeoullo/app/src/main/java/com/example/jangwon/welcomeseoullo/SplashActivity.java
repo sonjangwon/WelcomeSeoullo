@@ -28,6 +28,12 @@ public class SplashActivity extends Activity {
                 finish();
             }
         },SPLASH_TIME);
+    }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SplashActivity.this.finish();
+        System.exit(0);
     }
 }
