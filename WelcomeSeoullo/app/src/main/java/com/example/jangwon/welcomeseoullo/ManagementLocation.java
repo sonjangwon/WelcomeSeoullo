@@ -16,7 +16,7 @@ public class ManagementLocation {
     double currentLatitude;
     double currentLongitude;
     String currentAddress;
-    String sortSpinner;
+    String sortSpinner="";
     double distanceSpinner;
 
     public static ManagementLocation getInstance(){

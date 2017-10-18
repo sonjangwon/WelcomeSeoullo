@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -17,33 +17,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GuideAppInfo">
-
-        </activity>
-        <activity android:name=".HomeMenu.Test">
-
-        </activity>
+        <activity android:name=".GuideAppInfo"></activity>
+        <activity android:name=".HomeMenu.Test"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme" >
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity" />
-        <activity android:name=".NavigationMenu.PathInfoActivity" >
-
-        </activity>
-        <activity android:name=".NoticeActivity"/>
+        <activity android:name=".NavigationMenu.PathInfoActivity"></activity>
+        <activity android:name=".NoticeActivity" />
         <activity android:name=".HomeMenu.ViewContents" />
-        <activity android:name=".FacilityMenu.GuideInfoActivity" >
-
-        </activity>
+        <activity android:name=".FacilityMenu.GuideInfoActivity"></activity>
         <activity android:name=".NavigationMenu.BusPathActivity" />
+        <activity android:name=".NavigationMenu.BusPathFragment"></activity>
     </application>
 
 </manifest>

@@ -29,6 +29,7 @@ import com.example.jangwon.welcomeseoullo.ManageListToMap;
 import com.example.jangwon.welcomeseoullo.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
+import com.skp.Tmap.TMapView;
 
 import java.io.IOException;
 import java.util.List;
@@ -43,11 +44,10 @@ public class GuideInfoFragment extends Fragment {
     double currentLatitude;
     double currentLongitude;
     String currentAddress;
-    String nowFragment="map";
     TextView addressTextView;
     static LinearLayout listGuideLinearLayout;
     static LinearLayout mapGuideLinearLayout;
-
+    static String nowFragment="map";
 
     static Button mapGuideButton;
     static Button listGuideButton;
@@ -57,6 +57,8 @@ public class GuideInfoFragment extends Fragment {
     Button marketButton;
 
     public static Context mContext;
+    TMapView tmapview;
+
 
     public GuideInfoFragment(){
 
@@ -101,7 +103,7 @@ public class GuideInfoFragment extends Fragment {
             ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
             ManagementLocation.getInstance().setSortSpinner("공공화장실");
-            ManagementLocation.getInstance().setDistanceSpinner("2km");
+            switchFragments(nowFragment);
 
             listGuideButton.setOnClickListener(new EditText.OnClickListener(){
                 @Override
@@ -189,7 +191,7 @@ public class GuideInfoFragment extends Fragment {
         super.onResume();
         Toast.makeText(getActivity(),"onResume",Toast.LENGTH_SHORT).show();
         settingGPS();
-        ListToMapCheck();
+//        ListToMapCheck();
         reverseGeocoder();
     }
 
@@ -197,10 +199,31 @@ public class GuideInfoFragment extends Fragment {
     public void onStart() {
         super.onStart();
         Toast.makeText(getActivity(),"onStart",Toast.LENGTH_SHORT).show();
-        ListToMapCheck();
+//        ListToMapCheck();
     }
 
-
+//    //맵 띄우기
+//    public void mapView(View view)
+//    {
+//        //선언
+//        tmapview = new TMapView(getActivity());
+//        RelativeLayout relativeLayout2 = (RelativeLayout) view.findViewById(R.id.guideMapView);  //getActivity().findViewByID 아니다 ㅅㅂ
+//
+////        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
+//        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
+//        tmapview.setLocationPoint(currentLongitude,currentLatitude);
+//        tmapview.setCenterPoint(126.970325,37.556152);
+//        tmapview.setCompassMode(false);
+//        tmapview.setIconVisibility(true);
+//        tmapview.setZoomLevel(15);
+//        tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
+//        tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
+//        tmapview.setTrackingMode(false);
+//        tmapview.setSightVisible(false);
+//        relativeLayout2.addView(tmapview);
+//
+//
+//    }
 
 
     public void ListToMapCheck()
@@ -208,7 +231,7 @@ public class GuideInfoFragment extends Fragment {
         if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
             Toast.makeText(getActivity(),"map2",Toast.LENGTH_SHORT).show();
             ManageListToMap.getInstance().setFragmentCondition("list");
-
+//            ManageListToMap.getInstance().setFragmentCondition("map");
         }
     }
 
@@ -224,6 +247,8 @@ public class GuideInfoFragment extends Fragment {
             mapGuideButton.invalidate();
             mapGuideLinearLayout.bringToFront();
             mapGuideLinearLayout.invalidate();
+            nowFragment="map";
+//            ManageListToMap.getInstance().setFragmentCondition("map");
         }
     };
 

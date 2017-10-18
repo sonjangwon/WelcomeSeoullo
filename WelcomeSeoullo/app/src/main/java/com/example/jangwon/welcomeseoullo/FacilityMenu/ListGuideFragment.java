@@ -62,6 +62,7 @@ public class ListGuideFragment extends Fragment {
                 ManageListToMap.getInstance().setClickedLongitude(Double.valueOf(descStr.split(",")[1]));
                 ManageListToMap.getInstance().setClickedPlaceName(titleStr);
                 ManageListToMap.getInstance().setFragmentCondition("map");
+                ManageListToMap.getInstance().setClickedListView(true);
 
                 //한 fragment에서 다른fragment 함수 호출해야한다.
                 GuideInfoFragment.changeButtonIcon.sendEmptyMessage(0);
