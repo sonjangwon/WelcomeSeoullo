@@ -14,4 +14,11 @@
         <item>1.5km</item>
         <item>2km</item>
     </string-array>
+
+    <!--설정창-->
+    <string-array name="language">
+        <item>한국</item>
+        <item>영어</item>
+    </string-array>
+
 </resources>

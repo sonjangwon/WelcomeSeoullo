@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
 import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;
+import com.example.jangwon.welcomeseoullo.SettingsMenu.SettingsFragment;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,7 +46,7 @@ public class MainActivity extends Activity {
     GuideInfoFragment guideInfoFragment;
     BlankFragment arFragment;
     PathInfoFragment pathInfoFragment;
-    FacilityFragment facilityFragment;
+    SettingsFragment settingsFragment;
 
     // 사용자 위치 수신기
     private LocationManager locationManager;
@@ -129,7 +130,8 @@ public class MainActivity extends Activity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        LoadingDialog.getInstance().progressON(MainActivity.this);
+        //Loading화면 시작
+//        LoadingDialog.getInstance().progressON(MainActivity.this);
 
         adapter = new ViewPagerAdapter(getFragmentManager());
 
@@ -137,15 +139,16 @@ public class MainActivity extends Activity {
         guideInfoFragment = new GuideInfoFragment();
         arFragment = new BlankFragment();
         pathInfoFragment = new PathInfoFragment();
-        facilityFragment = new FacilityFragment();
+        settingsFragment = new SettingsFragment();
 
         adapter.addFragment(homeFragment);
         adapter.addFragment(guideInfoFragment);
         adapter.addFragment(arFragment);
         adapter.addFragment(pathInfoFragment);
-        adapter.addFragment(facilityFragment);
+        adapter.addFragment(settingsFragment);
 
         viewPager.setAdapter(adapter);
+        LoadingDialog.getInstance().progressON(MainActivity.this);
     }
 
     @Override

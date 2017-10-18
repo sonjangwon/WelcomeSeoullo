@@ -31,17 +31,6 @@ public class LoadingDialog {
             return;
         }
 
-//        if (progressDialog != null && progressDialog.isShowing()) {
-//            progressSET(message);
-//        } else {
-//
-//            progressDialog = new AppCompatDialog(activity);
-//            progressDialog.setCancelable(false);
-//            progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-//            progressDialog.setContentView(R.layout.progress_loading);
-//            progressDialog.show();
-//        }
-
         progressDialog = new AppCompatDialog(activity);
         progressDialog.setCancelable(false);
         progressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

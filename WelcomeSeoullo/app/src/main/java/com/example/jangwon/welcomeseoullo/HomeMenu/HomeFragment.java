@@ -131,6 +131,7 @@ public class HomeFragment extends Fragment {
         if(count ==0)
         {
             task.execute();
+//            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             Log.e("어싱크실행", task.getStatus().toString());
             count++;
         }

@@ -95,7 +95,6 @@ public class GuideAppInfo extends Activity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                     launchHomeScreen();
             }
         });
