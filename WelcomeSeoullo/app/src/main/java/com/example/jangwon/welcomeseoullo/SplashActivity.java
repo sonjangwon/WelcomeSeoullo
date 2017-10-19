@@ -2,7 +2,6 @@ package com.example.jangwon.welcomeseoullo;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -19,15 +18,15 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
-//                ManagePublicData.getInstance().parsePublicToilet.execute();
-//                ManagePublicData.getInstance().parsePublicPark.execute();
-//                ManagePublicData.getInstance().parsePublicParkingLot.execute();
-//                ManagePublicData.getInstance().parseTraditionalMarket.execute();
+                ManagePublicData.getInstance().parsePublicToilet.execute();
+                ManagePublicData.getInstance().parsePublicPark.execute();
+                ManagePublicData.getInstance().parsePublicParkingLot.execute();
+                ManagePublicData.getInstance().parseTraditionalMarket.execute();
 
-                ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                 overridePendingTransition(0,android.R.anim.fade_in);
                 startActivity(new Intent(SplashActivity.this, GuideAppInfo.class));
