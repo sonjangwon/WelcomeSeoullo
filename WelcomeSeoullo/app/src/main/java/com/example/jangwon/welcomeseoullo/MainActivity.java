@@ -3,23 +3,29 @@ package com.example.jangwon.welcomeseoullo;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
+import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
@@ -29,6 +35,7 @@ import com.example.jangwon.welcomeseoullo.SettingsMenu.SettingsFragment;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 public class MainActivity extends Activity {
 
@@ -60,6 +67,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        changeStatusBarColor();
 
         mainViewPager = (ViewPager) findViewById(R.id.mainViewPager);
         mainViewPager.setOffscreenPageLimit(5);
@@ -127,12 +136,22 @@ public class MainActivity extends Activity {
         ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
         ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
         ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+
+        //save UUID value in SharedPreference
+        savePreferences("UUID", GetDevicesUUID(getApplicationContext()));
+        savePreferences("language", "Korean");
+    }
+
+    //효완이 코드 사용
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+        }
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        //Loading화면 시작
-//        LoadingDialog.getInstance().progressON(MainActivity.this);
-
         adapter = new ViewPagerAdapter(getFragmentManager());
 
         homeFragment = new HomeFragment();
@@ -148,6 +167,8 @@ public class MainActivity extends Activity {
         adapter.addFragment(settingsFragment);
 
         viewPager.setAdapter(adapter);
+
+        //Loading화면 시작
         LoadingDialog.getInstance().progressON(MainActivity.this);
     }
 
@@ -159,6 +180,7 @@ public class MainActivity extends Activity {
         if(currentMenu == R.id.action_home){
             if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
                 super.onBackPressed();
+                removeAllPreferences();
                 MainActivity.this.finish();
                 System.exit(0);
             }
@@ -171,6 +193,38 @@ public class MainActivity extends Activity {
             bottomNavigationView.setSelectedItemId(R.id.action_home);
         }
     }
+
+    //앱 종료 시, SharedPreference 값(ALL Data) 삭제하기
+    private void removeAllPreferences(){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    //SharedPreference String 값 저장하기
+    private void savePreferences(String key, String data){
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString(key, data);
+        editor.commit();
+    }
+
+    private String GetDevicesUUID(Context mContext){
+
+        final TelephonyManager tm = (TelephonyManager) mContext.getSystemService(Context.TELEPHONY_SERVICE);
+
+        final String tmDevice, tmSerial, androidId;
+        tmDevice = "" + tm.getDeviceId();
+        tmSerial = "" + tm.getSimSerialNumber();
+        androidId = "" + android.provider.Settings.Secure.getString(getContentResolver(), android.provider.Settings.Secure.ANDROID_ID);
+
+        UUID deviceUuid = new UUID(androidId.hashCode(), ((long)tmDevice.hashCode() << 32) | tmSerial.hashCode());
+        String deviceId = deviceUuid.toString();
+
+        return deviceId;
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

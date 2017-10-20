@@ -33,11 +33,11 @@
     <PreferenceCategory android:title="언어">
 
         <ListPreference android:title="언어 선택"
-            android:key="products_list"
+            android:key="language_list"
             android:entries="@array/language"
             android:entryValues="@array/language"
             android:dialogTitle="언어 선택"
-            android:summary="abcde">
+            android:summary="Choose language">
         </ListPreference>
 
     </PreferenceCategory>
@@ -51,10 +51,10 @@
 
         <Preference
             android:title="도움말"
-            android:summary="Summary" />
+            android:summary="서울로를 즐기는 애플리케이션" />
 
         <Preference
             android:title="어서와, 서울로 7017"
-            android:summary="Summary" />
+            android:summary="서울로를 즐기는 애플리케이션" />
     </PreferenceCategory>
 </PreferenceScreen>

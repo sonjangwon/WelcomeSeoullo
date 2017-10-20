@@ -4,22 +4,25 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <!--<item name="colorPrimaryDark">@android:color/transparent</item>-->
+        <item name="colorAccent">@color/orangeGolfwang</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:textColorPrimary">@color/black</item>
         <item name="android:windowDisablePreview">true</item>
-    </style>
 
-    <!--Settings style-->
-    <style name="SettingsFragmentStyle">
-        <item name="android:textColorSecondary">#FFFFFF</item>
+        <item name="windowActionBarOverlay">true</item>
     </style>
 
     <!-- Splash Screen theme. -->
     <style name="SplashTheme" parent="AppTheme">
         <item name="android:background">@drawable/splash_background</item>
     </style>
+
+    <!--Settings style-->
+    <!--<style name="SettingsFragmentStyle">-->
+    <!--<item name="android:textColorSecondary">#FFFFFF</item>-->
+    <!--</style>-->
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
