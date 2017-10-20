@@ -7,14 +7,6 @@
         <item>전통시장</item>
     </string-array>
 
-    <string-array name="distance">
-        <item>거리선택</item>
-        <item>500m</item>
-        <item>1km</item>
-        <item>1.5km</item>
-        <item>2km</item>
-    </string-array>
-
     <!--설정창-->
     <string-array name="language">
         <item>한국</item>

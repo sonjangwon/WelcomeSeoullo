@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#7BA293</color>      //굿
-    <color name="colorPrimaryLight">#8BE3CE</color>>    //경로안내
+    <color name="colorPrimary">#7BA293</color>
+    <color name="colorPrimaryLight">#8BE3CE</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FD8BB1</color>
-    <color name="greenNike">#7BA293</color>     //이것도
-    <color name="orangeGolfwang">#FDA293</color>      //굿
+    <color name="greenNike">#7BA293</color>
+    <color name="orangeGolfwang">#FDA293</color>
     <color name="pinkGolfwang">#EECEDF</color>
 
     <!-- dots inactive colors -->
