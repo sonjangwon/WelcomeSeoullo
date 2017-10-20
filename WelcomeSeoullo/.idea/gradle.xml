@@ -9,6 +9,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/droidAR" />
+            <option value="$PROJECT_DIR$/photoeditorsdk" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

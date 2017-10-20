@@ -1,0 +1,54 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* default.properties
+* lib/
+* lib/simpleUIv2.jar
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => droidAR/src/main/AndroidManifest.xml
+* res/ => droidAR/src/main/res/
+* src/ => droidAR/src/main/java/
+* src/actions/actionExample.uxf => droidAR/src/main/resources/actions/actionExample.uxf
+* src/commands/commands.uxf => droidAR/src/main/resources/commands/commands.uxf
+* src/gamelogic/concept.uxf => droidAR/src/main/resources/gamelogic/concept.uxf
+* src/geo/geo.uxf => droidAR/src/main/resources/geo/geo.uxf
+* src/geo/geoObjWithMeshGroup.uxf => droidAR/src/main/resources/geo/geoObjWithMeshGroup.uxf
+* src/geo/gmap.uxf => droidAR/src/main/resources/geo/gmap.uxf
+* src/gl/animations/animationConcept.uxf => droidAR/src/main/resources/gl/animations/animationConcept.uxf
+* src/gl/color picking.uxf => droidAR/src/main/resources/gl/color picking.uxf
+* src/gl/graphics overview 1.uxf => droidAR/src/main/resources/gl/graphics overview 1.uxf
+* src/gl/graphics overview 2.uxf => droidAR/src/main/resources/gl/graphics overview 2.uxf
+* src/gui/editScreen.uxf => droidAR/src/main/resources/gui/editScreen.uxf
+* src/gui/gui.uxf => droidAR/src/main/resources/gui/gui.uxf
+* src/system/inputSystem.uxf => droidAR/src/main/resources/system/inputSystem.uxf
+* src/system/inputSystem2.uxf => droidAR/src/main/resources/system/inputSystem2.uxf
+* src/system/setup.uxf => droidAR/src/main/resources/system/setup.uxf
+* src/util/util.uxf => droidAR/src/main/resources/util/util.uxf
+* src/worldData/visitor.uxf => droidAR/src/main/resources/worldData/visitor.uxf
+* src/worldData/world.uxf => droidAR/src/main/resources/worldData/world.uxf
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

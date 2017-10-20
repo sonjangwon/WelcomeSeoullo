@@ -3,6 +3,7 @@ package com.example.jangwon.welcomeseoullo;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -28,6 +29,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.ARMenu.ARMainActivity;
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
 import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;

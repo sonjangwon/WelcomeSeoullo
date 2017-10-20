@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jangwon.welcomeseoullo">
+    package="com.example.jangwon.welcomeseoullo"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -8,6 +9,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        xmlns:tools="http://schemas.android.com/tools"/>
 
     <application
         android:allowBackup="true"
@@ -17,7 +21,8 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
 
         <activity android:name=".GuideAppInfo"/>
         <activity android:name=".HomeMenu.Test"/>
@@ -35,6 +40,14 @@
         <activity android:name=".NoticeActivity"/>
         <activity android:name=".HomeMenu.ViewContents" />
         <activity android:name=".NavigationMenu.BusPathActivity" />
+        <activity android:name=".ARMenu.ARMainActivity"/>
+        <activity
+            android:name=".ARMenu.PhotoEditorActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="@string/title_activity_photo_editor"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+
     </application>
 
 </manifest>
