@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#7BA293</color>
-    <color name="colorPrimaryLight">#8BE3CE</color>>
+    <color name="colorPrimary">#7BA293</color>      //굿
+    <color name="colorPrimaryLight">#8BE3CE</color>>    //경로안내
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FD8BB1</color>
-    <color name="greenNike">#7BA293</color>
-    <color name="orangeGolfwang">#FDA293</color>
+    <color name="greenNike">#7BA293</color>     //이것도
+    <color name="orangeGolfwang">#FDA293</color>      //굿
     <color name="pinkGolfwang">#EECEDF</color>
 
     <!-- dots inactive colors -->
@@ -56,7 +56,7 @@
     <!-- Grays -->
     <color name="black25PercentColor">#404040</color>
     <color name="black50PercentColor">#808080</color>
-    <color name="black75PercentColor">#c0c0c0</color>
+    <color name="black75PercentColor">#c0c0c0</color>      //굿
     <color name="warmGrayColor">#857570</color>
     <color name="coolGrayColor">#767a85</color>
     <color name="charcoalColor">#222222</color>

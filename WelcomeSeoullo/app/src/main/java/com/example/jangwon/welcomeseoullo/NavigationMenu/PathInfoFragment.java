@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
@@ -25,7 +25,9 @@ public class PathInfoFragment extends Fragment {
     double currentLatitude;
     double currentLongitude;
     String currentAddress;
-    TextView startPointAddress;
+    Button startPointAddress;
+    LinearLayout categoryLinearLayout;
+
 
     static Button byCarButton;
     static Button byBusButton;
@@ -50,11 +52,16 @@ public class PathInfoFragment extends Fragment {
 
             view = inflater.inflate(R.layout.fragment_path_info, container, false);
 
+            categoryLinearLayout = (LinearLayout) view.findViewById(R.id.categoryLinearLayout);
+
+            categoryLinearLayout.bringToFront();
+            categoryLinearLayout.invalidate();
+
             byCarButton = (Button) view.findViewById(R.id.byCar);
             byBusButton = (Button) view.findViewById(R.id.byBus);
             onFootButton = (Button) view.findViewById(R.id.onFoot);
 
-            startPointAddress = (TextView) view.findViewById(R.id.startPointAddress);
+            startPointAddress = (Button) view.findViewById(R.id.startPointAddress);
 
             currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
             currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
@@ -110,7 +117,8 @@ public class PathInfoFragment extends Fragment {
         if(view == view.findViewById(R.id.byCar)){
             fr = new CarFragment();
         }else if(view == view.findViewById(R.id.byBus)){
-            fr = new BusFragment();
+//            fr = new BusFragment();
+            fr = new BusPathFragment();
         }else{
             fr = new FootFragment();
         }
