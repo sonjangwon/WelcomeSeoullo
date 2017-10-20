@@ -10,7 +10,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,21 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.ManageListToMap;
-import com.example.jangwon.welcomeseoullo.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 import com.skp.Tmap.TMapView;
 
 import java.io.IOException;
 import java.util.List;
-
-import static com.example.jangwon.welcomeseoullo.R.id.mapPointImageButton;
 
 
 public class GuideInfoFragment extends Fragment {
@@ -187,7 +181,6 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Toast.makeText(getActivity(),"onResume",Toast.LENGTH_SHORT).show();
         settingGPS();
 //        ListToMapCheck();
         reverseGeocoder();
@@ -196,7 +189,6 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        Toast.makeText(getActivity(),"onStart",Toast.LENGTH_SHORT).show();
 //        ListToMapCheck();
     }
 
@@ -227,7 +219,6 @@ public class GuideInfoFragment extends Fragment {
     public void ListToMapCheck()
     {
         if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
-            Toast.makeText(getActivity(),"map2",Toast.LENGTH_SHORT).show();
             ManageListToMap.getInstance().setFragmentCondition("list");
 //            ManageListToMap.getInstance().setFragmentCondition("map");
         }
@@ -256,11 +247,9 @@ public class GuideInfoFragment extends Fragment {
 
         if(view == view.findViewById(R.id.mapGuideButton)){
             fr = new MapGuideFragment();
-            //Toast.makeText(getApplicationContext(),"mapPointImageButton",Toast.LENGTH_SHORT).show();
         }
         else if(view == view.findViewById(R.id.listGuideButton)){
             fr = new ListGuideFragment();
-            //Toast.makeText(getApplicationContext(),"listImageButton",Toast.LENGTH_SHORT).show();
 
         }
 

@@ -16,7 +16,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.ManageListToMap;
 import com.example.jangwon.welcomeseoullo.ManagePublicData;
@@ -96,7 +95,6 @@ public class MapGuideFragment extends Fragment {
             public void onCalloutRightButton(TMapMarkerItem markerItem) {
                 String strMessage = "";
                 strMessage = "ID: " + markerItem.getID() + " " + "Title " + markerItem.getCalloutTitle();
-                Toast.makeText(getActivity(),strMessage,Toast.LENGTH_LONG).show();
 //                .showAlertDialog(MapGuideFragment.this, "Callout Right Button", strMessage);
             }
         });
@@ -291,7 +289,6 @@ public class MapGuideFragment extends Fragment {
     public void ListToMap(){
         Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
         if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
-            Toast.makeText(getActivity(), "map", Toast.LENGTH_SHORT).show();
 //            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
             TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(), ManageListToMap.getInstance().getClickedLongitude());
             TMapMarkerItem tItem5 = new TMapMarkerItem();

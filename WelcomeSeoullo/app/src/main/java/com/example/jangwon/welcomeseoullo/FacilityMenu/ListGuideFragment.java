@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.ListViewAdapter;
 import com.example.jangwon.welcomeseoullo.ListViewItem;
@@ -54,8 +53,6 @@ public class ListGuideFragment extends Fragment {
 
                 String titleStr = item.getTitle() ;
                 String descStr = item.getDesc() ;
-                Toast.makeText(getActivity(),titleStr,Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(),descStr,Toast.LENGTH_SHORT).show();
                 // TODO : use item data.
                 switchFragment();
                 ManageListToMap.getInstance().setClickedLatitude(Double.valueOf(descStr.split(",")[0]));
