@@ -33,6 +33,8 @@ public class PathInfoFragment extends Fragment {
     static Button byBusButton;
     static Button onFootButton;
 
+    boolean isFragmentShownAgain = false;
+
     public PathInfoFragment(){
 
     }
@@ -103,7 +105,7 @@ public class PathInfoFragment extends Fragment {
                 }
             });
 
-            byCarButton.callOnClick();
+//            byCarButton.callOnClick();
         }
         else{
 
@@ -114,10 +116,17 @@ public class PathInfoFragment extends Fragment {
     //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
     public void switchFragment(View view){
 
+//        LoadingDialog.getInstance().progressON(getActivity());
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                LoadingDialog.getInstance().progressOFF();
+//            }
+//        }, 5000);
+
         if(view == view.findViewById(R.id.byCar)){
             fr = new CarFragment();
         }else if(view == view.findViewById(R.id.byBus)){
-//            fr = new BusFragment();
             fr = new BusPathFragment();
         }else{
             fr = new FootFragment();
@@ -129,4 +138,17 @@ public class PathInfoFragment extends Fragment {
         fragmentTransaction.commitAllowingStateLoss();
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
+            if(!isFragmentShownAgain){
+                byCarButton.callOnClick();
+                isFragmentShownAgain = true;
+            }
+        } else {
+
+        }
+    }
 }
