@@ -56,7 +56,6 @@ public class StaticDemoSetup extends Setup {
 		// allow the user to send error reports to the developer:
 		ErrorHandler.enableEmailReports("droidar.rwth@gmail.com",
 				"Error in DroidAR App");
-
 	}
 
 	@Override
