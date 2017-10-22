@@ -10,7 +10,8 @@
         android:id="@+id/fragmentCategoryLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="#FFFFFF">
 
         <FrameLayout
             android:layout_width="200dp"
@@ -27,6 +28,7 @@
                     android:layout_height="30dp"
                     android:background="@drawable/nonclickbutton"
                     android:text="리스트"
+                    android:textStyle="bold"
                     android:textColor="#bdbdbd"
                     android:textSize="15dp"/>
             </LinearLayout>
@@ -40,6 +42,8 @@
                     android:layout_height="30dp"
                     android:background="@drawable/roundbutton"
                     android:text="지도"
+                    android:textColor="#7BA293"
+                    android:textStyle="bold"
                     android:textSize="15dp"/>
             </LinearLayout>
         </FrameLayout>
@@ -51,45 +55,96 @@
         android:layout_height="50dp"
         android:layout_below="@+id/fragmentCategoryLinearLayout"
         android:orientation="horizontal"
-        android:gravity="center">
-        <Button
+        android:gravity="center"
+        android:background="#FFFFFF">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            > <Button
             android:id="@+id/toiletButton"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
             android:background="@android:color/transparent"
+            android:textStyle="bold"
             android:text="공공화장실"
-            android:textStyle="bold"
-            android:textColor="#388E3C"
-            android:gravity="center"/>
-        <Button
-            android:id="@+id/parkinglotButton"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"/></LinearLayout>
+        <LinearLayout
             android:layout_width="0dp"
-            android:background="@android:color/transparent"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="주차장"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <Button
-            android:id="@+id/parkButton"
+            >
+
+            <Button
+                android:id="@+id/parkinglotButton"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textStyle="bold"
+                android:text="주차장"
+                android:textColor="#c0c5ce"
+                android:gravity="center"  />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="0dp"
-            android:background="@android:color/transparent"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="공원"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <Button
-            android:id="@+id/marketButton"
+            >
+            <Button
+                android:id="@+id/parkButton"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textStyle="bold"
+                android:text="공원"
+                android:textColor="#c0c5ce"
+                android:gravity="center"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="0dp"
-            android:background="@android:color/transparent"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:textStyle="bold"
-            android:text="전통시장"
-            android:gravity="center"/>
+            >
+            <Button
+                android:id="@+id/marketButton"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:textStyle="bold"
+                android:text="전통시장"
+                android:textColor="#c0c5ce"
+                android:gravity="center"/>
+        </LinearLayout>
     </LinearLayout>
+
+
+
+
+    <!--<Button-->
+        <!--android:id="@+id/parkButton"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="공원"-->
+        <!--android:textStyle="bold"-->
+        <!--android:gravity="center"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/marketButton"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:textStyle="bold"-->
+        <!--android:text="전통시장"-->
+        <!--android:gravity="center"/>-->
+
+
     <!--<RelativeLayout-->
 
 
@@ -147,7 +202,8 @@
         android:layout_below="@+id/publicDataCategoryLinearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout3">
+        android:id="@+id/linearLayout3"
+        android:background="#FFFFFF">
 
         <ImageView
             android:layout_width="20dp"

@@ -193,7 +193,7 @@ public class MapGuideFragment extends Fragment {
 
 
 //                    tItem1.setCalloutTitle( String.valueOf(i) );
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
                 tItem1.setIcon(bitmap);
                 tmapview.bringMarkerToFront(tItem1);
                 tmapview.addMarkerItem("공공화장실" + String.valueOf(i)  , tItem1);
@@ -215,7 +215,7 @@ public class MapGuideFragment extends Fragment {
                 tItem2.setCanShowCallout(true);
                 tItem2.setAutoCalloutVisible(false);
 
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
                 tItem2.setIcon(bitmap);
                 tmapview.bringMarkerToFront(tItem2);
                 tmapview.addMarkerItem("주차장" + String.valueOf(i), tItem2);
@@ -287,7 +287,7 @@ public class MapGuideFragment extends Fragment {
     }
 
     public void ListToMap(){
-        Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
+        Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
         if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
 //            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
             TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(), ManageListToMap.getInstance().getClickedLongitude());
@@ -298,9 +298,9 @@ public class MapGuideFragment extends Fragment {
             tItem5.setCanShowCallout(true);
             tItem5.setAutoCalloutVisible(true);
             if (ManagementLocation.getInstance().getSortSpinner() == "공공화장실") {
-                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
-            } else if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
+            } else if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
+                bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
             } else if (ManagementLocation.getInstance().getSortSpinner() == "공원") {
                 bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder3);
             } else if (ManagementLocation.getInstance().getSortSpinner() == "전통시장") {

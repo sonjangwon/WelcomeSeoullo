@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
@@ -29,9 +29,16 @@ public class PathInfoFragment extends Fragment {
     LinearLayout categoryLinearLayout;
 
 
-    static Button byCarButton;
-    static Button byBusButton;
-    static Button onFootButton;
+    Button byCarButton;
+    Button byBusButton;
+    Button onFootButton;
+    ImageButton byCarImageButton;
+    ImageButton byBusImageButton;
+    ImageButton onFootImageButton;
+    LinearLayout byCarLinearlayout;
+    LinearLayout byBusLinearLayout;
+    LinearLayout onFootLinearLayout;
+
 
     public PathInfoFragment(){
 
@@ -60,6 +67,12 @@ public class PathInfoFragment extends Fragment {
             byCarButton = (Button) view.findViewById(R.id.byCar);
             byBusButton = (Button) view.findViewById(R.id.byBus);
             onFootButton = (Button) view.findViewById(R.id.onFoot);
+            byCarImageButton = (ImageButton) view.findViewById(R.id.byCarImageButton);
+            byBusImageButton = (ImageButton) view.findViewById(R.id.byBusImageButton);
+            onFootImageButton = (ImageButton) view.findViewById(R.id.onFootImageButton);
+            byCarLinearlayout = (LinearLayout) view.findViewById(R.id.byCarLinearLayout);
+            byBusLinearLayout = (LinearLayout) view.findViewById(R.id.byBusLinearLayout);
+            onFootLinearLayout = (LinearLayout) view.findViewById(R.id.onFootLinearLayout);
 
             startPointAddress = (Button) view.findViewById(R.id.startPointAddress);
 
@@ -68,42 +81,92 @@ public class PathInfoFragment extends Fragment {
             currentAddress = ManagementLocation.getInstance().getCurrentAddress();
 
             startPointAddress.setText(currentAddress);
+            byCarButton.setOnClickListener(new LinearLayout.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+//                    자동차 경로안내 버튼을 누를 경우
+                    byCarImageButton.setBackgroundResource(R.drawable.clickedcar);
+                    byBusImageButton.setBackgroundResource(R.drawable.nonclickbus);
+                    onFootImageButton.setBackgroundResource(R.drawable.nonclickwalker);
+                    byCarButton.setTextColor(Color.parseColor("#7BA293"));
+                    byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
 
-            byCarButton.setOnClickListener(new EditText.OnClickListener(){
+                    switchFragment("자동차");
+                }
+            });
+            byCarImageButton.setOnClickListener(new LinearLayout.OnClickListener(){
                 @Override
                 public void onClick(View view) {
                     //자동차 경로안내 버튼을 누를 경우
-                    byCarButton.setTextColor(Color.parseColor("#FF0000"));
-                    byBusButton.setTextColor(Color.parseColor("#000000"));
-                    onFootButton.setTextColor(Color.parseColor("#000000"));
+                    byBusImageButton.setBackgroundResource(R.drawable.nonclickbus);
+                    onFootImageButton.setBackgroundResource(R.drawable.nonclickwalker);
+                    byCarImageButton.setBackgroundResource(R.drawable.nonclickcar);
+                    byCarButton.setTextColor(Color.parseColor("#7BA293"));
+                    byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
 
-                    switchFragment(view);
+                    switchFragment("자동차");
                 }
             });
-            byBusButton.setOnClickListener(new EditText.OnClickListener(){
+            byBusButton.setOnClickListener(new LinearLayout.OnClickListener(){
                 @Override
                 public void onClick(View view) {
                     //대중교통 경로안내 버튼을 누를 경우
-                    byBusButton.setTextColor(Color.parseColor("#FF0000"));
-                    byCarButton.setTextColor(Color.parseColor("#000000"));
-                    onFootButton.setTextColor(Color.parseColor("#000000"));
+                    byBusImageButton.setBackgroundResource(R.drawable.clickedbus);
+                    byCarImageButton.setBackgroundResource(R.drawable.nonclickcar);
+                    onFootImageButton.setBackgroundResource(R.drawable.nonclickwalker);
+                    byBusButton.setTextColor(Color.parseColor("#7BA293"));
+                    byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
 
-                    switchFragment(view);
+                    switchFragment("대중교통");
                 }
             });
-            onFootButton.setOnClickListener(new EditText.OnClickListener(){
+            byBusImageButton.setOnClickListener(new LinearLayout.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    //대중교통 경로안내 버튼을 누를 경우
+                    byBusImageButton.setBackgroundResource(R.drawable.clickedbus);
+                    byCarImageButton.setBackgroundResource(R.drawable.nonclickcar);
+                    onFootImageButton.setBackgroundResource(R.drawable.nonclickwalker);
+                    byBusButton.setTextColor(Color.parseColor("#7BA293"));
+                    byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
+
+                    switchFragment("대중교통");
+                }
+            });
+            onFootButton.setOnClickListener(new LinearLayout.OnClickListener(){
                 @Override
                 public void onClick(View view) {
                     //도보 경로안내 버튼을 누를 경우
-                    onFootButton.setTextColor(Color.parseColor("#FF0000"));
-                    byBusButton.setTextColor(Color.parseColor("#000000"));
-                    byCarButton.setTextColor(Color.parseColor("#000000"));
+                    onFootImageButton.setBackgroundResource(R.drawable.clickedwalker);
+                    byCarImageButton.setBackgroundResource(R.drawable.nonclickcar);
+                    byBusImageButton.setBackgroundResource(R.drawable.nonclickbus);
+                    onFootButton.setTextColor(Color.parseColor("#7BA293"));
+                    byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
 
-                    switchFragment(view);
+                    switchFragment("도보");
                 }
             });
+            onFootImageButton.setOnClickListener(new LinearLayout.OnClickListener(){
+                @Override
+                public void onClick(View view) {
+                    //도보 경로안내 버튼을 누를 경우
+                    onFootImageButton.setImageResource(R.drawable.clickedwalker);
+                    byCarImageButton.setImageResource(R.drawable.nonclickcar);
+                    byBusImageButton.setImageResource(R.drawable.nonclickbus);
+                    onFootButton.setTextColor(Color.parseColor("#7BA293"));
+                    byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
 
+                    switchFragment("도보");
+                }
+            });
             byCarButton.callOnClick();
+
         }
         else{
 
@@ -112,14 +175,13 @@ public class PathInfoFragment extends Fragment {
     }
 
     //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
-    public void switchFragment(View view){
+    public void switchFragment(String path){
 
-        if(view == view.findViewById(R.id.byCar)){
+        if(path=="자동차"){
             fr = new CarFragment();
-        }else if(view == view.findViewById(R.id.byBus)){
-//            fr = new BusFragment();
-            fr = new BusPathFragment();
-        }else{
+        }else if(path=="대중교통"){
+            fr = new BusFragment();
+        }else if(path=="도보"){
             fr = new FootFragment();
         }
 

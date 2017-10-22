@@ -57,7 +57,7 @@ public class BusPathActivity extends AppCompatActivity {
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 onFootButton.setTextColor(Color.parseColor("#000000"));
 
-                PathInfoFragment.byCarButton.callOnClick();
+//                PathInfoFragment.byCarButton.callOnClick();
                 onBackPressed();
             }
         });
@@ -77,7 +77,7 @@ public class BusPathActivity extends AppCompatActivity {
                 byBusButton.setTextColor(Color.parseColor("#000000"));
                 byCarButton.setTextColor(Color.parseColor("#000000"));
 
-                PathInfoFragment.onFootButton.callOnClick();
+//                PathInfoFragment.onFootButton.callOnClick();
                 onBackPressed();
             }
         });

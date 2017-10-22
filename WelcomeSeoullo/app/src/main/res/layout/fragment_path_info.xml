@@ -19,113 +19,139 @@
         android:layout_weight="1"
         tools:layout="@layout/fragment_path_info" />
 
-    <LinearLayout
-        android:id="@+id/categoryLinearLayout"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="150dp">
         <LinearLayout
-            android:id="@+id/pointLinearLayout"
+            android:id="@+id/categoryLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
-            android:layout_weight="2"
-            android:background="#FFFFFF"
-            android:fitsSystemWindows="false"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:layout_height="130dp">
             <LinearLayout
+                android:id="@+id/pointLinearLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="80dp"
+                android:layout_weight="2"
+                android:background="#FFFFFF"
+                android:fitsSystemWindows="false"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/textView"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.85"
+                    android:orientation="vertical"
                     android:gravity="center"
-                    android:text="출발"
-                    android:background="@android:color/transparent"
-                    android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:layout_gravity="center">
 
-                <Button
-                    android:id="@+id/startPointAddress"
+                        <ImageButton
+                            android:id="@+id/textView"
+                            android:layout_width="20dp"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:background="@drawable/pathinfo"  />
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.15"
-                    android:background="@android:color/transparent"
-                    android:gravity="center_vertical"
-                    android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/startPointAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:gravity="center_vertical"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+
+                    <Button
+                        android:id="@+id/departmentAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:background="@android:color/transparent"
+                        android:text="서울로7017"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                </LinearLayout>
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.85"
-                    android:gravity="center"
-                    android:text="도착"
-                    android:background="@android:color/transparent"
-                    android:textColor="#000000"
-                    android:textSize="15dp" />
-
-                <Button
-                    android:id="@+id/departmentAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.15"
-                    android:gravity="center_vertical"
-                    android:background="@android:color/transparent"
-                    android:text="서울로7017"
-                    android:textColor="#000000"
-                    android:textSize="15dp" />
-            </LinearLayout>
-        </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/pointLinearLayout"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/byCar"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/pointLinearLayout"
+                android:layout_weight="1"
+                android:background="@color/white"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/byCarLinearLayout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+                    <ImageButton
+                        android:id="@+id/byCarImageButton"
+                        android:layout_width="20dp"
+                        android:background="@drawable/clickedcar"
+                        android:layout_height="20dp"/>
+                    <Button
+                        android:id="@+id/byCar"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/button_state"
+                        android:text="자동차"
+                        android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/byBusLinearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_state"
-                android:text="자동차"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/byBus"
+                android:layout_gravity="center"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/byBusImageButton"
+                    android:layout_width="17dp"
+                    android:background="@drawable/nonclickbus"
+                    android:layout_height="17dp"/>
+                <Button
+                    android:id="@+id/byBus"
+                    android:layout_width="60dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button_state"
+                    android:paddingLeft="1dp"
+                    android:text="대중교통"
+                    android:textColor="#c0c5ce"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/onFootLinearLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@drawable/button_state"
-                android:text="대중교통"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/onFoot"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_state"
-                android:text="도보"
-                android:textStyle="bold" />
-
+                android:layout_gravity="center"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/onFootImageButton"
+                    android:layout_width="20dp"
+                    android:background="@drawable/nonclickwalker"
+                    android:layout_height="20dp"/>
+                <Button
+                    android:id="@+id/onFoot"
+                    android:layout_width="35dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/button_state"
+                    android:gravity="left|center"
+                    android:paddingLeft="2dp"
+                    android:text="도보"
+                    android:textColor="#c0c5ce"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
