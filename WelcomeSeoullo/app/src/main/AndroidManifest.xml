@@ -19,8 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".GuideAppInfo"/>
-        <activity android:name=".HomeMenu.Test"/>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -30,11 +28,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".GuideAppInfo"/>
         <activity android:name=".MainActivity" />
-        <activity android:name=".NavigationMenu.PathInfoActivity" />
-        <activity android:name=".NoticeActivity"/>
+        <activity android:name=".HomeMenu.Test"/>
         <activity android:name=".HomeMenu.ViewContents" />
-        <activity android:name=".NavigationMenu.BusPathActivity" />
+
     </application>
 
 </manifest>

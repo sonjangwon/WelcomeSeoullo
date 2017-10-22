@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
+
 public class SplashActivity extends Activity {
 
     int SPLASH_TIME=2000;
@@ -24,11 +26,6 @@ public class SplashActivity extends Activity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-//                ManagePublicData.getInstance().parsePublicToilet.execute();
-//                ManagePublicData.getInstance().parsePublicPark.execute();
-//                ManagePublicData.getInstance().parsePublicParkingLot.execute();
-//                ManagePublicData.getInstance().parseTraditionalMarket.execute();
 
                 ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);

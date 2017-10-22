@@ -32,6 +32,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment;
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
 import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;
@@ -135,17 +136,9 @@ public class MainActivity extends Activity {
             }
         });
 
-
-
-
-
-
-
-
         alertCheckGPS();
 
         checkAndRequestPermissions();
-
     }
 
 
