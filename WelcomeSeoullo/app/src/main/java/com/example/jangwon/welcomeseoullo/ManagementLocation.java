@@ -26,7 +26,6 @@ public class ManagementLocation {
         return managementLocation;
     }
 
-
     public void setCurrentLatitude(double currentLatitude)
     {
         this.currentLatitude = currentLatitude;

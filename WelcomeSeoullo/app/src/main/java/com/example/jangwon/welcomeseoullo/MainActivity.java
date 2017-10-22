@@ -365,6 +365,7 @@ public class MainActivity extends Activity {
             getMyLocation();
             //위도경도를 상세주소로 변경
             reverseGeocoder();
+
             ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
             ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
             ManagementLocation.getInstance().setCurrentAddress(currentAddress);
@@ -391,6 +392,7 @@ public class MainActivity extends Activity {
                     getMyLocation();
                     //위도경도를 상세주소로 변경
                     reverseGeocoder();
+
                     ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
                     ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
                     ManagementLocation.getInstance().setCurrentAddress(currentAddress);
