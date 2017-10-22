@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
 /**
  * Created by Jangwon on 2017-09-19.
