@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -26,6 +27,12 @@ import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.R;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -107,21 +114,22 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-//        NewThread task = new NewThread();
-//        if(count == 0)
-//        {
-////            task.execute();
-//            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-//            Log.e("어싱크실행", task.getStatus().toString());
-//            count++;
-//        }
-//        else
-//        {
-//            task.cancel(true);
-//        }
+        NewThread task = new NewThread();
+        if(count == 0)
+        {
+//            task.execute();
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            Log.e("어싱크실행", task.getStatus().toString());
+            count++;
+        }
+        else
+        {
+            task.cancel(true);
+        }
 
-        mRecyclerView.setAdapter(new RecyclerAdapter(
-                getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.test));
+//        //NewsCrawling 싱글톤 클래스 사용 시 이용
+//        mRecyclerView.setAdapter(new RecyclerAdapter(
+//                getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.test));
     }
 
     @Override
@@ -130,60 +138,60 @@ public class HomeFragment extends Fragment {
     }
 
 
-//    public class NewThread extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            Document document = null;
-//            try {
-//                document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEList.do").get();
-//                Elements elements = document.getElementsByAttributeValue("class", "t_left");
-//                //Elements elements = document.select("td.t_left > a");
-//                for (Element element : elements) {
-//                    String num = element.text();
-//                    if(num.length()>32)
-//                    {
-//                        String n = num.substring(0,33);
-//                        num = n + "...";
-//                        titleList.add(num);
-//                    }
-//                    else {
-//                        titleList.add(element.text());
-//                    }
-//                    String title = element.select("a").attr("href").toString();
-//                    String titleNum = title.substring(26,29);
-//                    urlNumList.add(titleNum);
-//                }
-//                Elements ss = document.select("tr td:eq(3)");
-//                for (Element e : ss) {
-//                    String year =  e.text().substring(0,4);
-//                    String month = e.text().substring(5,7);
-//                    String day = e.text().substring(8,10);
-//                    String date = year+"년 "+ month+"월 "+day+"일";
-//                    dateList.add(date);
-//
-//                    Log.e("dd",date);
-//                }
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//
-//            return null;
-//        }
-//        @Override
-//        protected void onPostExecute(String result) {
-//
-//            for(int i=0; i<titleList.size(); i++)
-//            {
-//                items.add(new Item(titleList.get(i), "  "+dateList.get(i)));
-//            }
-//            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
-//
-//            //홈 화면 로드 완료하면 로딩화면 종료, 신재혁 추가
-////            LoadingDialog.getInstance().progressOFF();
-//        }
-//    }
+    public class NewThread extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            Document document = null;
+            try {
+                document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEList.do").get();
+                Elements elements = document.getElementsByAttributeValue("class", "t_left");
+                //Elements elements = document.select("td.t_left > a");
+                for (Element element : elements) {
+                    String num = element.text();
+                    if(num.length()>32)
+                    {
+                        String n = num.substring(0,33);
+                        num = n + "...";
+                        titleList.add(num);
+                    }
+                    else {
+                        titleList.add(element.text());
+                    }
+                    String title = element.select("a").attr("href").toString();
+                    String titleNum = title.substring(26,29);
+                    urlNumList.add(titleNum);
+                }
+                Elements ss = document.select("tr td:eq(3)");
+                for (Element e : ss) {
+                    String year =  e.text().substring(0,4);
+                    String month = e.text().substring(5,7);
+                    String day = e.text().substring(8,10);
+                    String date = year+"년 "+ month+"월 "+day+"일";
+                    dateList.add(date);
+
+                    Log.e("dd",date);
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String result) {
+
+            for(int i=0; i<titleList.size(); i++)
+            {
+                items.add(new Item(titleList.get(i), "  "+dateList.get(i)));
+            }
+            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
+
+            //홈 화면 로드 완료하면 로딩화면 종료, 신재혁 추가
+//            LoadingDialog.getInstance().progressOFF();
+        }
+    }
 
 
     private int getItem(int i) {

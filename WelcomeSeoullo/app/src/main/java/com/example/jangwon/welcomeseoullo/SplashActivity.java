@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.jangwon.welcomeseoullo.HomeMenu.NewsCrawling;
 import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
 
 public class SplashActivity extends Activity {
@@ -28,7 +27,7 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
-                NewsCrawling.getInstance().newThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                NewsCrawling.getInstance().newThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                 ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
