@@ -32,6 +32,7 @@ public class GuideAppInfo extends Activity {
     private Button btnSkip, btnNext, btnStart;
     private PrefManager prefManager;
     int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +99,7 @@ public class GuideAppInfo extends Activity {
                     launchHomeScreen();
             }
         });
+
     }
 
     private void addBottomDots(int currentPage) {

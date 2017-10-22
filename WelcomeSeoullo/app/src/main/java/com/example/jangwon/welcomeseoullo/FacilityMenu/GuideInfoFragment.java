@@ -293,7 +293,6 @@ public class GuideInfoFragment extends Fragment {
             if (list.size()==0) {
                 Log.e("noList", "noList");
             } else {
-//                tv.setText(list.get(0).toString());
                 addressTextView.setText(list.get(0).getAddressLine(0).toString().substring(5));
                 Log.e("addressTextView",list.get(0).getAddressLine(0).toString().substring(5));
             }
@@ -325,6 +324,17 @@ public class GuideInfoFragment extends Fragment {
             public void onProviderDisabled(String provider) {
             }
         };
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
+        }
+        else {
+
+        }
     }
 
 }

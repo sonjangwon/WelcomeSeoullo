@@ -25,7 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jangwon.welcomeseoullo.LoadingDialog;
 import com.example.jangwon.welcomeseoullo.R;
 
 import org.jsoup.Jsoup;
@@ -130,8 +129,8 @@ public class HomeFragment extends Fragment {
         NewThread task = new NewThread();
         if(count ==0)
         {
-            task.execute();
-//            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//            task.execute();
+            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             Log.e("어싱크실행", task.getStatus().toString());
             count++;
         }
@@ -197,7 +196,7 @@ public class HomeFragment extends Fragment {
             mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
 
             //홈 화면 로드 완료하면 로딩화면 종료, 신재혁 추가
-            LoadingDialog.getInstance().progressOFF();
+//            LoadingDialog.getInstance().progressOFF();
         }
     }
 
