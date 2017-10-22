@@ -1,8 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
-
-/**
- * Created by Jangwon on 2017-09-19.
- */
+package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
 public class ManageListToMap {
     //GuideInfoFragment의 ListGuideFragment에서 한 장소를 클릭했을 경우
