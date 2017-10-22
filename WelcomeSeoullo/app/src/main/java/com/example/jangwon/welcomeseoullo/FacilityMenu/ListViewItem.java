@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
 import android.graphics.drawable.Drawable;
 

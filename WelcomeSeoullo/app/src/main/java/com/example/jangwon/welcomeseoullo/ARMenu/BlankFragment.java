@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.ARMenu;
 
 import android.app.Fragment;
 import android.content.SharedPreferences;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.jangwon.welcomeseoullo.R;
 
 import static android.content.Context.MODE_PRIVATE;
 

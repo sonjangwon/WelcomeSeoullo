@@ -2,22 +2,15 @@ package com.example.jangwon.welcomeseoullo.NavigationMenu;
 
 import android.annotation.SuppressLint;
 import android.app.Fragment;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.TextView;
 
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
-
-import java.io.IOException;
-import java.util.List;
 
 @SuppressLint("setJavaScriptEnabled")
 public class BusFragment extends Fragment {
@@ -26,7 +19,6 @@ public class BusFragment extends Fragment {
     double currentLatitude;
     double currentLongitude;
     String currentAddress;
-    TextView startPointAddress;
 
     String busUrl= "https://m.map.naver.com/directions/?ex=126.96961950000002&ey=37.5536067&eex=126.8915131&eey=37.5089833&edid=11630456&incomeUrl=https%3A%2F%2Fm.map.naver.com%2Fsearch2%2Fsearch.nhn%3Fquery%3D%25EC%2584%259C%25EC%259A%25B8%25EC%2597%25AD%26sm%3Dhty#/publicTransit/list/세종대학교,127.07313899999997,37.5502596,,,false,/서울로7017,126.9697727,37.5580094,,,false,/0";
     View view;
@@ -58,23 +50,23 @@ public class BusFragment extends Fragment {
         webViewTest.loadUrl(busUrl.toString());
     }
 
-    //역 지오코딩(위도경도를 상세주소로 변경)
-    public void reverseGeocoder()
-    {
-        final Geocoder geocoder = new Geocoder(getActivity());
-        List<Address> list = null;
-        try {
-            list = geocoder.getFromLocation(currentLatitude, currentLongitude, 10); // 얻어올 값의 개수
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
-        }
-        if (list != null) {
-            if (list.size()==0) {
-                Log.e("noList", "noList");
-            } else {
-                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
-            }
-        }
-    }
+//    //역 지오코딩(위도경도를 상세주소로 변경)
+//    public void reverseGeocoder()
+//    {
+//        final Geocoder geocoder = new Geocoder(getActivity());
+//        List<Address> list = null;
+//        try {
+//            list = geocoder.getFromLocation(currentLatitude, currentLongitude, 10); // 얻어올 값의 개수
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+//        }
+//        if (list != null) {
+//            if (list.size()==0) {
+//                Log.e("noList", "noList");
+//            } else {
+//                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
+//            }
+//        }
+//    }
 }

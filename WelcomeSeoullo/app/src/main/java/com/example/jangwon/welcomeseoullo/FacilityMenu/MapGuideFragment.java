@@ -18,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.jangwon.welcomeseoullo.ManageListToMap;
-import com.example.jangwon.welcomeseoullo.ManagePublicData;
+import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 import com.skp.Tmap.TMapData;

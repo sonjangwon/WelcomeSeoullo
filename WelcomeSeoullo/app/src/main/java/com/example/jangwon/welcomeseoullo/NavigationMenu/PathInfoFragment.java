@@ -29,9 +29,9 @@ public class PathInfoFragment extends Fragment {
     LinearLayout categoryLinearLayout;
 
 
-    static Button byCarButton;
-    static Button byBusButton;
-    static Button onFootButton;
+    Button byCarButton;
+    Button byBusButton;
+    Button onFootButton;
 
     boolean isFragmentShownAgain = false;
 
@@ -116,18 +116,10 @@ public class PathInfoFragment extends Fragment {
     //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
     public void switchFragment(View view){
 
-//        LoadingDialog.getInstance().progressON(getActivity());
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                LoadingDialog.getInstance().progressOFF();
-//            }
-//        }, 5000);
-
         if(view == view.findViewById(R.id.byCar)){
             fr = new CarFragment();
         }else if(view == view.findViewById(R.id.byBus)){
-            fr = new BusPathFragment();
+            fr = new BusFragment();
         }else{
             fr = new FootFragment();
         }

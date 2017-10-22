@@ -23,10 +23,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.jangwon.welcomeseoullo.ManageListToMap;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
-import com.skp.Tmap.TMapView;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,8 +52,6 @@ public class GuideInfoFragment extends Fragment {
     Button marketButton;
 
     public static Context mContext;
-    TMapView tmapview;
-
 
     public GuideInfoFragment(){
 
@@ -182,48 +178,13 @@ public class GuideInfoFragment extends Fragment {
     public void onResume() {
         super.onResume();
         settingGPS();
-//        ListToMapCheck();
         reverseGeocoder();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-//        ListToMapCheck();
     }
-
-//    //맵 띄우기
-//    public void mapView(View view)
-//    {
-//        //선언
-//        tmapview = new TMapView(getActivity());
-//        RelativeLayout relativeLayout2 = (RelativeLayout) view.findViewById(R.id.guideMapView);  //getActivity().findViewByID 아니다 ㅅㅂ
-//
-////        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
-//        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
-//        tmapview.setLocationPoint(currentLongitude,currentLatitude);
-//        tmapview.setCenterPoint(126.970325,37.556152);
-//        tmapview.setCompassMode(false);
-//        tmapview.setIconVisibility(true);
-//        tmapview.setZoomLevel(15);
-//        tmapview.setMapType(TMapView.MAPTYPE_STANDARD);  //일반지도
-//        tmapview.setLanguage(TMapView.LANGUAGE_KOREAN);
-//        tmapview.setTrackingMode(false);
-//        tmapview.setSightVisible(false);
-//        relativeLayout2.addView(tmapview);
-//
-//
-//    }
-
-
-    public void ListToMapCheck()
-    {
-        if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
-            ManageListToMap.getInstance().setFragmentCondition("list");
-//            ManageListToMap.getInstance().setFragmentCondition("map");
-        }
-    }
-
 
     public static Handler changeButtonIcon = new Handler() {
         @Override
@@ -258,6 +219,7 @@ public class GuideInfoFragment extends Fragment {
         fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
         fragmentTransaction.commit();
     }
+
     //Spinner로 fragment 재생성 될 때, 자동차경로, 도보경로를 클릭한 경우
     public void switchFragments(String nowFragment){
         Fragment fr = new MapGuideFragment();

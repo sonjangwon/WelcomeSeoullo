@@ -3,24 +3,19 @@ package com.example.jangwon.welcomeseoullo.FacilityMenu;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.jangwon.welcomeseoullo.ListViewAdapter;
-import com.example.jangwon.welcomeseoullo.ListViewItem;
 import com.example.jangwon.welcomeseoullo.ManageListToMap;
-import com.example.jangwon.welcomeseoullo.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
+import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,31 +115,29 @@ public class ListGuideFragment extends Fragment {
         }
     }
 
-    //역 지오코딩(위도경도를 상세주소로 변경)
-    public String reverseGeocoder(double currentLatitude,double currentLongitude)
-    {
-        final Geocoder geocoder = new Geocoder(getActivity());
-        List<android.location.Address> list = null;
-        String currentAddress="";
-        try {
-            list = geocoder.getFromLocation(currentLatitude, currentLongitude, 1); // 위도,경도,얻어올 값의 개수
-            Log.e("latitude", String.valueOf(currentLatitude));
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
-        }
-        if (list != null) {
-            if (list.size()==0) {
-                Log.e("noList", "noList");
-
-            } else {
-//                tv.setText(list.get(0).toString());
-                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
-                Log.e("currentAddress", currentAddress);
-            }
-        }
-        return currentAddress;
-
-
-    }
+//    //역 지오코딩(위도경도를 상세주소로 변경)
+//    public String reverseGeocoder(double currentLatitude,double currentLongitude)
+//    {
+//        final Geocoder geocoder = new Geocoder(getActivity());
+//        List<android.location.Address> list = null;
+//        String currentAddress="";
+//        try {
+//            list = geocoder.getFromLocation(currentLatitude, currentLongitude, 1); // 위도,경도,얻어올 값의 개수
+//            Log.e("latitude", String.valueOf(currentLatitude));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+//        }
+//        if (list != null) {
+//            if (list.size()==0) {
+//                Log.e("noList", "noList");
+//
+//            } else {
+////                tv.setText(list.get(0).toString());
+//                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
+//                Log.e("currentAddress", currentAddress);
+//            }
+//        }
+//        return currentAddress;
+//    }
 }

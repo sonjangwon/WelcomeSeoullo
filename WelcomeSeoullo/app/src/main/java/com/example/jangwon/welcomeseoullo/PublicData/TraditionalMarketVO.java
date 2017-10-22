@@ -1,4 +1,4 @@
-package com.example.jangwon.welcomeseoullo;
+package com.example.jangwon.welcomeseoullo.PublicData;
 
 public class TraditionalMarketVO {
     private String MarketName;

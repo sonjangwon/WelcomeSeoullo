@@ -92,7 +92,4 @@ public class PathTracker {
     public int getTaxiFare(){
         return taxiFare;
     }
-
-
-
 }

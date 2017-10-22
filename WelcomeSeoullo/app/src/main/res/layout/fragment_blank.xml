@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.jangwon.welcomeseoullo.BlankFragment"
+    tools:context="com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment"
     android:background="@drawable/background_image">
 
     <TextView
