@@ -1,9 +1,5 @@
 package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
-/**
- * Created by Jangwon on 2017-09-19.
- */
-
 public class ManageListToMap {
     //GuideInfoFragment의 ListGuideFragment에서 한 장소를 클릭했을 경우
     //Fragment의 상태변화 정보 저장과 해당 장소의 위도 경도를 set,get하는 싱글톤 클래스
