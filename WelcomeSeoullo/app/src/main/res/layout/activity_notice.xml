@@ -15,8 +15,7 @@
     <ImageView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="67dp"
-        android:background="@drawable/banner3" />
+        android:layout_height="67dp" />
 
     <ListView
         android:id="@+id/noticeList"
