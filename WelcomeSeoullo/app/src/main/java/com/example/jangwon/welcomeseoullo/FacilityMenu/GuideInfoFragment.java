@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -50,6 +51,14 @@ public class GuideInfoFragment extends Fragment {
     Button parkinglotButton;
     Button parkButton;
     Button marketButton;
+    ImageButton parkinglotImageButton;
+    ImageButton parkImageButton;
+    ImageButton marketImageButton;
+    ImageButton toiletImageButton;
+    LinearLayout toiletLinearLayout;
+    LinearLayout parkinglotLinearLayout;
+    LinearLayout parkLinearLayout;
+    LinearLayout marketLinearLayout;
 
     public static Context mContext;
 
@@ -79,6 +88,15 @@ public class GuideInfoFragment extends Fragment {
             parkinglotButton = (Button)view.findViewById(R.id.parkinglotButton);
             parkButton = (Button)view.findViewById(R.id.parkButton);
             marketButton = (Button)view.findViewById(R.id.marketButton);
+            toiletImageButton = (ImageButton) view.findViewById(R.id.toiletImageButton);
+            parkinglotImageButton = (ImageButton) view.findViewById(R.id.parkinglotImageButton);
+            parkImageButton = (ImageButton) view.findViewById(R.id.parkImageButton);
+            marketImageButton = (ImageButton) view.findViewById(R.id.marketImageButton);
+
+            toiletLinearLayout = (LinearLayout) view.findViewById(R.id.toiletLinearLayout);
+            parkinglotLinearLayout = (LinearLayout) view.findViewById(R.id.parkinglotLinearLayout);
+            parkLinearLayout = (LinearLayout) view.findViewById(R.id.parkLinearLayout);
+            marketLinearLayout = (LinearLayout) view.findViewById(R.id.marketLinearLayout);
 
             listGuideLinearLayout = (LinearLayout) view.findViewById(R.id.listGuideLinearLayout);
             mapGuideLinearLayout = (LinearLayout) view.findViewById(R.id.mapGuideLinearLayout);
@@ -131,10 +149,18 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("공공화장실");
+                    toiletImageButton.setBackgroundResource(R.drawable.clickedtoilet);
+                    parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
+                    parkImageButton.setBackgroundResource(R.drawable.nonclickpark);
+                    marketImageButton.setBackgroundResource(R.drawable.nonclickmarket);
                     toiletButton.setTextColor(Color.parseColor("#7BA293"));
                     parkinglotButton.setTextColor(Color.parseColor("#c0c5ce"));
                     parkButton.setTextColor(Color.parseColor("#c0c5ce"));
                     marketButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    toiletLinearLayout.setBackgroundColor(Color.parseColor("#7BA293"));
+                    parkinglotLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    parkLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    marketLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
                     switchFragments(nowFragment);
                 }
             });
@@ -142,10 +168,18 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("주차장");
+                    parkinglotImageButton.setBackgroundResource(R.drawable.clickedparkinglot);
+                    toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
+                    parkImageButton.setBackgroundResource(R.drawable.nonclickpark);
+                    marketImageButton.setBackgroundResource(R.drawable.nonclickmarket);
                     parkinglotButton.setTextColor(Color.parseColor("#7BA293"));
                     toiletButton.setTextColor(Color.parseColor("#c0c5ce"));
                     parkButton.setTextColor(Color.parseColor("#c0c5ce"));
                     marketButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    parkinglotLinearLayout.setBackgroundColor(Color.parseColor("#7BA293"));
+                    toiletLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    parkLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    marketLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
                     switchFragments(nowFragment);
                 }
             });
@@ -153,10 +187,18 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("공원");
+                    parkImageButton.setBackgroundResource(R.drawable.clickedpark);
+                    toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
+                    parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
+                    marketImageButton.setBackgroundResource(R.drawable.nonclickmarket);
                     parkButton.setTextColor(Color.parseColor("#7BA293"));
                     parkinglotButton.setTextColor(Color.parseColor("#c0c5ce"));
                     toiletButton.setTextColor(Color.parseColor("#c0c5ce"));
                     marketButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    parkLinearLayout.setBackgroundColor(Color.parseColor("#7BA293"));
+                    parkinglotLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    toiletLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    marketLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
                     switchFragments(nowFragment);
                 }
             });
@@ -164,10 +206,18 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("전통시장");
+                    marketImageButton.setBackgroundResource(R.drawable.clickedmarket);
+                    toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
+                    parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
+                    parkImageButton.setBackgroundResource(R.drawable.nonclickpark);
                     marketButton.setTextColor(Color.parseColor("#7BA293"));
                     parkinglotButton.setTextColor(Color.parseColor("#c0c5ce"));
                     parkButton.setTextColor(Color.parseColor("#c0c5ce"));
                     toiletButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    marketLinearLayout.setBackgroundColor(Color.parseColor("#7BA293"));
+                    parkinglotLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    parkLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    toiletLinearLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
                     switchFragments(nowFragment);
                 }
             });

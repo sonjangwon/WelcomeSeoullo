@@ -39,7 +39,9 @@ public class PathInfoFragment extends Fragment {
     LinearLayout byCarLinearlayout;
     LinearLayout byBusLinearLayout;
     LinearLayout onFootLinearLayout;
-
+    LinearLayout byCarLayout;
+    LinearLayout byBusLayout;
+    LinearLayout onFootLayout;
 
     public PathInfoFragment(){
 
@@ -74,6 +76,9 @@ public class PathInfoFragment extends Fragment {
             byCarLinearlayout = (LinearLayout) view.findViewById(R.id.byCarLinearLayout);
             byBusLinearLayout = (LinearLayout) view.findViewById(R.id.byBusLinearLayout);
             onFootLinearLayout = (LinearLayout) view.findViewById(R.id.onFootLinearLayout);
+            byCarLayout = (LinearLayout) view.findViewById(R.id.byCarLayout);
+            byBusLayout = (LinearLayout) view.findViewById(R.id.byBusLayout);
+            onFootLayout = (LinearLayout) view.findViewById(R.id.onFootLayout);
 
             startPointAddress = (Button) view.findViewById(R.id.startPointAddress);
 
@@ -92,6 +97,9 @@ public class PathInfoFragment extends Fragment {
                     byCarButton.setTextColor(Color.parseColor("#7BA293"));
                     byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
                     onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarLayout.setBackgroundColor(Color.parseColor("#FDA293"));
+                    byBusLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    onFootLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
                     switchFragment("자동차");
                 }
@@ -106,6 +114,9 @@ public class PathInfoFragment extends Fragment {
                     byCarButton.setTextColor(Color.parseColor("#7BA293"));
                     byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
                     onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarLayout.setBackgroundColor(Color.parseColor("#FDA293"));
+                    byBusLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    onFootLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
                     switchFragment("자동차");
                 }
@@ -120,6 +131,9 @@ public class PathInfoFragment extends Fragment {
                     byBusButton.setTextColor(Color.parseColor("#7BA293"));
                     byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
                     onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    byBusLayout.setBackgroundColor(Color.parseColor("#FDA293"));
+                    onFootLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
                     switchFragment("대중교통");
                 }
@@ -134,6 +148,9 @@ public class PathInfoFragment extends Fragment {
                     byBusButton.setTextColor(Color.parseColor("#7BA293"));
                     byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
                     onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    byBusLayout.setBackgroundColor(Color.parseColor("#FDA293"));
+                    onFootLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
 
                     switchFragment("대중교통");
                 }
@@ -148,6 +165,9 @@ public class PathInfoFragment extends Fragment {
                     onFootButton.setTextColor(Color.parseColor("#7BA293"));
                     byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
                     byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    byBusLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    onFootLayout.setBackgroundColor(Color.parseColor("#FDA293"));
 
                     switchFragment("도보");
                 }
@@ -156,12 +176,15 @@ public class PathInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     //도보 경로안내 버튼을 누를 경우
-                    onFootImageButton.setImageResource(R.drawable.clickedwalker);
-                    byCarImageButton.setImageResource(R.drawable.nonclickcar);
-                    byBusImageButton.setImageResource(R.drawable.nonclickbus);
+                    onFootImageButton.setBackgroundResource(R.drawable.clickedwalker);
+                    byCarImageButton.setBackgroundResource(R.drawable.nonclickcar);
+                    byBusImageButton.setBackgroundResource(R.drawable.nonclickbus);
                     onFootButton.setTextColor(Color.parseColor("#7BA293"));
                     byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
                     byCarButton.setTextColor(Color.parseColor("#c0c5ce"));
+                    byCarLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    byBusLayout.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    onFootLayout.setBackgroundColor(Color.parseColor("#FDA293"));
 
                     switchFragment("도보");
                 }
