@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -109,7 +111,11 @@ public class CarFragment extends Fragment {
 
         point.add(startPoint);
         point.add(endPoint);
-
+        Bitmap start = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test);
+        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test0);
+        start = Bitmap.createScaledBitmap(start, 110, 110, true);
+        end = Bitmap.createScaledBitmap(end, 110, 110, true);
+        tmapview.setTMapPathIcon(start, end);
         TMapInfo info = tmapview.getDisplayTMapInfo(point);
         tmapview.setCompassMode(false);
         tmapview.setIconVisibility(false);

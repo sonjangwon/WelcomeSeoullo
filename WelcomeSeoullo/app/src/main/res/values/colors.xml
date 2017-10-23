@@ -57,7 +57,7 @@
     <color name="black25PercentColor">#404040</color>
     <color name="black50PercentColor">#808080</color>
     <color name="black75PercentColor">#c0c0c0</color>      //굿
-    <color name="warmGrayColor">#857570</color>
+        <color name="warmGrayColor">#857570</color>
     <color name="coolGrayColor">#767a85</color>
     <color name="charcoalColor">#222222</color>
 

@@ -1,6 +1,8 @@
 package com.example.jangwon.welcomeseoullo.NavigationMenu;
 
 import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -70,13 +72,21 @@ public class FootFragment extends Fragment {
         startPoint = new TMapPoint(currentLatitude,currentLongitude);    //현재위치
         endPoint = new TMapPoint(37.5536067,126.96961950000002);  //서울로7017
 
+//        Bitmap start = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.startpoint);
+//        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.arrivalpoint);
+//        tmapview.setTMapPathIcon(start, end);
+
 //        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
         tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
         ArrayList<TMapPoint> point = new ArrayList<TMapPoint>();
 
         point.add(startPoint);
         point.add(endPoint);
-
+        Bitmap start = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test);
+        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test0);
+        start = Bitmap.createScaledBitmap(start, 110, 110, true);
+        end = Bitmap.createScaledBitmap(end, 110, 110, true);
+        tmapview.setTMapPathIcon(start, end);
         tmapview.getDisplayTMapInfo(point);
         tmapview.setCompassMode(false);
         tmapview.setIconVisibility(false);

@@ -55,70 +55,146 @@
         android:layout_height="50dp"
         android:layout_below="@+id/fragmentCategoryLinearLayout"
         android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#FFFFFF">
+        android:gravity="top"
+        android:background="#7BA293">
         <LinearLayout
+            android:id="@+id/toiletLinearLayout"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
-            > <Button
-            android:id="@+id/toiletButton"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
-            android:background="@android:color/transparent"
-            android:textStyle="bold"
-            android:text="공공화장실"
-            android:textColor="@color/colorPrimary"
-            android:gravity="center"/></LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="1"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:background="#7BA293"
             >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:background="#FFFFFF"
+                >
+                <ImageButton
+                    android:id="@+id/toiletImageButton"
+                    android:layout_width="15dp"
+                    android:background="@drawable/clickedtoilet"
+                    android:layout_height="15dp"/>
+                <Button
+                    android:id="@+id/toiletButton"
+                    android:layout_width="68dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:text="공공화장실"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/parkinglotLinearLayout"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="#FFFFFF"
+                android:gravity="center">
 
-            <Button
-                android:id="@+id/parkinglotButton"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:textStyle="bold"
-                android:text="주차장"
-                android:textColor="#c0c5ce"
-                android:gravity="center"  />
+                <ImageButton
+                    android:id="@+id/parkinglotImageButton"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@drawable/nonclickparkinglot" />
+
+                <Button
+                    android:id="@+id/parkinglotButton"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:text="주차장"
+                    android:textColor="#c0c5ce"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/parkLinearLayout"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
             >
-            <Button
-                android:id="@+id/parkButton"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:textStyle="bold"
-                android:text="공원"
-                android:textColor="#c0c5ce"
-                android:gravity="center"/>
+                android:background="#FFFFFF"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/parkImageButton"
+                    android:layout_width="15dp"
+                    android:background="@drawable/nonclickpark"
+                    android:layout_height="15dp"/>
+                <Button
+                    android:id="@+id/parkButton"
+                    android:layout_width="35dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:text="공원"
+                    android:textColor="#c0c5ce"
+                    android:gravity="center"/>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:id="@+id/marketLinearLayout"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
             >
-            <Button
-                android:id="@+id/marketButton"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
                 android:layout_gravity="center"
-                android:background="@android:color/transparent"
-                android:textStyle="bold"
-                android:text="전통시장"
-                android:textColor="#c0c5ce"
-                android:gravity="center"/>
+                android:background="#FFFFFF"
+                android:gravity="center">
+                <ImageButton
+                    android:id="@+id/marketImageButton"
+                    android:layout_width="15dp"
+                    android:background="@drawable/nonclickmarket"
+                    android:layout_height="15dp"/>
+                <Button
+                    android:id="@+id/marketButton"
+                    android:layout_width="55dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:text="전통시장"
+                    android:textColor="#c0c5ce"
+                    android:gravity="center"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
