@@ -10,6 +10,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,6 +35,8 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -43,6 +47,7 @@ public class HomeFragment extends Fragment {
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayList<String> dateList = new ArrayList<String>();
+    ArrayList<String> urlList = new ArrayList<String>();
     int count =0;
     //현재화면인덱스
 
@@ -60,6 +65,14 @@ public class HomeFragment extends Fragment {
     private TextView[] dots;
     private int[] layouts;
     private LinearLayout dotsLayout;
+    //refresh에 필요
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    NestedScrollView mScrollView;
+    ImageView centerImage;
+    //이미지 파싱
+    private String url;
+    boolean getimageFirst = false;
+    int isEmptyImage = 0;
 
     public HomeFragment(){
 
@@ -68,7 +81,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
-
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
+        mScrollView = (NestedScrollView) view.findViewById(R.id.nestedScrollView);
+        centerImage = (ImageView) view.findViewById(R.id.imageView2);
+        //mScrollView.smoothScrollBy(100, 1000);
+        refreshView();
         viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
@@ -96,13 +113,12 @@ public class HomeFragment extends Fragment {
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        Toast.makeText(getActivity().getApplicationContext(),position+"번 째 아이템 롱 클릭",Toast.LENGTH_SHORT).show();
+
                     }
+
                 }));
 
         items = new ArrayList<>();
-        Log.e("메인","작동끝");
-
         return view;
     }
 
@@ -110,34 +126,111 @@ public class HomeFragment extends Fragment {
     {
         return true;
     }
+    public void refreshView() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mRecyclerView.removeAllViewsInLayout();
+                viewPager.setVisibility(View.GONE);
+                centerImage.setVisibility(View.GONE);
+                viewPager.setVisibility(View.VISIBLE);
+                mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
+                centerImage.setVisibility(View.VISIBLE);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        mSwipeRefreshLayout.setColorSchemeResources(
+                android.R.color.holo_red_light
+        );
+    }
+
     @Override
     public void onResume() {
         super.onResume();
-
         NewThread task = new NewThread();
-        if(count == 0)
-        {
-//            task.execute();
-            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            Log.e("어싱크실행", task.getStatus().toString());
-            count++;
-        }
-        else
-        {
-            task.cancel(true);
-        }
+        thumnailThread thumnailTask = new thumnailThread();
 
-//        //NewsCrawling 싱글톤 클래스 사용 시 이용
-//        mRecyclerView.setAdapter(new RecyclerAdapter(
-//                getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.test));
+        if (count == 0) {
+            task.execute();
+            thumnailTask.execute();
+            //Log.e("어싱크실행", task.getStatus().toString());
+            count++;
+        } else {
+            task.cancel(true);
+            thumnailTask.cancel(true);
+        }
     }
 
     @Override
-    public  void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
 
+    private String _getImage(Document doc) {
+        // 2nd -> img in p
+        for (Element e1 : doc.getElementsByTag("p")) {
+            for (Element e2 : e1.getElementsByTag("img")) {
+                final String text = getValidPath(e2.attr("src"));
+                if (text != null && !getimageFirst) {
+                    //Log.e("imageurl", text);
+                    urlList.add(text);
+                    //Log.e("listSize", String.valueOf(urlNumList.size()) + ":" + String.valueOf(urlList.size()));
+                    getimageFirst = true;
+                    isEmptyImage++;
+                }
+            }
+        }
+        // etc empty
+        return "";
+    }
 
+
+    private String getValidPath(String url) {
+        try {
+            if (url.startsWith("http://") || url.startsWith("https://")) {
+                //Log.e("imageurl",url);
+                return url;
+            }
+
+            final URI ogpUri = new URI(this.url);
+            final URI imgUri = ogpUri.resolve(url);
+            return imgUri.toString();
+        } catch (URISyntaxException e) {
+            return url;
+        }
+    }
+    public class thumnailThread extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            Document document = null;
+            try {
+                for(int i=0; i<urlNumList.size(); i++) {
+                    document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEView.do?board_seq=" + urlNumList.get(i) + "&pageIndex=1&pageSize=10&searchCondition=all&searchKeyword=").get();
+                    _getImage(document);
+                    getimageFirst = false;
+                    if(isEmptyImage==0)
+                    {
+                        urlList.add("http://seoullo7017.seoul.go.kr/img/front/img_logo.png");
+                        Log.e("emptyImage", String.valueOf(i));
+                    }
+                    isEmptyImage = 0;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            for(int i=0; i<titleList.size(); i++)
+            {
+                items.add(new Item(titleList.get(i), "  "+dateList.get(i),urlList.get(i)));
+            }
+            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
+        }
+    }
     public class NewThread extends AsyncTask<String, Void, String> {
 
         @Override
@@ -149,9 +242,9 @@ public class HomeFragment extends Fragment {
                 //Elements elements = document.select("td.t_left > a");
                 for (Element element : elements) {
                     String num = element.text();
-                    if(num.length()>32)
+                    if(num.length()>40)
                     {
-                        String n = num.substring(0,33);
+                        String n = num.substring(0,41);
                         num = n + "...";
                         titleList.add(num);
                     }
@@ -182,14 +275,6 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
 
-            for(int i=0; i<titleList.size(); i++)
-            {
-                items.add(new Item(titleList.get(i), "  "+dateList.get(i)));
-            }
-            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
-
-            //홈 화면 로드 완료하면 로딩화면 종료, 신재혁 추가
-//            LoadingDialog.getInstance().progressOFF();
         }
     }
 

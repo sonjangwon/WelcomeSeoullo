@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/swipe_layout">
+<RelativeLayout
     xmlns:card="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -40,19 +45,17 @@
                 android:layout_marginBottom="10dp"></LinearLayout>
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:background="@drawable/banner4"
+                android:layout_height="250dp"
                 android:id="@+id/imageView2"
+                android:background="@drawable/center2"
                 android:layout_below="@+id/viewPager"
                 android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginTop="10dp" />
+                android:layout_alignParentStart="true"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/my_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="12dp"
                 android:layout_below="@+id/imageView2"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -60,16 +63,4 @@
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout >
-
-    <!--<ListView-->
-    <!--android:id="@+id/noticeList2"-->
-    <!--android:scrollbars="none"-->
-    <!--android:ellipsize="end"-->
-    <!--android:maxLines = "1"-->
-    <!--android:inputType="text"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="301dp"-->
-    <!--android:layout_marginTop="54dp"-->
-    <!--android:layout_below="@+id/viewPager"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentStart="true" />-->
+    </android.support.v4.widget.SwipeRefreshLayout>
