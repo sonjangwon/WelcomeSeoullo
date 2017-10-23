@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class CarFragment extends Fragment {
     TextView totalDistanceTextView;
     TextView totalPaymentTextView;
     LinearLayout startTmap;
+    ImageButton startTmapButton;
 
     int totalDistance;
     int totalTime;
@@ -70,8 +72,9 @@ public class CarFragment extends Fragment {
         totalTimeTextView = (TextView) view.findViewById(R.id.totalTime);
         totalDistanceTextView = (TextView) view.findViewById(R.id.totalDistance);
         totalPaymentTextView = (TextView) view.findViewById(R.id.totalPayment);
+        startTmapButton = (ImageButton)view.findViewById(R.id.startTmapButton);
         startTmap = (LinearLayout) view.findViewById(R.id.startTmap) ;
-        startTmap.setOnClickListener(new LinearLayout.OnClickListener(){
+        startTmapButton.setOnClickListener(new ImageButton.OnClickListener(){
             @Override
             public void onClick(View view) {
                 TmapNavigation();
@@ -111,8 +114,8 @@ public class CarFragment extends Fragment {
 
         point.add(startPoint);
         point.add(endPoint);
-        Bitmap start = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test);
-        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test0);
+        Bitmap start = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.startpoint);
+        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.arrivalpoint);
         start = Bitmap.createScaledBitmap(start, 110, 110, true);
         end = Bitmap.createScaledBitmap(end, 110, 110, true);
         tmapview.setTMapPathIcon(start, end);
@@ -205,8 +208,8 @@ public class CarFragment extends Fragment {
             Log.e("showTmapInstallDialog","null");
             showTmapInstallDialog();
         }
-        //Tmap이 설치되지 않은 경우
-        showTmapInstallDialog();
+//        //Tmap이 설치되지 않은 경우
+//        showTmapInstallDialog();
     }
 
     //Tmap설치로 인도하는 부분

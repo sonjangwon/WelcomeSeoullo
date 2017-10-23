@@ -8,7 +8,7 @@ public class PublicToiletVO {
 
     public PublicToiletVO(){}
 
-    public PublicToiletVO(String ToiletName, String ToiletCategory, String ToiletLatitude, String ToiletLongitude){
+    public PublicToiletVO(String ToiletName, String ToiletLatitude, String ToiletLongitude){
         this.ToiletName = ToiletName;
         this.ToiletCategory = ToiletCategory;
         this.ToiletLatitude = ToiletLatitude;

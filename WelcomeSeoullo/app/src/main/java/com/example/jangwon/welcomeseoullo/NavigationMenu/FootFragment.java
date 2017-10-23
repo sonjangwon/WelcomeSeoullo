@@ -82,8 +82,8 @@ public class FootFragment extends Fragment {
 
         point.add(startPoint);
         point.add(endPoint);
-        Bitmap start = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test);
-        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.test0);
+        Bitmap start = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.startpoint);
+        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.arrivalpoint);
         start = Bitmap.createScaledBitmap(start, 110, 110, true);
         end = Bitmap.createScaledBitmap(end, 110, 110, true);
         tmapview.setTMapPathIcon(start, end);
