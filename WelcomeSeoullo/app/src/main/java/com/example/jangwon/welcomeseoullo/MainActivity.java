@@ -194,6 +194,7 @@ public class MainActivity extends Activity {
         }
         else{
             bottomNavigationView.setSelectedItemId(R.id.action_home);
+            homeFragment.setScrollViewTop();
         }
     }
 

@@ -30,7 +30,6 @@
         </activity>
         <activity android:name=".GuideAppInfo"/>
         <activity android:name=".MainActivity" />
-        <activity android:name=".HomeMenu.Test"/>
         <activity android:name=".HomeMenu.ViewContents" />
 
     </application>
