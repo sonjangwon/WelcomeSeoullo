@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     View view;
 
-    private Test.MyViewPagerAdapter myViewPagerAdapter;
+//    private Test.MyViewPagerAdapter myViewPagerAdapter;
     ArrayList<String> titleList = new ArrayList<String>();
     ArrayList<String> urlNumList = new ArrayList<String>();
     ArrayList<String> dateList = new ArrayList<String>();
@@ -81,10 +81,11 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
+
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
         mScrollView = (NestedScrollView) view.findViewById(R.id.nestedScrollView);
         centerImage = (ImageView) view.findViewById(R.id.imageView2);
-        //mScrollView.smoothScrollBy(100, 1000);
+        mScrollView.smoothScrollBy(100, 1000);
         refreshView();
         viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
@@ -122,10 +123,22 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+
+        }
+        else {
+
+        }
+    }
+
     public boolean onTouch(View v, MotionEvent event)
     {
         return true;
     }
+
     public void refreshView() {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -134,7 +147,7 @@ public class HomeFragment extends Fragment {
                 viewPager.setVisibility(View.GONE);
                 centerImage.setVisibility(View.GONE);
                 viewPager.setVisibility(View.VISIBLE);
-                mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
+                mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.fragment_home));
                 centerImage.setVisibility(View.VISIBLE);
                 mSwipeRefreshLayout.setRefreshing(false);
             }
@@ -184,7 +197,6 @@ public class HomeFragment extends Fragment {
         return "";
     }
 
-
     private String getValidPath(String url) {
         try {
             if (url.startsWith("http://") || url.startsWith("https://")) {
@@ -199,6 +211,7 @@ public class HomeFragment extends Fragment {
             return url;
         }
     }
+
     public class thumnailThread extends AsyncTask<String, Void, String> {
 
         @Override
@@ -228,9 +241,10 @@ public class HomeFragment extends Fragment {
             {
                 items.add(new Item(titleList.get(i), "  "+dateList.get(i),urlList.get(i)));
             }
-            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
+            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.fragment_home));
         }
     }
+
     public class NewThread extends AsyncTask<String, Void, String> {
 
         @Override
@@ -278,7 +292,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
     }
@@ -315,6 +328,7 @@ public class HomeFragment extends Fragment {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 
@@ -350,6 +364,7 @@ public class HomeFragment extends Fragment {
             container.removeView(view);
         }
     }
+
     public void whenTouchImagePosition(int index)
     {
         Intent intent = new Intent();
@@ -372,7 +387,6 @@ public class HomeFragment extends Fragment {
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
             Toast.makeText(getActivity().getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
-
         }
     }
 
