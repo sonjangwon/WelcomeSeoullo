@@ -153,7 +153,7 @@ public class HomeFragment extends Fragment {
             }
         });
         mSwipeRefreshLayout.setColorSchemeResources(
-                android.R.color.holo_red_light
+                R.color.orangeGolfwang
         );
     }
 
@@ -303,6 +303,7 @@ public class HomeFragment extends Fragment {
             return false;
         }
     };
+
     //	viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
@@ -389,5 +390,4 @@ public class HomeFragment extends Fragment {
             Toast.makeText(getActivity().getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
