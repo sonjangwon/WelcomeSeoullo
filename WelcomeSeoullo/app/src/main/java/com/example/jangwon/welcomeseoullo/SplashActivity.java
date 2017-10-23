@@ -3,14 +3,11 @@ package com.example.jangwon.welcomeseoullo;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
 
 public class SplashActivity extends Activity {
 
@@ -29,10 +26,10 @@ public class SplashActivity extends Activity {
 
 //                NewsCrawling.getInstance().newThread.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
-                ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parsePublicToilet.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parsePublicPark.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parsePublicParkingLot.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+//                ManagePublicData.getInstance().parseTraditionalMarket.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
                 overridePendingTransition(0,android.R.anim.fade_in);
                 startActivity(new Intent(SplashActivity.this, GuideAppInfo.class));

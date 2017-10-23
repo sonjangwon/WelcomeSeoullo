@@ -99,11 +99,12 @@
                 android:layout_weight="7">
 
                 <ImageButton
-                    android:layout_marginTop="20dp"
+                    android:id="@+id/startTmapButton"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="12dp"
-                    android:background="@drawable/start"/>
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/start" />
             </RelativeLayout>
 
             <TextView
