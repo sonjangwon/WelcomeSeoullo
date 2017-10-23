@@ -44,14 +44,15 @@ public class HomeFragment extends Fragment {
     View view;
 
     private Test.MyViewPagerAdapter myViewPagerAdapter;
-    ArrayList<String> titleList = new ArrayList<String>();
-    ArrayList<String> urlNumList = new ArrayList<String>();
-    ArrayList<String> dateList = new ArrayList<String>();
-    ArrayList<String> urlList = new ArrayList<String>();
+    ArrayList<String> titleList = new ArrayList<String>(10);
+    ArrayList<String> urlNumList = new ArrayList<String>(10);
+    ArrayList<String> dateList = new ArrayList<String>(10);
+    ArrayList<String> urlList = new ArrayList<String>(10);
     int count =0;
     //현재화면인덱스
 
     AutoScrollViewPager viewPager;
+    AutoScrollViewPager imageViewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
     //InfiniteViewPager view;
@@ -73,6 +74,8 @@ public class HomeFragment extends Fragment {
     private String url;
     boolean getimageFirst = false;
     int isEmptyImage = 0;
+    //load more recyclerView list
+    TextView loadMoreText;
 
     public HomeFragment(){
 
@@ -81,20 +84,24 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        loadMoreText = (TextView) view.findViewById(R.id.loadMore);
+        loadMoreText.setVisibility(View.GONE);
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
         mScrollView = (NestedScrollView) view.findViewById(R.id.nestedScrollView);
         centerImage = (ImageView) view.findViewById(R.id.imageView2);
-        //mScrollView.smoothScrollBy(100, 1000);
+        mScrollView.smoothScrollBy(100, 1000);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         refreshView();
+
         viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
+        imageViewPager = (AutoScrollViewPager) view.findViewById(R.id.imageViewPager);
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
 
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
         viewPager.startAutoScroll();
-
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        imageViewPager.setAdapter(wrappedAdapter);
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -119,8 +126,26 @@ public class HomeFragment extends Fragment {
                 }));
 
         items = new ArrayList<>();
+        loadMoreText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = items.size();
+                int end = index + 2;
+                if(items.size() <titleList.size()) {
+                    for (int i = index; i < end; i++) {
+                        items.add(new Item(titleList.get(i), "  " + dateList.get(i), urlList.get(i)));
+                    }
+                    mAdapter.notifyDataSetChanged();
+                }
+                if(end== titleList.size())
+                {
+                    loadMoreText.setVisibility(View.GONE);
+                }
+            }
+        });
         return view;
     }
+
 
     public boolean onTouch(View v, MotionEvent event)
     {
@@ -224,11 +249,13 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(String result) {
-            for(int i=0; i<titleList.size(); i++)
+            for(int i=0; i<2; i++)
             {
                 items.add(new Item(titleList.get(i), "  "+dateList.get(i),urlList.get(i)));
             }
             mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
+            mAdapter = mRecyclerView.getAdapter();
+            loadMoreText.setVisibility(View.VISIBLE);
         }
     }
     public class NewThread extends AsyncTask<String, Void, String> {
@@ -263,7 +290,7 @@ public class HomeFragment extends Fragment {
                     String date = year+"년 "+ month+"월 "+day+"일";
                     dateList.add(date);
 
-                    Log.e("dd",date);
+                    //Log.e("dd",date);
                 }
 
             } catch (IOException e) {

@@ -11,7 +11,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/nestedScrollView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -25,7 +26,22 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
-
+            <LinearLayout
+                android:id="@+id/dotLayouts"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dots_height"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_above="@+id/imageViewPager"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginBottom="10dp"></LinearLayout>
+            <com.example.jangwon.welcomeseoullo.HomeMenu.AutoScrollViewPager
+                android:id="@+id/imageViewPager"
+                android:layout_below="@+id/viewPager"
+                android:layout_marginTop="5dp"
+                android:layout_width = "match_parent"
+                android:layout_height="212dp" />
             <!--<me.relex.circleindicator.CircleIndicator-->
             <!--android:id="@+id/indicator"-->
             <!--android:layout_width="match_parent"-->
@@ -33,22 +49,13 @@
             <!--android:layout_above="@+id/imageView2"-->
             <!--android:layout_alignParentLeft="true"-->
             <!--android:layout_alignParentStart="true" />-->
-            <LinearLayout
-                android:id="@+id/dotLayouts"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dots_height"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_above="@+id/imageView2"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="10dp"></LinearLayout>
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="250dp"
+                android:layout_below="@+id/imageViewPager"
                 android:id="@+id/imageView2"
                 android:background="@drawable/center2"
-                android:layout_below="@+id/viewPager"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"/>
 
@@ -60,6 +67,17 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
 
+            <TextView
+                android:layout_below="@id/my_recycler_view"
+                android:id="@+id/loadMore"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="더 보기"
+                android:textSize="18dp"
+                android:gravity="center_horizontal"
+                android:background="@color/white"
+                android:onClick="onClick"
+                android:clickable="true" />
         </RelativeLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout >

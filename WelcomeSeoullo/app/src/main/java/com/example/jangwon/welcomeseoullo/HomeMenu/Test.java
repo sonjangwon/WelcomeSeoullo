@@ -81,8 +81,8 @@ public class Test extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
-        mScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_layout2);
+        mScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView2);
         centerImage = (ImageView) findViewById(R.id.imageView2);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         viewPager = (AutoScrollViewPager) findViewById(R.id.viewPager);
