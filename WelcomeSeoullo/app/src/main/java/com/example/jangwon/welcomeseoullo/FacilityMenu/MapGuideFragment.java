@@ -67,7 +67,6 @@ public class MapGuideFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
         view = inflater.inflate(R.layout.fragment_map_guide, container, false);
-//        addMarker();
         Log.e("onCreateView","true");
         addressTextView = (TextView) view.findViewById(R.id.addressTextView);
         zoonInFrameLayout = (FrameLayout) view.findViewById(R.id.zoonInFrameLayout);
@@ -174,7 +173,7 @@ public class MapGuideFragment extends Fragment {
         ManagePublicData.getInstance().getPublicParkVOArrayList();
         ManagePublicData.getInstance().getPublicToiletVOArrayList();
         ManagePublicData.getInstance().getTraditionalMarketVOArrayList();
-//
+
         if(ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
                 TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
@@ -191,7 +190,6 @@ public class MapGuideFragment extends Fragment {
                 tItem1.setAutoCalloutVisible(false);
 
 
-//                    tItem1.setCalloutTitle( String.valueOf(i) );
                 Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
                 bitmap = Bitmap.createScaledBitmap(bitmap, 70, 70, true);
                 tItem1.setIcon(bitmap);
@@ -276,7 +274,6 @@ public class MapGuideFragment extends Fragment {
         Log.d(this.getClass().getSimpleName(), "onStart()");
         Log.e("onStart","true");
         addMarker();
-//        ListToMap();
         if(ManageListToMap.getInstance().getClickedListView()==true) {
             tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
             ListToMap();

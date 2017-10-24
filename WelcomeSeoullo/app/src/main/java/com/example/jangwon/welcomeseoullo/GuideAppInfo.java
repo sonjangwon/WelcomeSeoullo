@@ -17,10 +17,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.HomeMenu.NewsCrawling;
 import com.example.jangwon.welcomeseoullo.HomeMenu.PrefManager;
 
 public class GuideAppInfo extends Activity {
@@ -33,11 +35,15 @@ public class GuideAppInfo extends Activity {
     private int[] layouts;
     private Button btnSkip, btnNext, btnStart;
     private PrefManager prefManager;
+    private ImageView imageISeoulU;
     int count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        NewsCrawling.getInstance().newThread.execute();
+//        NewsCrawling.getInstance().thumnailTask.execute();
 
         // Checking for first time launch - before calling setContentView()
         //sharedPrefence에 저장ㅇ해놓고 실행안되게
@@ -69,7 +75,9 @@ public class GuideAppInfo extends Activity {
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext =(Button) findViewById(R.id.btn_next);
         btnStart = (Button) findViewById(R.id.btn_start);
+        imageISeoulU = (ImageView) findViewById(R.id.i_seoul_u);
         btnStart.setVisibility(View.INVISIBLE);
+
 
         // layouts of all welcome sliders
         // add few more layouts if you want
@@ -159,12 +167,14 @@ public class GuideAppInfo extends Activity {
                 btnStart.setVisibility(View.VISIBLE);
                 btnSkip.setVisibility(View.GONE);
                 btnNext.setVisibility(View.INVISIBLE);
+                imageISeoulU.setVisibility(View.INVISIBLE);
                 //dotsLayout.setVisibility(View.INVISIBLE); //밑에 닷 안보이게
             } else {
                 // still pages are left
                 btnStart.setVisibility(View.INVISIBLE);
                 btnSkip.setVisibility(View.VISIBLE);
                 btnNext.setVisibility(View.VISIBLE);
+                imageISeoulU.setVisibility(View.VISIBLE);
                // dotsLayout.setVisibility(View.VISIBLE); //닷 보이게
             }
         }

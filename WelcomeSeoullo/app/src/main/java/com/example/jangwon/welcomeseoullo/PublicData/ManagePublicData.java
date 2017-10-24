@@ -314,6 +314,4 @@ public class ManagePublicData {
         traditionalMarketVOArrayList.add(new TraditionalMarketVO("자유상가", String.valueOf(37.5611858),String.valueOf(126.9800889)));
         traditionalMarketVOArrayList.add(new TraditionalMarketVO("인현시장", String.valueOf(37.5639577),String.valueOf(126.9952871)));
     }
-
-
 }

@@ -1,9 +1,0 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/colorPrimary" />
-    <item>
-        <bitmap android:src="@mipmap/application_name" android:gravity="center" />
-    </item>
-    <item>
-        <bitmap android:src="@mipmap/i_seoul_u" android:gravity="bottom" />
-    </item>
-</layer-list>
