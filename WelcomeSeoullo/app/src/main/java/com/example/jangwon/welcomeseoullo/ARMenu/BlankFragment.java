@@ -43,7 +43,7 @@ public class BlankFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_blank, container, false);
 
         //비디오 배경 설정
-        MyVideoView mVideoView = (MyVideoView) view.findViewById(R.id.bgVideoView);
+        MyVideoView mVideoView = (MyVideoView) view.findViewById(R.id.bgVideoView2);
         Uri uri = Uri.parse("android.resource://com.example.jangwon.welcomeseoullo/" + R.raw.video);
         mVideoView.setVideoURI(uri);
         mVideoView.start();
