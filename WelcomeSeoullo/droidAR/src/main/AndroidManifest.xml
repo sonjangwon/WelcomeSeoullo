@@ -2,58 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.rwth"
     android:versionCode="1"
-    android:versionName="1.0" >
-
-    <application
-        android:icon="@drawable/icon"
-        android:label="@string/app_name" >
-        <activity android:name="TechDemoLauncher" >
-
-        </activity>
-
-        <!--
-             IMPORTANT: The following activities have to be added to each project 
-			which imports the DroidAR Library
-        -->
-
-        <activity
-            android:name="system.ArActivity"
-            android:configChanges="keyboardHidden|orientation"
-            android:label="@string/app_name"
-            android:screenOrientation="landscape" >
-        </activity>
-
-        <!-- Custom List is used to easily display lists of any type of object -->
-        <activity android:name="gui.CustomListActivity" >
-        </activity>
-
-        <!-- the error handler will be automatically displayed when an error appears -->
-        <activity
-            android:name="system.ErrorHandler"
-            android:process=":myexeptionprocess"
-            android:taskAffinity="system.ErrorHandler" >
-            <intent-filter>
-                <category android:name="android.intent.category.DEFAULT" />
-
-                <action android:name="android.intent.action.VIEW" />
-
-                <data android:mimeType="errors/myUnhandleCatcher" />
-            </intent-filter>
-        </activity>
-
-        <!-- is needed to display information on application startup -->
-        <activity
-            android:name="gui.InfoScreen"
-            android:theme="@android:style/Theme.Dialog" >
-        </activity>
-
-        <!-- an activity to easily display any kind of ui -->
-        <activity
-            android:name="gui.simpleUI.SimpleUIv1"
-            android:theme="@android:style/Theme.Translucent" >
-        </activity>
-    </application>
-
+    android:versionName="1.0">
     <!--
          The minimum sdk version is set to 3 because all the methods should 
 		work for devices with android 1.5 as well. The development version is set 
@@ -85,5 +34,53 @@
         android:largeScreens="true"
         android:normalScreens="true"
         android:smallScreens="true" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:icon="@drawable/icon"
+        android:label="@string/app_name">
+        <activity android:name=".TechDemoLauncher"></activity>
+
+        <!--
+             IMPORTANT: The following activities have to be added to each project 
+			which imports the DroidAR Library
+        -->
+
+        <activity
+            android:name="system.ArActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/app_name"
+            android:screenOrientation="landscape"></activity>
+
+        <!-- Custom List is used to easily display lists of any type of object -->
+        <activity android:name="gui.CustomListActivity"></activity>
+
+        <!-- the error handler will be automatically displayed when an error appears -->
+        <activity
+            android:name="system.ErrorHandler"
+            android:process=":myexeptionprocess"
+            android:taskAffinity="system.ErrorHandler">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:mimeType="errors/myUnhandleCatcher" />
+            </intent-filter>
+        </activity>
+
+        <!-- is needed to display information on application startup -->
+        <activity
+            android:name="gui.InfoScreen"
+            android:theme="@android:style/Theme.Dialog"></activity>
+
+        <!-- an activity to easily display any kind of ui -->
+        <activity
+            android:name="gui.simpleUI.SimpleUIv1"
+            android:theme="@android:style/Theme.Translucent"></activity>
+        <activity android:name=".SampleActivity"></activity>
+    </application>
 
 </manifest>

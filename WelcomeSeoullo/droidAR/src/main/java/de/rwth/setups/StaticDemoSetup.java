@@ -1,7 +1,16 @@
 package de.rwth.setups;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.widget.Toast;
+
+import actions.ActionMoveCameraBuffered;
+import actions.ActionRotateCameraBuffered;
+import actions.ActionWASDMovement;
+import commands.Command;
+import de.rwth.R;
+import de.rwth.SampleActivity;
 import geo.GeoObj;
-import gl.Color;
 import gl.CustomGLSurfaceView;
 import gl.GL1Renderer;
 import gl.GLCamera;
@@ -10,39 +19,21 @@ import gl.animations.AnimationFaceToCamera;
 import gl.scenegraph.MeshComponent;
 import gl.scenegraph.RenderList;
 import gui.GuiSetup;
-import gui.simpleUI.ModifierGroup;
-import gui.simpleUI.Theme;
-import gui.simpleUI.Theme.ThemeColors;
-import gui.simpleUI.modifiers.Headline;
-import gui.simpleUI.modifiers.InfoText;
 import system.ErrorHandler;
 import system.EventManager;
 import system.Setup;
 import util.IO;
 import util.Vec;
-import worldData.Obj;
 import worldData.SystemUpdater;
 import worldData.World;
-import actions.ActionMoveCameraBuffered;
-import actions.ActionRotateCameraBuffered;
-import actions.ActionWASDMovement;
-import android.app.Activity;
-import android.view.Gravity;
-import android.view.View;
-import android.view.View.MeasureSpec;
-import android.widget.Button;
-import android.widget.LinearLayout.LayoutParams;
 
-import commands.Command;
-import commands.ui.CommandShowToast;
-
-import de.rwth.R;
+//import com.example.jangwon.welcomeseoullo.ARMenu.SetImageView;
 
 public class StaticDemoSetup extends Setup {
 
 	private static final float MIN_DIST = 15f;
 	private static final float MAX_DIST = 55f;
-
+	public String imagePathForeAR;
 	protected static final String LOG_TAG = "StaticDemoSetup";
 
 	World world;
@@ -61,9 +52,10 @@ public class StaticDemoSetup extends Setup {
 	@Override
 	public void _b_addWorldsToRenderer(GL1Renderer renderer,
 									   GLFactory objectFactory, GeoObj currentPosition) {
-
 		camera = new GLCamera(new Vec(0, 0, 1));
 		world = new World(camera);
+		Intent getIntent = getActivity().getIntent();
+		imagePathForeAR = getIntent.getExtras().getString("imagePath");
 
 		timeModifier = new TimeModifier(1);
 		RenderList l = new RenderList();
@@ -102,6 +94,15 @@ public class StaticDemoSetup extends Setup {
 							"elefantId",
 							IO.loadBitmapFromId(getActivity(),
 									R.drawable.fire));
+			triangleMesh.setOnClickCommand(new Command(){
+				@Override
+				public boolean execute(){
+					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity.class);
+					intent.putExtra("imagePathForAR", imagePathForeAR);
+					getActivity().startActivity(intent);
+					return false;
+				}
+			});
 			triangleMesh.setScale(new Vec(10, 10, 10));
 			triangleMesh.addChild(new AnimationFaceToCamera(camera, 0.5f));
 			GeoObj treangleGeo = new GeoObj(GeoObj.newRandomGeoObjAroundCamera(

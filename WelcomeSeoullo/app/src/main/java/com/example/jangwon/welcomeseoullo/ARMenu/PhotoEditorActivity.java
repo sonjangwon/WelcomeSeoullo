@@ -3,6 +3,7 @@ package com.example.jangwon.welcomeseoullo.ARMenu;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
@@ -27,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.ARMenu.widget.SlidingUpPanelLayout;
 import com.ahmedadeltito.photoeditorsdk.BrushDrawingView;
@@ -69,7 +71,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
     private ArrayList<Integer> colorPickerColors;
     private int colorCodeTextView = -1;
     private PhotoEditorSDK photoEditorSDK;
-
+    public static final String IMAGESTATICPATH = "aefw";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -316,7 +318,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void returnBackWithSavedImage() {
-        showSetup("Demo Setup", new StaticDemoSetup());
+
 //        Button b = new Button(this);
 //        b.setOnClickListener(new View.OnClickListener(){
 //            @Override
@@ -330,31 +332,41 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 //            }
 //        });
 //        setContentView(b);
-//        updateView(View.GONE);
-//        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-//                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
-//        parentImageRelativeLayout.setLayoutParams(layoutParams);
-//        new CountDownTimer(1000, 500) {
-//            public void onTick(long millisUntilFinished) {
-//
-//            }
-//
-//            public void onFinish() {
+        final String imageNameTemporary;
+        updateView(View.GONE);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        parentImageRelativeLayout.setLayoutParams(layoutParams);
+        new CountDownTimer(1000, 500) {
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
 //                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-//                String imageName = "IMG_" + timeStamp + ".jpg";
-//                Intent returnIntent = new Intent();
-//                returnIntent.putExtra("imagePath", photoEditorSDK.saveImage("PhotoEditorSDK", imageName));
-//                setResult(Activity.RESULT_OK, returnIntent);
-//                finish();
-//            }
-//        }.start();
+                String imageName = "IMG_.jpg";
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("imagePath", photoEditorSDK.saveImage("PhotoEditorSDK", imageName));
+
+                setResult(Activity.RESULT_OK, returnIntent);
+                finish();
+            }
+        }.start();
+
+        showSetup("Demo Setup", new StaticDemoSetup(), photoEditorSDK.saveImage("PhotoEditorSDK", "IMG_.jpg"));
+
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("hi", photoEditorSDK.saveImage("PhotoEditorSDK", "IMG_.jpg"));
+        editor.commit();
+
     }
 
-    private void showSetup(String string, final Setup aSetupInstance) {
+    private void showSetup(String string, final Setup aSetupInstance, String imagePath) {
         Activity theCurrentActivity = PhotoEditorActivity.this;
         ArActivity.startWithSetup(theCurrentActivity,
-                aSetupInstance);
+                aSetupInstance, imagePath);
     }
 
     @Override

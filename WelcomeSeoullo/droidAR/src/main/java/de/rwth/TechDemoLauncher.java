@@ -96,32 +96,32 @@ public class TechDemoLauncher extends Activity {
 //
 //	}
 
-	private void showSetup(String string, final Setup aSetupInstance) {
-		((LinearLayout) findViewById(R.id.demoScreenLinView))
-				.addView(new SimpleButton(string) {
-					@Override
-					public void onButtonPressed() {
-						Activity theCurrentActivity = TechDemoLauncher.this;
-						ArActivity.startWithSetup(theCurrentActivity,
-								aSetupInstance);
-					}
-				});
-	}
+//	private void showSetup(String string, final Setup aSetupInstance) {
+//		((LinearLayout) findViewById(R.id.demoScreenLinView))
+//				.addView(new SimpleButton(string) {
+//					@Override
+//					public void onButtonPressed() {
+//						Activity theCurrentActivity = TechDemoLauncher.this;
+////						ArActivity.startWithSetup(theCurrentActivity,
+////								aSetupInstance);
+//					}
+//				});
+//	}
 
-	private abstract class SimpleButton extends Button {
-		public SimpleButton(String text) {
-			super(TechDemoLauncher.this);
-			setText(text);
-			setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					onButtonPressed();
-				}
-			});
-		}
-
-		public abstract void onButtonPressed();
-	}
+//	private abstract class SimpleButton extends Button {
+//		public SimpleButton(String text) {
+//			super(TechDemoLauncher.this);
+//			setText(text);
+//			setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					onButtonPressed();
+//				}
+//			});
+//		}
+//
+//		public abstract void onButtonPressed();
+//	}
 
 	private void runTests() {
 		// execute all tests defined in the ARTestSuite:

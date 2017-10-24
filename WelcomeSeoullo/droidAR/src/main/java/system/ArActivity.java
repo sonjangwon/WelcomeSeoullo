@@ -44,10 +44,13 @@ public class ArActivity extends Activity {
 		}
 	}
 
-	public static void startWithSetup(Activity currentActivity, Setup setupToUse) {
+	public static void startWithSetup(Activity currentActivity, Setup setupToUse, String imagePath) {
 		ArActivity.staticSetupHolder = setupToUse;
-		currentActivity.startActivity(new Intent(currentActivity,
-				ArActivity.class));
+		Intent arIntent = new Intent(currentActivity, ArActivity.class);
+		arIntent.putExtra("ImagePath", imagePath);
+		currentActivity.startActivity(arIntent);
+//		currentActivity.startActivity(new Intent(currentActivity,
+//				ArActivity.class));
 	}
 
 	public static void startWithSetupForResult(Activity currentActivity,
