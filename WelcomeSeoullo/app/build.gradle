@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
-    compileOptions.encoding="ISO-8859-1"
+    compileOptions.encoding = "ISO-8859-1"
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
         applicationId "com.example.jangwon.welcomeseoullo"
@@ -29,6 +29,8 @@ dependencies {
     })
     compile files('libs/com.skp.Tmap_1.0.47.jar')
     compile files('libs/jsoup-1.10.3.jar')
+    compile project(':droidAR')
+    compile project(':photoeditorsdk')
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
@@ -44,6 +46,4 @@ dependencies {
     compile 'me.relex:circleindicator:1.2.2@aar'
     testCompile 'junit:junit:4.12'
     provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-    compile project(':droidAR')
-    compile project(':photoeditorsdk')
 }

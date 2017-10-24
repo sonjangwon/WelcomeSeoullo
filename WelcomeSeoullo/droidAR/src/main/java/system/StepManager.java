@@ -108,20 +108,20 @@ public class StepManager implements SensorEventListener {
 		for (int t = 1; t <= lookahead; t++) {
 			int x0 = (vhPointer - 1 - t + vhSize + vhSize) % vhSize;
 			int x1 = (vhPointer - 1 + vhSize) % vhSize;
-			if (stepDetecWindow[(vhPointer - 1 - t + vhSize + vhSize) % vhSize] != null) {
-				double check = FloatMath
-						.sqrt((stepDetecWindow[x0][0] - stepDetecWindow[x1][0])
-								* (stepDetecWindow[x0][0] - stepDetecWindow[x1][0])
-								+ (stepDetecWindow[x0][1] - stepDetecWindow[x1][1])
-								* (stepDetecWindow[x0][1] - stepDetecWindow[x1][1])
-								+ (stepDetecWindow[x0][2] - stepDetecWindow[x1][2])
-								* (stepDetecWindow[x0][2] - stepDetecWindow[x1][2]));
-				if (check >= minStepPeakSize) {
-					// Log.i(LOG_TAG, "Detected step with t = " + t +
-					// ", peakSize = " + minStepPeakSize + " < " + check);
-					return true;
-				}
-			}
+//			if (stepDetecWindow[(vhPointer - 1 - t + vhSize + vhSize) % vhSize] != null) {
+//				double check = FloatMath
+//                        .sqrt((stepDetecWindow[x0][0] - stepDetecWindow[x1][0])
+//                                * (stepDetecWindow[x0][0] - stepDetecWindow[x1][0])
+//                                + (stepDetecWindow[x0][1] - stepDetecWindow[x1][1])
+//                                * (stepDetecWindow[x0][1] - stepDetecWindow[x1][1])
+//                                + (stepDetecWindow[x0][2] - stepDetecWindow[x1][2])
+//                                * (stepDetecWindow[x0][2] - stepDetecWindow[x1][2]));
+//                if (check >= minStepPeakSize) {
+//					// Log.i(LOG_TAG, "Detected step with t = " + t +
+//					// ", peakSize = " + minStepPeakSize + " < " + check);
+//					return true;
+//				}
+//			}
 
 		}
 		return false;

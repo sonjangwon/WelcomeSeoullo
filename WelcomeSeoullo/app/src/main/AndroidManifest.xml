@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.jangwon.welcomeseoullo"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.jangwon.welcomeseoullo">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -10,8 +10,8 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        xmlns:tools="http://schemas.android.com/tools"/>
+    <uses-permission xmlns:tools="http://schemas.android.com/tools"
+        android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -23,31 +23,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
-        <activity android:name=".GuideAppInfo"/>
-        <activity android:name=".HomeMenu.Test"/>
+        <activity android:name=".GuideAppInfo" />
+        <activity android:name=".HomeMenu.Test" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".NavigationMenu.PathInfoActivity" />
-        <activity android:name=".NoticeActivity"/>
+        <activity android:name=".NoticeActivity" />
         <activity android:name=".HomeMenu.ViewContents" />
         <activity android:name=".NavigationMenu.BusPathActivity" />
-        <activity android:name=".ARMenu.ARMainActivity"/>
+        <activity android:name=".ARMenu.ARMainActivity" />
         <activity
             android:name=".ARMenu.PhotoEditorActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_photo_editor"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
-
+        <activity android:name=".ARMenu.SetImageView"></activity>
     </application>
 
 </manifest>
