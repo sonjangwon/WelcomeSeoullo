@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -15,10 +17,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.HomeMenu.NewsCrawling;
 import com.example.jangwon.welcomeseoullo.HomeMenu.PrefManager;
 
 public class GuideAppInfo extends Activity {
@@ -31,10 +35,15 @@ public class GuideAppInfo extends Activity {
     private int[] layouts;
     private Button btnSkip, btnNext, btnStart;
     private PrefManager prefManager;
+    private ImageView imageISeoulU;
     int count = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        NewsCrawling.getInstance().newThread.execute();
+//        NewsCrawling.getInstance().thumnailTask.execute();
 
         // Checking for first time launch - before calling setContentView()
         //sharedPrefence에 저장ㅇ해놓고 실행안되게
@@ -49,11 +58,24 @@ public class GuideAppInfo extends Activity {
 
         setContentView(R.layout.activity_guide2);
 
+        //비디오 배경 설정
+        MyVideoView mVideoView = (MyVideoView) findViewById(R.id.bgVideoView);
+        Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video);
+        mVideoView.setVideoURI(uri);
+        mVideoView.start();
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                mediaPlayer.setLooping(true);
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext =(Button) findViewById(R.id.btn_next);
         btnStart = (Button) findViewById(R.id.btn_start);
+        imageISeoulU = (ImageView) findViewById(R.id.i_seoul_u);
         btnStart.setVisibility(View.INVISIBLE);
 
 
@@ -98,6 +120,7 @@ public class GuideAppInfo extends Activity {
                     launchHomeScreen();
             }
         });
+
     }
 
     private void addBottomDots(int currentPage) {
@@ -144,12 +167,14 @@ public class GuideAppInfo extends Activity {
                 btnStart.setVisibility(View.VISIBLE);
                 btnSkip.setVisibility(View.GONE);
                 btnNext.setVisibility(View.INVISIBLE);
+                imageISeoulU.setVisibility(View.INVISIBLE);
                 //dotsLayout.setVisibility(View.INVISIBLE); //밑에 닷 안보이게
             } else {
                 // still pages are left
                 btnStart.setVisibility(View.INVISIBLE);
                 btnSkip.setVisibility(View.VISIBLE);
                 btnNext.setVisibility(View.VISIBLE);
+                imageISeoulU.setVisibility(View.VISIBLE);
                // dotsLayout.setVisibility(View.VISIBLE); //닷 보이게
             }
         }

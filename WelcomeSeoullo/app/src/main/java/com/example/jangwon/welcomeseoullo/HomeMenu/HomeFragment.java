@@ -5,15 +5,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,29 +25,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.jangwon.welcomeseoullo.LoadingDialog;
 import com.example.jangwon.welcomeseoullo.R;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
     View view;
 
-    private Test.MyViewPagerAdapter myViewPagerAdapter;
-    ArrayList<String> titleList = new ArrayList<String>();
-    ArrayList<String> urlNumList = new ArrayList<String>();
-    ArrayList<String> dateList = new ArrayList<String>();
+//    ArrayList<String> titleList = new ArrayList<String>(10);
+//    ArrayList<String> urlNumList = new ArrayList<String>(10);
+//    ArrayList<String> dateList = new ArrayList<String>(10);
+//    ArrayList<String> urlList = new ArrayList<String>(10);
     int count =0;
     //현재화면인덱스
 
     AutoScrollViewPager viewPager;
+    AutoScrollViewPager imageViewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
     //InfiniteViewPager view;
@@ -56,11 +50,21 @@ public class HomeFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    public ArrayList<Item> items;
+//    public ArrayList<Item> items;
 
     private TextView[] dots;
     private int[] layouts;
     private LinearLayout dotsLayout;
+    //refresh에 필요
+    SwipeRefreshLayout mSwipeRefreshLayout;
+    NestedScrollView mScrollView;
+    ImageView centerImage;
+    //이미지 파싱
+    private String url;
+    boolean getimageFirst = false;
+    int isEmptyImage = 0;
+    //load more recyclerView list
+    TextView loadMoreText;
 
     public HomeFragment(){
 
@@ -69,27 +73,24 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
+        loadMoreText = (TextView) view.findViewById(R.id.loadMore);
+        loadMoreText.setVisibility(View.GONE);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
+        mScrollView = (NestedScrollView) view.findViewById(R.id.nestedScrollView);
+        centerImage = (ImageView) view.findViewById(R.id.imageView2);
+        mScrollView.smoothScrollBy(100, 1000);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        refreshView();
 
         viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
+        imageViewPager = (AutoScrollViewPager) view.findViewById(R.id.imageViewPager);
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
-//        view = new InfiniteViewPager(this);
-//        view = (InfiniteViewPager) findViewById(R.id.viewPager);
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
 
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
         viewPager.startAutoScroll();
-//        myViewPagerAdapter = new MyViewPagerAdapter();
-        //Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
-//
-//        pager.setAdapter(myViewPagerAdapter);
-//        pager.addOnPageChangeListener(viewPagerPageChangeListener);
-        //CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
-        //indicator.setViewPager(viewPager);
-        //dotsLayout = (LinearLayout) findViewById(R.id.dotLayouts);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
+        imageViewPager.setAdapter(wrappedAdapter);
 
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -102,105 +103,216 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(getActivity(), ViewContents.class);
-                        intent.putExtra("urlNum", urlNumList.get(position));
+                        intent.putExtra("urlNum", NewsCrawling.getInstance().urlNumList.get(position));
                         startActivity(intent);
                     }
 
                     @Override
                     public void onLongItemClick(View view, int position) {
-                        Toast.makeText(getActivity().getApplicationContext(),position+"번 째 아이템 롱 클릭",Toast.LENGTH_SHORT).show();
+
                     }
+
                 }));
 
-        //mRecyclerView.setNestedScrollingEnabled(false);
-        items = new ArrayList<>();
-        Log.e("메인","작동끝");
+//        items = new ArrayList<>();
 
+        loadMoreText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int index = NewsCrawling.getInstance().items.size();
+                int end = index + 2;
+                if(NewsCrawling.getInstance().items.size() < NewsCrawling.getInstance().titleList.size()) {
+                    for (int i = index; i < end; i++) {
+                        NewsCrawling.getInstance().items.add(new Item(NewsCrawling.getInstance().titleList.get(i), "  " + NewsCrawling.getInstance().dateList.get(i), NewsCrawling.getInstance().urlList.get(i)));
+                    }
+                    mAdapter.notifyDataSetChanged();
+                }
+                if(end== NewsCrawling.getInstance().titleList.size())
+                {
+                    loadMoreText.setVisibility(View.GONE);
+                }
+
+//                mAdapter.notifyDataSetChanged();
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+
+        }
+        else {
+
+        }
     }
 
     public boolean onTouch(View v, MotionEvent event)
     {
         return true;
     }
+
+    public void refreshView() {
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mRecyclerView.removeAllViewsInLayout();
+                viewPager.setVisibility(View.GONE);
+                centerImage.setVisibility(View.GONE);
+                viewPager.setVisibility(View.VISIBLE);
+                mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_home));
+                centerImage.setVisibility(View.VISIBLE);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        mSwipeRefreshLayout.setColorSchemeResources(
+                R.color.orangeGolfwang
+        );
+    }
+
     @Override
     public void onResume() {
         super.onResume();
 
-        NewThread task = new NewThread();
-        if(count ==0)
-        {
-            task.execute();
-//            task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            Log.e("어싱크실행", task.getStatus().toString());
-            count++;
-        }
-        else
-        {
-            task.cancel(true);
-        }
+//        NewThread task = new NewThread();
+//        thumnailThread thumnailTask = new thumnailThread();
+//
+//        if (count == 0) {
+//            task.execute();
+//            thumnailTask.execute();
+//            count++;
+//        } else {
+//            task.cancel(true);
+//            thumnailTask.cancel(true);
+//        }
+
+        mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_home));
+        mAdapter = mRecyclerView.getAdapter();
+        loadMoreText.setVisibility(View.VISIBLE);
     }
+
     @Override
-    public  void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
     }
 
-
-    public class NewThread extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            Document document = null;
-            try {
-                document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEList.do").get();
-                Elements elements = document.getElementsByAttributeValue("class", "t_left");
-                //Elements elements = document.select("td.t_left > a");
-                for (Element element : elements) {
-                    String num = element.text();
-                    if(num.length()>32)
-                    {
-                        String n = num.substring(0,33);
-                        num = n + "...";
-                        titleList.add(num);
-                    }
-                    else {
-                        titleList.add(element.text());
-                    }
-                    String title = element.select("a").attr("href").toString();
-                    String titleNum = title.substring(26,29);
-                    urlNumList.add(titleNum);
-                }
-                Elements ss = document.select("tr td:eq(3)");
-                for (Element e : ss) {
-                    String year =  e.text().substring(0,4);
-                    String month = e.text().substring(5,7);
-                    String day = e.text().substring(8,10);
-                    String date = year+"년 "+ month+"월 "+day+"일";
-                    dateList.add(date);
-
-                    Log.e("dd",date);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
-        @Override
-        protected void onPostExecute(String result) {
-
-            for(int i=0; i<titleList.size(); i++)
-            {
-                items.add(new Item(titleList.get(i), "  "+dateList.get(i)));
-            }
-            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.test));
-
-            //홈 화면 로드 완료하면 로딩화면 종료, 신재혁 추가
-            LoadingDialog.getInstance().progressOFF();
-        }
-    }
-
+//    private String _getImage(Document doc) {
+//        // 2nd -> img in p
+//        for (Element e1 : doc.getElementsByTag("p")) {
+//            for (Element e2 : e1.getElementsByTag("img")) {
+//                final String text = getValidPath(e2.attr("src"));
+//                if (text != null && !getimageFirst) {
+//                    //Log.e("imageurl", text);
+//                    urlList.add(text);
+//                    //Log.e("listSize", String.valueOf(urlNumList.size()) + ":" + String.valueOf(urlList.size()));
+//                    getimageFirst = true;
+//                    isEmptyImage++;
+//                }
+//            }
+//        }
+//        // etc empty
+//        return "";
+//    }
+//
+//    private String getValidPath(String url) {
+//        try {
+//            if (url.startsWith("http://") || url.startsWith("https://")) {
+//                //Log.e("imageurl",url);
+//                return url;
+//            }
+//
+//            final URI ogpUri = new URI(this.url);
+//            final URI imgUri = ogpUri.resolve(url);
+//            return imgUri.toString();
+//        } catch (URISyntaxException e) {
+//            return url;
+//        }
+//    }
+//
+//    public class thumnailThread extends AsyncTask<String, Void, String> {
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            Document document = null;
+//            try {
+//                for(int i=0; i<urlNumList.size(); i++) {
+//                    document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEView.do?board_seq=" + urlNumList.get(i) + "&pageIndex=1&pageSize=10&searchCondition=all&searchKeyword=").get();
+//                    _getImage(document);
+//                    getimageFirst = false;
+//                    if(isEmptyImage==0)
+//                    {
+//                        urlList.add("http://seoullo7017.seoul.go.kr/img/front/img_logo.png");
+//                        Log.e("emptyImage", String.valueOf(i));
+//                    }
+//                    isEmptyImage = 0;
+//                }
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String result) {
+//            for(int i=0; i<2; i++)
+//            {
+//                items.add(new Item(titleList.get(i), "  "+dateList.get(i),urlList.get(i)));
+//            }
+//
+//            mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), items, R.layout.fragment_home));
+//            mAdapter = mRecyclerView.getAdapter();
+//            loadMoreText.setVisibility(View.VISIBLE);
+//        }
+//    }
+//
+//    public class NewThread extends AsyncTask<String, Void, String> {
+//
+//        @Override
+//        protected String doInBackground(String... params) {
+//            Document document = null;
+//            try {
+//                document = Jsoup.connect("http://seoullo7017.seoul.go.kr/SSF/J/NO/NEList.do").get();
+//                Elements elements = document.getElementsByAttributeValue("class", "t_left");
+//                //Elements elements = document.select("td.t_left > a");
+//                for (Element element : elements) {
+//                    String num = element.text();
+//                    if(num.length()>40)
+//                    {
+//                        String n = num.substring(0,41);
+//                        num = n + "...";
+//                        titleList.add(num);
+//                    }
+//                    else {
+//                        titleList.add(element.text());
+//                    }
+//                    String title = element.select("a").attr("href").toString();
+//                    String titleNum = title.substring(26,29);
+//                    urlNumList.add(titleNum);
+//                }
+//                Elements ss = document.select("tr td:eq(3)");
+//                for (Element e : ss) {
+//                    String year =  e.text().substring(0,4);
+//                    String month = e.text().substring(5,7);
+//                    String day = e.text().substring(8,10);
+//                    String date = year+"년 "+ month+"월 "+day+"일";
+//                    dateList.add(date);
+//
+//                    //Log.e("dd",date);
+//                }
+//
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            return null;
+//        }
+//        @Override
+//        protected void onPostExecute(String result) {
+//
+//        }
+//    }
 
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
@@ -213,6 +325,7 @@ public class HomeFragment extends Fragment {
             return false;
         }
     };
+
     //	viewpager change listener
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
@@ -238,6 +351,7 @@ public class HomeFragment extends Fragment {
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 
@@ -273,6 +387,7 @@ public class HomeFragment extends Fragment {
             container.removeView(view);
         }
     }
+
     public void whenTouchImagePosition(int index)
     {
         Intent intent = new Intent();
@@ -295,8 +410,6 @@ public class HomeFragment extends Fragment {
             intent.setData(Uri.parse("http://www.naver.com"));
             startActivity(intent);
             Toast.makeText(getActivity().getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
-
         }
     }
-
 }

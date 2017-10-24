@@ -9,16 +9,16 @@
     <color name="pinkGolfwang">#EECEDF</color>
 
     <!-- dots inactive colors -->
-    <color name="dot_dark_screen1">@color/colorPrimary</color>
-    <color name="dot_dark_screen2">@color/colorPrimary</color>
-    <color name="dot_dark_screen3">@color/colorPrimary</color>
-    <color name="dot_dark_screen4">@color/colorPrimary</color>
+    <color name="dot_dark_screen1">@color/white</color>
+    <color name="dot_dark_screen2">@color/white</color>
+    <color name="dot_dark_screen3">@color/white</color>
+    <color name="dot_dark_screen4">@color/white</color>
 
     <!-- dots active colors -->
-    <color name="dot_light_screen1">@color/white</color>
-    <color name="dot_light_screen2">@color/white</color>
-    <color name="dot_light_screen3">@color/white</color>
-    <color name="dot_light_screen4">@color/white</color>
+    <color name="dot_light_screen1">@color/orangeGolfwang</color>
+    <color name="dot_light_screen2">@color/orangeGolfwang</color>
+    <color name="dot_light_screen3">@color/orangeGolfwang</color>
+    <color name="dot_light_screen4">@color/orangeGolfwang</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>
@@ -57,7 +57,7 @@
     <color name="black25PercentColor">#404040</color>
     <color name="black50PercentColor">#808080</color>
     <color name="black75PercentColor">#c0c0c0</color>      //굿
-    <color name="warmGrayColor">#857570</color>
+        <color name="warmGrayColor">#857570</color>
     <color name="coolGrayColor">#767a85</color>
     <color name="charcoalColor">#222222</color>
 

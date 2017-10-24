@@ -109,7 +109,7 @@ public class StepManager implements SensorEventListener {
 			int x0 = (vhPointer - 1 - t + vhSize + vhSize) % vhSize;
 			int x1 = (vhPointer - 1 + vhSize) % vhSize;
 			if (stepDetecWindow[(vhPointer - 1 - t + vhSize + vhSize) % vhSize] != null) {
-				double check = FloatMath
+				double check = Math
 						.sqrt((stepDetecWindow[x0][0] - stepDetecWindow[x1][0])
 								* (stepDetecWindow[x0][0] - stepDetecWindow[x1][0])
 								+ (stepDetecWindow[x0][1] - stepDetecWindow[x1][1])

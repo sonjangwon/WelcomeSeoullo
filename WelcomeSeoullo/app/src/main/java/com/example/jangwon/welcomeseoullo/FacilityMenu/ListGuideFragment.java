@@ -3,24 +3,18 @@ package com.example.jangwon.welcomeseoullo.FacilityMenu;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.example.jangwon.welcomeseoullo.ListViewAdapter;
-import com.example.jangwon.welcomeseoullo.ListViewItem;
-import com.example.jangwon.welcomeseoullo.ManageListToMap;
-import com.example.jangwon.welcomeseoullo.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
+import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.R;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,7 +83,7 @@ public class ListGuideFragment extends Fragment {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
 //                address = reverseGeocoder(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
 //                        Double.valueOf( ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.toilet),ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclicktoilet),ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
                         ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()+","+ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude());
 //                adapter.addItem(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
 //                        address);
@@ -98,14 +92,14 @@ public class ListGuideFragment extends Fragment {
         }
         if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkingLotVOArrayList().size(); i++) {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.parkinglot),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclickparkinglot),
                         ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotName(),
                         ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude()+","+ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude());
             }
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="공원") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkVOArrayList().size(); i++) {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.park),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclickpark),
                         ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName(),
                         ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLatitude()+","+ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLongitude());
 
@@ -113,38 +107,36 @@ public class ListGuideFragment extends Fragment {
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
             for (int i = 0; i < ManagePublicData.getInstance().getTraditionalMarketVOArrayList().size(); i++) {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.shopping),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclickmarket),
                         ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName(),
                         ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLatitude()+","+ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLongitude());
             }
         }
     }
 
-    //역 지오코딩(위도경도를 상세주소로 변경)
-    public String reverseGeocoder(double currentLatitude,double currentLongitude)
-    {
-        final Geocoder geocoder = new Geocoder(getActivity());
-        List<android.location.Address> list = null;
-        String currentAddress="";
-        try {
-            list = geocoder.getFromLocation(currentLatitude, currentLongitude, 1); // 위도,경도,얻어올 값의 개수
-            Log.e("latitude", String.valueOf(currentLatitude));
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
-        }
-        if (list != null) {
-            if (list.size()==0) {
-                Log.e("noList", "noList");
-
-            } else {
-//                tv.setText(list.get(0).toString());
-                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
-                Log.e("currentAddress", currentAddress);
-            }
-        }
-        return currentAddress;
-
-
-    }
+//    //역 지오코딩(위도경도를 상세주소로 변경)
+//    public String reverseGeocoder(double currentLatitude,double currentLongitude)
+//    {
+//        final Geocoder geocoder = new Geocoder(getActivity());
+//        List<android.location.Address> list = null;
+//        String currentAddress="";
+//        try {
+//            list = geocoder.getFromLocation(currentLatitude, currentLongitude, 1); // 위도,경도,얻어올 값의 개수
+//            Log.e("latitude", String.valueOf(currentLatitude));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
+//        }
+//        if (list != null) {
+//            if (list.size()==0) {
+//                Log.e("noList", "noList");
+//
+//            } else {
+////                tv.setText(list.get(0).toString());
+//                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
+//                Log.e("currentAddress", currentAddress);
+//            }
+//        }
+//        return currentAddress;
+//    }
 }

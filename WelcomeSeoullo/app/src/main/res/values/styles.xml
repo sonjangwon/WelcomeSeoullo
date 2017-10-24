@@ -14,11 +14,6 @@
         <item name="windowActionBarOverlay">true</item>
     </style>
 
-    <!-- Splash Screen theme. -->
-    <style name="SplashTheme" parent="AppTheme">
-        <item name="android:background">@drawable/splash_background</item>
-    </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />

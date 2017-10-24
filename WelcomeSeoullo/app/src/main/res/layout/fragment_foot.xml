@@ -60,7 +60,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center|left"
                     android:text="4시간 21분"
-                    android:textColor="#01A2DD"
+                    android:textColor="#7BA293"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 

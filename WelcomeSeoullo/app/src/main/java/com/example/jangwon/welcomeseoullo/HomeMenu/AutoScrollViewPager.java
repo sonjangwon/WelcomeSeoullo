@@ -14,25 +14,6 @@ import android.view.animation.Interpolator;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 
-/**
- * Auto Scroll View Pager
- * <ul>
- * <strong>Basic Setting and Usage</strong>
- * <li>{@link #startAutoScroll()} start auto scroll, or {@link #startAutoScroll(int)} start auto scroll delayed</li>
- * <li>{@link #stopAutoScroll()} stop auto scroll</li>
- * <li>{@link #setInterval(long)} set auto scroll time in milliseconds, default is {@link #DEFAULT_INTERVAL}</li>
- * </ul>
- * <ul>
- * <strong>Advanced Settings and Usage</strong>
- * <li>{@link #setDirection(int)} set auto scroll direction</li>
- * <li>{@link #setCycle(boolean)} set whether automatic cycle when auto scroll reaching the last or first item, default
- * is true</li>
- * <li>{@link #setSlideBorderMode(int)} set how to process when sliding at the last or first item</li>
- * <li>{@link #setStopScrollWhenTouch(boolean)} set whether stop auto scroll when touching, default is true</li>
- * </ul>
- * 
- * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2013-12-30
- */
 public class AutoScrollViewPager extends ViewPager {
 
     public static final int        DEFAULT_INTERVAL            = 5000;
@@ -189,9 +170,9 @@ public class AutoScrollViewPager extends ViewPager {
         if (stopScrollWhenTouch) {
             if ((action == MotionEvent.ACTION_DOWN) && isAutoScroll) {
                 isStopByTouch = true;
-                stopAutoScroll();
+                //stopAutoScroll();
             } else if (ev.getAction() == MotionEvent.ACTION_UP && isStopByTouch) {
-                startAutoScroll();
+                //startAutoScroll();
             }
         }
 

@@ -60,7 +60,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center|left"
                     android:text="1시간 21분"
-                    android:textColor="#01A2DD"
+                    android:textColor="#7BA293"
                     android:textSize="20dp"
                     android:textStyle="bold" />
 
@@ -99,11 +99,12 @@
                 android:layout_weight="7">
 
                 <ImageButton
-                    android:layout_marginTop="20dp"
+                    android:id="@+id/startTmapButton"
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_marginLeft="12dp"
-                    android:background="@drawable/start"/>
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/start" />
             </RelativeLayout>
 
             <TextView
@@ -112,7 +113,7 @@
                 android:layout_weight="3"
                 android:gravity="top|center"
                 android:text="안내시작"
-                android:textColor="#024987"
+                android:textColor="#7BA293"
                 android:textSize="11dp" />
         </LinearLayout>
 
