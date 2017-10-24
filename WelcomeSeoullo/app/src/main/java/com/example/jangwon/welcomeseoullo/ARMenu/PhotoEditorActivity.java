@@ -356,6 +356,11 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 
         showSetup("Demo Setup", new StaticDemoSetup(), photoEditorSDK.saveImage("PhotoEditorSDK", "IMG_.jpg"));
 
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("hi", photoEditorSDK.saveImage("PhotoEditorSDK", "IMG_.jpg"));
+        editor.commit();
+
     }
 
     private void showSetup(String string, final Setup aSetupInstance, String imagePath) {

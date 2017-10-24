@@ -1,5 +1,6 @@
 package de.rwth;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
@@ -24,13 +25,14 @@ public class SampleActivity extends AppCompatActivity {
 //        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 //        String imageName = "IMG_.jpg";
 //        String selectedImagePath = photoEditorSDK.saveImage("PhotoEditorSDK", imageName);
+        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
+        String imagePathFinal = pref.getString("hi", "");
         Intent intentToGetImagePath = getIntent();
-        String imagePath = intentToGetImagePath.getExtras().getString("imagePathForAR");
+//        String imagePath = intentToGetImagePath.getExtras().getString("imagePathForAR");
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 1;
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePathFinal, options);
         ImageView photoEditImageView = (ImageView) findViewById(R.id.imageView);
         photoEditImageView.setImageBitmap(bitmap);
-        Toast.makeText(SampleActivity.this, imagePath, Toast.LENGTH_LONG).show();
     }
 }
