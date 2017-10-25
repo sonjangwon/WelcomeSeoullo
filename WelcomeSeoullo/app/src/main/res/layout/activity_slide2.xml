@@ -3,13 +3,27 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="이미지뷰 대체2"
-        android:layout_weight="2"
+
+    <ImageView
+        android:layout_width="350dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="400dp"
+        android:background="@drawable/splash_text2"
+        android:layout_gravity="center_horizontal|bottom"
         android:gravity="center"
+        android:text="증강현실로 공유하는 서울로7017의 추억"
         android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+        android:textSize="20dp"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="2"-->
+        <!--android:gravity="center"-->
+        <!--android:text="증강현실로 공유하는 서울로7017의 추억"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginTop="200dp"/>-->
 </LinearLayout>

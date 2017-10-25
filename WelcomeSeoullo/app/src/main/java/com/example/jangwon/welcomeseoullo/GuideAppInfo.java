@@ -33,7 +33,7 @@ public class GuideAppInfo extends Activity {
     private LinearLayout dotsLayout;
     private TextView[] dots;
     private int[] layouts;
-    private Button btnSkip, btnNext, btnStart;
+    private Button btnStart;
     private PrefManager prefManager;
     private ImageView imageISeoulU;
     int count = 0;
@@ -43,7 +43,6 @@ public class GuideAppInfo extends Activity {
         super.onCreate(savedInstanceState);
 
         NewsCrawling.getInstance().newThread.execute();
-//        NewsCrawling.getInstance().thumnailTask.execute();
 
         // Checking for first time launch - before calling setContentView()
         //sharedPrefence에 저장ㅇ해놓고 실행안되게
@@ -72,8 +71,6 @@ public class GuideAppInfo extends Activity {
 
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnSkip = (Button) findViewById(R.id.btn_skip);
-        btnNext =(Button) findViewById(R.id.btn_next);
         btnStart = (Button) findViewById(R.id.btn_start);
         imageISeoulU = (ImageView) findViewById(R.id.i_seoul_u);
         btnStart.setVisibility(View.INVISIBLE);
@@ -95,25 +92,6 @@ public class GuideAppInfo extends Activity {
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-
-        btnSkip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchHomeScreen();
-            }
-        });
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // checking for last page
-                // if last page home screen will be launched
-                int current = getItem(+1);
-                if (current < layouts.length) {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                }
-            }
-        });
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,21 +139,12 @@ public class GuideAppInfo extends Activity {
         public void onPageSelected(int position) {
             addBottomDots(position);
 
-            // changing the next button text 'NEXT' / 'GOT IT'
             if (position == layouts.length - 1) {
-                // last page. make button text to GOT IT
                 btnStart.setVisibility(View.VISIBLE);
-                btnSkip.setVisibility(View.GONE);
-                btnNext.setVisibility(View.INVISIBLE);
-                imageISeoulU.setVisibility(View.INVISIBLE);
-                //dotsLayout.setVisibility(View.INVISIBLE); //밑에 닷 안보이게
+
             } else {
-                // still pages are left
                 btnStart.setVisibility(View.INVISIBLE);
-                btnSkip.setVisibility(View.VISIBLE);
-                btnNext.setVisibility(View.VISIBLE);
-                imageISeoulU.setVisibility(View.VISIBLE);
-               // dotsLayout.setVisibility(View.VISIBLE); //닷 보이게
+
             }
         }
 

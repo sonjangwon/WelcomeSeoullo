@@ -31,7 +31,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-import com.example.jangwon.welcomeseoullo.ARMenu.ARMainActivity;
+
 import com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment;
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
@@ -48,9 +48,7 @@ public class MainActivity extends Activity {
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
 
-
     private static final int MY_PERMISSIONS_REQUEST_ACCOUNTS = 1;
-
 
     int currentMenu;
     BottomNavigationView bottomNavigationView;
@@ -141,13 +139,6 @@ public class MainActivity extends Activity {
         checkAndRequestPermissions();
     }
 
-
-
-
-
-
-
-
     //효완이 코드 사용
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -230,12 +221,16 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/BMDOHYEON_ttf.ttf");
-        for(int i=0;i<5;i++){
-            applyFontToMenuItem(bottomNavigationView.getMenu().getItem(i), typeface);
-        }
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/barefoot_regular.ttf");
+//        for(int i=0;i<5;i++){
+//            applyFontToMenuItem(bottomNavigationView.getMenu().getItem(i), typeface);
+//        }
     }
 
     private void applyFontToMenuItem(MenuItem mi, Typeface font) {
@@ -243,14 +238,6 @@ public class MainActivity extends Activity {
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
-
-
-
-
-
-
-
-
 
     //현재위치 받아오기
     private void getMyLocation() {

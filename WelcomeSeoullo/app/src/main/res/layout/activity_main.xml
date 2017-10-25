@@ -42,13 +42,7 @@
             app:itemIconTint="@drawable/select_bottom_navigation"
             app:itemTextColor="@drawable/select_bottom_navigation"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:menu="@menu/bottom_navigation_main"
-            />
-
-
+            app:menu="@menu/bottom_navigation_main" />
 
     </LinearLayout>
-
-
-
 </RelativeLayout>

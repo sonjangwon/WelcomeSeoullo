@@ -15,11 +15,11 @@
 
         <Button
             android:id="@+id/button"
-            android:layout_width="match_parent"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/button_shape"
+            android:background="@drawable/arfragment_button_shape"
             android:text="시작하기"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
