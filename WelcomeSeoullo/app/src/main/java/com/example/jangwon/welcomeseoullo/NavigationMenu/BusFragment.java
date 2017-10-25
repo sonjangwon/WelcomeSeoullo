@@ -3,7 +3,6 @@ package com.example.jangwon.welcomeseoullo.NavigationMenu;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +46,7 @@ public class BusFragment extends Fragment  {
         currentAddress = ManagementLocation.getInstance().getCurrentAddress();
 
 //        https://m.map.naver.com/directions/?ex=126.96961950000002&ey=37.5536067&eex=126.96961950000002&eey=37.553606&edid=11630456&incomeUrl=https%3A%2F%2Fm.map.naver.com%2Fsearch2%2Fsearch.nhn%3Fquery%3D%25EC%2584%259C%25EC%259A%25B8%25EC%2597%25AD%26sm%3Dhty#/publicTransit/list/"+currentAddress+","+currentLongitude+","+currentLatitude+",,,false,/서울로7017,126.9697727,37.5580094,,,false,/0
-        busUrl= "https://m.map.naver.com/directions/?ex=126.96961950000002&ey=37.5536067&eex="+currentLongitude+"&eey="+currentLatitude+"&edid=11630456&incomeUrl=https%3A%2F%2Fm.map.naver.com%2Fsearch2%2Fsearch.nhn%3Fquery%3D%25EC%2584%259C%25EC%259A%25B8%25EC%2597%25AD%26sm%3Dhty#/publicTransit/list/"+currentAddress+","+currentLongitude+","+currentLatitude+",,,false,/서울로7017,126.9697727,37.5580094,,,false,/0";
+//        busUrl= "https://m.map.naver.com/directions/?ex=126.96961950000002&ey=37.5536067&eex="+currentLongitude+"&eey="+currentLatitude+"&edid=11630456&incomeUrl=https%3A%2F%2Fm.map.naver.com%2Fsearch2%2Fsearch.nhn%3Fquery%3D%25EC%2584%259C%25EC%259A%25B8%25EC%2597%25AD%26sm%3Dhty#/publicTransit/list/"+currentAddress+","+currentLongitude+","+currentLatitude+",,,false,/서울로7017,126.9697727,37.5580094,,,false,/0";
 //        busUrl = "https://m.map.daum.net/actions/publicRoute?startLoc="+currentAddress+"&sxEnc=MNPNPP&syEnc=QNLPQQM&endLoc=서울로7017&exEnc=LVMPRP&eyEnc=QNLSUUW&ids=P7949668%2CP27327842&service=";
 //        busUrl="https://www.google.co.kr/maps/dir/%EC%84%B8%EC%A2%85%EB%8C%80%ED%95%99%EA%B5%90+%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C+%EA%B4%91%EC%A7%84%EA%B5%AC+%EA%B5%B0%EC%9E%90%EB%8F%99+%EB%8A%A5%EB%8F%99%EB%A1%9C+209/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C+%EC%A4%91%EA%B5%AC+%EB%A7%8C%EB%A6%AC%EB%8F%991%EA%B0%80+1+%EC%84%9C%EC%9A%B8%EB%A1%9C7017/@37.5606405,126.9969973,13.26z/data=!4m14!4m13!1m5!1m1!1s0x357ca4d0720eecc1:0x1a7ad975c6b5e4eb!2m2!1d127.073139!2d37.5502596!1m5!1m1!1s0x357ca2607008c5c3:0xa35240ec632d4307!2m2!1d126.9715781!2d37.5566149!3e3";
         busUrl = "https://m.map.naver.com/directions/?ex=126.96961950000002&ey=37.5536067&eex="+currentLongitude+"&eey="+currentLatitude+"&edid=11630456&incomeUrl=https%3A%2F%2Fm.map.naver.com%2Fsearch2%2Fsearch.nhn%3Fquery%3D%25EC%2584%259C%25EC%259A%25B8%25EC%2597%25AD%26sm%3Dhty#/publicTransit/detail/"+currentAddress+","+currentLongitude+","+currentLatitude+",,,false,13479327/%25EC%2584%259C%25EC%259A%25B8%25EB%25A1%259C7017,126.9697727,37.5580094,,,false,/0/0/map/0";
@@ -80,31 +79,6 @@ public class BusFragment extends Fragment  {
                 Toast.makeText(getActivity(),"onPageFinished",Toast.LENGTH_SHORT).show();
             }
 
-            @SuppressWarnings("deprecation")  //수정하기
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                Toast.makeText(getActivity(), "shouldOverrideUrlLoading", Toast.LENGTH_SHORT).show();
-                webView.setBackgroundColor(Color.rgb(0, 255, 255));
-                return true;
-            }
-//             @Override
-//             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
-//                 Toast.makeText(getActivity(), "shouldOverrideUrlLoading", Toast.LENGTH_SHORT).show();
-//                 Toast.makeText(getActivity(),request.toString(),Toast.LENGTH_SHORT).show();
-//                 Uri requested = Uri.parse(busUrl.toString());
-//                 String scheme = requested.getScheme();
-//
-//                 if (scheme != null && scheme.contains("detail")) {
-//                     Toast.makeText(getActivity(),"detail",Toast.LENGTH_SHORT).show();
-//                     Log.d("WebView", "overriden"); //***
-//
-//                 return true; // true를 리턴하면 WebView는 해당 URL을 렌더하지 않는다.
-//                 } else {
-//                     return super.shouldOverrideUrlLoading(view, request);
-//                 }
-//             }
-
-
         });
 
         webView.loadUrl(busUrl.toString());
@@ -113,50 +87,5 @@ public class BusFragment extends Fragment  {
         webView.setVerticalScrollBarEnabled(true);
         webView.setScrollbarFadingEnabled(true);
 
-
-//                if(touchX == 0 && touchY == 0)
-//               {
-//                   webView.goBack();
-//                   touchX = (int)motionEvent.getX();
-//                   touchY = (int)motionEvent.getY();
-////                   Toast.makeText(getActivity(),"onTouch",Toast.LENGTH_SHORT).show();
-//                   Log.e("testt","onTouch");
-////                   webView.onPause();
-//               }
-//               if(motionEvent.getAction() == MotionEvent.ACTION_UP)
-//               {
-//                   int nowTouchX = (int)motionEvent.getX();
-//                   int nowTouchY = (int)motionEvent.getY();
-//
-//                   if(Math.abs(touchX - nowTouchX)  >= 10 || Math.abs(touchY - nowTouchY)  >= 10)
-//                   {
-////                       webView.setVerticalScrollBarEnabled(true);
-//                       Toast.makeText(getActivity(), "스크롤이벤트가 발생했습니다", Toast.LENGTH_SHORT).show();
-//                       Log.e("testt","스크롤이벤트가");
-//                   }
-//
-//                   touchX=0;
-//                   touchY=0;
-//               }
-//               if(motionEvent.getAction() == MotionEvent.ACTION_MOVE)
-//               {
-//                   webView.computeScroll();
-////                   Toast.makeText(getActivity(), "ACTION_MOVE", Toast.LENGTH_SHORT).show();
-//                   Log.e("testt","ACTION_MOVE");
-//               }
-//               if(motionEvent.getAction() == MotionEvent.ACTION_SCROLL)
-//               {
-//                   Toast.makeText(getActivity(), "ACTION_SCROLL", Toast.LENGTH_SHORT).show();
-//                   Log.e("testt","ACTION_SCROLL");
-//               }
-//               if(motionEvent.getAction() == MotionEvent.ACTION_BUTTON_RELEASE) {
-//                   Toast.makeText(getActivity(), "ACTION_BUTTON_RELEASE", Toast.LENGTH_SHORT).show();
-//                   Log.e("testt","ACTION_BUTTON_RELEASE");
-//               }
-//
-//                return false;
-//            }
-////        });
-//        });
     }
 }
