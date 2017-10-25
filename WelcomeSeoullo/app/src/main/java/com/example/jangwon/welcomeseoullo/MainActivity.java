@@ -28,6 +28,7 @@ import android.text.SpannableString;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -77,6 +78,8 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         changeStatusBarColor();
+        //상태바 남는 공간 활용
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         mainViewPager = (ViewPager) findViewById(R.id.mainViewPager);
         mainViewPager.setOffscreenPageLimit(5);

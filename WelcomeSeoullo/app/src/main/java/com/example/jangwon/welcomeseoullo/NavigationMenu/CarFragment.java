@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.jangwon.welcomeseoullo.LoadingDialog;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 import com.skp.Tmap.TMapData;
@@ -67,6 +68,8 @@ public class CarFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
+        LoadingDialog.getInstance().progressON(getActivity());
+
         view = inflater.inflate(R.layout.fragment_car, container, false);
 
         totalTimeTextView = (TextView) view.findViewById(R.id.totalTime);
@@ -92,6 +95,8 @@ public class CarFragment extends Fragment {
 
             }
         };
+
+        LoadingDialog.getInstance().progressOFF();
 
         return view;
     }

@@ -6,7 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatDialog;
 import android.widget.ImageView;
 
-public class LoadingDialog {
+public class LoadingDialog extends MainActivity {
 
     private static LoadingDialog loadingDialog;
 
