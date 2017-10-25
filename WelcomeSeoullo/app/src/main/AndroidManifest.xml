@@ -31,6 +31,9 @@
         <activity android:name=".GuideAppInfo"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".HomeMenu.ViewContents" />
+        <activity android:name=".HomeMenu.NewNoticeActivity" />
+        <activity android:name=".HomeMenu.SeoulloCourseFragment" />
+        <activity android:name=".HomeMenu.UsingGuideTimeActivity" />
 
     </application>
 

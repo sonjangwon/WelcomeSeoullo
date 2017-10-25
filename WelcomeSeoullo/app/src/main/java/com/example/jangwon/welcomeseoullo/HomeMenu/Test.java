@@ -241,11 +241,7 @@ public class Test extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String result) {
-            for(int i=0; i<titleList.size(); i++)
-            {
-                items.add(new Item(titleList.get(i), "  "+dateList.get(i),urlList.get(i)));
-            }
-            mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), items, R.layout.test));
+
         }
     }
     public class NewThread extends AsyncTask<String, Void, String> {
