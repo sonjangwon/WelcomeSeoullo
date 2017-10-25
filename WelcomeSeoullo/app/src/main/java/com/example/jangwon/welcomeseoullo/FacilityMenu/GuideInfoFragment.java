@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -14,6 +15,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.jangwon.welcomeseoullo.CustomTypefaceSpan;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 
@@ -231,6 +235,12 @@ public class GuideInfoFragment extends Fragment {
         super.onResume();
         settingGPS();
         reverseGeocoder();
+    }
+
+    private void applyFontToString(Button button, Typeface font) {
+        SpannableString mNewTitle = new SpannableString(button.getText());
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, button.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        button.setText(mNewTitle);
     }
 
     @Override
