@@ -83,7 +83,7 @@ public class ListGuideFragment extends Fragment {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
 //                address = reverseGeocoder(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
 //                        Double.valueOf( ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclicktoilet),ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.colortoilet),ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
                         ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()+","+ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude());
 //                adapter.addItem(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName(),
 //                        address);
@@ -92,14 +92,14 @@ public class ListGuideFragment extends Fragment {
         }
         if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkingLotVOArrayList().size(); i++) {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclickparkinglot),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.colorparkinglot),
                         ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotName(),
                         ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLatitude()+","+ManagePublicData.getInstance().getPublicParkingLotVOArrayList().get(i).getParkingLotLongitude());
             }
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="공원") {
             for (int i = 0; i < ManagePublicData.getInstance().getPublicParkVOArrayList().size(); i++) {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclickpark),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.colorpark),
                         ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkName(),
                         ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLatitude()+","+ManagePublicData.getInstance().getPublicParkVOArrayList().get(i).getParkLongitude());
 
@@ -107,7 +107,7 @@ public class ListGuideFragment extends Fragment {
         }
         if(ManagementLocation.getInstance().getSortSpinner()=="전통시장") {
             for (int i = 0; i < ManagePublicData.getInstance().getTraditionalMarketVOArrayList().size(); i++) {
-                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.nonclickmarket),
+                adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.colormarket),
                         ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketName(),
                         ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLatitude()+","+ManagePublicData.getInstance().getTraditionalMarketVOArrayList().get(i).getMarketLongitude());
             }
