@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,35 +38,30 @@ public class HomeFragment extends Fragment {
 //    ArrayList<String> urlNumList = new ArrayList<String>(10);
 //    ArrayList<String> dateList = new ArrayList<String>(10);
 //    ArrayList<String> urlList = new ArrayList<String>(10);
+//    private Test.MyViewPagerAdapter myViewPagerAdapter;
+
+
+    ArrayList<String> urlList = new ArrayList<String>(10);
     int count =0;
     //현재화면인덱스
 
     AutoScrollViewPager viewPager;
-    AutoScrollViewPager imageViewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
     //InfiniteViewPager view;
 
-    //카드뷰 선언--------------------------------
-    private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-//    public ArrayList<Item> items;
 
     private TextView[] dots;
     private int[] layouts;
     private LinearLayout dotsLayout;
-    //refresh에 필요
-    SwipeRefreshLayout mSwipeRefreshLayout;
-    NestedScrollView mScrollView;
-    ImageView centerImage;
-    //이미지 파싱
-    private String url;
-    boolean getimageFirst = false;
-    int isEmptyImage = 0;
     //load more recyclerView list
     TextView loadMoreText;
 
+    //메인버튼
+    Button btn_newNotice;
+    Button btn_history;
+    Button btn_usingTime;
+    Button btn_walkingCourse;
     public HomeFragment(){
 
     }
@@ -73,108 +69,86 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        loadMoreText = (TextView) view.findViewById(R.id.loadMore);
-        loadMoreText.setVisibility(View.GONE);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
-        mScrollView = (NestedScrollView) view.findViewById(R.id.nestedScrollView);
-        centerImage = (ImageView) view.findViewById(R.id.imageView2);
-        mScrollView.smoothScrollBy(100, 1000);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
-        refreshView();
+
 
         viewPager = (AutoScrollViewPager) view.findViewById(R.id.viewPager);
-        imageViewPager = (AutoScrollViewPager) view.findViewById(R.id.imageViewPager);
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
 
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
         viewPager.startAutoScroll();
-        imageViewPager.setAdapter(wrappedAdapter);
 
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(getActivity().getApplicationContext(),new LinearLayoutManager(getActivity()).getOrientation());
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-        mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity().getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getActivity(), ViewContents.class);
-                        intent.putExtra("urlNum", NewsCrawling.getInstance().urlNumList.get(position));
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onLongItemClick(View view, int position) {
-
-                    }
-
-                }));
 
 //        items = new ArrayList<>();
 
-        loadMoreText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int index = NewsCrawling.getInstance().items.size();
-                int end = index + 2;
-                if(NewsCrawling.getInstance().items.size() < NewsCrawling.getInstance().titleList.size()) {
-                    for (int i = index; i < end; i++) {
-                        NewsCrawling.getInstance().items.add(new Item(NewsCrawling.getInstance().titleList.get(i), "  " + NewsCrawling.getInstance().dateList.get(i), NewsCrawling.getInstance().urlList.get(i)));
+//        loadMoreText.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                int index = NewsCrawling.getInstance().items.size();
+//                int end = index + 2;
+//                if (NewsCrawling.getInstance().items.size() < NewsCrawling.getInstance().titleList.size()) {
+//                    for (int i = index; i < end; i++) {
+//                        NewsCrawling.getInstance().items.add(new Item(NewsCrawling.getInstance().titleList.get(i)));
+//                    }
+//                    mAdapter.notifyDataSetChanged();
+//                }
+//                if (end == NewsCrawling.getInstance().titleList.size()) {
+//                    loadMoreText.setVisibility(View.GONE);
+//                }
+//            }
+
+                btn_newNotice = (Button) view.findViewById(R.id.Btn_newNotice);
+                btn_walkingCourse = (Button) view.findViewById(R.id.Btn_walkingCourse);
+                btn_history = (Button) view.findViewById(R.id.Btn_history);
+                btn_usingTime = (Button) view.findViewById(R.id.Btn_usingTime);
+
+                btn_newNotice.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity().getApplicationContext(), NewNoticeActivity.class);
+                        startActivity(intent);
                     }
-                    mAdapter.notifyDataSetChanged();
-                }
-                if(end== NewsCrawling.getInstance().titleList.size())
-                {
-                    loadMoreText.setVisibility(View.GONE);
-                }
-
-//                mAdapter.notifyDataSetChanged();
+                });
+                btn_walkingCourse.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity().getApplicationContext(), SeoulloCourseFragment.class);
+                        startActivity(intent);
+                    }
+                });
+                btn_history.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity().getApplicationContext(), NewNoticeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                btn_usingTime.setOnClickListener(new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getActivity().getApplicationContext(), UsingGuideTimeActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                return view;
             }
-        });
-        return view;
-    }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
 
-        }
-        else {
-
-        }
-    }
-
-    public boolean onTouch(View v, MotionEvent event)
-    {
-        return true;
-    }
-
-    public void refreshView() {
-        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onRefresh() {
-                mRecyclerView.removeAllViewsInLayout();
-                viewPager.setVisibility(View.GONE);
-                centerImage.setVisibility(View.GONE);
-                viewPager.setVisibility(View.VISIBLE);
-                mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_home));
-                centerImage.setVisibility(View.VISIBLE);
-                mSwipeRefreshLayout.setRefreshing(false);
-            }
-        });
-        mSwipeRefreshLayout.setColorSchemeResources(
-                R.color.orangeGolfwang
-        );
-    }
+            public void setUserVisibleHint(boolean isVisibleToUser) {
+                super.setUserVisibleHint(isVisibleToUser);
+                if (isVisibleToUser) {
 
-    @Override
-    public void onResume() {
-        super.onResume();
+                } else {
+
+                }
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+
+
+            @Override
+            public void onResume() {
+                super.onResume();
 
 //        NewThread task = new NewThread();
 //        thumnailThread thumnailTask = new thumnailThread();
@@ -187,16 +161,13 @@ public class HomeFragment extends Fragment {
 //            task.cancel(true);
 //            thumnailTask.cancel(true);
 //        }
+            }
 
-        mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_home));
-        mAdapter = mRecyclerView.getAdapter();
-        loadMoreText.setVisibility(View.VISIBLE);
-    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
+            @Override
+            public void onDestroy() {
+                super.onDestroy();
+            }
 
 //    private String _getImage(Document doc) {
 //        // 2nd -> img in p
@@ -314,102 +285,98 @@ public class HomeFragment extends Fragment {
 //        }
 //    }
 
-    private int getItem(int i) {
-        return viewPager.getCurrentItem() + i;
-    }
 
-    ViewPager.OnTouchListener viewPagerTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            Toast.makeText(getActivity().getApplicationContext(),"터치", Toast.LENGTH_SHORT);
-            return false;
-        }
-    };
+            private int getItem(int i) {
+                return viewPager.getCurrentItem() + i;
+            }
 
-    //	viewpager change listener
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+            ViewPager.OnTouchListener viewPagerTouchListener = new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Toast.makeText(getActivity().getApplicationContext(), "터치", Toast.LENGTH_SHORT);
+                    return false;
+                }
+            };
 
-        @Override
-        public void onPageSelected(int position) {
-        }
+            //	viewpager change listener
+            ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
-        @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {
+                @Override
+                public void onPageSelected(int position) {
+                }
 
-        }
+                @Override
+                public void onPageScrolled(int arg0, float arg1, int arg2) {
 
-        @Override
-        public void onPageScrollStateChanged(int arg0) {
+                }
 
-        }
-    };
+                @Override
+                public void onPageScrollStateChanged(int arg0) {
 
-    private void changeStatusBarColor() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getActivity().getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-        }
-    }
+                }
+            };
 
-    public class MyViewPagerAdapter extends PagerAdapter {
-        private LayoutInflater layoutInflater;
+            private void changeStatusBarColor() {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    Window window = getActivity().getWindow();
+                    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                    window.setStatusBarColor(Color.TRANSPARENT);
+                }
+            }
 
-        public MyViewPagerAdapter() {
-        }
+            public class MyViewPagerAdapter extends PagerAdapter {
+                private LayoutInflater layoutInflater;
 
-        @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
-            layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = layoutInflater.inflate(R.layout.imagefragment, container, false);
-            ImageView imageView = (ImageView) view.findViewById(R.id.imagefragment_imageview);
-            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-            imageView.setImageResource(Images[position]);
-            container.addView(view);
+                public MyViewPagerAdapter() {
+                }
 
-            return view;
-        }
+                @Override
+                public Object instantiateItem(ViewGroup container, final int position) {
+                    layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    View view = layoutInflater.inflate(R.layout.imagefragment, container, false);
+                    ImageView imageView = (ImageView) view.findViewById(R.id.imagefragment_imageview);
+                    imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                    imageView.setImageResource(Images[position]);
+                    container.addView(view);
 
-        @Override
-        public int getCount() {
-            return Images.length;
-        }
+                    return view;
+                }
 
-        @Override
-        public boolean isViewFromObject(View view, Object obj) {
-            return view == obj;
-        }
+                @Override
+                public int getCount() {
+                    return Images.length;
+                }
+
+                @Override
+                public boolean isViewFromObject(View view, Object obj) {
+                    return view == obj;
+                }
 
 
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            View view = (View) object;
-            container.removeView(view);
-        }
-    }
+                @Override
+                public void destroyItem(ViewGroup container, int position, Object object) {
+                    View view = (View) object;
+                    container.removeView(view);
+                }
+            }
 
-    public void whenTouchImagePosition(int index)
-    {
-        Intent intent = new Intent();
-        intent.setAction(Intent.ACTION_VIEW);
-        intent.addCategory(Intent.CATEGORY_BROWSABLE);
-        if(index ==0){
-            intent.setData(Uri.parse("http://www.naver.com"));
-            startActivity(intent);
-            Toast.makeText(getActivity().getApplicationContext(),"1이동", Toast.LENGTH_SHORT).show();
-        }
-        else if(index == 1)
-        {
-            intent.setData(Uri.parse("http://www.daum.net"));
-            startActivity(intent);
-            Toast.makeText(getActivity().getApplicationContext(),"2이동", Toast.LENGTH_SHORT).show();
+            public void whenTouchImagePosition(int index) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                if (index == 0) {
+                    intent.setData(Uri.parse("http://www.naver.com"));
+                    startActivity(intent);
+                    Toast.makeText(getActivity().getApplicationContext(), "1이동", Toast.LENGTH_SHORT).show();
+                } else if (index == 1) {
+                    intent.setData(Uri.parse("http://www.daum.net"));
+                    startActivity(intent);
+                    Toast.makeText(getActivity().getApplicationContext(), "2이동", Toast.LENGTH_SHORT).show();
 
-        }
-        else if(index == 2)
-        {
-            intent.setData(Uri.parse("http://www.naver.com"));
-            startActivity(intent);
-            Toast.makeText(getActivity().getApplicationContext(),"3이동", Toast.LENGTH_SHORT).show();
-        }
-    }
+                } else if (index == 2) {
+                    intent.setData(Uri.parse("http://www.naver.com"));
+                    startActivity(intent);
+                    Toast.makeText(getActivity().getApplicationContext(), "3이동", Toast.LENGTH_SHORT).show();
+                }
+            }
 }

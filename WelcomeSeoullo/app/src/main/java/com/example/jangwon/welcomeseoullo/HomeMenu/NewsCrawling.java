@@ -90,8 +90,8 @@ public class NewsCrawling {
         }
         @Override
         protected void onPostExecute(String result) {
-            for(int i=0; i<2; i++) {
-                items.add(new Item(titleList.get(i), "  "+dateList.get(i),urlList.get(i)));
+            for(int i=0; i<10; i++) {
+                items.add(new Item(titleList.get(i)));
             }
             Log.v("jae", "task done");
         }

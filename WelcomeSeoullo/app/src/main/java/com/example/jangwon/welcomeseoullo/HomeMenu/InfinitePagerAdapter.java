@@ -21,7 +21,9 @@ public class InfinitePagerAdapter extends PagerAdapter {
 
     private static final String TAG = "InfinitePagerAdapter";
     private static final boolean DEBUG = true;
-    Integer[] Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
+    Integer[] Images = new Integer[]{R.drawable.img1,
+            R.drawable.img2,
+            R.drawable.img3, R.drawable.img4, R.drawable.img5,R.drawable.img6,R.drawable.img7,R.drawable.img8,R.drawable.img9};
     private TextView[] dots;
     private LinearLayout dotsLayout;
     private PagerAdapter adapter;

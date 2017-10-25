@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:textSize="25dp"
+            android:background="@drawable/tab_bg_selector"
+            android:text="   서울역 도보관광코스"/>
+<LinearLayout
+    android:id="@+id/tabLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="50dp">
+    <TextView
+        android:id="@+id/NamsanCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:textColor="@drawable/tab_color_selector"
+        android:background="@drawable/tab_bg_selector"
+        android:gravity="center"
+        android:text="남산회현코스"/>
+    <TextView
+        android:id="@+id/JunglimCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:textColor="@drawable/tab_color_selector"
+        android:background="@drawable/tab_bg_selector"
+        android:gravity="center"
+        android:text="중림충청코스"/>
+
+    <TextView
+    android:id="@+id/ChungpaCourse"
+    android:layout_width="wrap_content"
+    android:layout_height="50dp"
+        android:layout_weight="1"
+        android:textColor="@drawable/tab_color_selector"
+        android:background="@drawable/tab_bg_selector"
+    android:gravity="center"
+        android:text="청파효쳥코스"/>
+
+    <TextView
+        android:id="@+id/allCourse"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:textColor="@drawable/tab_color_selector"
+        android:background="@drawable/tab_bg_selector"
+        android:gravity="center"
+        android:text="서울역통합코스"/>
+</LinearLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_below="@+id/tabLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>

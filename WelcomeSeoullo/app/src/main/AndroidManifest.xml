@@ -43,6 +43,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".ARMenu.SetImageView"></activity>
+        <activity android:name=".HomeMenu.NewNoticeActivity" />
+        <activity android:name=".HomeMenu.SeoulloCourseFragment" />
+        <activity android:name=".HomeMenu.UsingGuideTimeActivity" />
     </application>
 
 </manifest>

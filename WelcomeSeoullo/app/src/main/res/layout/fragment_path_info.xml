@@ -150,7 +150,7 @@
                         android:layout_gravity="top"
                         android:layout_weight="1"
                         android:background="#FFFFFF"
-                        android:gravity="center">d
+                        android:gravity="center">
 
                         <ImageButton
                             android:id="@+id/byBusImageButton"
