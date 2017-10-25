@@ -4,14 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
+    <ImageView
+        android:layout_width="280dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="400dp"
+        android:background="@drawable/splash_text3"
+        android:layout_gravity="center_horizontal|bottom"
         android:gravity="center"
-        android:text="이미지뷰 대체3"
+        android:text="맘껏 서울로7017을 둘러보세요."
         android:textColor="@color/white"
-        android:textSize="30dp"
-        android:textStyle="bold" />
+        android:textSize="20dp"/>
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_weight="2"-->
+        <!--android:text="맘껏 서울로7017을 둘러보세요."-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="20dp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_marginTop="200dp"/>-->
 </LinearLayout>
