@@ -221,7 +221,7 @@ public class PathInfoFragment extends Fragment {
         if (isVisibleToUser) {
             startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
             if(!isFragmentShownAgain){
-                byCarButton.callOnClick();
+//                byCarButton.callOnClick();
                 isFragmentShownAgain = true;//drawline test
             }
         } else {

@@ -16,7 +16,6 @@
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_weight="0.92"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -31,57 +30,116 @@
                 android:layout_marginBottom="10dp"></LinearLayout>
 
             <LinearLayout
+                android:id="@+id/buttonLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_below="@+id/viewPager"
                 android:weightSum="2">
-<LinearLayout
-    android:layout_marginTop="20dp"
-    android:id="@+id/buttonLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:layout_weight="1.2"
-    android:weightSum="1">
-
-    <Button
-        android:id="@+id/Btn_newNotice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        android:text="새 소식" />
-
-    <Button
-        android:id="@+id/Btn_walkingCourse"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        android:text="서울역 도보관광코스" />
-</LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:layout_below="@+id/buttonLayout"
-                android:layout_weight="1.2"
-                android:weightSum="1">
-
-                <Button
-                android:id="@+id/Btn_history"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                android:text="역사문화자원" />
-
-                <Button
-                    android:id="@+id/Btn_usingTime"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:text="이용안내 및 시간" />
-            </LinearLayout>
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:weightSum="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="#32aa87">
+                        <ImageButton
+                            android:layout_marginTop="20dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/news2"/>
+
+                        <Button
+                            android:id="@+id/Btn_newNotice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:text="새 소식"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="#E0E0E0">
+                        <ImageButton
+                            android:layout_marginTop="20dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/roadcourse"/>
+                        <Button
+                            android:id="@+id/Btn_walkingCourse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:background="@android:color/transparent"
+                            android:text="서울역 도보관광코스" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_weight="1"
+                    android:weightSum="1">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="#E0E0E0">
+                        <ImageButton
+                            android:layout_marginTop="20dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/castle"/>
+                        <Button
+                            android:id="@+id/Btn_history"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000000"
+                            android:textStyle="bold"
+                            android:background="@android:color/transparent"
+                            android:text="역사문화자원" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.5"
+                        android:orientation="vertical"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="#32aa87">
+                        <ImageButton
+                            android:layout_marginTop="20dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:background="@drawable/time"/>
+                        <Button
+                            android:id="@+id/Btn_usingTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFFFFF"
+                            android:textStyle="bold"
+                            android:background="@android:color/transparent"
+                            android:text="이용안내 및 시간" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
             <!--<me.relex.circleindicator.CircleIndicator-->
             <!--android:id="@+id/indicator"-->
