@@ -59,6 +59,7 @@
     <color name="black75PercentColor">#c0c0c0</color>      //굿
         <color name="warmGrayColor">#857570</color>
     <color name="coolGrayColor">#767a85</color>
+    <color name="grayBtn">#656565</color>
     <color name="charcoalColor">#222222</color>
 
     <!-- Blues -->

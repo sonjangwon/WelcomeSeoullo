@@ -16,8 +16,9 @@ import com.example.jangwon.welcomeseoullo.R;
 public class FourthCourseFragment extends Fragment {
     View view;
     ImageView imageView;
-    public FourthCourseFragment() {
-
+    String tag;
+    public FourthCourseFragment(String tag) {
+        this.tag = tag;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -25,8 +26,15 @@ public class FourthCourseFragment extends Fragment {
         view = inflater.inflate(R.layout.seoulloinfo_imagefragment, container, false);
         imageView = (ImageView) view.findViewById(R.id.fragmentImage);
 
-        imageView.setImageResource(R.drawable.seoullou1);
-        imageView.setScaleType(ImageView.ScaleType.FIT_START);
+        if(tag == "SeoulloCourse") {
+            imageView.setImageResource(R.drawable.welcomeseoullo4);
+            imageView.setScaleType(ImageView.ScaleType.FIT_START);
+        }
+        else if(tag == "History")
+        {
+            imageView.setImageResource(R.drawable.welcomeseoullo_source4);
+            imageView.setScaleType(ImageView.ScaleType.FIT_START);
+        }
         return view;
     }
 }

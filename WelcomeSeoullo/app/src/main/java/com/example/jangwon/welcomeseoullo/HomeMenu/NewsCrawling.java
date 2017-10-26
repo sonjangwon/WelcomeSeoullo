@@ -52,9 +52,9 @@ public class NewsCrawling {
 
                 for (Element element : elements) {
                     String num = element.text();
-                    if(num.length()>40)
+                    if(num.length()>26)
                     {
-                        String n = num.substring(0,41);
+                        String n = num.substring(0,27);
                         num = n + "...";
                         titleList.add(num);
                     }
@@ -65,23 +65,22 @@ public class NewsCrawling {
                     String titleNum = title.substring(26,29);
                     urlNumList.add(titleNum);
 
-                    Log.v("jae", "urlNumList");
                 }
-                Elements ss = document.select("tr td:eq(3)");
-                for (Element e : ss) {
-                    String year =  e.text().substring(0,4);
-                    String month = e.text().substring(5,7);
-                    String day = e.text().substring(8,10);
-                    String date = year+"년 "+ month+"월 "+day+"일";
-                    dateList.add(date);
-
-                    Log.v("jae", "dateList");
-                }
-
-                for(int i=0; i<urlNumList.size(); i++){
-                    urlList.add("http://seoullo7017.seoul.go.kr/img/front/img_logo.png");
-                    Log.v("jae", "urlList");
-                }
+//                Elements ss = document.select("tr td:eq(3)");
+//                for (Element e : ss) {
+//                    String year =  e.text().substring(0,4);
+//                    String month = e.text().substring(5,7);
+//                    String day = e.text().substring(8,10);
+//                    String date = year+"년 "+ month+"월 "+day+"일";
+//                    dateList.add(date);
+//
+//                    Log.v("jae", "dateList");
+//                }
+//
+//                for(int i=0; i<urlNumList.size(); i++){
+//                    urlList.add("http://seoullo7017.seoul.go.kr/img/front/img_logo.png");
+//                    Log.v("jae", "urlList");
+//                }
             }
             catch (IOException e) {
                 e.printStackTrace();

@@ -9,11 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -117,7 +112,7 @@ public class HomeFragment extends Fragment {
                 });
                 btn_history.setOnClickListener(new Button.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent = new Intent(getActivity().getApplicationContext(), NewNoticeActivity.class);
+                        Intent intent = new Intent(getActivity().getApplicationContext(), HistoryFragment.class);
                         startActivity(intent);
                     }
                 });

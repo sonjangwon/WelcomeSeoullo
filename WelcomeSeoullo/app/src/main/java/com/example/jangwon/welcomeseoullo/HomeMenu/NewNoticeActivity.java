@@ -82,6 +82,7 @@ public class NewNoticeActivity extends AppCompatActivity {
                 }));
 
         items = new ArrayList<>();
+        mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), NewsCrawling.getInstance().items, R.layout.newnotice_layout));
 //        loadMoreText.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -173,13 +174,13 @@ public class NewNoticeActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        NewThread task = new NewThread();
-        if (count == 0) {
-            task.execute();
-            //Log.e("어싱크실행", task.getStatus().toString());
-            count++;
-        } else {
-            task.cancel(true);
-        }
+//        NewThread task = new NewThread();
+//        if (count == 0) {
+//            task.execute();
+//            //Log.e("어싱크실행", task.getStatus().toString());
+//            count++;
+//        } else {
+//            task.cancel(true);
+//        }
     }
 }

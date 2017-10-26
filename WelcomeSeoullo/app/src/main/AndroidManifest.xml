@@ -46,6 +46,7 @@
         <activity android:name=".HomeMenu.NewNoticeActivity" />
         <activity android:name=".HomeMenu.SeoulloCourseFragment" />
         <activity android:name=".HomeMenu.UsingGuideTimeActivity" />
+        <activity android:name=".HomeMenu.HistoryFragment" />
     </application>
 
 </manifest>
