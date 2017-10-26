@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.Typeface;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -38,6 +40,8 @@ import com.ahmedadeltito.photoeditorsdk.ViewType;
 import com.viewpagerindicator.PageIndicator;
 import com.example.jangwon.welcomeseoullo.R;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -78,11 +82,11 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_photo_editor);
 
         String selectedImagePath = getIntent().getExtras().getString("selectedImagePath");
-
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 1;
-        Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
 
+//        Bitmap bitmap = BitmapFactory.decodeFile(selectedImagePath, options);
+        Bitmap bitmap = safeDecodeBitmapFile(selectedImagePath);
         Typeface newFont = Typeface.createFromAsset(getAssets(), "Eventtus-Icons.ttf");
         emojiFont = Typeface.createFromAsset(getAssets(), "emojione-android.ttf");
 
@@ -115,7 +119,6 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         PageIndicator indicator = (PageIndicator) findViewById(R.id.image_emoji_indicator);
 
         photoEditImageView.setImageBitmap(bitmap);
-
         closeTextView.setTypeface(newFont);
         addTextView.setTypeface(newFont);
         addPencil.setTypeface(newFont);
@@ -332,33 +335,34 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 //            }
 //        });
 //        setContentView(b);
-        final String imageNameTemporary;
         updateView(View.GONE);
         RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         parentImageRelativeLayout.setLayoutParams(layoutParams);
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageName = "IMG_" + timeStamp + ".jpg";
+        final String imagePathForPref = photoEditorSDK.saveImage("PhotoEditorSDK", imageName);
         new CountDownTimer(1000, 500) {
             public void onTick(long millisUntilFinished) {
 
             }
 
             public void onFinish() {
-//                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String imageName = "IMG_.jpg";
+
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("imagePath", photoEditorSDK.saveImage("PhotoEditorSDK", imageName));
+                returnIntent.putExtra("imagePath", imagePathForPref);
 
                 setResult(Activity.RESULT_OK, returnIntent);
                 finish();
             }
         }.start();
 
-        showSetup("Demo Setup", new StaticDemoSetup(), photoEditorSDK.saveImage("PhotoEditorSDK", "IMG_.jpg"));
+        showSetup("Demo Setup", new StaticDemoSetup(), imagePathForPref);
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
-        editor.putString("hi", photoEditorSDK.saveImage("PhotoEditorSDK", "IMG_.jpg"));
+        editor.putString("hi", imagePathForPref);
         editor.commit();
 
     }
@@ -486,5 +490,100 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         public int getCount() {
             return 2;
         }
+    }
+
+    public synchronized static int getExifOrientation(String filepath){
+        int degree = 0;
+        ExifInterface exif = null;
+
+        try{
+            exif = new ExifInterface(filepath);
+        }
+        catch (IOException e){
+                e.printStackTrace();
+        }
+
+        if (exif != null){
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
+            if (orientation != -1){
+                switch(orientation)
+                {
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        degree = 90;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        degree = 180;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        degree = 270;
+                        break;
+                }
+            }
+        }
+        return degree;
+    }
+
+    public synchronized static Bitmap safeDecodeBitmapFile(String strFilePath)
+    {
+        try
+        {
+            File file = new File(strFilePath);
+            if (file.exists() == false)
+            {
+                return null;
+            }
+
+            // Max image size
+//            final int IMAGE_MAX_SIZE 	= GlobalConstants.getMaxImagePixelSize();
+            BitmapFactory.Options bfo 	= new BitmapFactory.Options();
+            bfo.inJustDecodeBounds 		= true;
+//
+            BitmapFactory.decodeFile(strFilePath, bfo);
+//
+//            if(bfo.outHeight * bfo.outWidth >= IMAGE_MAX_SIZE * IMAGE_MAX_SIZE)
+//            {
+//                bfo.inSampleSize = (int)Math.pow(2, (int)Math.round(Math.log(IMAGE_MAX_SIZE
+//                        / (double) Math.max(bfo.outHeight, bfo.outWidth)) / Math.log(0.5)));
+//            }
+            bfo.inJustDecodeBounds = false;
+            bfo.inPurgeable = true;
+            bfo.inDither = true;
+
+            final Bitmap bitmap = BitmapFactory.decodeFile(strFilePath, bfo);
+
+            int degree = getExifOrientation(strFilePath);
+
+            return getRotatedBitmap(bitmap, degree);
+        }
+        catch(OutOfMemoryError ex)
+        {
+            ex.printStackTrace();
+
+            return null;
+        }
+    }
+
+    public synchronized static Bitmap getRotatedBitmap(Bitmap bitmap, int degrees)
+    {
+        if ( degrees != 0 && bitmap != null )
+        {
+            Matrix m = new Matrix();
+            m.setRotate(degrees, (float) bitmap.getWidth() / 2, (float) bitmap.getHeight() / 2 );
+            try
+            {
+                Bitmap b2 = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), m, true);
+                if (bitmap != b2)
+                {
+                    bitmap.recycle();
+                    bitmap = b2;
+                }
+            }
+            catch (OutOfMemoryError ex)
+            {
+                // We have no memory to rotate. Return the original bitmap.
+            }
+        }
+
+        return bitmap;
     }
 }

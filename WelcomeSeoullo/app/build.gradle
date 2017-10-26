@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
-    compileOptions.encoding = "ISO-8859-1"
+
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
         applicationId "com.example.jangwon.welcomeseoullo"
