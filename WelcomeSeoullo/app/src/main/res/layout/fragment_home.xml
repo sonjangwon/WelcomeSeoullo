@@ -34,6 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="#e9e9e9"
                 android:layout_below="@+id/viewPager"
                 android:weightSum="2">
                 <LinearLayout
@@ -50,12 +51,16 @@
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:background="#32aa87">
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginTop="2.5dp"
+                        android:layout_marginBottom="1.25dp"
+                        android:layout_marginRight="1.25dp"
+                        android:background="#dd5561">
                         <ImageButton
                             android:layout_marginTop="20dp"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@drawable/news2"/>
+                            android:background="@drawable/test2"/>
 
                         <Button
                             android:id="@+id/Btn_newNotice"
@@ -73,17 +78,21 @@
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:background="#E0E0E0">
+                        android:layout_marginLeft="1.25dp"
+                        android:layout_marginTop="2.5dp"
+                        android:layout_marginBottom="1.25dp"
+                        android:layout_marginRight="2.5dp"
+                        android:background="#fa9d4d">
                         <ImageButton
                             android:layout_marginTop="20dp"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@drawable/roadcourse"/>
+                            android:background="@drawable/test1"/>
                         <Button
                             android:id="@+id/Btn_walkingCourse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#000000"
+                            android:textColor="#ffffff"
                             android:textStyle="bold"
                             android:background="@android:color/transparent"
                             android:text="서울역 도보관광코스" />
@@ -101,18 +110,22 @@
                         android:layout_weight="0.5"
                         android:orientation="vertical"
                         android:layout_gravity="center"
+                        android:layout_marginLeft="2.5dp"
+                        android:layout_marginTop="1.25dp"
+                        android:layout_marginBottom="2.5dp"
+                        android:layout_marginRight="1.25dp"
                         android:gravity="center"
-                        android:background="#E0E0E0">
+                        android:background="#b1bc39">
                         <ImageButton
                             android:layout_marginTop="20dp"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@drawable/castle"/>
+                            android:background="@drawable/test3"/>
                         <Button
                             android:id="@+id/Btn_history"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="#000000"
+                            android:textColor="#ffffff"
                             android:textStyle="bold"
                             android:background="@android:color/transparent"
                             android:text="역사문화자원" />
@@ -124,12 +137,16 @@
                         android:orientation="vertical"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:background="#32aa87">
+                        android:layout_marginLeft="1.25dp"
+                        android:layout_marginTop="1.25dp"
+                        android:layout_marginBottom="2.5dp"
+                        android:layout_marginRight="2.5dp"
+                        android:background="#378de2">
                         <ImageButton
                             android:layout_marginTop="20dp"
                             android:layout_width="50dp"
                             android:layout_height="50dp"
-                            android:background="@drawable/time"/>
+                            android:background="@drawable/test4"/>
                         <Button
                             android:id="@+id/Btn_usingTime"
                             android:layout_width="wrap_content"

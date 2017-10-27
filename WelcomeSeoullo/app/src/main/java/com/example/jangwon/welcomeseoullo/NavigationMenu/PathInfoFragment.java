@@ -4,11 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.example.jangwon.welcomeseoullo.CustomTypefaceSpan;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 
@@ -194,7 +190,7 @@ public class PathInfoFragment extends Fragment {
                     switchFragment("도보");
                 }
             });
-            byCarButton.callOnClick();
+            byBusButton.callOnClick();
 
         }
         else{
@@ -220,19 +216,12 @@ public class PathInfoFragment extends Fragment {
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-    private void applyFontToString(Button button, Typeface font) {
-        SpannableString mNewTitle = new SpannableString(button.getText());
-        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, button.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        button.setText(mNewTitle);
-    }
-
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
             if(!isFragmentShownAgain){
-//                byCarButton.callOnClick();
                 isFragmentShownAgain = true;//drawline test
             }
         } else {

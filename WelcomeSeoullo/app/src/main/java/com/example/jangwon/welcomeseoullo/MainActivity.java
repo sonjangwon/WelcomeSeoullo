@@ -25,7 +25,6 @@ import android.support.v4.view.ViewPager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -257,7 +256,6 @@ public class MainActivity extends Activity {
             if (currentLocation != null) {
                 currentLongitude = currentLocation.getLongitude();
                 currentLatitude = currentLocation.getLatitude();
-                Log.d("Main", "longtitude=" + currentLongitude + ", latitude=" + currentLatitude);
             }
         }
     }
@@ -276,8 +274,6 @@ public class MainActivity extends Activity {
 
                 currentLongitude = latitude;
                 currentLatitude = longitude;
-                Log.e("Latitude2", String.valueOf(latitude));
-                Log.e("Longitude2", String.valueOf(longitude));
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -302,16 +298,13 @@ public class MainActivity extends Activity {
                     10); // 얻어올 값의 개수
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
         }
         if (list != null) {
 
             if (list.size()==0) {
-                Log.e("noList", "noList");
 
             } else {
                 currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
-                Log.e("currentAddress2", currentAddress);
             }
         }
     }
