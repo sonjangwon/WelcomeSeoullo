@@ -37,19 +37,19 @@ public class CarFragment extends Fragment {
     //자동차 경로안내
 
     View view;
-    static TMapData tmapdata = new TMapData();
-    static TMapView tmapview;
-    static TextView totalTimeTextView;
-    static TextView totalDistanceTextView;
-    static TextView totalPaymentTextView;
+    TMapData tmapdata = new TMapData();
+    TMapView tmapview;
+    TextView totalTimeTextView;
+    TextView totalDistanceTextView;
+    TextView totalPaymentTextView;
     LinearLayout startTmap;
     ImageButton startTmapButton;
 
-    static int totalDistance;
-    static int totalTime;
-    static int taxiFare;
-    static int hour=0;
-    static int min=0;
+    int totalDistance;
+    int totalTime;
+    int taxiFare;
+    int hour=0;
+    int min=0;
 
     TelephonyManager telephonyManager;
     String networkoper;
@@ -57,8 +57,8 @@ public class CarFragment extends Fragment {
     // 사용자 위치 수신기
     double currentLatitude;
     double currentLongitude;
-    static TMapPoint startPoint;
-    static TMapPoint endPoint;
+    TMapPoint startPoint;
+    TMapPoint endPoint;
 
     public CarFragment(){
 

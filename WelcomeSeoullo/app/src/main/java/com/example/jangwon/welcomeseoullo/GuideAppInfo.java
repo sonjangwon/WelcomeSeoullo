@@ -57,6 +57,7 @@ public class GuideAppInfo extends Activity {
 
         setContentView(R.layout.activity_guide2);
 
+
         //비디오 배경 설정
         MyVideoView mVideoView = (MyVideoView) findViewById(R.id.bgVideoView);
         Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video);
