@@ -12,9 +12,9 @@ import com.example.jangwon.welcomeseoullo.R;
 public class ImageAdapter extends PagerAdapter {
 	Context context;
     private int[] GalImages = new int[] {
-            R.drawable.img1,
-            R.drawable.img2,
-            R.drawable.img3, R.drawable.img4, R.drawable.img5,R.drawable.img6,R.drawable.img7,R.drawable.img8,R.drawable.img9
+            R.drawable.img_1,
+            R.drawable.img_2,
+            R.drawable.img_3, R.drawable.img_4, R.drawable.img_5,R.drawable.img_6,R.drawable.img_7,R.drawable.img_8,R.drawable.img_9
     };
     ImageAdapter(Context context){
         this.context=context;

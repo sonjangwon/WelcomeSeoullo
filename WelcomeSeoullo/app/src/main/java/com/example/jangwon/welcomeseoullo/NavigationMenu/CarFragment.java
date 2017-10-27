@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,19 +37,19 @@ public class CarFragment extends Fragment {
     //자동차 경로안내
 
     View view;
-    TMapData tmapdata = new TMapData();
-    TMapView tmapview;
-    TextView totalTimeTextView;
-    TextView totalDistanceTextView;
-    TextView totalPaymentTextView;
+    static TMapData tmapdata = new TMapData();
+    static TMapView tmapview;
+    static TextView totalTimeTextView;
+    static TextView totalDistanceTextView;
+    static TextView totalPaymentTextView;
     LinearLayout startTmap;
     ImageButton startTmapButton;
 
-    int totalDistance;
-    int totalTime;
-    int taxiFare;
-    int hour=0;
-    int min=0;
+    static int totalDistance;
+    static int totalTime;
+    static int taxiFare;
+    static int hour=0;
+    static int min=0;
 
     TelephonyManager telephonyManager;
     String networkoper;
@@ -58,8 +57,8 @@ public class CarFragment extends Fragment {
     // 사용자 위치 수신기
     double currentLatitude;
     double currentLongitude;
-    TMapPoint startPoint;
-    TMapPoint endPoint;
+    static TMapPoint startPoint;
+    static TMapPoint endPoint;
 
     public CarFragment(){
 
@@ -187,29 +186,15 @@ public class CarFragment extends Fragment {
         Intent startLink1 = getActivity().getPackageManager().getLaunchIntentForPackage("com.skt.skaf.l001mtm091");
         Intent startLink2 = getActivity().getPackageManager().getLaunchIntentForPackage("com.skt.tmap.ku");
         Intent startLink3 = getActivity().getPackageManager().getLaunchIntentForPackage("com.skt.skaf.l001mtm092");
-        if(startLink1 == null)
-        {
-            Log.e("startLink1","null");
-        }
-        if(startLink2 == null)
-        {
-            Log.e("startLink2","null");
-        }
-        if(startLink3 == null)
-        {
-            Log.e("startLink3","null");
-        }
+
         if (startLink1 != null || startLink2 != null || startLink3 != null) {
             tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
             TMapTapi tmaptapi = new TMapTapi(getActivity());
             tmaptapi.invokeRoute("서울로7017", (float) 126.96961950000002, (float) 37.5536067);
         } else {
 //        Tmap이 설치되지 않은 경우
-            Log.e("showTmapInstallDialog","null");
             showTmapInstallDialog();
         }
-//        //Tmap이 설치되지 않은 경우
-//        showTmapInstallDialog();
     }
 
     //Tmap설치로 인도하는 부분
@@ -228,7 +213,6 @@ public class CarFragment extends Fragment {
                             public void onClick(
                                     DialogInterface dialog, int id) {
                                 if (networkoper.equals("SKTelecom")) {
-                                    Log.i("통신사", "skt");
                                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://onesto.re/0000163382"));
                                     startActivity(intent);
                                 } else {

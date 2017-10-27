@@ -1,7 +1,5 @@
 package com.example.jangwon.welcomeseoullo.NavigationMenu;
 
-import android.util.Log;
-
 import com.skp.Tmap.TMapPoint;
 import com.skp.Tmap.TMapPolyLine;
 import com.skp.Tmap.util.HttpConnect;
@@ -55,7 +53,6 @@ public class PathTracker {
                         HttpURLConnection ez = (HttpURLConnection)con;
                         e = HttpConnect.getDocument(con);
                     } catch (Exception ezx) {
-                        Log.i("error","에러남");
                     }
                     if(e != null) {
                         NodeList list = e.getElementsByTagName("tmap:totalTime");
@@ -70,12 +67,8 @@ public class PathTracker {
                         taxiFare = Integer.parseInt(taxiFareItem.getTextContent());
 
                         Integer bun = Integer.parseInt(timeItem.getTextContent()) / 60;
-                        Log.e(" 총 시간 ",":  "+ bun/60 + "시간 " + bun%60 + "분");
-                        Log.e(" 총 거리 ",":  " + Integer.parseInt(distanceItem.getTextContent()));
-                        Log.e(" 택시 요금 ",":  " + Integer.parseInt(taxiFareItem.getTextContent()));
                     }
                 } catch (Exception e) {
-                    Log.i("error","error");
                 }
             }
         }).start();

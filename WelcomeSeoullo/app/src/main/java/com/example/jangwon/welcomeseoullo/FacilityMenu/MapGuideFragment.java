@@ -347,16 +347,13 @@ public class MapGuideFragment extends Fragment {
                         HttpURLConnection ez = (HttpURLConnection)con;
                         e = HttpConnect.getDocument(con);
                     } catch (Exception ezx) {
-                        Log.i("error","에러남");
                     }
                     if(e != null) {
                         NodeList list2 = e.getElementsByTagName("tmap:totalDistance");
                         Node distanceItem = list2.item(0);
                         totalDistance = Integer.parseInt(distanceItem.getTextContent());
-                        Log.e(" 총 거리 ",":  " + Integer.parseInt(distanceItem.getTextContent()));
                     }
                 } catch (Exception e) {
-                    Log.i("error","error");
                 }
             }
         }).start();

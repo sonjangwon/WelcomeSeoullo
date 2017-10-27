@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,9 +122,7 @@ public class FootFragment extends Fragment {
         }
         totalDistanceTextView.setText(String.valueOf(totalDistance/(double)1000)+"km");
         calorieTextView.setText(String.valueOf((totalTime/60)*6)+"kcal");
-        Log.e(" 총 시간 ","true");
-        Log.e(" 총 시간 ",":  " + totalTime);
-        Log.e(" 총 거리 ",":  " + totalDistance);
+
 
         tmapdata.findPathDataWithType(TMapData.TMapPathType.CAR_PATH, startPoint, endPoint,  new TMapData.FindPathDataListenerCallback() {
             @Override

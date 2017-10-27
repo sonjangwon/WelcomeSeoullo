@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -301,14 +300,11 @@ public class GuideInfoFragment extends Fragment {
                     10); // 얻어올 값의 개수
         } catch (IOException e) {
             e.printStackTrace();
-            Log.e("test", "입출력 오류 - 서버에서 주소변환시 에러발생");
         }
         if (list != null) {
             if (list.size()==0) {
-                Log.e("noList", "noList");
             } else {
                 addressTextView.setText(list.get(0).getAddressLine(0).toString().substring(5));
-                Log.e("addressTextView",list.get(0).getAddressLine(0).toString().substring(5));
             }
         }
     }
@@ -325,8 +321,6 @@ public class GuideInfoFragment extends Fragment {
                 currentLongitude = location.getLongitude();
                 // TODO 위도, 경도로 하고 싶은 것
 
-                Log.e("Latitude2", String.valueOf(currentLatitude));
-                Log.e("Longitude2", String.valueOf(currentLongitude));
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {

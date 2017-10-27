@@ -189,7 +189,7 @@ public class PathInfoFragment extends Fragment {
                     switchFragment("도보");
                 }
             });
-            byCarButton.callOnClick();
+            byBusButton.callOnClick();
 
         }
         else{
@@ -215,12 +215,14 @@ public class PathInfoFragment extends Fragment {
         fragmentTransaction.commitAllowingStateLoss();
     }
 
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
             if(!isFragmentShownAgain){
+//                CarFragment.restartPathInfo.sendEmptyMessage(0);
 //                byCarButton.callOnClick();
                 isFragmentShownAgain = true;//drawline test
             }
