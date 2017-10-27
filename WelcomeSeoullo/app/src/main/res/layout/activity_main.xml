@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
-            app:itemBackground="@color/greenNike"
+            app:itemBackground="@color/colorPrimary"
             app:itemIconTint="@drawable/select_bottom_navigation"
             app:itemTextColor="@drawable/select_bottom_navigation"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"

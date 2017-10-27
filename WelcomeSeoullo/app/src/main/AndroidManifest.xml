@@ -32,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeMenu.Test" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"/>
@@ -45,9 +44,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".ARMenu.SetImageView"/>
-        <activity android:name=".HomeMenu.NewNoticeActivity" />
         <activity android:name=".HomeMenu.SeoulloCourseFragment" />
-        <activity android:name=".HomeMenu.UsingGuideTimeActivity" />
     </application>
 
 </manifest>
