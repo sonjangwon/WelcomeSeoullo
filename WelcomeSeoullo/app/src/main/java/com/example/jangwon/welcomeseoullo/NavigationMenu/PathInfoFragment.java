@@ -28,7 +28,6 @@ public class PathInfoFragment extends Fragment {
     Button startPointAddress;
     LinearLayout categoryLinearLayout;
 
-
     Button byCarButton;
     Button byBusButton;
     Button onFootButton;
@@ -91,7 +90,7 @@ public class PathInfoFragment extends Fragment {
             byCarButton.setOnClickListener(new LinearLayout.OnClickListener(){
                 @Override
                 public void onClick(View view) {
-//                    자동차 경로안내 버튼을 누를 경우
+                    //자동차 경로안내 버튼을 누를 경우
                     byCarImageButton.setBackgroundResource(R.drawable.clickedcar);
                     byBusImageButton.setBackgroundResource(R.drawable.nonclickbus);
                     onFootImageButton.setBackgroundResource(R.drawable.nonclickwalker);

@@ -3,6 +3,9 @@ package com.example.jangwon.welcomeseoullo;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +30,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -34,6 +38,7 @@ import android.widget.Toast;
 import com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment;
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
+import com.example.jangwon.welcomeseoullo.HomeMenu.MainHomeFragment;
 import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;
 import com.example.jangwon.welcomeseoullo.SettingsMenu.SettingsFragment;
 
@@ -49,6 +54,8 @@ public class MainActivity extends Activity {
 
     private static final int MY_PERMISSIONS_REQUEST_ACCOUNTS = 1;
 
+    public static boolean isHomeFragmentVisible = true;
+
     int currentMenu;
     BottomNavigationView bottomNavigationView;
 
@@ -56,6 +63,7 @@ public class MainActivity extends Activity {
     ViewPagerAdapter adapter;
     MenuItem prevMenuItem;
 
+    MainHomeFragment mainHomeFragment;
     HomeFragment homeFragment;
     GuideInfoFragment guideInfoFragment;
     BlankFragment arFragment;
@@ -74,6 +82,10 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        String str = new String(iso8859.getBytes(), "UTF-8");
+//        byte[] bytes = str.getBytes("ISO-8859-1");
+//        str = new String(bytes, "EUC-KR");
 
         changeStatusBarColor();
 
@@ -144,19 +156,23 @@ public class MainActivity extends Activity {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.TRANSPARENT);
+
+            //상태바 남는 공간 활용
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
     }
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getFragmentManager());
 
+        mainHomeFragment = new MainHomeFragment();
         homeFragment = new HomeFragment();
         guideInfoFragment = new GuideInfoFragment();
         arFragment = new BlankFragment();
         pathInfoFragment = new PathInfoFragment();
         settingsFragment = new SettingsFragment();
 
-        adapter.addFragment(homeFragment);
+        adapter.addFragment(mainHomeFragment);
         adapter.addFragment(guideInfoFragment);
         adapter.addFragment(arFragment);
         adapter.addFragment(pathInfoFragment);
@@ -170,7 +186,7 @@ public class MainActivity extends Activity {
         long tempTime = System.currentTimeMillis();
         long intervalTime = tempTime - backPressedTime;
 
-        if(currentMenu == R.id.action_home){
+        if(currentMenu == R.id.action_home && isHomeFragmentVisible){
             if (0 <= intervalTime && FINISH_INTERVAL_TIME >= intervalTime) {
                 super.onBackPressed();
                 removeAllPreferences();
@@ -184,7 +200,19 @@ public class MainActivity extends Activity {
         }
         else{
             bottomNavigationView.setSelectedItemId(R.id.action_home);
+            switchFragment(homeFragment);
+            isHomeFragmentVisible = true;
         }
+    }
+
+    public void switchFragment(Fragment switchingFragment){
+
+        Fragment fragment = switchingFragment;
+
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.main_home_fragment_place, fragment).addToBackStack(null).commit();
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
     }
 
     //앱 종료 시, SharedPreference 값(ALL Data) 삭제하기
