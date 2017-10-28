@@ -5,13 +5,13 @@
             <padding
                 android:bottom="5dp"
                 />
-            <solid android:color="#301500" />
+            <solid android:color="#86c67c" />
         </shape>
     </item>
 
     <item>
         <shape android:shape="rectangle" >
-            <solid android:color="#EAEAEA" />
+            <solid android:color="#FFFFFF" />
         </shape>
     </item>
 

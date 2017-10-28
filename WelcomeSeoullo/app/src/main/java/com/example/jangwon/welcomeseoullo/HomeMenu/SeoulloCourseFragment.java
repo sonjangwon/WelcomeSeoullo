@@ -20,6 +20,7 @@ public class SeoulloCourseFragment extends Fragment{
     //버튼 클릭시 남산코스 무슨코스 다 보여줌 목록으로 근데 그 하위프래그먼트 생기게해서 보여줄것같은데 조사 필요
     ViewPager vp;
     LinearLayout linearLayout;
+    String tagName = "SeoulloCourse";
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 
@@ -105,13 +106,13 @@ public class SeoulloCourseFragment extends Fragment{
         public Fragment getItem(int position) {
             switch(position) {
                 case 0:
-                    return new FirstCourseFragment();
+                    return new FirstCourseFragment(tagName);
                 case 1:
-                    return new SecondCourseFragment();
+                    return new SecondCourseFragment(tagName);
                 case 2:
-                    return new ThirdCourseFragment();
+                    return new ThirdCourseFragment(tagName);
                 case 3:
-                    return new FourthCourseFragment();
+                    return new FourthCourseFragment(tagName);
                 default:
                     return null;
             }

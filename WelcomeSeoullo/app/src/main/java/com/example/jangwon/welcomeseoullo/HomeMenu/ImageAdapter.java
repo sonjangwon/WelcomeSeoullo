@@ -1,5 +1,6 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,11 +12,11 @@ import com.example.jangwon.welcomeseoullo.R;
 
 public class ImageAdapter extends PagerAdapter {
 	Context context;
-    private int[] GalImages = new int[] {
-            R.drawable.img_1,
+    private int[] GalImages = new int[] {R.drawable.img_1,
             R.drawable.img_2,
             R.drawable.img_3, R.drawable.img_4, R.drawable.img_5,R.drawable.img_6,R.drawable.img_7,R.drawable.img_8,R.drawable.img_9
     };
+
     ImageAdapter(Context context){
         this.context=context;
     }

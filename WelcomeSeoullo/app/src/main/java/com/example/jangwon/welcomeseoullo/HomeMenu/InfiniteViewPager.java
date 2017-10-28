@@ -5,13 +5,16 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.View;
 
 /**
  * A {@link ViewPager} that allows pseudo-infinite paging with a wrap-around effect. Should be used with an {@link
  * InfinitePagerAdapter}.
  */
 public class InfiniteViewPager extends ViewPager {
-
+    private OnItemClickListener mOnItemClickListener;
     public InfiniteViewPager(Context context) {
         super(context);
     }
@@ -33,6 +36,25 @@ public class InfiniteViewPager extends ViewPager {
         setCurrentItem(item, false);
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    private void setup() {
+        final GestureDetector tapGestureDetector = new GestureDetector(getContext(), new TapGestureListener());
+
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tapGestureDetector.onTouchEvent(event);
+                return false;
+            }
+        });
+    }
     @Override
     public void setCurrentItem(int item, boolean smoothScroll) {
         if (getAdapter().getCount() == 0) {
@@ -71,6 +93,17 @@ public class InfiniteViewPager extends ViewPager {
             return infAdapter.getRealCount() * 100;
         } else {
             return 0;
+        }
+    }
+
+    private class TapGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if(mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(getCurrentItem());
+            }
+            return true;
         }
     }
 }

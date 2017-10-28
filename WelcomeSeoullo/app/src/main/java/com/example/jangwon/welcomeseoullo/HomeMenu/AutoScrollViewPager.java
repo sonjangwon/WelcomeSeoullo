@@ -8,14 +8,16 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.animation.Interpolator;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 
 public class AutoScrollViewPager extends ViewPager {
-
+    private OnItemClickListener mOnItemClickListener;
     public static final int        DEFAULT_INTERVAL            = 5000;
 
     public static final int        LEFT                        = 0;
@@ -56,11 +58,13 @@ public class AutoScrollViewPager extends ViewPager {
     public AutoScrollViewPager(Context paramContext) {
         super(paramContext);
         init();
+        setup();
     }
 
     public AutoScrollViewPager(Context paramContext, AttributeSet paramAttributeSet) {
         super(paramContext, paramAttributeSet);
         init();
+        setup();
     }
 
     private void init() {
@@ -153,6 +157,36 @@ public class AutoScrollViewPager extends ViewPager {
             }
         } else {
             setCurrentItem(nextItem, true);
+        }
+    }
+    private void setup() {
+        final GestureDetector tapGestureDetector = new    GestureDetector(getContext(), new TapGestureListener());
+
+        setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                tapGestureDetector.onTouchEvent(event);
+                return false;
+            }
+        });
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    private class TapGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if(mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(getCurrentItem());
+            }
+            return true;
         }
     }
 

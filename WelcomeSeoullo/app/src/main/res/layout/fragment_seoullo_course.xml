@@ -5,19 +5,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textSize="25dp"
-            android:background="@drawable/tab_bg_selector"
-            android:text="   서울역 도보관광코스"/>
 <LinearLayout
     android:id="@+id/tabLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="50dp">
+    android:orientation="horizontal">
     <TextView
         android:id="@+id/NamsanCourse"
         android:layout_width="wrap_content"

@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jangwon.welcomeseoullo.HomeMenu.NewsCrawling;
 import com.example.jangwon.welcomeseoullo.HomeMenu.PrefManager;
 
 public class GuideAppInfo extends Activity {
@@ -42,7 +43,7 @@ public class GuideAppInfo extends Activity {
         super.onCreate(savedInstanceState);
 
         //crawling 부분인데 나중에 추가할 예정
-//        NewsCrawling.getInstance().newThread.execute();
+        NewsCrawling.getInstance().newThread.execute();
 
         // Checking for first time launch - before calling setContentView()
         //sharedPrefence에 저장ㅇ해놓고 실행안되게
