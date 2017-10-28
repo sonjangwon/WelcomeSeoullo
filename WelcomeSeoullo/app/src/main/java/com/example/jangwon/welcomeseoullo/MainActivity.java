@@ -83,10 +83,6 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        String str = new String(iso8859.getBytes(), "UTF-8");
-//        byte[] bytes = str.getBytes("ISO-8859-1");
-//        str = new String(bytes, "EUC-KR");
-
         changeStatusBarColor();
 
         mainViewPager = (ViewPager) findViewById(R.id.mainViewPager);
@@ -298,7 +294,6 @@ public class MainActivity extends Activity {
             public void onLocationChanged(Location location) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                // TODO 위도, 경도로 하고 싶은 것
 
                 currentLongitude = latitude;
                 currentLatitude = longitude;
@@ -364,8 +359,6 @@ public class MainActivity extends Activity {
             // save UUID value in SharedPreference
             savePreferences("UUID", GetDevicesUUID(getApplicationContext()));
             savePreferences("language", "Korean");
-
-
 
             // 사용자의 위치 수신을 위한 세팅 //
             settingGPS();

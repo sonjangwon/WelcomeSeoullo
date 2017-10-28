@@ -111,8 +111,6 @@ public class GuideInfoFragment extends Fragment {
 
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
 
-
-
             ManagementLocation.getInstance().setSortSpinner("공공화장실");
             switchFragments(nowFragment);
 

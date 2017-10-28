@@ -1,7 +1,6 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -64,8 +63,6 @@ public class NewsCrawling {
                     String title = element.select("a").attr("href").toString();
                     String titleNum = title.substring(26,29);
                     urlNumList.add(titleNum);
-
-                    Log.v("jae", "urlNumList");
                 }
                 Elements ss = document.select("tr td:eq(3)");
                 for (Element e : ss) {
@@ -74,13 +71,10 @@ public class NewsCrawling {
                     String day = e.text().substring(8,10);
                     String date = year+"년 "+ month+"월 "+day+"일";
                     dateList.add(date);
-
-                    Log.v("jae", "dateList");
                 }
 
                 for(int i=0; i<urlNumList.size(); i++){
                     urlList.add("http://seoullo7017.seoul.go.kr/img/front/img_logo.png");
-                    Log.v("jae", "urlList");
                 }
             }
             catch (IOException e) {
@@ -93,7 +87,6 @@ public class NewsCrawling {
             for(int i=0; i<10; i++) {
                 items.add(new Item(titleList.get(i)));
             }
-            Log.v("jae", "task done");
         }
     }
 }
