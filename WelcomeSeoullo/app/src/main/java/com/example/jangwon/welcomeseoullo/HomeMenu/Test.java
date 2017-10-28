@@ -56,7 +56,7 @@ public class Test extends AppCompatActivity {
     AutoScrollViewPager viewPager;
     private Integer[] Images;
     private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
-    //InfiniteViewPager view;
+    InfiniteViewPager view;
 
     //카드뷰 선언--------------------------------
     private RecyclerView mRecyclerView;
@@ -97,20 +97,25 @@ public class Test extends AppCompatActivity {
         refreshView();
         ImageAdapter imgadapter = new ImageAdapter(this);
 //        view = new InfiniteViewPager(this);
-//        view = (InfiniteViewPager) findViewById(R.id.viewPager);
+        view = (InfiniteViewPager) findViewById(R.id.viewPager);
         wrappedAdapter = new InfinitePagerAdapter(imgadapter, getApplicationContext());
-
+        view.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                //this will log the page number that was click
+               // Log.i("TAG", "This page was clicked: " + pos);
+            }
+        });
         viewPager.setAdapter(wrappedAdapter);
         viewPager.setOnTouchListener(viewPagerTouchListener);
         viewPager.startAutoScroll();
 //        myViewPagerAdapter = new MyViewPagerAdapter();
-        //Images = new Integer[]{R.drawable.image1, R.drawable.image2, R.drawable.image3, R.drawable.image4};
-//
-//        pager.setAdapter(myViewPagerAdapter);
-//        pager.addOnPageChangeListener(viewPagerPageChangeListener);
+        Images = new Integer[]{R.drawable.img1, R.drawable.img2, R.drawable.img3, R.drawable.img4};
+
+        //pager.setAdapter(myViewPagerAdapter);
+        //pager.addOnPageChangeListener(viewPagerPageChangeListener);
         //CircleIndicator indicator = (CircleIndicator) findViewById(R.id.indicator);
         //indicator.setViewPager(viewPager);
-        //dotsLayout = (LinearLayout) findViewById(R.id.dotLayouts);
+        dotsLayout = (LinearLayout) findViewById(R.id.dotLayouts);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setNestedScrollingEnabled(false);

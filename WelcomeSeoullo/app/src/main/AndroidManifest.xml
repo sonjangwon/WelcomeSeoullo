@@ -47,6 +47,7 @@
         <activity android:name=".HomeMenu.SeoulloCourseFragment" />
         <activity android:name=".HomeMenu.UsingGuideTimeActivity" />
         <activity android:name=".HomeMenu.HistoryFragment" />
+        <activity android:name=".HomeMenu.EmoJeoMoImages"/>
     </application>
 
 </manifest>

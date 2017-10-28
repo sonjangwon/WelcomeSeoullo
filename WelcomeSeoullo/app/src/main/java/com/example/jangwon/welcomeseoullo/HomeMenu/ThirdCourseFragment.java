@@ -32,7 +32,7 @@ public class ThirdCourseFragment extends Fragment {
         }
         else if(tag == "History")
         {
-            imageView.setImageResource(R.drawable.welcomeseoullo_source3);
+            imageView.setImageResource(R.drawable.welcomeseoullo_source4);
             imageView.setScaleType(ImageView.ScaleType.FIT_START);
         }
         return view;

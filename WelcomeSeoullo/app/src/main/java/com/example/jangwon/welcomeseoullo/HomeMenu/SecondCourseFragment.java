@@ -32,7 +32,7 @@ public class SecondCourseFragment extends Fragment {
         }
         else if(tag == "History")
         {
-            imageView.setImageResource(R.drawable.welcomeseoullo_source2);
+            imageView.setImageResource(R.drawable.welcomeseoullo_info1);
             imageView.setScaleType(ImageView.ScaleType.FIT_START);
         }
         return view;

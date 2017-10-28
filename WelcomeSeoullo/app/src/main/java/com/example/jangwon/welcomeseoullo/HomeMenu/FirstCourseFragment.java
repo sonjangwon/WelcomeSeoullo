@@ -16,6 +16,10 @@ import com.example.jangwon.welcomeseoullo.R;
 public class FirstCourseFragment extends Fragment {
     View view;
     ImageView imageView;
+    ImageView imageView2;
+    ImageView imageView3;
+    ImageView imageView4;
+    ImageView imageView5;
     String tag;
     public FirstCourseFragment(String tag) {
         this.tag =tag;
@@ -32,7 +36,7 @@ public class FirstCourseFragment extends Fragment {
         }
         else if(tag == "History")
         {
-            imageView.setImageResource(R.drawable.welcomeseoullo_source1);
+            imageView.setImageResource(R.drawable.welcomeseoullo_source4);
             imageView.setScaleType(ImageView.ScaleType.FIT_START);
         }
         return view;

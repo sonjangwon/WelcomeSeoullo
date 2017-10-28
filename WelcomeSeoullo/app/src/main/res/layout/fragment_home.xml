@@ -12,7 +12,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true">
 
-            <com.example.jangwon.welcomeseoullo.HomeMenu.AutoScrollViewPager
+            <com.example.jangwon.welcomeseoullo.HomeMenu.ClickableAutoViewPager
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
@@ -26,16 +26,16 @@
                 android:layout_height="@dimen/dots_height"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="10dp"></LinearLayout>
+                android:layout_above="@+id/linearLayout"
+                android:layout_alignParentStart="true"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:layout_below="@+id/viewPager"
-                android:weightSum="2">
+                android:weightSum="2"
+                android:id="@+id/linearLayout">
 <LinearLayout
     android:layout_marginTop="20dp"
     android:id="@+id/buttonLayout"
