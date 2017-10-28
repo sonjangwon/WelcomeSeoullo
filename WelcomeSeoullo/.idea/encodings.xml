@@ -5,6 +5,43 @@
     <file url="file://$PROJECT_DIR$/app/src/main/res/values/attrs.xml" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/droidAR/build.gradle" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/algos/Algo.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/SampleActivity.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/TechDemoLauncher.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/CollectItemsSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/DebugSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/FarAwayPOIScenarioSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/FastChangingTextSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/GameDemoSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/GeoPosTestSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/GraphCreationSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/GraphMovementTestSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/LargeWorldsSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/LightningSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/PlaceObjectsSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/PlaceObjectsSetupTwo.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/PositionTestsSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/SensorTestSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/StaticDemoSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/ArActivity.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/DefaultARSetup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/EventManager.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/Setup.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/SimpleLocationManager.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/StepManager.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/StepSettingsControllerView.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/TaskList.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/TaskManager.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/TouchEventInterface.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/AbstractObj.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/Entity.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/EntityList.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/HasInfosInterface.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/LargeWorld.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/MoveComp.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/Obj.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/RenderQuadList.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/RenderableEntity.java" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/worldData/World.java" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/res/drawable/fire.png" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/photoeditorsdk" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />

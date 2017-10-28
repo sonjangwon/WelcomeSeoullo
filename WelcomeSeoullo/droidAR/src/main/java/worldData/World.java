@@ -15,21 +15,12 @@ import util.Vec;
 public class World implements RenderableEntity, Container<RenderableEntity> {
 
 	private static final String LOG_TAG = "World";
-	/**
-	 * think of this as the position on the screen
-	 */
 	private Vec myScreenPosition;
 	// private Vec myRotation;
-	/**
-	 * think of this as the scale of the whole world on the screen
-	 */
 	private Vec myScale;
 
 	EfficientList<RenderableEntity> container;
 
-	/**
-	 * the camera which is responsible to display the world correctly
-	 */
 	private GLCamera myCamera;
 	private boolean wasBeenClearedAtLeastOnce;
 	private Updateable myParent;
@@ -45,9 +36,6 @@ public class World implements RenderableEntity, Container<RenderableEntity> {
 		}
 		if (container == null)
 			container = new EfficientList<RenderableEntity>();
-		/*
-		 * check if obj already added before adding it to the world!
-		 */
 		if (container.contains(x) != -1) {
 			Log.e(LOG_TAG, "Object " + x + " already contained in this world!");
 			return false;

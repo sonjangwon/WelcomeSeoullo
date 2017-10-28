@@ -65,19 +65,10 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 		resumeCamera();
 	}
 
-	/**
-	 * http://stackoverflow.com/questions/3841122/android-camera-preview-is-
-	 * sideways
-	 */
 	public void setPreviewAccordingToScreenOrientation(int width, int height) {
 		Parameters parameters = myCamera.getParameters();
 		Display display = ((WindowManager) this.getContext().getSystemService(
 				Activity.WINDOW_SERVICE)).getDefaultDisplay();
-		/*
-		 * int rotation = display.getRotation();
-		 * 
-		 * this does not work on older devices so use reflection
-		 */
 		int rotation = 0;
 		try {
 			rotation = (Integer) display.getClass()
@@ -107,11 +98,6 @@ public class CameraView extends SurfaceView implements SurfaceHolder.Callback {
 	}
 
 	private void setDisplayOrientation(int inDegree) {
-		/*
-		 * myCamera.setDisplayOrientation(inDegree);
-		 * 
-		 * does not work on older devices so use reflection
-		 */
 		try {
 			myCamera.getClass().getMethod("setDisplayOrientation", int.class)
 					.invoke(myCamera, inDegree);

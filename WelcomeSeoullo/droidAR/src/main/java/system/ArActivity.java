@@ -9,13 +9,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-/**
- * This is an example activity which demonstrates how to use a Setup object. It
- * wraps the Setup object and forwards all needed events to it.
- * 
- * @author Simon Heinen
- * 
- */
 public class ArActivity extends Activity {
 
 	private static final String LOG_TAG = "ArActivity";
@@ -24,10 +17,6 @@ public class ArActivity extends Activity {
 
 	private Setup mySetupToUse;
 
-	/**
-	 * Called when the activity is first created.
-	 * 
-	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -44,11 +33,11 @@ public class ArActivity extends Activity {
 		}
 	}
 
-	public static void startWithSetup(Activity currentActivity, Setup setupToUse, String imagePath) {
+	public static void startWithSetup(Activity currentActivity, Setup setupToUse) {
 		ArActivity.staticSetupHolder = setupToUse;
 		Intent arIntent = new Intent(currentActivity, ArActivity.class);
 //		arIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		arIntent.putExtra("ImagePath", imagePath);
+//		arIntent.putExtra("ImagePath");
 		currentActivity.startActivity(arIntent);
 //		currentActivity.startActivity(new Intent(currentActivity,
 //				ArActivity.class));

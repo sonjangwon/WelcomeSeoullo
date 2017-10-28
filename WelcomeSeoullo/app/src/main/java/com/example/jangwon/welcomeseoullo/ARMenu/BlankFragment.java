@@ -66,7 +66,7 @@ public class BlankFragment extends Fragment {
                         Toast.LENGTH_SHORT
                 ).show();
                 Intent arIntent = new Intent(getActivity(), ARMainActivity.class);
-                arIntent.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
+//                arIntent.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
                 startActivity(arIntent);
 //                startActivity(new Intent(getActivity(), ARMainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 

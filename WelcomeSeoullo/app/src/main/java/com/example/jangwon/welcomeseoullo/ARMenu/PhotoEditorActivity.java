@@ -358,7 +358,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
             }
         }.start();
 
-        showSetup("Demo Setup", new StaticDemoSetup(), imagePathForPref);
+        showSetup("Demo Setup", new StaticDemoSetup());
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -367,10 +367,10 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void showSetup(String string, final Setup aSetupInstance, String imagePath) {
+    private void showSetup(String string, final Setup aSetupInstance) {
         Activity theCurrentActivity = PhotoEditorActivity.this;
         ArActivity.startWithSetup(theCurrentActivity,
-                aSetupInstance, imagePath);
+                aSetupInstance);
     }
 
     @Override

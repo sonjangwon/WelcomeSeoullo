@@ -27,7 +27,7 @@ public class SampleActivity extends AppCompatActivity {
 //        String selectedImagePath = photoEditorSDK.saveImage("PhotoEditorSDK", imageName);
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         String imagePathFinal = pref.getString("hi", "");
-        Intent intentToGetImagePath = getIntent();
+//        Intent intentToGetImagePath = getIntent();
 //        String imagePath = intentToGetImagePath.getExtras().getString("imagePathForAR");
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 1;

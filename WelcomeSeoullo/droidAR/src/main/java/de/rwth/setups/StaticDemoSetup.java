@@ -33,7 +33,6 @@ public class StaticDemoSetup extends Setup {
 
 	private static final float MIN_DIST = 15f;
 	private static final float MAX_DIST = 55f;
-	public String imagePathForeAR;
 	protected static final String LOG_TAG = "StaticDemoSetup";
 
 	World world;
@@ -54,8 +53,6 @@ public class StaticDemoSetup extends Setup {
 									   GLFactory objectFactory, GeoObj currentPosition) {
 		camera = new GLCamera(new Vec(0, 0, 1));
 		world = new World(camera);
-		Intent getIntent = getActivity().getIntent();
-		imagePathForeAR = getIntent.getExtras().getString("imagePath");
 
 		timeModifier = new TimeModifier(1);
 		RenderList l = new RenderList();
@@ -98,7 +95,6 @@ public class StaticDemoSetup extends Setup {
 				@Override
 				public boolean execute(){
 					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity.class);
-					intent.putExtra("imagePathForAR", imagePathForeAR);
 					getActivity().startActivity(intent);
 					return false;
 				}
