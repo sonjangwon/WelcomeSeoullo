@@ -45,7 +45,7 @@ public class BlankFragment extends Fragment {
 
         //비디오 배경 설정
         MyVideoView mVideoView = (MyVideoView) view.findViewById(R.id.bgVideoView2);
-        Uri uri = Uri.parse("android.resource://com.example.jangwon.welcomeseoullo/" + R.raw.video);
+        Uri uri = Uri.parse("android.resource://com.example.jangwon.welcomeseoullo/" + R.raw.splash_video);
         mVideoView.setVideoURI(uri);
         mVideoView.start();
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
