@@ -7,6 +7,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +18,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
+import com.example.jangwon.welcomeseoullo.PublicData.ManagePublicData;
 import com.example.jangwon.welcomeseoullo.R;
 import com.skp.Tmap.TMapData;
 import com.skp.Tmap.TMapMarkerItem;
@@ -58,6 +61,9 @@ public class MapGuideFragment extends Fragment {
     String currentAddress;
     TextView addressTextView;
 
+    Bitmap bitmap;
+    boolean isPageVisible;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,9 +86,7 @@ public class MapGuideFragment extends Fragment {
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
         currentAddress = ManagementLocation.getInstance().getCurrentAddress();
         Log.e("sortOnCreateVIew",ManagementLocation.getInstance().getSortSpinner());
-//        if(ManagementLocation.getInstance().getSortSpinner()=="") {
-//            ManagementLocation.getInstance().setSortSpinner("공공화장실");
-//        }
+
         mapView(view);
         addMarker();
 
@@ -265,19 +269,16 @@ public class MapGuideFragment extends Fragment {
     }
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        Log.d(this.getClass().getSimpleName(), "onActivityCreated()");
 //        addMarker();
         super.onActivityCreated(savedInstanceState);
     }
     @Override
     public void onStart() {
-        Log.d(this.getClass().getSimpleName(), "onStart()");
-        Log.e("onStart","true");
         addMarker();
         if(ManageListToMap.getInstance().getClickedListView()==true) {
-            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
+//            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
             ListToMap();
-            ManageListToMap.getInstance().setClickedListView(false);
+//            ListToMap.getInstance().setClickedListView(false);
         }
         else if(ManageListToMap.getInstance().getClickedListView()==false) {
             tmapview.setCenterPoint(126.970325, 37.556152);
@@ -286,10 +287,72 @@ public class MapGuideFragment extends Fragment {
         super.onStart();
     }
 
+
+    public static Handler HandlerListToMap = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+//            ManagePublicData.getInstance().getPublicParkingLotVOArrayList();
+//            ManagePublicData.getInstance().getPublicParkVOArrayList();
+//            ManagePublicData.getInstance().getPublicToiletVOArrayList();
+//            ManagePublicData.getInstance().getTraditionalMarketVOArrayList();
+//
+//            if(ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
+//                for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
+//                    TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
+//                            Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
+//
+//                    TMapMarkerItem tItem1 = new TMapMarkerItem();
+//                    tItem1.setTMapPoint(tpoint);
+//                    tItem1.setVisible(tItem1.VISIBLE);
+//                    tItem1.setName(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName());
+//
+//
+//                    tItem1.setCalloutTitle(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName());
+//                    tItem1.setCanShowCallout(true);
+//                    tItem1.setAutoCalloutVisible(false);
+//
+//
+//                    tmapview.bringMarkerToFront(tItem1);
+//                    tmapview.addMarkerItem("공공화장실" + String.valueOf(i)  , tItem1);
+//
+//                }
+//            }
+//
+
+//            bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
+//            if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
+////            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
+//                tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
+//                TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(), ManageListToMap.getInstance().getClickedLongitude());
+//                TMapMarkerItem tItem5 = new TMapMarkerItem();
+//                tItem5.setTMapPoint(tpoint);
+//                tmapview.setZoomLevel(15);
+//                tItem5.setCalloutTitle(ManageListToMap.getInstance().getClickedPlaceName());
+//                tItem5.setCanShowCallout(true);
+//                tItem5.setAutoCalloutVisible(true);
+////                if (ManagementLocation.getInstance().getSortSpinner() == "공공화장실") {
+////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
+////                } else if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
+////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
+////                } else if (ManagementLocation.getInstance().getSortSpinner() == "공원") {
+////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder3);
+////                } else if (ManagementLocation.getInstance().getSortSpinner() == "전통시장") {
+////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder4);
+////                }
+////                bitmap = Bitmap.createScaledBitmap(bitmap, 70, 70, true);
+////                tItem5.setIcon(bitmap);
+//                tmapview.bringMarkerToFront(tItem5);
+//                tmapview.addMarkerItem("ListToMap", tItem5);
+
+//            }
+        }
+    };
+
     public void ListToMap(){
         Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
         if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
 //            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
+            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
             TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(), ManageListToMap.getInstance().getClickedLongitude());
             TMapMarkerItem tItem5 = new TMapMarkerItem();
             tItem5.setTMapPoint(tpoint);
@@ -310,9 +373,6 @@ public class MapGuideFragment extends Fragment {
             tItem5.setIcon(bitmap);
             tmapview.bringMarkerToFront(tItem5);
             tmapview.addMarkerItem("ListToMap", tItem5);
-//            ManageListToMap.getInstance().setClickedListView(false);
-//            GuideInfoFragment.imageView1.setImageResource(R.drawable.reversemappoint);
-//            GuideInfoFragment.imageView2.setImageResource(R.drawable.listpoint);
 
         }
     }
@@ -358,6 +418,28 @@ public class MapGuideFragment extends Fragment {
             }
         }).start();
         return totalDistance;
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            Toast.makeText(getActivity(),"22setUserVisibleHint",Toast.LENGTH_SHORT).show();
+            if(ManageListToMap.getInstance().getClickedListView()==true) {
+//                Toast.makeText(getActivity(),"true",Toast.LENGTH_SHORT).show();
+//            ManageListToMap.getInstance().setClickedListView(false);
+            }
+        }
+        else {
+
+        }
+    }
+    @Override
+    public void setMenuVisibility(final boolean visible) {
+        super.setMenuVisibility(visible);
+        if (visible) {
+            Toast.makeText(getActivity(),"22setMenuVisibility",Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

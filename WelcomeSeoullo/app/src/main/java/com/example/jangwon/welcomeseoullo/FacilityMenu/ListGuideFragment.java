@@ -56,9 +56,6 @@ public class ListGuideFragment extends Fragment {
 
                 //한 fragment에서 다른fragment 함수 호출해야한다.
                 GuideInfoFragment.changeButtonIcon.sendEmptyMessage(0);
-//                ((GuideInfoFragment) getActivity().g).ChangeListIconToMap();
-//                GuideInfoFragment.imageView1.setImageResource(R.drawable.mappoint);
-//                GuideInfoFragment.imageView2.setImageResource(R.drawable.listpoint);
             }
         }) ;
 

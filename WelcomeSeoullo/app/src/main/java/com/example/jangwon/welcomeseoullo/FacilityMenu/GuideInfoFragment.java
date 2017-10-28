@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.CustomTypefaceSpan;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
@@ -123,10 +124,12 @@ public class GuideInfoFragment extends Fragment {
                     mapGuideButton.setBackgroundResource(R.drawable.nonclickbutton);
                     listGuideButton.setBackgroundResource(R.drawable.clickrightbutton);
                     listGuideButton.setTextColor(Color.parseColor("#7BA293"));
+                    ManageListToMap.getInstance().setClickedListView(false);
                     listGuideButton.bringToFront();
                     listGuideButton.invalidate();
                     listGuideLinearLayout.bringToFront();
                     listGuideLinearLayout.invalidate();
+
 
                 }
             });
@@ -135,6 +138,7 @@ public class GuideInfoFragment extends Fragment {
                 public void onClick(View view) {
                     nowFragment="map";
                     switchFragment(view);
+                    ManageListToMap.getInstance().setClickedListView(false);
                     listGuideButton.setBackgroundResource(R.drawable.nonclickbutton);
                     listGuideButton.setTextColor(Color.parseColor("#c0c5ce"));
                     mapGuideButton.bringToFront();
@@ -143,6 +147,7 @@ public class GuideInfoFragment extends Fragment {
                     mapGuideButton.invalidate();
                     mapGuideLinearLayout.bringToFront();
                     mapGuideLinearLayout.invalidate();
+
                 }
             });
 
@@ -150,6 +155,7 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("공공화장실");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     toiletImageButton.setBackgroundResource(R.drawable.clickedtoilet);
                     parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
                     parkImageButton.setBackgroundResource(R.drawable.nonclickpark);
@@ -169,6 +175,7 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("주차장");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     parkinglotImageButton.setBackgroundResource(R.drawable.clickedparkinglot);
                     toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
                     parkImageButton.setBackgroundResource(R.drawable.nonclickpark);
@@ -188,6 +195,7 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("공원");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     parkImageButton.setBackgroundResource(R.drawable.clickedpark);
                     toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
                     parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
@@ -207,6 +215,7 @@ public class GuideInfoFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("전통시장");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     marketImageButton.setBackgroundResource(R.drawable.clickedmarket);
                     toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
                     parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
@@ -347,10 +356,19 @@ public class GuideInfoFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
+
+//            MapGuideFragment.ListToMap();
+//            Toast.makeText(getActivity(),"setUserVisibleHint",Toast.LENGTH_SHORT).show();
+            if(ManageListToMap.getInstance().getClickedListView()==true) {
+                MapGuideFragment.HandlerListToMap.sendEmptyMessage(1);
+                Toast.makeText(getActivity(),"true",Toast.LENGTH_SHORT).show();
+//            ManageListToMap.getInstance().setClickedListView(false);
+            }
         }
         else {
 
         }
     }
+
 
 }

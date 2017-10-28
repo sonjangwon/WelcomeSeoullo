@@ -37,6 +37,8 @@ import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment;
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
+import com.example.jangwon.welcomeseoullo.FacilityMenu.ManageListToMap;
+import com.example.jangwon.welcomeseoullo.FacilityMenu.MapGuideFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.MainHomeFragment;
 import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;
@@ -69,6 +71,7 @@ public class MainActivity extends Activity {
     BlankFragment arFragment;
     PathInfoFragment pathInfoFragment;
     SettingsFragment settingsFragment;
+    boolean requestPermission=false;
 
     // 사용자 위치 수신기
     private LocationManager locationManager;
@@ -105,6 +108,10 @@ public class MainActivity extends Activity {
                         break;
                     case R.id.action_facility:
                         currentMenu = R.id.action_facility;
+                        if(ManageListToMap.getInstance().getClickedListView()==true) {
+                            MapGuideFragment.HandlerListToMap.sendEmptyMessage(0);
+                            Toast.makeText(getApplication(), "true", Toast.LENGTH_SHORT).show();
+                        }
                         mainViewPager.setCurrentItem(1);
                         break;
                     case R.id.action_AR:
@@ -250,12 +257,11 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/barefoot_regular.ttf");
-//        for(int i=0;i<5;i++){
-//            applyFontToMenuItem(bottomNavigationView.getMenu().getItem(i), typeface);
-//        }
+        if (requestPermission == true) {
+//            PathInfoFragment.buttonClickHandler.sendEmptyMessage(0);
+            setupViewPager(mainViewPager);
+        }
     }
-
     private void applyFontToMenuItem(MenuItem mi, Typeface font) {
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
         mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
@@ -370,6 +376,7 @@ public class MainActivity extends Activity {
             ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
             ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
             ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+
             return true;
         }
     }
@@ -379,12 +386,14 @@ public class MainActivity extends Activity {
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_ACCOUNTS:
+
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     //Permission Granted Successfully. Write working code here.
                     // save UUID value in SharedPreference
                     savePreferences("UUID", GetDevicesUUID(getApplicationContext()));
                     savePreferences("language", "Korean");
 
+                    requestPermission = true;
 
 
                     // 사용자의 위치 수신을 위한 세팅 //
