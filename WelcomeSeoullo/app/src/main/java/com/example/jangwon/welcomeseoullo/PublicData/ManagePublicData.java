@@ -18,11 +18,6 @@ public class ManagePublicData {
     private ArrayList<PublicParkVO> publicParkVOArrayList;
     private ArrayList<TraditionalMarketVO> traditionalMarketVOArrayList;
 
-//    public ParsePublicToilet parsePublicToilet;
-//    public ParsePublicParkingLot parsePublicParkingLot;
-//    public ParsePublicPark parsePublicPark;
-//    public ParseTraditionalMarket parseTraditionalMarket;
-
     LoadingDialog loadingDialog;
 
     String tag_name = null;
@@ -46,16 +41,10 @@ public class ManagePublicData {
         publicParkVOArrayList = new ArrayList<PublicParkVO>(10);
         traditionalMarketVOArrayList = new ArrayList<TraditionalMarketVO>(20);
 
-//        parsePublicToilet = new ParsePublicToilet();
         addToiletVO();
         addParkingLotVO();
         addParkVO();
         addTraditionalMarketVO();
-//        parsePublicParkingLot = new ParsePublicParkingLot();
-//        parsePublicPark = new ParsePublicPark();
-//        parseTraditionalMarket = new ParseTraditionalMarket();
-
-        loadingDialog = LoadingDialog.getInstance();
     }
 
     public ArrayList<PublicToiletVO> getPublicToiletVOArrayList(){
@@ -86,8 +75,6 @@ public class ManagePublicData {
         this.traditionalMarketVOArrayList = traditionalMarketVOArrayList;
     }
 
-
-
     public boolean calculateCoordinates(String latitude, String longitude){
         if(37.535936 < Double.valueOf(latitude) && Double.valueOf(latitude) < 37.571883 &&
                 126.949482 < Double.valueOf(longitude) && Double.valueOf(longitude) < 126.995575){
@@ -117,8 +104,7 @@ public class ManagePublicData {
         return true;
     }
 
-    public void addToiletVO()
-    {
+    public void addToiletVO() {
         publicToiletVOArrayList.add(new PublicToiletVO("동화빌딩", String.valueOf(37.562583518437265),String.valueOf(126.97297540786496)));
         publicToiletVOArrayList.add(new PublicToiletVO("삼구상사(주)", String.valueOf(37.563853976106095),String.valueOf(126.98080545627715)));
         publicToiletVOArrayList.add(new PublicToiletVO("케이티중앙지사", String.valueOf(37.56186876289762),String.valueOf(126.98265825452533)));
@@ -236,8 +222,7 @@ public class ManagePublicData {
         publicToiletVOArrayList.add(new PublicToiletVO("서남주유소화장실", String.valueOf(37.55838941592916),String.valueOf(126.97214199569845)));
     }
 
-    public void addParkingLotVO()
-    {
+    public void addParkingLotVO() {
         publicParkingLotVOArrayList.add(new PublicParkingLotVO("세운상가밑(구)","노상 주차장",String.valueOf(37.56941418),String.valueOf(126.99549249)));
         publicParkingLotVOArrayList.add(new PublicParkingLotVO("세일철강~LG전자연구소(구)","노상 주차장",String.valueOf(37.55559696),String.valueOf(126.96497303)));
         publicParkingLotVOArrayList.add(new PublicParkingLotVO("조양화학(구)","노상 주차장",String.valueOf(37.56954962),String.valueOf(126.98364791)));
@@ -273,10 +258,9 @@ public class ManagePublicData {
         publicParkingLotVOArrayList.add(new PublicParkingLotVO("새문안로2길(노상주차장)(시)","노상 주차장",String.valueOf(37.56886668),String.valueOf(126.97134592)));
         publicParkingLotVOArrayList.add(new PublicParkingLotVO("중림종합복지센터 부설주차장(구_중림(제5))(구)","노외 주차장",String.valueOf(37.55947076),String.valueOf(126.96616091)));
         publicParkingLotVOArrayList.add(new PublicParkingLotVO("중앙우체국옆 이륜자동차주차장(구)","노상 주차장",String.valueOf(37.56198572),String.valueOf(126.98160593)));
-
     }
-    public void addParkVO()
-    {
+
+    public void addParkVO() {
         publicParkVOArrayList.add(new PublicParkVO("경희궁",String.valueOf(126.968158),String.valueOf(37.571459)));
         publicParkVOArrayList.add(new PublicParkVO("손기정체육공원",String.valueOf(126.964857126815),String.valueOf(37.5555834468086)));
         publicParkVOArrayList.add(new PublicParkVO("효창근린공원",String.valueOf(126.960238497744),String.valueOf(37.5451839308893)));
@@ -288,8 +272,7 @@ public class ManagePublicData {
         publicParkVOArrayList.add(new PublicParkVO("덕수궁",String.valueOf(126.97772),String.valueOf(37.5658049)));
     }
 
-    public void addTraditionalMarketVO()
-    {
+    public void addTraditionalMarketVO() {
         traditionalMarketVOArrayList.add(new TraditionalMarketVO("아현골목시장", String.valueOf(37.5567398),String.valueOf(126.9554835)));
         traditionalMarketVOArrayList.add(new TraditionalMarketVO("공덕시장", String.valueOf(37.5447975),String.valueOf(126.9533474)));
         traditionalMarketVOArrayList.add(new TraditionalMarketVO("마포시장", String.valueOf(37.5448107),String.valueOf(126.9538425)));

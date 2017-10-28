@@ -12,7 +12,6 @@ public class ManageListToMap {
     String fragmentCondition;
     boolean clickedListView = false;
 
-
     public static ManageListToMap getInstance(){
         if(manageListToMap == null){
             manageListToMap = new ManageListToMap();

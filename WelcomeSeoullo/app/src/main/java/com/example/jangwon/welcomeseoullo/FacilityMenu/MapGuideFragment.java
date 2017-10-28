@@ -360,5 +360,4 @@ public class MapGuideFragment extends Fragment {
         return totalDistance;
     }
 
-
 }

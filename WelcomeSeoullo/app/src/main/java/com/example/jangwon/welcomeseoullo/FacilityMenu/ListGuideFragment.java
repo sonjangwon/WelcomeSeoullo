@@ -21,7 +21,6 @@ import java.util.List;
 public class ListGuideFragment extends Fragment {
     //주변경로안내 리스트뷰 Fragment
 
-
     ListViewAdapter adapter;
     ListView listview;
     List<String> LIST_MENU ;
