@@ -65,7 +65,7 @@ public class NoticeFragment extends Fragment {
                     @Override
                     public void onItemClick(View view, int position) {
                         Intent intent = new Intent(getActivity().getApplicationContext(), ViewContents.class);
-                        intent.putExtra("urlNum", urlNumList.get(position));
+                        intent.putExtra("urlNum", NewsCrawling.getInstance().urlNumList.get(position));
                         startActivity(intent);
                     }
 
@@ -76,7 +76,7 @@ public class NoticeFragment extends Fragment {
 
                 }));
 
-        items = new ArrayList<>();
+        //items = new ArrayList<>();
         mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_notice));
 
         return view;

@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,51 +56,69 @@ public class GuidanceFragment extends Fragment{
             public void onClick(View v) {
                 DownloadURL = "http://seoullo7017.seoul.go.kr/files/7017leaflet_korean.pdf";
                 FileName = "7017leaflet_korean.pdf";
+
+                //LoadFile(DownloadURL,FileName);
                 new DownloadFile().execute(DownloadURL,FileName);
-                LoadFile(DownloadURL,FileName);
             }
         });
         english.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 DownloadURL = "http://seoullo7017.seoul.go.kr/files/7017leaflet_english.pdf";
                 FileName = "7017leaflet_english.pdf";
+
+                //LoadFile(DownloadURL,FileName);
                 new DownloadFile().execute(DownloadURL,FileName);
-                LoadFile(DownloadURL,FileName);
             }
         });
         chinese.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 DownloadURL = "http://seoullo7017.seoul.go.kr/files/7017leaflet_chinese.pdf";
                 FileName = "7017leaflet_chinese.pdf";
+
+                //LoadFile(DownloadURL,FileName);
                 new DownloadFile().execute(DownloadURL,FileName);
-                LoadFile(DownloadURL,FileName);
             }
         });
         japanese.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 DownloadURL = "http://seoullo7017.seoul.go.kr/files/7017leaflet_japanese.pdf";
                 FileName = "7017leaflet_japanese.pdf";
+
+                //LoadFile(DownloadURL,FileName);
                 new DownloadFile().execute(DownloadURL,FileName);
-                LoadFile(DownloadURL,FileName);
             }
         });
         guideDownload.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 DownloadURL = "http://seoullo7017.seoul.go.kr/files/7017_walking_tour_map.pdf";
                 FileName = "7017_walking_tour_map.pdf";
+
+                //LoadFile(DownloadURL,FileName);
                 new DownloadFile().execute(DownloadURL,FileName);
-                LoadFile(DownloadURL,FileName);
             }
         });
 
         return view;
     }
 
+    final Handler downtoastHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            Toast.makeText(getActivity().getApplicationContext(), FileName+"다운로드 중", Toast.LENGTH_LONG).show();
+        }
+    };
+    final Handler waittoastHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            Toast.makeText(getActivity().getApplicationContext(), "잠시만 기다려주세요", Toast.LENGTH_SHORT).show();
+        }
+    };
+
     public void LoadFile(String url, String file)
     {
-        Toast.makeText(getActivity().getApplicationContext(),file+"다운로드", Toast.LENGTH_SHORT).show();
+
         File pdfFile = new File(Environment.getExternalStorageDirectory() +"/Download/"+ file);  // -> filename = maven.pdf
-        if(pdfFile.exists()) {
+        //if(pdfFile.exists()) {
             Uri path = Uri.fromFile(pdfFile);
             Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
             pdfIntent.setDataAndType(path, "application/pdf");
@@ -109,37 +129,42 @@ public class GuidanceFragment extends Fragment{
             } catch (ActivityNotFoundException e) {
                 Toast.makeText(getActivity().getApplicationContext(), "No Application available to view PDF", Toast.LENGTH_SHORT).show();
             }
-        }
-        else{
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            startActivity(browserIntent);
-        }
+        //}
+        //else{
+            //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            //startActivity(browserIntent);
+        //}
     }
-    public class DownloadFile extends AsyncTask<String, Void, Void> {
+    public class DownloadFile extends AsyncTask<String, Void, String> {
 
         @Override
-        protected Void doInBackground(String... strings) {
+        protected String doInBackground(String... strings) {
             String fileUrl = strings[0];   // -> http://maven.apache.org/maven-1.x/maven.pdf
             String fileName = strings[1];  // -> maven.pdf
+            downtoastHandler.sendEmptyMessage(0);
             String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
             File folder = new File(extStorageDirectory, "/Download/");
             folder.mkdir();
 
             File pdfFile = new File(folder, fileName);
-
-            try{
+            try {
                 pdfFile.createNewFile();
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             downloadFile(fileUrl, pdfFile);
             return null;
         }
+        @Override
+        protected void onPostExecute(String result) {
+            LoadFile(DownloadURL,FileName);
+        }
     }
+
 
     public void downloadFile(String fileUrl, File directory){
         try {
-
+            waittoastHandler.sendEmptyMessage(0);
             URL url = new URL(fileUrl);
             HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
             //urlConnection.setRequestMethod("GET");

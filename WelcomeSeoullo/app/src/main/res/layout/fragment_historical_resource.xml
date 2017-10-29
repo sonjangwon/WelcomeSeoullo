@@ -4,8 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="20dp"
+    android:background="@color/white"/>
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:id="@+id/historyTabLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +55,7 @@
     </LinearLayout>
     <android.support.v4.view.ViewPager
         android:id="@+id/historyPager"
-        android:layout_below="@+id/tabLinearLayout"
+        android:layout_below="@+id/historyTabLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

@@ -7,10 +7,6 @@ import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.example.jangwon.welcomeseoullo.R;
 
 /**
  * A PagerAdapter that wraps around another PagerAdapter to handle paging wrap-around.
@@ -19,11 +15,6 @@ public class InfinitePagerAdapter extends PagerAdapter {
 
     private static final String TAG = "InfinitePagerAdapter";
     private static final boolean DEBUG = true;
-    Integer[] Images = new Integer[]{R.drawable.img_1,
-            R.drawable.img_2,
-            R.drawable.img_3, R.drawable.img_4, R.drawable.img_5,R.drawable.img_6,R.drawable.img_7,R.drawable.img_8,R.drawable.img_9};
-    private TextView[] dots;
-    private LinearLayout dotsLayout;
     private PagerAdapter adapter;
     Context mContext;
     public InfinitePagerAdapter(PagerAdapter adapter, Context context) {

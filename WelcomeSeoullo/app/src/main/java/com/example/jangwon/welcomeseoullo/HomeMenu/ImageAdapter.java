@@ -1,6 +1,5 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
-import android.app.Activity;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,9 +11,9 @@ import com.example.jangwon.welcomeseoullo.R;
 
 public class ImageAdapter extends PagerAdapter {
 	Context context;
-    private int[] GalImages = new int[] {R.drawable.img_1,
-            R.drawable.img_2,
-            R.drawable.img_3, R.drawable.img_4, R.drawable.img_5,R.drawable.img_6,R.drawable.img_7,R.drawable.img_8,R.drawable.img_9
+    private int[] GalImages = new int[] { R.drawable.img_card04_big_main1, R.drawable.img_card02_big_main2, R.drawable.img_card010_big_main3,
+            R.drawable.img_card013_big_main4, R.drawable.img_card011_big_main5, R.drawable.img_card014_big_main6, R.drawable.img_card012_big_main7,
+            R.drawable.img_card03_big_main8
     };
 
     ImageAdapter(Context context){
@@ -45,6 +44,7 @@ public class ImageAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+
         ((ViewPager) container).removeView((ImageView) object);
     }
   }

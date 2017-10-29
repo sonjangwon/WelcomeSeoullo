@@ -21,9 +21,6 @@ public class EmoJeoMoImages extends AppCompatActivity {
 
     LinearLayout imageViewLinear;
     ImageView imageView;
-    Integer[] image = new Integer[]{R.drawable.img_card01_big_1,R.drawable.img_card01_big_2,R.drawable.img_card01_big_3,
-            R.drawable.img_card01_big_4,R.drawable.img_card01_big_5,R.drawable.img_card01_big_6,R.drawable.img_card01_big_7,R.drawable.img_card01_big_8,
-            R.drawable.img_card01_big_9,R.drawable.img_card01_big_10,R.drawable.img_card01_big_11,R.drawable.img_card01_big_12};
 
     Integer[] image1 = new Integer[]{R.drawable.img_card02_big_1,R.drawable.img_card02_big_2,R.drawable.img_card02_big_3,R.drawable.img_card02_big_4,R.drawable.img_card02_big_5,
             R.drawable.img_card02_big_6,R.drawable.img_card02_big_7,R.drawable.img_card02_big_8,R.drawable.img_card02_big_9};
@@ -32,33 +29,22 @@ public class EmoJeoMoImages extends AppCompatActivity {
             R.drawable.img_card03_big_5,R.drawable.img_card03_big_6,R.drawable.img_card03_big_7};
 
     Integer[] image3 = new Integer[]{R.drawable.img_card04_big_1,R.drawable.img_card04_big_2,R.drawable.img_card04_big_3,R.drawable.img_card04_big_4,
-            R.drawable.img_card04_big_5,R.drawable.img_card04_big_6,R.drawable.img_card04_big_7,R.drawable.img_card04_big_8,R.drawable.img_card04_big_9,};
+            R.drawable.img_card04_big_5,R.drawable.img_card04_big_6,R.drawable.img_card04_big_7,R.drawable.img_card04_big_8,R.drawable.img_card04_big_9,};;
 
-    Integer[] image4 = new Integer[]{R.drawable.img_card05_big_1,R.drawable.img_card05_big_2,R.drawable.img_card05_big_3,R.drawable.img_card05_big_4,R.drawable.img_card05_big_5,
-            R.drawable.img_card05_big_6};
-
-    Integer[] image5 = new Integer[]{R.drawable.img_card09_big_1,R.drawable.img_card09_big_2,R.drawable.img_card09_big_3,R.drawable.img_card09_big_4,
-            R.drawable.img_card09_big_5,R.drawable.img_card09_big_6};
-
-    Integer[] image6 = new Integer[]{R.drawable.img_card010_big_1,R.drawable.img_card010_big_2,R.drawable.img_card010_big_3,R.drawable.img_card010_big_4,
+    Integer[] image4 = new Integer[]{R.drawable.img_card010_big_1,R.drawable.img_card010_big_2,R.drawable.img_card010_big_3,R.drawable.img_card010_big_4,
             R.drawable.img_card010_big_5,R.drawable.img_card010_big_6};
-    Integer[] image7 = new Integer[]{R.drawable.img_card011_big_1,R.drawable.img_card011_big_2,R.drawable.img_card011_big_3,R.drawable.img_card011_big_4,
+    Integer[] image5 = new Integer[]{R.drawable.img_card011_big_1,R.drawable.img_card011_big_2,R.drawable.img_card011_big_3,R.drawable.img_card011_big_4,
             R.drawable.img_card011_big_5,R.drawable.img_card011_big_6,R.drawable.img_card011_big_7};
 
-    Integer[] image8 = new Integer[]{R.drawable.img_card012_big_1,R.drawable.img_card012_big_2,R.drawable.img_card012_big_3,R.drawable.img_card012_big_4,
+    Integer[] image6 = new Integer[]{R.drawable.img_card012_big_1,R.drawable.img_card012_big_2,R.drawable.img_card012_big_3,R.drawable.img_card012_big_4,
             R.drawable.img_card012_big_5,R.drawable.img_card012_big_6,R.drawable.img_card012_big_7,R.drawable.img_card012_big_8};
 
-    Integer[] image9 = new Integer[]{R.drawable.img_card013_big_1,R.drawable.img_card013_big_2,R.drawable.img_card013_big_3,R.drawable.img_card013_big_4};
+    Integer[] image7 = new Integer[]{R.drawable.img_card013_big_1,R.drawable.img_card013_big_2,R.drawable.img_card013_big_3,R.drawable.img_card013_big_4};
 
-    Integer[] image10 = new Integer[]{R.drawable.img_card014_big_1,R.drawable.img_card014_big_2,R.drawable.img_card014_big_3,R.drawable.img_card014_big_4,
+    Integer[] image8 = new Integer[]{R.drawable.img_card014_big_1,R.drawable.img_card014_big_2,R.drawable.img_card014_big_3,R.drawable.img_card014_big_4,
             R.drawable.img_card014_big_5,R.drawable.img_card014_big_6,R.drawable.img_card014_big_7,R.drawable.img_card014_big_8,R.drawable.img_card014_big_9};
 
-    Integer[] image11 = new Integer[]{};
-    Integer[] image12 = new Integer[]{};
-    Integer[] image13 = new Integer[]{};
-    Integer[] image14 = new Integer[]{};
     ArrayList<ImageItems> items;
-    ImageRecyclerAdapter imageRecyclerAdapter;
     RecyclerView imageRecyclerView;
     NestedScrollView mScrollView;
 
@@ -68,8 +54,9 @@ public class EmoJeoMoImages extends AppCompatActivity {
         setContentView(R.layout.emojeomoimages_layout);
         Intent intent = getIntent();
         String num = intent.getExtras().getString("position");
-        mScrollView = (NestedScrollView) findViewById(R.id.ScrollView);
-        mScrollView.smoothScrollBy(100, 1000);
+//        mScrollView = (NestedScrollView) findViewById(R.id.ScrollView);
+//        mScrollView.smoothScrollBy(100, 1000);
+
         imageRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         imageViewLinear = (LinearLayout) findViewById(R.id.linear);
         imageRecyclerView.setHasFixedSize(true);
@@ -81,31 +68,28 @@ public class EmoJeoMoImages extends AppCompatActivity {
     public void setImage(String pageNum){
         switch (pageNum){
             case "0":
-                images(image,"1");
+                images(image3,"1");
                 break;
             case "1":
                 images(image1,"2");
                 break;
             case "2":
-                images(image2, "3");
+                images(image4, "3");
                 break;
             case "3":
-                images(image3, "4");
+                images(image7, "4");
                 break;
             case "4":
-                images(image4, "5");
+                images(image5, "5");
                 break;
             case "5":
-                images(image5, "9");
+                images(image8, "6");
                 break;
             case "6":
-                images(image6, "10");
+                images(image6, "7");
                 break;
             case "7":
-                images(image7, "11");
-                break;
-            case "8":
-                images(image8, "12");
+                images(image2, "8");
                 break;
         }
     }

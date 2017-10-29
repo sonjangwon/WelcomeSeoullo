@@ -3,22 +3,13 @@ package com.example.jangwon.welcomeseoullo.HomeMenu;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -76,7 +67,7 @@ public class HomeFragment extends Fragment {
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
         PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
 
-        viewPager.setAdapter(wrappedAdapter);
+        viewPager.setAdapter(imgadapter);
         viewPager.startAutoScroll();
 
         btn_newNotice = (Button) view.findViewById(R.id.Btn_newNotice);
@@ -117,7 +108,7 @@ public class HomeFragment extends Fragment {
         viewPager.setOnItemClickListener(new ClickableAutoViewPager.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                int pageNum = position % 9;
+                int pageNum = position % 8;
                 Intent intent = new Intent(getActivity().getApplicationContext(), EmoJeoMoImages.class);
                 intent.putExtra("position", String.valueOf(pageNum));
                 Toast.makeText(getActivity().getApplicationContext(), String.valueOf(position)+String.valueOf(pageNum), Toast.LENGTH_SHORT).show();

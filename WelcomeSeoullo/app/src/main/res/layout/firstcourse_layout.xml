@@ -5,10 +5,31 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
     <ImageView
-        android:background="@drawable/welcomeseoullo1"
+        android:id="@+id/firstcourse"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/firstcourse2"
+        android:layout_below="@+id/firstcourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/firstcourse3"
+        android:layout_below="@+id/firstcourse2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/firstcourse4"
+        android:layout_below="@+id/firstcourse3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ImageView
+        android:id="@+id/firstcourse5"
+        android:layout_below="@+id/firstcourse4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>
     </ScrollView>

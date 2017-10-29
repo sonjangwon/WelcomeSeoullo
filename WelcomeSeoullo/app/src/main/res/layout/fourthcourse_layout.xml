@@ -8,27 +8,27 @@
         android:layout_height="match_parent"
         android:background="@color/white">
         <ImageView
-            android:id="@+id/secondcourse"
+            android:id="@+id/fourthcourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:id="@+id/secondcourse2"
-            android:layout_below="@+id/secondcourse"
+            android:id="@+id/fourthcourse2"
+            android:layout_below="@+id/fourthcourse"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:id="@+id/secondcourse3"
-            android:layout_below="@+id/secondcourse2"
+            android:id="@+id/fourthcourse3"
+            android:layout_below="@+id/fourthcourse2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:id="@+id/secondcourse4"
-            android:layout_below="@+id/secondcourse3"
+            android:id="@+id/fourthcourse4"
+            android:layout_below="@+id/fourthcourse3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:id="@+id/secondcourse5"
-            android:layout_below="@+id/secondcourse4"
+            android:id="@+id/fourthcourse5"
+            android:layout_below="@+id/fourthcourse4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>

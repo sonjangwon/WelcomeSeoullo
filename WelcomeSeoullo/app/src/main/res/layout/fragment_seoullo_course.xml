@@ -5,7 +5,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/white"/>
 <LinearLayout
+    android:layout_marginTop="20dp"
     android:id="@+id/tabLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

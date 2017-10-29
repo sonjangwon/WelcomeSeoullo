@@ -3,16 +3,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/usingScroll">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout
     android:background="@color/white"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/white"/>
 <ImageView
     android:id="@+id/head"
     android:background="@drawable/welcomeseoullo_info1"
     android:layout_width="match_parent"
-    android:layout_height="300dp" />
+    android:layout_height="280dp" />
     <LinearLayout
         android:layout_marginTop="20dp"
         android:layout_below="@+id/head"

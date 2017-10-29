@@ -6,11 +6,32 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
         <ImageView
-            android:background="@drawable/welcomeseoullo3"
+            android:id="@+id/thirdcourse"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/thirdcourse2"
+            android:layout_below="@+id/thirdcourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/thirdcourse3"
+            android:layout_below="@+id/thirdcourse2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/thirdcourse4"
+            android:layout_below="@+id/thirdcourse3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/thirdcourse5"
+            android:layout_below="@+id/thirdcourse4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </ScrollView>
