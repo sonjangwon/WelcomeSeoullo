@@ -25,7 +25,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.CustomTypefaceSpan;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
@@ -361,7 +360,7 @@ public class GuideInfoFragment extends Fragment {
 //            Toast.makeText(getActivity(),"setUserVisibleHint",Toast.LENGTH_SHORT).show();
             if(ManageListToMap.getInstance().getClickedListView()==true) {
                 MapGuideFragment.HandlerListToMap.sendEmptyMessage(1);
-                Toast.makeText(getActivity(),"true",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(),"true",Toast.LENGTH_SHORT).show();
 //            ManageListToMap.getInstance().setClickedListView(false);
             }
         }

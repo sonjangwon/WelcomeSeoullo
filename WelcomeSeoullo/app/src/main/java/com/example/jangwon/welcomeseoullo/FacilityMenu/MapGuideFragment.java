@@ -276,7 +276,7 @@ public class MapGuideFragment extends Fragment {
     public void onStart() {
         addMarker();
         if(ManageListToMap.getInstance().getClickedListView()==true) {
-//            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
+            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
             ListToMap();
 //            ListToMap.getInstance().setClickedListView(false);
         }
@@ -352,7 +352,7 @@ public class MapGuideFragment extends Fragment {
         Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
         if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
 //            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
-            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
+//            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
             TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(), ManageListToMap.getInstance().getClickedLongitude());
             TMapMarkerItem tItem5 = new TMapMarkerItem();
             tItem5.setTMapPoint(tpoint);
