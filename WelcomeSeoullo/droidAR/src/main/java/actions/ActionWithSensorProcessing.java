@@ -1,15 +1,16 @@
 package actions;
 
+import android.hardware.SensorManager;
+import android.view.MotionEvent;
+import android.view.Surface;
+
+import actions.algos.Algo;
 import gl.GLCamRotationController;
 import gl.GLUtilityClass;
 import system.EventManager;
 import system.Setup;
 import util.Calculus;
 import worldData.Updateable;
-import actions.algos.Algo;
-import android.hardware.SensorManager;
-import android.view.MotionEvent;
-import android.view.Surface;
 
 public abstract class ActionWithSensorProcessing extends Action {
 

@@ -22,15 +22,6 @@ public class AnimationFaceToCamera extends GLAnimation {
 	private Vec myTargetCameraPosition;
 	private boolean dontChangeXRotation;
 
-	/**
-	 * @param targetCamera
-	 * @param targetMesh
-	 * @param updateDelay
-	 *            around 0.5f s
-	 * @param dontChangeXRotation
-	 *            if this is false, the mesh will also change the rotation x
-	 *            value, otherwise only the z value to face to the camera
-	 */
 	public AnimationFaceToCamera(GLCamera targetCamera, float updateDelay,
 			boolean dontChangeXRotation) {
 		myTargetCamera = targetCamera;

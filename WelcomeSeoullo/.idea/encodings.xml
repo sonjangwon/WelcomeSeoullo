@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionBufferedCameraAR.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionCalcRelativePos.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionDoAlongAxis.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionDoAlongAxis.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionMoveCameraBuffered.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionMoveCameraUnbuffered.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionMoveObject.java" charset="ISO-8859-1" />
@@ -24,8 +25,11 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionUseCameraAngles2.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionWASDMovement.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionWaitForAccuracy.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionWaitForAccuracy.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionWaitForAccuracy2.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionWithSensorProcessing.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/ActionWithSensorProcessing.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/algos/Algo.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/algos/Algo.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/algos/AlgoCubicRootBuffer.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/actions/algos/BufferAlgo1.java" charset="ISO-8859-1" />
@@ -38,6 +42,7 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/CommandGroup.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/DebugCommandPositionEvent.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/gl/CommandCameraMoveAndLookAt.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/logic/CommandIfThenElse.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/logic/CommandIfThenElse.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/logic/CommandSetWrapperToValue.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/logic/CommandSetWrapperToValue2.java" charset="ISO-8859-1" />
@@ -59,6 +64,7 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/ui/CommandShowListActivity.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/ui/CommandShowToast.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/undoable/CommandProcessor.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/undoable/CommandProcessorList.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/undoable/CommandProcessorList.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/commands/undoable/UndoableCommand.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/components/PhysicsComponent.java" charset="ISO-8859-1" />
@@ -94,6 +100,8 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/StaticDemoSetup.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/TestSetup.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/TimeModifier.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/de/rwth/setups/TimeModifier.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gamelogic/ActionFeedback.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gamelogic/ActionFeedback.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gamelogic/ActionList.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gamelogic/ActionThrowFireball.java" charset="ISO-8859-1" />
@@ -112,13 +120,17 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gamelogic/Stat.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gamelogic/StatList.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/DefaultNodeEdgeListener.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/DefaultNodeEdgeListener.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/Edge.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/EdgeListener.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/EdgeListener.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/GeoCalcer.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/GeoGraph.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/GeoObj.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/GeoUtils.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/NodeListener.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/NodeListener.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/SimpleNodeEdgeListener.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/geo/SimpleNodeEdgeListener.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gestures/PhoneGesture.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gestures/PhoneGestureDetector.java" charset="ISO-8859-1" />
@@ -154,8 +166,10 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationBounce.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationColorBounce.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationColorMorph.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationColorMorph.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationFaceToCamera.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationGrow.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationMove.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationMove.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationPulse.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/AnimationRotate.java" charset="ISO-8859-1" />
@@ -164,6 +178,7 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/animations/GLAnimation.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/parsers/ObjParser.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/scenegraph/MeshComponent.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/scenegraph/MultiColorRenderData.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/scenegraph/MultiColorRenderData.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/scenegraph/MultiColoredShape.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/scenegraph/RenderData.java" charset="ISO-8859-1" />
@@ -177,9 +192,11 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl/textures/TexturedShape.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gl2/GL2SurfaceView.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/CustomBaseAdapter.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/CustomBaseAdapter.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/CustomCursorAdapter.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/CustomGestureListener.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/CustomListActivity.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/DefaultListItemView.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/DefaultListItemView.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/GuiSetup.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/InfoScreen.java" charset="ISO-8859-1" />
@@ -191,6 +208,7 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/SimpleCustomView.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/simpleUI/AbstractModifier.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/simpleUI/EditItem.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/simpleUI/HalfHalfModifier.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/simpleUI/HalfHalfModifier.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/simpleUI/ModifierGroup.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/gui/simpleUI/ModifierInterface.java" charset="ISO-8859-1" />
@@ -227,7 +245,10 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/ActivityConnector.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/ArActivity.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/CameraView.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/CameraView.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/CameraViewForOldDevices.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/CameraViewForOldDevices.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/ConcreteSimpleLocationManager.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/ConcreteSimpleLocationManager.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/Container.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/system/DefaultARSetup.java" charset="ISO-8859-1" />
@@ -258,6 +279,7 @@
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/util/HasDebugInformation.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/util/IO.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/util/ImageTransform.java" charset="ISO-8859-1" />
+    <file url="file://$PROJECT_DIR$/droidAR/src/main/java/util/LimitedQueue.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/util/LimitedQueue.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/util/Log.java" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/droidAR/src/main/java/util/QuadTree.java" charset="ISO-8859-1" />

@@ -1,9 +1,8 @@
 package gl.animations;
 
-import gl.Renderable;
-
 import javax.microedition.khronos.opengles.GL10;
 
+import gl.Renderable;
 import util.Vec;
 import worldData.Updateable;
 import worldData.Visitor;

@@ -1,14 +1,14 @@
 package de.rwth.setups;
 
-import gl.Renderable;
+import android.util.Log;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import gl.Renderable;
 import util.Calculus;
 import worldData.RenderableEntity;
 import worldData.Updateable;
 import worldData.Visitor;
-import android.util.Log;
 
 public class TimeModifier implements RenderableEntity {
 

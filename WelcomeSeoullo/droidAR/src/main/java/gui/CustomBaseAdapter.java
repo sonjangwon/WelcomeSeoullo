@@ -1,11 +1,12 @@
 package gui;
 
-import system.Container;
-import util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.SimpleCursorAdapter;
+
+import system.Container;
+import util.Log;
 
 /**
  * use {@link SimpleCursorAdapter} instead!!

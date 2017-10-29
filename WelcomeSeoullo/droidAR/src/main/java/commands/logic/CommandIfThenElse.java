@@ -1,9 +1,8 @@
 package commands.logic;
 
+import commands.Command;
 import listeners.ProcessListener;
 import util.Log;
-
-import commands.Command;
 
 public class CommandIfThenElse extends Command {
 

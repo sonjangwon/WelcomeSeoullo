@@ -1,5 +1,6 @@
 package geo;
 
+import components.ProximitySensor;
 import gl.Color;
 import gl.GLCamera;
 import gl.animations.AnimationColorMorph;
@@ -11,8 +12,6 @@ import util.Log;
 import util.Vec;
 import worldData.Entity;
 import worldData.Obj;
-
-import components.ProximitySensor;
 
 public abstract class SimpleNodeEdgeListener implements NodeListener,
 		EdgeListener {
@@ -128,7 +127,7 @@ public abstract class SimpleNodeEdgeListener implements NodeListener,
 
 			@Override
 			public void onObjectIsCloseToCamera(GLCamera glCamera, Obj obj,
-					MeshComponent meshComp, float currentDistance) {
+                                                MeshComponent meshComp, float currentDistance) {
 				Log.d(LOG_TAG, "Proxim Sensor executed, close to " + obj);
 
 				Log.d(LOG_TAG, "     meshComp=" + meshComp);
@@ -168,7 +167,7 @@ public abstract class SimpleNodeEdgeListener implements NodeListener,
 
 	@Override
 	public void addEdgeToGraph(GeoGraph targetGraph, GeoObj startPoint,
-			GeoObj endPoint) {
+                               GeoObj endPoint) {
 
 		// add an edge:
 		if (startPoint != null) {
@@ -195,7 +194,7 @@ public abstract class SimpleNodeEdgeListener implements NodeListener,
 	 * @return
 	 */
 	public abstract MeshComponent getEdgeMesh(GeoGraph targetGraph,
-			GeoObj startPoint, GeoObj endPoint);
+                                              GeoObj startPoint, GeoObj endPoint);
 
 	/**
 	 * @return null is no node mesh should be used
