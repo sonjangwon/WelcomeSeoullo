@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.MainActivity;
 import com.example.jangwon.welcomeseoullo.R;
@@ -111,7 +110,7 @@ public class HomeFragment extends Fragment {
                 int pageNum = position % 8;
                 Intent intent = new Intent(getActivity().getApplicationContext(), EmoJeoMoImages.class);
                 intent.putExtra("position", String.valueOf(pageNum));
-                Toast.makeText(getActivity().getApplicationContext(), String.valueOf(position)+String.valueOf(pageNum), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity().getApplicationContext(), String.valueOf(position)+String.valueOf(pageNum), Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
