@@ -110,7 +110,7 @@ public class GuidanceFragment extends Fragment{
     final Handler waittoastHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
-            Toast.makeText(getActivity().getApplicationContext(), "잠시만 기다려주세요", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "잠시만 기다려주세요", Toast.LENGTH_LONG).show();
         }
     };
 
@@ -157,6 +157,7 @@ public class GuidanceFragment extends Fragment{
         }
         @Override
         protected void onPostExecute(String result) {
+
             LoadFile(DownloadURL,FileName);
         }
     }
@@ -164,13 +165,13 @@ public class GuidanceFragment extends Fragment{
 
     public void downloadFile(String fileUrl, File directory){
         try {
-            waittoastHandler.sendEmptyMessage(0);
+
             URL url = new URL(fileUrl);
             HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
             //urlConnection.setRequestMethod("GET");
             //urlConnection.setDoOutput(true);
             urlConnection.connect();
-
+            waittoastHandler.sendEmptyMessage(0);
             InputStream inputStream = urlConnection.getInputStream();
             FileOutputStream fileOutputStream = new FileOutputStream(directory);
             int totalSize = urlConnection.getContentLength();

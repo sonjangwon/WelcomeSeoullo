@@ -102,6 +102,8 @@ public class MainActivity extends Activity {
                     case R.id.action_home:
                         currentMenu = R.id.action_home;
                         mainViewPager.setCurrentItem(0);
+                        switchFragment(homeFragment);
+                        isHomeFragmentVisible = true;
                         break;
                     case R.id.action_facility:
                         currentMenu = R.id.action_facility;
