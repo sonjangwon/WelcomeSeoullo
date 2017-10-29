@@ -121,11 +121,12 @@
                     <ImageButton
                         android:id="@+id/image_historical"
                         android:layout_marginTop="20dp"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:background="@drawable/test3"/>
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/ic_home_black_24dp" />
                     <Button
                         android:id="@+id/Btn_history"
+                        android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="#ffffff"
