@@ -342,15 +342,15 @@ public class GuideInfoFragment extends Fragment {
         };
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
-        }
-        else {
-
-        }
-    }
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
+//        }
+//        else {
+//
+//        }
+//    }
 
 }

@@ -1,13 +1,21 @@
 package com.example.jangwon.welcomeseoullo;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Html;
@@ -25,6 +33,9 @@ import android.widget.Toast;
 import com.example.jangwon.welcomeseoullo.HomeMenu.NewsCrawling;
 import com.example.jangwon.welcomeseoullo.HomeMenu.PrefManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GuideAppInfo extends Activity {
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
@@ -37,6 +48,8 @@ public class GuideAppInfo extends Activity {
     private PrefManager prefManager;
     private ImageView imageISeoulU;
     int count = 0;
+
+    private static final int MY_PERMISSIONS_REQUEST_ACCOUNTS = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +143,8 @@ public class GuideAppInfo extends Activity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+
+        alertCheckGPS();
     }
 
     //	viewpager change listener
@@ -227,6 +240,110 @@ public class GuideAppInfo extends Activity {
         else {
             backPressedTime = tempTime;
             Toast.makeText(getApplicationContext(), "'뒤로' 버튼을 한 번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //핸드폰 고유 번호를 만들기 위해서 사용자에게 권한 획득 과정, API 23이상인 경우에만 해당, 런타임 중에 권한 획득
+    private boolean checkAndRequestPermissions() {
+
+        int permissionPhoneState = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        int permissionFineLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int permissionCoarseLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        int permissionMedia = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (permissionPhoneState != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (permissionFineLocation != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (permissionCoarseLocation != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+        if (permissionMedia != PackageManager.PERMISSION_GRANTED){
+            listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), MY_PERMISSIONS_REQUEST_ACCOUNTS);
+            return false;
+        }
+        else{
+
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            finish();
+            return true;
+        }
+    }
+
+    //핸드폰 고유 번호를 만들기 위해서 사용자에게 권한 획득 과정 Permission 처리후 callback
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCOUNTS:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+                else {
+                    //You did not accept the request can not use the functionality.
+                    Toast.makeText(GuideAppInfo.this, "권한사용을 동의해주셔야 이용이 가능합니다.", Toast.LENGTH_SHORT).show();
+                    //권한 획득이 거부되면 수행해야 할 적업이 표시됨
+                    //일반적으로 작업을 처리할 메서드를 호출
+                    checkAndRequestPermissions();
+                }
+                break;
+        }
+    }
+
+    //gps체크
+    private void alertCheckGPS() { //gps 꺼져있으면 켤 껀지 체크
+        LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        if(!locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("'어서와, 서울로 7017'을 이용하시려면 \n[위치] 권한을 허용해 주세요")
+                    .setCancelable(false)
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            moveConfigGPS();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+        else {
+            checkAndRequestPermissions();
+        }
+    }
+
+    // GPS 설정화면으로 이동
+    private void moveConfigGPS() {
+
+//        Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//        startActivity(gpsOptionsIntent);
+
+        Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivityForResult(myIntent,100);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode,int resultCode,Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        isGPSEnabled();
+    }
+
+    private void isGPSEnabled(){
+        LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        boolean statusOfGPS = locManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(statusOfGPS){
+            checkAndRequestPermissions();
+        }
+        else{
+            alertCheckGPS();
         }
     }
 }

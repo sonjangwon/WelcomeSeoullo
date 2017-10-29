@@ -32,5 +32,4 @@ public class ViewPagerAdapter extends android.support.v13.app.FragmentStatePager
         mFragmentList.remove(position);
         mFragmentList.add(position, fragment);
     }
-
 }

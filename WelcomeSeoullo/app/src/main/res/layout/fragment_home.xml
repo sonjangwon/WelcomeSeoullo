@@ -42,6 +42,7 @@
                 android:layout_gravity="center"
                 android:weightSum="1">
                 <LinearLayout
+                    android:id="@+id/notice_section"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
@@ -54,6 +55,7 @@
                     android:layout_marginRight="1.25dp"
                     android:background="#dd5561">
                     <ImageButton
+                        android:id="@+id/image_notice"
                         android:layout_marginTop="20dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -69,6 +71,7 @@
                         android:textStyle="bold" />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/walking_course_section"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
@@ -81,6 +84,7 @@
                     android:layout_marginRight="2.5dp"
                     android:background="#fa9d4d">
                     <ImageButton
+                        android:id="@+id/image_walking_course"
                         android:layout_marginTop="20dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -102,6 +106,7 @@
                 android:layout_weight="1"
                 android:weightSum="1">
                 <LinearLayout
+                    android:id="@+id/historical_section"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
@@ -114,6 +119,7 @@
                     android:gravity="center"
                     android:background="#b1bc39">
                     <ImageButton
+                        android:id="@+id/image_historical"
                         android:layout_marginTop="20dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
@@ -128,6 +134,7 @@
                         android:text="역사문화자원" />
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/guidance_section"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
@@ -140,6 +147,7 @@
                     android:layout_marginRight="2.5dp"
                     android:background="#378de2">
                     <ImageButton
+                        android:id="@+id/image_guidance"
                         android:layout_marginTop="20dp"
                         android:layout_width="50dp"
                         android:layout_height="50dp"

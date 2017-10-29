@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.MyVideoView;
 import com.example.jangwon.welcomeseoullo.R;
@@ -59,12 +58,12 @@ public class BlankFragment extends Fragment {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(
-                        getActivity().getApplicationContext(),
-                        getPreferences("fullName") + " " + getPreferences("emailAddress") + "\n" + getPreferences("UUID") + "\n"
-                        + getBooleanPreferences("openPublic") + " " + getPreferences("language"),
-                        Toast.LENGTH_SHORT
-                ).show();
+//                Toast.makeText(
+//                        getActivity().getApplicationContext(),
+//                        getPreferences("fullName") + " " + getPreferences("emailAddress") + "\n" + getPreferences("UUID") + "\n"
+//                        + getBooleanPreferences("openPublic") + " " + getPreferences("language"),
+//                        Toast.LENGTH_SHORT
+//                ).show();
                 Intent arIntent = new Intent(getActivity(), ARMainActivity.class);
                 arIntent.setFlags(Intent.FLAG_ACTIVITY_TASK_ON_HOME);
                 startActivity(arIntent);

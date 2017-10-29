@@ -42,6 +42,7 @@ public class MainHomeFragment extends Fragment {
         fragment = switchingFragment;
 
         fm = getFragmentManager();
+        //fm = getChildFragmentManager();
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.main_home_fragment_place, fragment).addToBackStack(null).commit();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);

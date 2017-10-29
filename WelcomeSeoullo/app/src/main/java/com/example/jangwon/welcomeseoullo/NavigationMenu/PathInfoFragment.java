@@ -110,7 +110,7 @@ public class PathInfoFragment extends Fragment {
                     //자동차 경로안내 버튼을 누를 경우
                     byBusImageButton.setBackgroundResource(R.drawable.nonclickbus);
                     onFootImageButton.setBackgroundResource(R.drawable.nonclickwalker);
-                    byCarImageButton.setBackgroundResource(R.drawable.nonclickcar);
+                    byCarImageButton.setBackgroundResource(R.drawable.clickedcar);
                     byCarButton.setTextColor(Color.parseColor("#7BA293"));
                     byBusButton.setTextColor(Color.parseColor("#c0c5ce"));
                     onFootButton.setTextColor(Color.parseColor("#c0c5ce"));
@@ -189,7 +189,7 @@ public class PathInfoFragment extends Fragment {
                     switchFragment("도보");
                 }
             });
-            byBusButton.callOnClick();
+            byCarButton.callOnClick();
 
         }
         else{
@@ -215,16 +215,16 @@ public class PathInfoFragment extends Fragment {
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
-            if(!isFragmentShownAgain){
-                isFragmentShownAgain = true;//drawline test
-            }
-        } else {
-
-        }
-    }
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        if (isVisibleToUser) {
+//            startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
+//            if(!isFragmentShownAgain){
+//                isFragmentShownAgain = true;//drawline test
+//            }
+//        } else {
+//
+//        }
+//    }
 }

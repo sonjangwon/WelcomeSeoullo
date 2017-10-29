@@ -10,8 +10,6 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.jsoup.Connection.Method.HEAD;
-
 public class NewsCrawling {
 
     private static NewsCrawling newsCrawling;
@@ -74,12 +72,10 @@ public class NewsCrawling {
 //                    String date = year+"년 "+ month+"월 "+day+"일";
 //                    dateList.add(date);
 //
-//                    Log.v("jae", "dateList");
 //                }
 //
 //                for(int i=0; i<urlNumList.size(); i++){
 //                    urlList.add("http://seoullo7017.seoul.go.kr/img/front/img_logo.png");
-//                    Log.v("jae", "urlList");
 //                }
             }
             catch (IOException e) {

@@ -3,22 +3,14 @@ package com.example.jangwon.welcomeseoullo.HomeMenu;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,10 +46,18 @@ public class HomeFragment extends Fragment {
     TextView loadMoreText;
 
     //메인버튼
+    ImageButton imageNotice;
+    ImageButton imageWalkingCourse;
+    ImageButton imageHistorical;
+    ImageButton imageGuidance;
     Button btn_newNotice;
     Button btn_history;
     Button btn_usingTime;
     Button btn_walkingCourse;
+    LinearLayout noticeSection;
+    LinearLayout walkingCourseSection;
+    LinearLayout historicalSection;
+    LinearLayout guidanceSection;
 
     NoticeFragment noticeFragment;
     SeoulloCourseFragment seoulloCourseFragment;
@@ -79,15 +79,50 @@ public class HomeFragment extends Fragment {
         viewPager.setAdapter(wrappedAdapter);
         viewPager.startAutoScroll();
 
+        imageNotice = (ImageButton) view.findViewById(R.id.image_notice);
+        imageWalkingCourse = (ImageButton) view.findViewById(R.id.image_walking_course);
+        imageHistorical = (ImageButton) view.findViewById(R.id.image_historical);
+        imageGuidance = (ImageButton) view.findViewById(R.id.image_guidance);
+
         btn_newNotice = (Button) view.findViewById(R.id.Btn_newNotice);
         btn_walkingCourse = (Button) view.findViewById(R.id.Btn_walkingCourse);
         btn_history = (Button) view.findViewById(R.id.Btn_history);
         btn_usingTime = (Button) view.findViewById(R.id.Btn_usingTime);
 
+        noticeSection = (LinearLayout) view.findViewById(R.id.notice_section);
+        walkingCourseSection = (LinearLayout) view.findViewById(R.id.walking_course_section);
+        historicalSection = (LinearLayout) view.findViewById(R.id.historical_section);
+        guidanceSection = (LinearLayout) view.findViewById(R.id.guidance_section);
+
         noticeFragment = new NoticeFragment();
         seoulloCourseFragment = new SeoulloCourseFragment();
         historicalResourceFragment = new HistoricalResourceFragment();
         guidanceFragment = new GuidanceFragment();
+
+        imageNotice.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(noticeFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
+        imageWalkingCourse.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(seoulloCourseFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
+        imageHistorical.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(historicalResourceFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
+        imageGuidance.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(guidanceFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
 
         btn_newNotice.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -107,11 +142,36 @@ public class HomeFragment extends Fragment {
                 MainActivity.isHomeFragmentVisible = false;
             }
         });
-
         btn_usingTime.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 switchFragment(guidanceFragment);
-                MainActivity.isHomeFragmentVisible = false;}
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
+
+        noticeSection.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(noticeFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
+        walkingCourseSection.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(seoulloCourseFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
+        historicalSection.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(historicalResourceFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
+        });
+        guidanceSection.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View v) {
+                switchFragment(guidanceFragment);
+                MainActivity.isHomeFragmentVisible = false;
+            }
         });
 
         viewPager.setOnItemClickListener(new ClickableAutoViewPager.OnItemClickListener() {
