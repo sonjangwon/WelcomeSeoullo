@@ -15,8 +15,7 @@ import com.ahmedadeltito.photoeditorsdk.PhotoEditorSDK;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class SampleActivity extends AppCompatActivity {
-    private PhotoEditorSDK photoEditorSDK;
+public class SampleActivity4 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,12 +23,7 @@ public class SampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sample);
 
         ImageView photoEditImageView = (ImageView) findViewById(R.id.imageView);
-        SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
-        String imagePathFinal = pref.getString("hi", "");
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 1;
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePathFinal, options);
-        photoEditImageView.setImageBitmap(bitmap);
+        photoEditImageView.setImageResource(R.drawable.img_20171029_2);
 
 //        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 //        String imageName = "IMG_.jpg";
