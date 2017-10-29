@@ -119,13 +119,13 @@ public class HistoricalResourceFragment extends Fragment {
             switch(position)
             {
                 case 0:
-                    return new FirstCourseFragment(tagName);
+                    return new FirstHistoryFragment();
                 case 1:
-                    return new SecondCourseFragment(tagName);
+                    return new SecondHistoryFragment();
                 case 2:
-                    return new ThirdCourseFragment(tagName);
+                    return new ThirdHistoryFragment();
                 case 3:
-                    return new FourthCourseFragment(tagName);
+                    return new FourthHistoryFragment();
                 default:
                     return null;
             }

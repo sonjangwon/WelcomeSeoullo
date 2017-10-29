@@ -25,7 +25,6 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
         this.item_layout = item_layout;
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
 

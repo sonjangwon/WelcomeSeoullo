@@ -16,15 +16,9 @@ public class NewsCrawling {
 
     public ArrayList<String> titleList = new ArrayList<String>(10);
     public ArrayList<String> urlNumList = new ArrayList<String>(10);
-    public ArrayList<String> dateList = new ArrayList<String>(10);
-    public ArrayList<String> urlList = new ArrayList<String>(10);
 
     public ArrayList<Item> items;
 
-    //이미지 파싱
-    private String url;
-    boolean getimageFirst = false;
-    int isEmptyImage = 0;
 
     public NewThread newThread;
 

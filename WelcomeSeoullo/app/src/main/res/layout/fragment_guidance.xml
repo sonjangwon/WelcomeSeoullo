@@ -3,73 +3,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/usingScroll">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<ImageView
-    android:id="@+id/head"
-    android:background="@drawable/welcomeseoullo_info1"
-    android:layout_width="match_parent"
-    android:layout_height="300dp" />
+
     <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/head"
+        android:background="@color/white"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/btn_korean"
-            android:layout_marginLeft="5dp"
-            android:layout_width="80dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/white"/>
+        <ImageView
+            android:id="@+id/head"
+            android:background="@drawable/welcomeseoullo_info1"
+            android:layout_width="match_parent"
+            android:layout_height="280dp" />
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/head"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/grayBtn"
-            android:textColor="@color/white"
-            android:text="서울로7107 리플릿"/>
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_korean"
+                android:layout_marginLeft="5dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grayBtn"
+                android:textColor="@color/white"
+                android:text="서울로7107 리플릿"/>
+            <Button
+                android:id="@+id/btn_english"
+                android:layout_marginLeft="5dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grayBtn"
+                android:textColor="@color/white"
+                android:text="서울로7107 리플릿(Eng)"/>
+            <Button
+                android:id="@+id/btn_china"
+                android:layout_marginLeft="5dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grayBtn"
+                android:textColor="@color/white"
+                android:text="서울로7107 리플릿(中文)"/>
+            <Button
+                android:id="@+id/btn_japan"
+                android:layout_marginLeft="5dp"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:background="@color/grayBtn"
+                android:textColor="@color/white"
+                android:text="서울로7107 리플릿(日本)"/>
+        </LinearLayout>
+        <ImageView
+            android:background="@drawable/welcomeseoullo_info2"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
         <Button
-            android:id="@+id/btn_english"
-            android:layout_marginLeft="5dp"
-            android:layout_width="80dp"
+            android:id="@+id/btn_guide"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:background="@color/grayBtn"
             android:textColor="@color/white"
-            android:text="서울로7107 리플릿(Eng)"/>
-        <Button
-            android:id="@+id/btn_china"
-            android:layout_marginLeft="5dp"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
             android:background="@color/grayBtn"
-            android:textColor="@color/white"
-            android:text="서울로7107 리플릿(中文)"/>
-        <Button
-            android:id="@+id/btn_japan"
-            android:layout_marginLeft="5dp"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="@color/grayBtn"
-            android:textColor="@color/white"
-            android:text="서울로7107 리플릿(日本)"/>
+            android:text="서울로7017 보행길 안내지도 다운로드"/>
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@drawable/welcomeseoullo_info3" />
     </LinearLayout>
-    <ImageView
-        android:background="@drawable/welcomeseoullo_info2"
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="80dp" />
-    <Button
-        android:id="@+id/btn_guide"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="10dp"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:background="@color/grayBtn"
-        android:text="서울로7017 보행길 안내지도 다운로드"/>
-    <ImageView
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="@drawable/welcomeseoullo_info3" />
-</LinearLayout>
-    </ScrollView>
+</ScrollView>
