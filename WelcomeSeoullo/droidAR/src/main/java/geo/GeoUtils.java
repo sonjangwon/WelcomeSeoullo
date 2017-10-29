@@ -61,34 +61,11 @@ public class GeoUtils {
 		defaultNEListener = new DefaultNodeEdgeListener(glCamera);
 	}
 
-	/**
-	 * In DroidAR all coordinates have to be decimal degrees. Use this method if
-	 * you have to convert to decimal degrees.
-	 * 
-	 * Example usage: <br>
-	 * 16° 19' 28,29" to 16,324525°
-	 * 
-	 * @param degree
-	 *            16
-	 * @param minutes
-	 *            19
-	 * @param seconds
-	 *            28,29
-	 * @return 16,324525°
-	 */
 	public static double convertDegreesMinutesSecondsToDecimalDegrees(
 			double degree, double minutes, double seconds) {
 		return degree + ((minutes + (seconds / 60)) / 60) / 60;
 	}
 
-	/**
-	 * This method returns the best match for a specified position. It could for
-	 * example be used to calculate the closest address to your current
-	 * location.
-	 * 
-	 * @param location
-	 * @return the closest address to the {@link GeoObj}
-	 */
 	public Address getBestAddressForLocation(GeoObj location) {
 		try {
 			List<Address> locations = myGeoCoder.getFromLocation(
@@ -103,12 +80,6 @@ public class GeoUtils {
 		return null;
 	}
 
-	/**
-	 * Returns the position of an specified address (Streetname e.g.)
-	 * 
-	 * @param address
-	 * @return null if the address could not be found
-	 */
 	public GeoObj getBestLocationForAddress(String address) {
 		try {
 			List<Address> addresses = myGeoCoder
@@ -127,15 +98,6 @@ public class GeoUtils {
 		return null;
 	}
 
-	/**
-	 * This will search for a specified address and return the found results
-	 * 
-	 * @param address
-	 * @param maxResults
-	 *            number of results
-	 * @return a {@link GeoGraph} with maxResults many {@link GeoObj}s as
-	 *         specified
-	 */
 	public GeoGraph getLocationListForAddress(String address, int maxResults) {
 		try {
 			List<Address> addresses = myGeoCoder.getFromLocationName(address,
@@ -170,60 +132,22 @@ public class GeoUtils {
 		return null;
 	}
 
-	/**
-	 * use {@link SimpleLocationManager#getCurrentLocation(Context)} instead
-	 * 
-	 * This method will try to get the most accurate position currently
-	 * available. This includes also the last known position of the device if no
-	 * current position sources can't be accessed so the returned position might
-	 * be outdated <br>
-	 * <br>
-	 * If you need permanent location updates better create a
-	 * {@link LocationEventListener} and register it at
-	 * {@link EventManager#addOnLocationChangedAction(LocationEventListener)}
-	 * instead of calling this method here frequently.
-	 * 
-	 * @param context
-	 * @return the current location
-	 */
 	@Deprecated
 	public static Location getCurrentLocation(Context context) {
 		return SimpleLocationManager.getInstance(context).getCurrentLocation();
 	}
 
-	/**
-	 * use {@link SimpleLocationManager#getCurrentLocation(Context)} instead
-	 * 
-	 * See {@link GeoUtils#getCurrentLocation(Context)}
-	 * 
-	 * @return
-	 */
 	@Deprecated
 	public Location getCurrentLocation() {
 		return getCurrentLocation(myContext);
 	}
 
-	/**
-	 * Use {@link SimpleLocationManager#getCurrentLocation(int)} instead
-	 * 
-	 * @param context
-	 * @param accuracy
-	 * @return
-	 */
 	@Deprecated
 	public static Location getCurrentLocation(Context context, int accuracy) {
 		return SimpleLocationManager.getInstance(context).getCurrentLocation(
 				accuracy);
 	}
 
-	/**
-	 * @param startPos
-	 * @param destPos
-	 * @param myResultingPath
-	 *            in this Wrapper the resulting path will be stored
-	 * @param byWalk
-	 * @return
-	 */
 	public boolean getPathFromAtoB(GeoObj startPos, GeoObj destPos,
 			Wrapper myResultingPath, boolean byWalk) {
 		GeoGraph result = getPathFromAtoB(startPos, destPos, byWalk);
@@ -242,17 +166,6 @@ public class GeoUtils {
 		return getPathFromAtoB(startPos, destPos, byWalk, null, null);
 	}
 
-	/**
-	 * Uses google maps to calculate the way from the start pos to the
-	 * destination pos
-	 * 
-	 * @param startPos
-	 * @param destPos
-	 * @param byWalk
-	 * @param nodeListener
-	 * @param edgeListener
-	 * @return
-	 */
 	public GeoGraph getPathFromAtoB(GeoObj startPos, GeoObj destPos,
 			boolean byWalk, NodeListener nodeListener, EdgeListener edgeListener) {
 
@@ -435,11 +348,6 @@ public class GeoUtils {
 				.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 	}
 
-	/**
-	 * @param activity
-	 * @return true if GPS could be disabled without user interaction, else the
-	 *         settings will be started and false is returned
-	 */
 	public static boolean disableGPS(Activity activity) {
 		return disableGPS(activity, false);
 	}

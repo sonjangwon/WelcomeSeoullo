@@ -10,11 +10,6 @@ import android.location.LocationListener;
 
 public class ConcreteSimpleLocationManager extends SimpleLocationManager {
 
-	/**
-	 * <1 accuracy less important
-	 * 
-	 * >1 accuracy more important
-	 */
 	private static final float ACCURACY_WEIGHTING = 1f;
 
 	private static final int MAX_NUMBR_OF_LOCATIONS = 15;
@@ -77,17 +72,6 @@ public class ConcreteSimpleLocationManager extends SimpleLocationManager {
 		double meanAlti = 0;
 		double meanLong = 0;
 
-		/*
-		 * weights via accuracy
-		 * 
-		 * example: a and b weights (e.g. 1/10m and 1/20m), x and y are latitude
-		 * values from the 2 measurements:
-		 * 
-		 * 1/(a+b)*(a*x+b*y)
-		 * 
-		 * TODO could also add a simple time control parameter via gaus
-		 * anzI=i*(i+1)/2
-		 */
 		int numberOfLocations = lastPositions.size();
 		Log.d(LOG_TAG, "Calculating average of " + numberOfLocations
 				+ " locations");
@@ -108,10 +92,6 @@ public class ConcreteSimpleLocationManager extends SimpleLocationManager {
 
 		Log.d(LOG_TAG, "Average is: " + target);
 
-		/*
-		 * check with gausian distr if value is ok to add (>a certaion
-		 * probability) TODO then add to list of location measurements
-		 */
 
 		// double variance=0;
 		// variance/=numberOfLocations-1;

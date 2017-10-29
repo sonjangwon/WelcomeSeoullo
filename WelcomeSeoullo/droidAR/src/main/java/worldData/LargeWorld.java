@@ -88,10 +88,6 @@ public class LargeWorld extends World {
 		return result;
 	}
 
-	/**
-	 * The current internal tree will be deleted and recreated. This is
-	 * expensive so do not call this too often!
-	 */
 	public void rebuildTree() {
 		final EfficientList<RenderableEntity> list = new EfficientList<RenderableEntity>();
 		tree.getAllItems(tree.new ResultListener() {

@@ -12,21 +12,6 @@ import util.Log;
 import components.PhysicsComponent;
 import components.ProximitySensor;
 
-/**
- * the concrete visitor should override the visit methods and if the visitor
- * want to change the deeper algorithm behaviour (eg search not complete graph)
- * it has to override default_visit to (and call visit by itself!)
- * 
- * TODO create default log text with hint that the subclases all an own accept
- * method
- * 
- * TODO its important that every class wich ever want to be used with the
- * visitor pattern implements its own accept method. its not enough to implement
- * it in the superclass!
- * 
- * @author Spobo
- * 
- */
 public abstract class Visitor {
 
 	private static final String LOG_TAG = "Visitor.visit()";

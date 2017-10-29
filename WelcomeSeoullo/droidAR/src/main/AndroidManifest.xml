@@ -81,6 +81,11 @@
             android:name="gui.simpleUI.SimpleUIv1"
             android:theme="@android:style/Theme.Translucent"></activity>
         <activity android:name=".SampleActivity"></activity>
+        <activity android:name=".SampleActivity2"></activity>
+        <activity android:name=".SampleActivity3"></activity>
+        <activity android:name=".SampleActivity4"></activity>
+        <activity android:name=".SampleActivity5"></activity>
+        <activity android:name=".SampleActivity6"></activity>
     </application>
 
 </manifest>

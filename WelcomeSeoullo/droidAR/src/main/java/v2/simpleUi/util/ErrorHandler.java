@@ -29,146 +29,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * Register the {@link ErrorHandler} like this: </br>
- * Thread.setDefaultUncaughtExceptionHandler(new ErrorHandler(currentActivity));
- * </br></br>
- * 
- * Or use the {@link ErrorHandler#registerNewErrorHandler(Activity)}
- * method.</br></br>
- * 
- * To add email support, call
- * {@link ErrorHandler#enableEmailReports(String, String)} </br></br>
- * 
- * And dont forget to add the ErrorReports.xml Layout file to your res/layout
- * folder!</br></br>
- * 
- * The ErrorHandler has to be registered in the AndroidManifest.xml like this:
- * 
- * <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal;mso-layout-grid-align:none;text-autospace:none'>
- * <span style='font-size: 10.0pt;font-family:"Courier New";color:teal;mso-ansi
- * -language:DE'>&lt;</span><span class=SpellE><span
- * style='font-size:10.0pt;font-family:"Courier New";
- * color:#3F7F7F;mso-ansi-language:DE'>activity</span></span><span
- * style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:DE'>
- * <span class=SpellE><span
- * style='color:#7F007F'>android:name</span></span><span
- * style='color:black'>=</span><i><span style='color:#2A00FF'>&quot;<span
- * class=SpellE>system.ErrorHandler</span>&quot;</span></i> <span
- * class=SpellE><span style='color:#7F007F'>android:process</span></span><span
- * style='color:black'>=</span><i><span style='color:#2A00FF'>&quot;:<span
- * class=SpellE>myexeptionprocess</span>&quot;</span></i><o:p></o:p></span>
- * </p>
- * 
- * <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal;mso-layout-grid-align:none;text-autospace:none'>
- * <span style='font-size:
- * 10.0pt;font-family:"Courier New";mso-ansi-language:DE'><span
- * style='mso-tab-count: 1'>      </span><span class=SpellE><span
- * style='color:#7F007F'>android:taskAffinity</span></span><span
- * style='color:black'>=</span><i><span style='color:#2A00FF'>&quot;<span
- * class=SpellE>tools.ErrorHandler</span>&quot;</span></i><span style='color:
- * teal'>&gt;</span><o:p></o:p></span>
- * </p>
- * 
- * <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal;mso-layout-grid-align:none;text-autospace:none'>
- * <span style='font-size:
- * 10.0pt;font-family:"Courier New";color:black;mso-ansi-language:DE'><span
- * style='mso-tab-count:1'>      </span></span><span style='font-size:10.0pt;
- * font-family:"Courier New";color:teal;mso-ansi-language :DE'>&lt;</span><span
- * class=SpellE><span style='font-size:10.0pt;font-family:"Courier New";
- * color:#3F7F7F;mso-ansi-language:DE'>intent</span></span><span
- * style='font-size: 10.0pt;font-family:"Courier New";color:#3F7F7F;mso-ansi-
- * language:DE'>-filter</span><span style='font-size:10.0pt;font-family:"Courier
- * New";color:teal;mso-ansi-language: DE'>&gt;</span><span
- * style='font-size:10.0pt;font-family:"Courier New";
- * mso-ansi-language:DE'><o:p></o:p></span>
- * </p>
- * 
- * <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal;mso-layout-grid-align:none;text-autospace:none'>
- * <span style='font-size:
- * 10.0pt;font-family:"Courier New";color:black;mso-ansi-language:DE'><span
- * style='mso-tab-count:2'>            </span></span><span
- * style='font-size:10.0pt;
- * font-family:"Courier New";color:teal;mso-ansi-language :DE'>&lt;</span><span
- * class=SpellE><span style='font-size:10.0pt;font-family:"Courier New";
- * color:#3F7F7F;mso-ansi-language:DE'>category</span></span><span
- * style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:DE'>
- * <span class=SpellE><span
- * style='color:#7F007F'>android:name</span></span><span
- * style='color:black'>=</span><i><span style='color:#2A00FF'>&quot;<span
- * class=SpellE>android.intent.category.DEFAULT</span>&quot;</span></i> <span
- * style='color:teal'>/&gt;</span><o:p></o:p></span>
- * </p>
- * 
- * <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal;mso-layout-grid-align:none;text-autospace:none'>
- * <span style='font-size:
- * 10.0pt;font-family:"Courier New";color:black;mso-ansi-language:DE'><span
- * style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>     
- * </span></span><span style='font-size:10.0pt;font-family:"Courier
- * New";color:teal;mso-ansi-language: DE'>&lt;</span><span class=SpellE><span
- * style='font-size:10.0pt;font-family: "Courier New";color
- * :#3F7F7F;mso-ansi-language:DE'>action</span></span><span
- * style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:DE'>
- * <span class=SpellE><span
- * style='color:#7F007F'>android:name</span></span><span
- * style='color:black'>=</span><i><span style='color:#2A00FF'>&quot;<span
- * class=SpellE>android.intent.action.VIEW</span>&quot;</span></i> <span
- * style='color:teal'>/&gt;</span><o:p></o:p></span>
- * </p>
- * 
- * <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal;mso-layout-grid-align:none;text-autospace:none'>
- * <span style='font-size:
- * 10.0pt;font-family:"Courier New";color:black;mso-ansi-language:DE'><span
- * style='mso-tab-count:1'>      </span><span style='mso-tab-count:1'>     
- * </span></span><span style='font-size:10.0pt;font-family:"Courier
- * New";color:teal;mso-ansi-language: DE'>&lt;</span><span class=SpellE><span
- * style='font-size:10.0pt;font-family:
- * "Courier New";color:#3F7F7F;mso-ansi-language:DE'>data</span></span><span
- * style='font-size:10.0pt;font-family:"Courier New";mso-ansi-language:DE'>
- * <span class=SpellE><span
- * style='color:#7F007F'>android:mimeType</span></span><span
- * style='color:black'>=</span><i><span style='color:#2A00FF'>&quot;<span
- * class=SpellE>errors</span>/<span
- * class=SpellE>myUnhandleCatcher</span>&quot;</span></i> <span
- * style='color:teal'>/&gt;</span><o:p></o:p></span>
- * </p>
- * 
- * <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;line-height: normal;mso-layout-grid-align:none;text-autospace:none'>
- * <span style='font-size:
- * 10.0pt;font-family:"Courier New";color:black;mso-ansi-language:DE'><span
- * style='mso-tab-count:1'>      </span></span><span style='font-size:10.0pt;
- * font-family:"Courier New";color:teal;mso-ansi-language :DE'>&lt;/</span><span
- * class=SpellE><span style='font-size:10.0pt;font-family:"Courier New";
- * color:#3F7F7F;mso-ansi-language:DE'>intent</span></span><span
- * style='font-size: 10.0pt;font-family:"Courier New";color:#3F7F7F;mso-ansi-
- * language:DE'>-filter</span><span style='font-size:10.0pt;font-family:"Courier
- * New";color:teal;mso-ansi-language: DE'>&gt;</span><span
- * style='font-size:10.0pt;font-family:"Courier New";
- * mso-ansi-language:DE'><o:p></o:p></span>
- * </p>
- * 
- * <p class=MsoNormal>
- * <span style='font-size:10.0pt;line-height:115%;font-family:
- * "Courier New";color:teal;mso-ansi-language:DE'>&lt;/</span><span
- * class=SpellE><span
- * style='font-size:10.0pt;line-height:115%;font-family:"Courier
- * New";color:#3F7F7F; mso-ansi-language:DE'>activity</span></span><span
- * style='font-size:10.0pt; line-height:115%;font-family:"Courier New";color:
- * teal;mso-ansi-language:DE'>&gt;</span>
- * </p>
- * 
- * @author Spobo
- * 
- */
 public class ErrorHandler extends Activity implements UncaughtExceptionHandler {
 
-	/**
-	 * must be the same "x/y" string as in the AndroidManifest. </br></br>
-	 * 
-	 * 
-	 * see {@link ErrorHandler} to understand where this is defined in the
-	 * manifest
-	 */
 	public static String DATA_ANDROID_MIME_TYPE = "errors/myUnhandleCatcher";
 	private static final String LOG_TAG = "ErrorHandler";
 	private static final String PASSED_ERROR_TEXT_ID = "Error Text";
@@ -181,15 +43,6 @@ public class ErrorHandler extends Activity implements UncaughtExceptionHandler {
 	private static String myDeveloperMailAdress;
 	private static String myMailSubject = "Error in DroidAR";
 
-	/**
-	 * DO NOT DELETE THIS CONSTURUCTOR!
-	 * 
-	 * use the {@link ErrorHandler#ErrorHandler(Activity) constructor instead}.
-	 * This constructor is required by the Android system and the
-	 * {@link ErrorHandler} can only work properly if a activity is provided, so
-	 * only use this constructor if you call
-	 * {@link ErrorHandler#setCurrentActivity(Activity)} later!
-	 */
 	@Deprecated
 	// DO NOT DELETE THIS CONSTURUCTOR!
 	public ErrorHandler() {
@@ -198,11 +51,6 @@ public class ErrorHandler extends Activity implements UncaughtExceptionHandler {
 		}
 	}
 
-	/**
-	 * See {@link ErrorHandler} for details
-	 * 
-	 * @param a
-	 */
 	public ErrorHandler(Activity a) {
 		setCurrentActivity(a);
 		if (defaultHandler == null) {
@@ -216,13 +64,6 @@ public class ErrorHandler extends Activity implements UncaughtExceptionHandler {
 				keepBrokenProcessRunning);
 	}
 
-	/**
-	 * @param a
-	 * @param errorToShow
-	 * @param optionalFilePathToSend
-	 *            something like "file://"+"/sdcard/folderA/fileB.jpg"
-	 * @param keepBrokenProcessRunning
-	 */
 	public static void showErrorActivity(Activity a, Exception errorToShow,
 			String[] optionalFilePathToSend, boolean keepBrokenProcessRunning) {
 		showErrorActivity(a, throwableToString(errorToShow),

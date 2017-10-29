@@ -5,19 +5,6 @@ import java.util.HashMap;
 import android.app.Activity;
 import android.content.Intent;
 
-/**
- * This is a Singleton to pass objects between activities. The two essential
- * methods are:
- * 
- * startActivity(Activity currentActivity, Class ActivityClassToShow, Object
- * objectToPass): to start a new activity and pass an object to it.
- * 
- * loadObjFromNewlyCreatedActivity(Activity theNewActivity): to load the passed
- * object in the new Activity.
- * 
- * @author Spobo
- * 
- */
 public class ActivityConnector {
 
 	private static ActivityConnector myInstance = new ActivityConnector();
@@ -42,13 +29,6 @@ public class ActivityConnector {
 		myHashMap.put(key, transfairObject);
 	}
 
-	/**
-	 * @param o
-	 *            The object which wants to pass some data
-	 * @param transfairObject
-	 *            the object to send to the activity
-	 * @return the key which can be used at .getObject(key)
-	 */
 	public String addTransfairObject(Object o, Object transfairObject) {
 		String key = getNextKey(o);
 		myHashMap.put(key, transfairObject);
@@ -59,14 +39,6 @@ public class ActivityConnector {
 		return myInstance;
 	}
 
-	/**
-	 * @param currentActivity
-	 *            The current activity
-	 * @param ActivityClassToShow
-	 *            the .class object of the activity to start
-	 * @param objectToPass
-	 *            the object to pass (null if nothing should be passed)
-	 */
 	@SuppressWarnings("unchecked")
 	public void startActivity(Activity currentActivity,
 			Class ActivityClassToShow, Object objectToPass) {
@@ -80,11 +52,6 @@ public class ActivityConnector {
 		currentActivity.startActivity(intent);
 	}
 
-	/**
-	 * @param theNewActivity
-	 *            the newly created activity
-	 * @return The object which was passed or null if nothing was passed
-	 */
 	public Object loadObjFromNewlyCreatedActivity(Activity theNewActivity) {
 		if (theNewActivity == null)
 			return null;

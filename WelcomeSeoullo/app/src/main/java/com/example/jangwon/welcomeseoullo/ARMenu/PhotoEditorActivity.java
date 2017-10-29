@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.media.ExifInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -22,6 +24,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -80,7 +84,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_editor);
-
+        changeStatusBarColor();
         String selectedImagePath = getIntent().getExtras().getString("selectedImagePath");
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 1;
@@ -358,7 +362,7 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
             }
         }.start();
 
-        showSetup("Demo Setup", new StaticDemoSetup(), imagePathForPref);
+        showSetup("Demo Setup", new StaticDemoSetup());
 
         SharedPreferences pref = getSharedPreferences("pref", MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
@@ -367,10 +371,10 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
 
     }
 
-    private void showSetup(String string, final Setup aSetupInstance, String imagePath) {
+    private void showSetup(String string, final Setup aSetupInstance) {
         Activity theCurrentActivity = PhotoEditorActivity.this;
         ArActivity.startWithSetup(theCurrentActivity,
-                aSetupInstance, imagePath);
+                aSetupInstance);
     }
 
     @Override
@@ -585,5 +589,14 @@ public class PhotoEditorActivity extends AppCompatActivity implements View.OnCli
         }
 
         return bitmap;
+    }
+
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.TRANSPARENT);
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        }
     }
 }

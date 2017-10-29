@@ -22,21 +22,6 @@ import android.location.Location;
 
 import commands.Command;
 
-/**
- * This is an example how you can use the default setup: <br>
- * <code>
- * ArActivity.startWithSetup(currentActicity, new DefaultARSetup() { <br>
- * 	 public void addObjectsTo(World world, GLFactory factory) { <br>
- * 		GeoObj obj = new GeoObj();<br>
- * 		obj.setComp(factory.newCube()); world.add(obj); <br>
- * 		obj.setVirtualPosition(new Vec()); <br>
- * 	 } <br> 
- * });
- * <code>
- * 
- * @author Spobo
- * 
- */
 public abstract class DefaultARSetup extends Setup {
 
 	protected static final int ZDELTA = 5;
@@ -68,13 +53,6 @@ public abstract class DefaultARSetup extends Setup {
 		return camera;
 	}
 
-	/**
-	 * This will be called when the GPS accuracy is high enough
-	 * 
-	 * @param renderer
-	 * @param world
-	 * @param objectFactory
-	 */
 	public abstract void addObjectsTo(GL1Renderer renderer, World world,
 			GLFactory objectFactory);
 

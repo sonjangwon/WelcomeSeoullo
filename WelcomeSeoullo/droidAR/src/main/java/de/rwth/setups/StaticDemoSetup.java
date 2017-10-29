@@ -10,6 +10,11 @@ import actions.ActionWASDMovement;
 import commands.Command;
 import de.rwth.R;
 import de.rwth.SampleActivity;
+import de.rwth.SampleActivity2;
+import de.rwth.SampleActivity3;
+import de.rwth.SampleActivity4;
+import de.rwth.SampleActivity5;
+import de.rwth.SampleActivity6;
 import geo.GeoObj;
 import gl.CustomGLSurfaceView;
 import gl.GL1Renderer;
@@ -33,7 +38,6 @@ public class StaticDemoSetup extends Setup {
 
 	private static final float MIN_DIST = 15f;
 	private static final float MAX_DIST = 55f;
-	public String imagePathForeAR;
 	protected static final String LOG_TAG = "StaticDemoSetup";
 
 	World world;
@@ -54,8 +58,6 @@ public class StaticDemoSetup extends Setup {
 									   GLFactory objectFactory, GeoObj currentPosition) {
 		camera = new GLCamera(new Vec(0, 0, 1));
 		world = new World(camera);
-		Intent getIntent = getActivity().getIntent();
-		imagePathForeAR = getIntent.getExtras().getString("imagePath");
 
 		timeModifier = new TimeModifier(1);
 		RenderList l = new RenderList();
@@ -93,12 +95,11 @@ public class StaticDemoSetup extends Setup {
 					.newTexturedSquare(
 							"elefantId",
 							IO.loadBitmapFromId(getActivity(),
-									R.drawable.fire));
+									R.drawable.red_heart));
 			triangleMesh.setOnClickCommand(new Command(){
 				@Override
 				public boolean execute(){
 					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity.class);
-					intent.putExtra("imagePathForAR", imagePathForeAR);
 					getActivity().startActivity(intent);
 					return false;
 				}
@@ -116,7 +117,15 @@ public class StaticDemoSetup extends Setup {
 					.newTexturedSquare(
 							"hippoId",
 							IO.loadBitmapFromId(getActivity(),
-									R.drawable.fire));
+									R.drawable.blue_heart));
+			triangleMesh.setOnClickCommand(new Command(){
+				@Override
+				public boolean execute(){
+					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity2.class);
+					getActivity().startActivity(intent);
+					return false;
+				}
+			});
 			triangleMesh.addChild(new AnimationFaceToCamera(camera, 0.5f));
 			triangleMesh.setScale(new Vec(10, 10, 10));
 			GeoObj treangleGeo = new GeoObj(GeoObj.newRandomGeoObjAroundCamera(
@@ -130,7 +139,15 @@ public class StaticDemoSetup extends Setup {
 					.newTexturedSquare(
 							"pandaId",
 							IO.loadBitmapFromId(getActivity(),
-									R.drawable.fire));
+									R.drawable.green_heart));
+			triangleMesh.setOnClickCommand(new Command(){
+				@Override
+				public boolean execute(){
+					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity3.class);
+					getActivity().startActivity(intent);
+					return false;
+				}
+			});
 			triangleMesh.addChild(new AnimationFaceToCamera(camera, 0.5f));
 			triangleMesh.setScale(new Vec(10, 10, 10));
 			GeoObj treangleGeo = new GeoObj(GeoObj.newRandomGeoObjAroundCamera(
@@ -142,7 +159,15 @@ public class StaticDemoSetup extends Setup {
 					.newTexturedSquare(
 							"pandaId",
 							IO.loadBitmapFromId(getActivity(),
-									R.drawable.fire));
+									R.drawable.growing_heart_1));
+			triangleMesh.setOnClickCommand(new Command(){
+				@Override
+				public boolean execute(){
+					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity4.class);
+					getActivity().startActivity(intent);
+					return false;
+				}
+			});
 			triangleMesh.addChild(new AnimationFaceToCamera(camera, 0.5f));
 			triangleMesh.setScale(new Vec(10, 10, 10));
 			GeoObj treangleGeo = new GeoObj(GeoObj.newRandomGeoObjAroundCamera(
@@ -154,7 +179,15 @@ public class StaticDemoSetup extends Setup {
 					.newTexturedSquare(
 							"pandaId",
 							IO.loadBitmapFromId(getActivity(),
-									R.drawable.fire));
+									R.drawable.revolving_heart_1));
+			triangleMesh.setOnClickCommand(new Command(){
+				@Override
+				public boolean execute(){
+					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity5.class);
+					getActivity().startActivity(intent);
+					return false;
+				}
+			});
 			triangleMesh.addChild(new AnimationFaceToCamera(camera, 0.5f));
 			triangleMesh.setScale(new Vec(10, 10, 10));
 			GeoObj treangleGeo = new GeoObj(GeoObj.newRandomGeoObjAroundCamera(
@@ -166,7 +199,15 @@ public class StaticDemoSetup extends Setup {
 					.newTexturedSquare(
 							"pandaId",
 							IO.loadBitmapFromId(getActivity(),
-									R.drawable.fire));
+									R.drawable.sparkling_heart_1));
+			triangleMesh.setOnClickCommand(new Command(){
+				@Override
+				public boolean execute(){
+					Intent intent = new Intent(getActivity().getApplicationContext(), SampleActivity6.class);
+					getActivity().startActivity(intent);
+					return false;
+				}
+			});
 			triangleMesh.addChild(new AnimationFaceToCamera(camera, 0.5f));
 			triangleMesh.setScale(new Vec(10, 10, 10));
 			GeoObj treangleGeo = new GeoObj(GeoObj.newRandomGeoObjAroundCamera(

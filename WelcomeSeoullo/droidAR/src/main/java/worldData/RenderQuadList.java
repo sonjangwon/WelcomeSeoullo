@@ -13,13 +13,6 @@ import util.QuadTree.ResultListener;
 import util.Vec;
 import android.util.Log;
 
-/**
- * This Container structure uses a Quadtree (
- * http://en.wikipedia.org/wiki/Quadtree )
- * 
- * @author Spobo
- * 
- */
 public class RenderQuadList implements RenderableEntity,
 		Container<RenderableEntity> {
 
@@ -41,13 +34,6 @@ public class RenderQuadList implements RenderableEntity,
 	private boolean wasClearedAtLeastOnce = false;
 	private Updateable myParent;
 
-	/**
-	 * @param glCamera
-	 * @param renderDistance
-	 * @param recalcDistance
-	 *            If you pass 10 here then the list of objects currently updated
-	 *            will be refreshed every 10 meters when the user moves around
-	 */
 	public RenderQuadList(GLCamera glCamera, float renderDistance,
 			float recalcDistance) {
 		myGlCamera = glCamera;
@@ -142,10 +128,6 @@ public class RenderQuadList implements RenderableEntity,
 		}
 	}
 
-	/**
-	 * Call this method to update the list of objects that are rendered and
-	 * updated after you modified the quad tree
-	 */
 	public void refreshList() {
 		if (itemsInRange == null)
 			itemsInRange = new EfficientList<RenderableEntity>();
