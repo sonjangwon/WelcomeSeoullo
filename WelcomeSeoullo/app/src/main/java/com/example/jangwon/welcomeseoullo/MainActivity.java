@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import util.Log;
-
 public class MainActivity extends Activity {
 
     private final long FINISH_INTERVAL_TIME = 2000;
@@ -84,6 +82,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         addressTextView = (TextView) findViewById(R.id.addressTextView);
@@ -291,8 +290,6 @@ public class MainActivity extends Activity {
 
         //위도경도를 상세주소로 변경
         reverseGeocoder();
-
-
     }
 
     private void applyFontToMenuItem(MenuItem mi, Typeface font) {

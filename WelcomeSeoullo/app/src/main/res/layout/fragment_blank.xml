@@ -1,35 +1,38 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
-        <com.example.jangwon.welcomeseoullo.MyVideoView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bgVideoView2" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/ar_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="100dp"
-            android:background="@drawable/ar_explanation_text"
-            android:layout_gravity="center_horizontal|center"
+        <LinearLayout
+            android:id="@+id/layoutDots"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dots_height"
             android:gravity="center"
-            android:text="증강현실 기능"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:textStyle="bold" />
+            android:layout_gravity="center_horizontal|bottom"
+            android:orientation="horizontal"
+            android:layout_marginBottom="120dp"/>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/ar_btn_start"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/arfragment_button_shape"
             android:text="시작하기"
             android:textColor="@android:color/white"
@@ -37,4 +40,47 @@
 
     </FrameLayout>
 
-</FrameLayout>
+</RelativeLayout>
+
+
+
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--tools:context="com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment">-->
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<com.example.jangwon.welcomeseoullo.MyVideoView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/bgVideoView2" />-->
+
+        <!--<ImageView-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:background="@drawable/ar_explanation_text"-->
+            <!--android:layout_gravity="center_horizontal|center"-->
+            <!--android:gravity="center"-->
+            <!--android:text="증강현실 기능"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="20dp"-->
+            <!--android:textStyle="bold" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/button"-->
+            <!--android:layout_width="300dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal|bottom"-->
+            <!--android:layout_marginBottom="20dp"-->
+            <!--android:background="@drawable/arfragment_button_shape"-->
+            <!--android:text="시작하기"-->
+            <!--android:textColor="@android:color/white"-->
+            <!--android:textStyle="bold" />-->
+
+    <!--</FrameLayout>-->
+
+<!--</FrameLayout>-->
