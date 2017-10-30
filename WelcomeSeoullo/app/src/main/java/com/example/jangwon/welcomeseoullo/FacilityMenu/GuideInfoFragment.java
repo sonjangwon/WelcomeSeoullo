@@ -46,7 +46,7 @@ public class GuideInfoFragment extends Fragment {
     TextView addressTextView;
     static LinearLayout listGuideLinearLayout;
     static LinearLayout mapGuideLinearLayout;
-    static String nowFragment="map";
+    static String nowFragment = "map";
 
     static Button mapGuideButton;
     static Button listGuideButton;
@@ -65,7 +65,7 @@ public class GuideInfoFragment extends Fragment {
 
     public static Context mContext;
 
-    public GuideInfoFragment(){
+    public GuideInfoFragment() {
 
     }
 
@@ -81,16 +81,16 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
 
             view = inflater.inflate(R.layout.fragment_guide_info, container, false);
 
-            mapGuideButton = (Button)view.findViewById(R.id.mapGuideButton);
-            listGuideButton = (Button)view.findViewById(R.id.listGuideButton);
-            toiletButton = (Button)view.findViewById(R.id.toiletButton);
-            parkinglotButton = (Button)view.findViewById(R.id.parkinglotButton);
-            parkButton = (Button)view.findViewById(R.id.parkButton);
-            marketButton = (Button)view.findViewById(R.id.marketButton);
+            mapGuideButton = (Button) view.findViewById(R.id.mapGuideButton);
+            listGuideButton = (Button) view.findViewById(R.id.listGuideButton);
+            toiletButton = (Button) view.findViewById(R.id.toiletButton);
+            parkinglotButton = (Button) view.findViewById(R.id.parkinglotButton);
+            parkButton = (Button) view.findViewById(R.id.parkButton);
+            marketButton = (Button) view.findViewById(R.id.marketButton);
             toiletImageButton = (ImageButton) view.findViewById(R.id.toiletImageButton);
             parkinglotImageButton = (ImageButton) view.findViewById(R.id.parkinglotImageButton);
             parkImageButton = (ImageButton) view.findViewById(R.id.parkImageButton);
@@ -114,27 +114,30 @@ public class GuideInfoFragment extends Fragment {
             ManagementLocation.getInstance().setSortSpinner("공공화장실");
             switchFragments(nowFragment);
 
-            listGuideButton.setOnClickListener(new EditText.OnClickListener(){
+            listGuideButton.setOnClickListener(new EditText.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    nowFragment="list";
+                    nowFragment = "list";
                     switchFragment(view);
                     mapGuideButton.setTextColor(Color.parseColor("#bdbdbd"));
                     mapGuideButton.setBackgroundResource(R.drawable.nonclickbutton);
                     listGuideButton.setBackgroundResource(R.drawable.clickrightbutton);
                     listGuideButton.setTextColor(Color.parseColor("#7BA293"));
+                    ManageListToMap.getInstance().setClickedListView(false);
                     listGuideButton.bringToFront();
                     listGuideButton.invalidate();
                     listGuideLinearLayout.bringToFront();
                     listGuideLinearLayout.invalidate();
 
+
                 }
             });
-            mapGuideButton.setOnClickListener(new EditText.OnClickListener(){
+            mapGuideButton.setOnClickListener(new EditText.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    nowFragment="map";
+                    nowFragment = "map";
                     switchFragment(view);
+                    ManageListToMap.getInstance().setClickedListView(false);
                     listGuideButton.setBackgroundResource(R.drawable.nonclickbutton);
                     listGuideButton.setTextColor(Color.parseColor("#c0c5ce"));
                     mapGuideButton.bringToFront();
@@ -143,13 +146,15 @@ public class GuideInfoFragment extends Fragment {
                     mapGuideButton.invalidate();
                     mapGuideLinearLayout.bringToFront();
                     mapGuideLinearLayout.invalidate();
+
                 }
             });
 
-            toiletButton.setOnClickListener(new EditText.OnClickListener(){
+            toiletButton.setOnClickListener(new EditText.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("공공화장실");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     toiletImageButton.setBackgroundResource(R.drawable.clickedtoilet);
                     parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
                     parkImageButton.setBackgroundResource(R.drawable.nonclickpark);
@@ -165,10 +170,11 @@ public class GuideInfoFragment extends Fragment {
                     switchFragments(nowFragment);
                 }
             });
-            parkinglotButton.setOnClickListener(new EditText.OnClickListener(){
+            parkinglotButton.setOnClickListener(new EditText.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("주차장");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     parkinglotImageButton.setBackgroundResource(R.drawable.clickedparkinglot);
                     toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
                     parkImageButton.setBackgroundResource(R.drawable.nonclickpark);
@@ -184,10 +190,11 @@ public class GuideInfoFragment extends Fragment {
                     switchFragments(nowFragment);
                 }
             });
-            parkButton.setOnClickListener(new EditText.OnClickListener(){
+            parkButton.setOnClickListener(new EditText.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("공원");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     parkImageButton.setBackgroundResource(R.drawable.clickedpark);
                     toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
                     parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
@@ -203,10 +210,11 @@ public class GuideInfoFragment extends Fragment {
                     switchFragments(nowFragment);
                 }
             });
-            marketButton.setOnClickListener(new EditText.OnClickListener(){
+            marketButton.setOnClickListener(new EditText.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     ManagementLocation.getInstance().setSortSpinner("전통시장");
+                    ManageListToMap.getInstance().setClickedListView(false);
                     marketImageButton.setBackgroundResource(R.drawable.clickedmarket);
                     toiletImageButton.setBackgroundResource(R.drawable.nonclicktoilet);
                     parkinglotImageButton.setBackgroundResource(R.drawable.nonclickparkinglot);
@@ -256,37 +264,36 @@ public class GuideInfoFragment extends Fragment {
             mapGuideButton.invalidate();
             mapGuideLinearLayout.bringToFront();
             mapGuideLinearLayout.invalidate();
-            nowFragment="map";
+            nowFragment = "map";
 //            ManageListToMap.getInstance().setFragmentCondition("map");
         }
     };
 
     //버튼으로 리스트뷰, 맵포인트를 클릭한 경우 각 프레그먼트가 실행된다.
-    public void switchFragment(View view){
+    public void switchFragment(View view) {
         Fragment fr = new MapGuideFragment();
 
-        if(view == view.findViewById(R.id.mapGuideButton)){
+        if (view == view.findViewById(R.id.mapGuideButton)) {
             fr = new MapGuideFragment();
-        }
-        else if(view == view.findViewById(R.id.listGuideButton)){
+        } else if (view == view.findViewById(R.id.listGuideButton)) {
             fr = new ListGuideFragment();
 
         }
 
-        FragmentManager fm = getFragmentManager()   ;
+        FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fagment_mapGuide, fr);
         fragmentTransaction.commit();
     }
 
     //Spinner로 fragment 재생성 될 때, 자동차경로, 도보경로를 클릭한 경우
-    public void switchFragments(String nowFragment){
+    public void switchFragments(String nowFragment) {
         Fragment fr = new MapGuideFragment();
 
-        if(nowFragment == "map"){
+        if (nowFragment == "map") {
             fr = new MapGuideFragment();
 
-        }else if(nowFragment == "list") {
+        } else if (nowFragment == "list") {
             fr = new ListGuideFragment();
         }
 
@@ -297,8 +304,7 @@ public class GuideInfoFragment extends Fragment {
     }
 
     //역 지오코딩(위도경도를 상세주소로 변경)
-    public void reverseGeocoder()
-    {
+    public void reverseGeocoder() {
         final Geocoder geocoder = new Geocoder(getActivity());
         List<Address> list = null;
         try {
@@ -310,7 +316,7 @@ public class GuideInfoFragment extends Fragment {
             e.printStackTrace();
         }
         if (list != null) {
-            if (list.size()==0) {
+            if (list.size() == 0) {
             } else {
                 addressTextView.setText(list.get(0).getAddressLine(0).toString().substring(5));
             }
@@ -342,15 +348,19 @@ public class GuideInfoFragment extends Fragment {
         };
     }
 
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//        if (isVisibleToUser) {
-//            addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
-//        }
-//        else {
-//
-//        }
-//    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
 
+            if (ManageListToMap.getInstance().getClickedListView() == true) {
+//                MapGuideFragment.HandlerListToMap.sendEmptyMessage(1);
+            }
+        } else {
+
+        }
+
+
+    }
 }

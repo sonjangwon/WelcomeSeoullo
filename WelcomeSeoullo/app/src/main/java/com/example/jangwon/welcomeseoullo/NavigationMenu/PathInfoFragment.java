@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +31,7 @@ public class PathInfoFragment extends Fragment {
     LinearLayout categoryLinearLayout;
 
     Button byCarButton;
-    Button byBusButton;
+    static Button byBusButton;
     Button onFootButton;
     boolean isFragmentShownAgain = false;
     ImageButton byCarImageButton;
@@ -198,6 +200,13 @@ public class PathInfoFragment extends Fragment {
         return view;
     }
 
+    public static Handler buttonClickHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            byBusButton.callOnClick();
+        }
+    };
+
     //Fragment안에서 자동차경로, 도보경로를 클릭한 경우
     public void switchFragment(String path){
 
@@ -215,16 +224,17 @@ public class PathInfoFragment extends Fragment {
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//        if (isVisibleToUser) {
-//            startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
-//            if(!isFragmentShownAgain){
-//                isFragmentShownAgain = true;//drawline test
-//            }
-//        } else {
-//
-//        }
-//    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            startPointAddress.setText(ManagementLocation.getInstance().getCurrentAddress());
+            if(!isFragmentShownAgain){
+//                byBusButton.callOnClick();
+                isFragmentShownAgain = true;//drawline test
+            }
+        } else {
+
+        }
+    }
 }

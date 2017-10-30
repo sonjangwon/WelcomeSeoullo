@@ -2,13 +2,15 @@ package com.example.jangwon.welcomeseoullo;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,6 +22,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
@@ -38,6 +41,7 @@ import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;
 import com.example.jangwon.welcomeseoullo.SettingsMenu.SettingsFragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,6 +49,8 @@ public class MainActivity extends Activity {
 
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
+
+    private static final int MY_PERMISSIONS_REQUEST_ACCOUNTS = 1;
 
     public static boolean isHomeFragmentVisible = true;
 
@@ -73,22 +79,9 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
         changeStatusBarColor();
-
-        // save UUID value in SharedPreference
-        savePreferences("UUID", GetDevicesUUID(getApplicationContext()));
-        // 사용자의 위치 수신을 위한 세팅 //
-        settingGPS();
-        // 사용자의 현재 위치 //
-        getMyLocation();
-        //위도경도를 상세주소로 변경
-        reverseGeocoder();
-        ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
-        ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
-        ManagementLocation.getInstance().setCurrentAddress(currentAddress);
 
         mainViewPager = (ViewPager) findViewById(R.id.mainViewPager);
         mainViewPager.setOffscreenPageLimit(5);
@@ -148,6 +141,9 @@ public class MainActivity extends Activity {
             }
         });
 
+        alertCheckGPS();
+
+        checkAndRequestPermissions();
     }
 
     //효완이 코드 사용
@@ -155,16 +151,10 @@ public class MainActivity extends Activity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-
-//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-//            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryTranslucent));
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryTranslucent));
 
             //상태바 남는 공간 활용
-//            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_IMMERSIVE);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-
+            //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
     }
 
@@ -340,5 +330,110 @@ public class MainActivity extends Activity {
                 currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
             }
         }
+    }
+
+    //핸드폰 고유 번호를 만들기 위해서 사용자에게 권한 획득 과정, API 23이상인 경우에만 해당, 런타임 중에 권한 획득
+    private boolean checkAndRequestPermissions() {
+
+        int permissionPhoneState = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
+        int permissionFineLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
+        int permissionCoarseLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+
+        List<String> listPermissionsNeeded = new ArrayList<>();
+
+        if (permissionPhoneState != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (permissionFineLocation != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_FINE_LOCATION);
+        }
+        if (permissionCoarseLocation != PackageManager.PERMISSION_GRANTED) {
+            listPermissionsNeeded.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        }
+
+        if (!listPermissionsNeeded.isEmpty()) {
+            ActivityCompat.requestPermissions(this, listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), MY_PERMISSIONS_REQUEST_ACCOUNTS);
+            return false;
+        }
+        else{
+            // save UUID value in SharedPreference
+            savePreferences("UUID", GetDevicesUUID(getApplicationContext()));
+            savePreferences("language", "Korean");
+
+            // 사용자의 위치 수신을 위한 세팅 //
+            settingGPS();
+            // 사용자의 현재 위치 //
+            getMyLocation();
+            //위도경도를 상세주소로 변경
+            reverseGeocoder();
+
+            ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
+            ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
+            ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+            return true;
+        }
+    }
+
+    //핸드폰 고유 번호를 만들기 위해서 사용자에게 권한 획득 과정 Permission 처리후 callback
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCOUNTS:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    //Permission Granted Successfully. Write working code here.
+                    // save UUID value in SharedPreference
+                    savePreferences("UUID", GetDevicesUUID(getApplicationContext()));
+                    savePreferences("language", "Korean");
+
+
+
+                    // 사용자의 위치 수신을 위한 세팅 //
+                    settingGPS();
+                    // 사용자의 현재 위치 //
+                    getMyLocation();
+                    //위도경도를 상세주소로 변경
+                    reverseGeocoder();
+
+                    ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
+                    ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
+                    ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+                }
+                else {
+                    //You did not accept the request can not use the functionality.
+                    Toast.makeText(MainActivity.this, "권한사용을 동의해주셔야 이용이 가능합니다.", Toast.LENGTH_SHORT).show();
+                    //권한 획득이 거부되면 수행해야 할 적업이 표시됨
+                    //일반적으로 작업을 처리할 메서드를 호출
+                    checkAndRequestPermissions();
+                }
+                break;
+        }
+    }
+
+    //gps체크
+    private void alertCheckGPS() { //gps 꺼져있으면 켤 껀지 체크
+        LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        if(!locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("'어서와, 서울로 7017'을 이용하시려면 \n[위치] 권한을 허용해 주세요")
+                    .setCancelable(false)
+                    .setPositiveButton("확인",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    moveConfigGPS();
+                                }
+                            });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+        else {
+
+        }
+    }
+
+    // GPS 설정화면으로 이동
+    private void moveConfigGPS() {
+        Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(gpsOptionsIntent);
     }
 }
