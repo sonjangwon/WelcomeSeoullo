@@ -25,6 +25,7 @@
         tools:replace="android:icon">
 
         <activity
+            android:hardwareAccelerated="true"
             android:name=".GuideAppInfo"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -44,7 +45,8 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity android:name=".ARMenu.SetImageView"/>
-        <activity android:name=".HomeMenu.EmoJeoMoImages"/>
+        <activity android:hardwareAccelerated="true"
+            android:name=".HomeMenu.EmoJeoMoImages"/>
     </application>
 
 </manifest>

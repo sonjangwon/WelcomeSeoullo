@@ -39,20 +39,19 @@ public class ThirdHistoryFragment extends Fragment {
         String imageURL3 = "http://postfiles12.naver.net/MjAxNzEwMjlfMjU5/MDAxNTA5MjgxMTkyMTU0._3XlIV4STMXTZmox3CBLqCTCJKUuHDuCyiVoxHgBeiUg.sDl8gF6MTUiG5NnZSaI0g72YiU3GWB_jhYRiyP6XN1Eg.PNG.qkrgy1206/welcomeseoullo_source3_3.png?type=w1";
         String imageURL4 = "http://postfiles5.naver.net/MjAxNzEwMjlfMjc5/MDAxNTA5MjgxMTk0MDAw.tI2RZlWnSoAS2Ajcv0ipJWxzPv0k5e-DtefVnC1gzOcg.WuKSquyAbe4EBwRLOpGysNxbh1phOy_CMO5IQj_e-58g.PNG.qkrgy1206/welcomeseoullo_source3_4.png?type=w1";
 
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL1)
-                .into(imageView1);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL2)
-                .into(imageView2);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL3)
-                .into(imageView3);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL4)
-                .into(imageView4);
+        setImage(imageURL1, imageView1);
+        setImage(imageURL2, imageView2);
+        setImage(imageURL3, imageView3);
+        setImage(imageURL4, imageView4);
 
         return view;
     }
 
+    public void setImage(String url, ImageView image)
+    {
+        Picasso.with(getActivity().getApplicationContext())
+                .load(url)
+                .skipMemoryCache()
+                .into(image);
+    }
 }

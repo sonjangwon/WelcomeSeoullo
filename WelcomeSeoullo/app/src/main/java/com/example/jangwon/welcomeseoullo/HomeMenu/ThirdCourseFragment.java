@@ -1,9 +1,6 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.app.Fragment;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,75 +41,35 @@ public class ThirdCourseFragment extends Fragment {
         String imageURL5 = "http://postfiles16.naver.net/MjAxNzEwMjlfMjI2/MDAxNTA5MjI1NjI0NTAw.GufwMkbk9ACLPmGKrmdcqA769OFibgiUmkWPkt2dnRsg.XeQKnhBXq9f3XMeFbA4mIGesYl_Ix4sSzRdk4SdLhn8g.PNG.qkrgy1206/welcomeseoullo3_5.png?type=w1";
         Picasso.with(getActivity().getApplicationContext())
                 .load(imageURL1)
+                .skipMemoryCache()
                 .into(imageView);
         Picasso.with(getActivity().getApplicationContext())
                 .load(imageURL2)
+                .skipMemoryCache()
                 .into(imageView2);
         Picasso.with(getActivity().getApplicationContext())
                 .load(imageURL3)
+                .skipMemoryCache()
                 .into(imageView3);
         Picasso.with(getActivity().getApplicationContext())
                 .load(imageURL4)
+                .skipMemoryCache()
                 .into(imageView4);
         Picasso.with(getActivity().getApplicationContext())
                 .load(imageURL5)
+                .skipMemoryCache()
                 .into(imageView5);
-//        BitmapFactory.Options options = new BitmapFactory.Options();
-//        options.inJustDecodeBounds = true;
-//
-//        if(tag == "SeoulloCourse") {
-//            int imageHeight = options.outHeight;
-//            int imageWidth = options.outWidth;
-//            imageView.setImageBitmap(
-//                    decodeSampledBitmapFromResource(getResources(), R.drawable.img_card02_big_3, imageWidth, imageHeight));
-//            imageView.setScaleType(ImageView.ScaleType.FIT_START);
-//        }
-//        else if(tag == "History")
-//        {
-//            int imageHeight = options.outHeight;
-//            int imageWidth = options.outWidth;
-//            imageView.setImageBitmap(
-//                    decodeSampledBitmapFromResource(getResources(), R.drawable.welcomeseoullo_source3, imageWidth, imageHeight));
-//            imageView.setScaleType(ImageView.ScaleType.FIT_START);
-//        }
+//        setImage(imageURL1, imageView);
+//        setImage(imageURL2, imageView2);
+//        setImage(imageURL3, imageView3);
+//        setImage(imageURL4, imageView4);
+//        setImage(imageURL5, imageView5);
+
         return view;
     }
-    public int calculateInSampleSize(
-            BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // Raw height and width of image
-        final int height = options.outHeight;
-        final int width = options.outWidth;
-        int inSampleSize = 1;
 
-        if (height > reqHeight || width > reqWidth) {
+    public void setImage(String url, ImageView image)
+    {
 
-            final int halfHeight = height / 2;
-            final int halfWidth = width / 2;
-
-            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
-            // height and width larger than the requested height and width.
-            while ((halfHeight / inSampleSize) > reqHeight
-                    && (halfWidth / inSampleSize) > reqWidth) {
-                inSampleSize *= 2;
-            }
-        }
-
-        return inSampleSize;
-    }
-
-    public Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
-                                                         int reqWidth, int reqHeight) {
-
-        // First decode with inJustDecodeBounds=true to check dimensions
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(res, resId, options);
-
-        // Calculate inSampleSize
-        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-        // Decode bitmap with inSampleSize set
-        options.inJustDecodeBounds = false;
-        return BitmapFactory.decodeResource(res, resId, options);
     }
 }

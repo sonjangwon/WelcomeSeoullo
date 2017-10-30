@@ -7,6 +7,8 @@
     <color name="greenNike">#7BA293</color>
     <color name="orangeGolfwang">#FDA293</color>
     <color name="pinkGolfwang">#EECEDF</color>
+    <color name="colorPrimaryTranslucent">#CC7BA293</color>
+    <color name="orangeGolfwangTranslucent">#CCFDA293</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">@color/white</color>
