@@ -27,6 +27,7 @@ import android.support.v4.view.ViewPager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -146,7 +147,7 @@ public class MainActivity extends Activity {
         checkAndRequestPermissions();
     }
 
-    //효완이 코드 사용
+    //상태바 없애기
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -250,10 +251,41 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/barefoot_regular.ttf");
-//        for(int i=0;i<5;i++){
-//            applyFontToMenuItem(bottomNavigationView.getMenu().getItem(i), typeface);
-//        }
+        if(ManagementLocation.getInstance().getRequestLocationPermission()==true) {
+
+            Log.e("Test", "trueonResumeTrue");
+            if((int)currentLatitude!=0) {
+                settingGPS();
+                // 사용자의 현재 위치 //
+                getMyLocation();
+                //위도경도를 상세주소로 변경
+                reverseGeocoder();
+
+                Log.e("Test", "onResumeTrue");
+                Log.e("Test", String.valueOf(currentLatitude));
+                Log.e("Test", String.valueOf(currentLongitude));
+                Log.e("Test",currentAddress);
+                ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
+                ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
+                 ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+                setupViewPager(mainViewPager);
+                ManagementLocation.getInstance().setRequestLocationPermission(false);
+            }
+            else
+            {
+                Log.e("Test", String.valueOf(currentLatitude));
+                // 사용자의 위치 수신을 위한 세팅 //
+                settingGPS();
+                // 사용자의 현재 위치 //
+                getMyLocation();
+                //위도경도를 상세주소로 변경
+                reverseGeocoder();
+                ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+                setupViewPager(mainViewPager);
+                ManagementLocation.getInstance().setRequestLocationPermission(false);
+            }
+        }
+
     }
 
     private void applyFontToMenuItem(MenuItem mi, Typeface font) {
@@ -294,9 +326,21 @@ public class MainActivity extends Activity {
             public void onLocationChanged(Location location) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
+                if((int)currentLatitude==0)
+                {
+                    Log.e("TestListner",String.valueOf(longitude));
+                    Log.e("TestListner",String.valueOf(latitude));
 
-                currentLongitude = latitude;
-                currentLatitude = longitude;
+                    ManagementLocation.getInstance().setCurrentLatitude(longitude);
+                    ManagementLocation.getInstance().setCurrentLongitude(latitude);
+                    ManagementLocation.getInstance().setCurrentAddress(reverseGeocoder(latitude,longitude));
+                    setupViewPager(mainViewPager);
+                }
+                    currentLongitude = latitude;
+                    currentLatitude = longitude;
+//                reverseGeocoder();
+
+
             }
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -328,10 +372,35 @@ public class MainActivity extends Activity {
 
             } else {
                 currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
+                ManagementLocation.getInstance().setCurrentAddress(currentAddress);
             }
         }
     }
+    //역 지오코딩(위도경도를 상세주소로 변경)
+    public String reverseGeocoder(double latitude, double longitude)
+    {
+        final Geocoder geocoder = new Geocoder(this);
+        List<Address> list = null;
+        try {
+            list = geocoder.getFromLocation(
+                    latitude, // 위도
+                    longitude, // 경도
+                    1); // 얻어올 값의 개수
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (list != null) {
 
+            if (list.size()==0) {
+
+            } else {
+                currentAddress=list.get(0).getAddressLine(0).toString().substring(5);
+                Log.e("TestReverse", String.valueOf(currentAddress));
+                return currentAddress;
+            }
+        }
+        return currentAddress;
+    }
     //핸드폰 고유 번호를 만들기 위해서 사용자에게 권한 획득 과정, API 23이상인 경우에만 해당, 런타임 중에 권한 획득
     private boolean checkAndRequestPermissions() {
 
@@ -366,7 +435,6 @@ public class MainActivity extends Activity {
             getMyLocation();
             //위도경도를 상세주소로 변경
             reverseGeocoder();
-
             ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
             ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
             ManagementLocation.getInstance().setCurrentAddress(currentAddress);
@@ -394,9 +462,14 @@ public class MainActivity extends Activity {
                     //위도경도를 상세주소로 변경
                     reverseGeocoder();
 
-                    ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
-                    ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
-                    ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+                    //블랙뷰 앱 깔린상태에서 이거 실행안댔었음
+//                    Log.e("Test","MainActivityonRequestPermissionsResult");
+//                    Log.e("Test",String.valueOf(currentLatitude));
+//                    Log.e("Test",String.valueOf(currentLongitude));
+//                    Log.e("Test",currentAddress);
+//                    ManagementLocation.getInstance().setRequestLocationPermission(true);
+//                    ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
+//                    ManagementLocation.getInstance().setCurrentAddress(currentAddress);
                 }
                 else {
                     //You did not accept the request can not use the functionality.

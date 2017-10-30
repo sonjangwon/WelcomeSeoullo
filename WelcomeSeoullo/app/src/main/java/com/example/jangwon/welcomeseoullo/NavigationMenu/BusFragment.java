@@ -54,6 +54,18 @@ public class BusFragment extends Fragment  {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if((int)ManagementLocation.getInstance().getCurrentLatitude()!=0 && (int)currentLatitude==0) {
+
+            currentLatitude=ManagementLocation.getInstance().getCurrentLatitude();
+            currentLongitude=ManagementLocation.getInstance().getCurrentLongitude();
+            busUrl = "https://m.map.naver.com/directions/?ex=126.96961950000002&ey=37.5536067&eex="+currentLongitude+"&eey="+currentLatitude+"&edid=11630456&incomeUrl=https%3A%2F%2Fm.map.naver.com%2Fsearch2%2Fsearch.nhn%3Fquery%3D%25EC%2584%259C%25EC%259A%25B8%25EC%2597%25AD%26sm%3Dhty#/publicTransit/detail/"+currentAddress+","+currentLongitude+","+currentLatitude+",,,false,13479327/%25EC%2584%259C%25EC%259A%25B8%25EB%25A1%259C7017,126.9697727,37.5580094,,,false,/0/0/map/0";
+            webView();
+        }
+    }
+
     //busUrl로 받은 웹주소를 웹뷰를 이용하여 띄운다.
     private void webView() {
 

@@ -9,7 +9,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,12 +67,10 @@ public class MapGuideFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.e("onCreate","true");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
         view = inflater.inflate(R.layout.fragment_map_guide, container, false);
-        Log.e("onCreateView","true");
         addressTextView = (TextView) view.findViewById(R.id.addressTextView);
         zoonInFrameLayout = (FrameLayout) view.findViewById(R.id.zoonInFrameLayout);
         zoomOutFrameLayout = (FrameLayout) view.findViewById(R.id.zoomOutFrameLayout);
@@ -85,7 +82,6 @@ public class MapGuideFragment extends Fragment {
         currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
         currentAddress = ManagementLocation.getInstance().getCurrentAddress();
-        Log.e("sortOnCreateVIew",ManagementLocation.getInstance().getSortSpinner());
 
         mapView(view);
         addMarker();
@@ -97,7 +93,6 @@ public class MapGuideFragment extends Fragment {
             public void onCalloutRightButton(TMapMarkerItem markerItem) {
                 String strMessage = "";
                 strMessage = "ID: " + markerItem.getID() + " " + "Title " + markerItem.getCalloutTitle();
-//                .showAlertDialog(MapGuideFragment.this, "Callout Right Button", strMessage);
             }
         });
         zoonInFrameLayout.setOnClickListener(new EditText.OnClickListener(){
@@ -138,8 +133,10 @@ public class MapGuideFragment extends Fragment {
         gpsButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
+//                Toast.makeText(getActivity(),String.valueOf(currentLongitude),Toast.LENGTH_SHORT).show();
                 tmapview.setTrackingMode(true);
                 tmapview.setSightVisible(true);
+                tmapview.setCenterPoint(ManagementLocation.getInstance().getCurrentLongitude(),ManagementLocation.getInstance().getCurrentLatitude());
             }
         });
 

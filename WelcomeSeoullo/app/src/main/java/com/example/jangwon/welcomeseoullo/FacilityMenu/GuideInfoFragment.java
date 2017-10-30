@@ -17,6 +17,7 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,9 +109,10 @@ public class GuideInfoFragment extends Fragment {
             currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
             currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
             currentAddress = ManagementLocation.getInstance().getCurrentAddress();
-
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
-
+            if((int)currentLatitude!=0) {
+                addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
+            }
             ManagementLocation.getInstance().setSortSpinner("공공화장실");
             switchFragments(nowFragment);
 
@@ -238,8 +240,6 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        settingGPS();
-        reverseGeocoder();
     }
 
     private void applyFontToString(Button button, Typeface font) {
@@ -352,10 +352,10 @@ public class GuideInfoFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
+
             addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
 
             if (ManageListToMap.getInstance().getClickedListView() == true) {
-//                MapGuideFragment.HandlerListToMap.sendEmptyMessage(1);
             }
         } else {
 

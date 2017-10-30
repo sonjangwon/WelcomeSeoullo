@@ -55,9 +55,10 @@ public class GuideAppInfo extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+
         //crawling 부분인데 나중에 추가할 예정
         NewsCrawling.getInstance().newThread.execute();
-
         // Checking for first time launch - before calling setContentView()
         //sharedPrefence에 저장ㅇ해놓고 실행안되게
         prefManager = new PrefManager(this);
@@ -143,6 +144,7 @@ public class GuideAppInfo extends Activity {
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
+
 
         alertCheckGPS();
     }
@@ -250,7 +252,6 @@ public class GuideAppInfo extends Activity {
         int permissionFineLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
         int permissionCoarseLocation = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         int permissionMedia = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
-
         List<String> listPermissionsNeeded = new ArrayList<>();
 
         if (permissionPhoneState != PackageManager.PERMISSION_GRANTED) {
@@ -271,7 +272,6 @@ public class GuideAppInfo extends Activity {
             return false;
         }
         else{
-
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
             return true;
@@ -325,7 +325,7 @@ public class GuideAppInfo extends Activity {
 
 //        Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
 //        startActivity(gpsOptionsIntent);
-
+        ManagementLocation.getInstance().setRequestLocationPermission(true);
         Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivityForResult(myIntent,100);
     }
