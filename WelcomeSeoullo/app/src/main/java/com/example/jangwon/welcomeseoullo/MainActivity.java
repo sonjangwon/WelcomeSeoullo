@@ -28,6 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment;
@@ -40,6 +41,8 @@ import com.example.jangwon.welcomeseoullo.SettingsMenu.SettingsFragment;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+
+import util.Log;
 
 public class MainActivity extends Activity {
 
@@ -70,11 +73,15 @@ public class MainActivity extends Activity {
     double currentLongitude;
     String currentAddress;
 
+    TextView addressTextView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        addressTextView = (TextView) findViewById(R.id.addressTextView);
 
         changeStatusBarColor();
 
@@ -83,7 +90,7 @@ public class MainActivity extends Activity {
         // 사용자의 위치 수신을 위한 세팅 //
         settingGPS();
         // 사용자의 현재 위치 //
-        getMyLocation();
+        //getMyLocation();
         //위도경도를 상세주소로 변경
         reverseGeocoder();
         ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
@@ -113,6 +120,10 @@ public class MainActivity extends Activity {
                     case R.id.action_facility:
                         currentMenu = R.id.action_facility;
                         mainViewPager.setCurrentItem(1);
+                        settingGPS();
+                        getMyLocation();
+                        reverseGeocoder();
+                        Toast.makeText(MainActivity.this, "1 button click", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_AR:
                         currentMenu = R.id.action_AR;
@@ -147,6 +158,8 @@ public class MainActivity extends Activity {
 
             }
         });
+
+//        Toast.makeText(this, "HELLO MAINACTIVITY ONCREATE", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -185,6 +198,8 @@ public class MainActivity extends Activity {
         adapter.addFragment(settingsFragment);
 
         viewPager.setAdapter(adapter);
+
+//        Toast.makeText(this, "HELLO SETUPVIEWPAGER", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -264,6 +279,19 @@ public class MainActivity extends Activity {
 //        for(int i=0;i<5;i++){
 //            applyFontToMenuItem(bottomNavigationView.getMenu().getItem(i), typeface);
 //        }
+
+        settingGPS();
+        // 사용자의 현재 위치 //
+        getMyLocation();
+
+        ManagementLocation.getInstance().setCurrentLatitude(currentLatitude);
+        ManagementLocation.getInstance().setCurrentLongitude(currentLongitude);
+        ManagementLocation.getInstance().setCurrentAddress(currentAddress);
+
+        //위도경도를 상세주소로 변경
+        reverseGeocoder();
+
+
     }
 
     private void applyFontToMenuItem(MenuItem mi, Typeface font) {
