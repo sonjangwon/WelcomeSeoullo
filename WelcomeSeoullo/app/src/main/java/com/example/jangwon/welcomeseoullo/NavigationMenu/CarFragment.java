@@ -86,8 +86,9 @@ public class CarFragment extends Fragment {
         //현재 위도경도 받아오기
         currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
-
-        mapView(view);
+        if((int)currentLatitude!=0) {
+            mapView(view);
+        }
         tt = new TimerTask() {
             @Override
             public void run() {
@@ -100,7 +101,16 @@ public class CarFragment extends Fragment {
         return view;
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        if((int)ManagementLocation.getInstance().getCurrentLatitude()!=0 && (int)currentLatitude==0) {
+            currentLatitude=ManagementLocation.getInstance().getCurrentLatitude();
+            currentLongitude=ManagementLocation.getInstance().getCurrentLongitude();
+//            PathInfoFragment.buttonClickHandler.sendEmptyMessage(0);
+            mapView(view);
+        }
+    }
 
     //맵 띄우기
     public void mapView(View view)

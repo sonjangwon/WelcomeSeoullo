@@ -7,9 +7,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,12 +65,10 @@ public class MapGuideFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.e("onCreate","true");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)  {
         view = inflater.inflate(R.layout.fragment_map_guide, container, false);
-        Log.e("onCreateView","true");
         addressTextView = (TextView) view.findViewById(R.id.addressTextView);
         zoonInFrameLayout = (FrameLayout) view.findViewById(R.id.zoonInFrameLayout);
         zoomOutFrameLayout = (FrameLayout) view.findViewById(R.id.zoomOutFrameLayout);
@@ -85,7 +80,6 @@ public class MapGuideFragment extends Fragment {
         currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
         currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
         currentAddress = ManagementLocation.getInstance().getCurrentAddress();
-        Log.e("sortOnCreateVIew",ManagementLocation.getInstance().getSortSpinner());
 
         mapView(view);
         addMarker();
@@ -97,7 +91,6 @@ public class MapGuideFragment extends Fragment {
             public void onCalloutRightButton(TMapMarkerItem markerItem) {
                 String strMessage = "";
                 strMessage = "ID: " + markerItem.getID() + " " + "Title " + markerItem.getCalloutTitle();
-//                .showAlertDialog(MapGuideFragment.this, "Callout Right Button", strMessage);
             }
         });
         zoonInFrameLayout.setOnClickListener(new EditText.OnClickListener(){
@@ -138,6 +131,7 @@ public class MapGuideFragment extends Fragment {
         gpsButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
+//                Toast.makeText(getActivity(),String.valueOf(currentLongitude),Toast.LENGTH_SHORT).show();
                 tmapview.setTrackingMode(true);
                 tmapview.setSightVisible(true);
             }
@@ -288,65 +282,6 @@ public class MapGuideFragment extends Fragment {
     }
 
 
-    public static Handler HandlerListToMap = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-//            ManagePublicData.getInstance().getPublicParkingLotVOArrayList();
-//            ManagePublicData.getInstance().getPublicParkVOArrayList();
-//            ManagePublicData.getInstance().getPublicToiletVOArrayList();
-//            ManagePublicData.getInstance().getTraditionalMarketVOArrayList();
-//
-//            if(ManagementLocation.getInstance().getSortSpinner()=="공공화장실") {
-//                for (int i = 0; i < ManagePublicData.getInstance().getPublicToiletVOArrayList().size(); i++) {
-//                    TMapPoint tpoint = new TMapPoint(Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLatitude()),
-//                            Double.valueOf(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletLongitude()));
-//
-//                    TMapMarkerItem tItem1 = new TMapMarkerItem();
-//                    tItem1.setTMapPoint(tpoint);
-//                    tItem1.setVisible(tItem1.VISIBLE);
-//                    tItem1.setName(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName());
-//
-//
-//                    tItem1.setCalloutTitle(ManagePublicData.getInstance().getPublicToiletVOArrayList().get(i).getToiletName());
-//                    tItem1.setCanShowCallout(true);
-//                    tItem1.setAutoCalloutVisible(false);
-//
-//
-//                    tmapview.bringMarkerToFront(tItem1);
-//                    tmapview.addMarkerItem("공공화장실" + String.valueOf(i)  , tItem1);
-//
-//                }
-//            }
-//
-
-//            bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
-//            if(ManageListToMap.getInstance().getFragmentCondition()=="map"){
-////            tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
-//                tmapview.setCenterPoint(ManageListToMap.getInstance().getClickedLongitude(), ManageListToMap.getInstance().getClickedLatitude());
-//                TMapPoint tpoint = new TMapPoint(ManageListToMap.getInstance().getClickedLatitude(), ManageListToMap.getInstance().getClickedLongitude());
-//                TMapMarkerItem tItem5 = new TMapMarkerItem();
-//                tItem5.setTMapPoint(tpoint);
-//                tmapview.setZoomLevel(15);
-//                tItem5.setCalloutTitle(ManageListToMap.getInstance().getClickedPlaceName());
-//                tItem5.setCanShowCallout(true);
-//                tItem5.setAutoCalloutVisible(true);
-////                if (ManagementLocation.getInstance().getSortSpinner() == "공공화장실") {
-////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);
-////                } else if (ManagementLocation.getInstance().getSortSpinner() == "주차장") {
-////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder2);
-////                } else if (ManagementLocation.getInstance().getSortSpinner() == "공원") {
-////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder3);
-////                } else if (ManagementLocation.getInstance().getSortSpinner() == "전통시장") {
-////                    bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.mapholder4);
-////                }
-////                bitmap = Bitmap.createScaledBitmap(bitmap, 70, 70, true);
-////                tItem5.setIcon(bitmap);
-//                tmapview.bringMarkerToFront(tItem5);
-//                tmapview.addMarkerItem("ListToMap", tItem5);
-
-//            }
-        }
-    };
 
     public void ListToMap(){
         Bitmap bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.mapholder1);

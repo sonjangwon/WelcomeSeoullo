@@ -1,11 +1,9 @@
 package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
-import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Address;
@@ -17,7 +15,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -28,16 +25,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.CustomTypefaceSpan;
-import com.example.jangwon.welcomeseoullo.MainActivity;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Random;
 
 
 public class GuideInfoFragment extends Fragment {
@@ -116,9 +110,10 @@ public class GuideInfoFragment extends Fragment {
             currentLatitude = ManagementLocation.getInstance().getCurrentLatitude();
             currentLongitude = ManagementLocation.getInstance().getCurrentLongitude();
             currentAddress = ManagementLocation.getInstance().getCurrentAddress();
-
             addressTextView = (TextView) view.findViewById(R.id.addressTextView);
-
+            if((int)currentLatitude!=0) {
+                addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
+            }
             ManagementLocation.getInstance().setSortSpinner("공공화장실");
             switchFragments(nowFragment);
 
@@ -246,9 +241,6 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-        settingGPS();
-        reverseGeocoder();
     }
 
     private void applyFontToString(Button button, Typeface font) {
@@ -362,10 +354,10 @@ public class GuideInfoFragment extends Fragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
+
             addressTextView.setText(ManagementLocation.getInstance().getCurrentAddress());
 
             if (ManageListToMap.getInstance().getClickedListView() == true) {
-//                MapGuideFragment.HandlerListToMap.sendEmptyMessage(1);
             }
         } else {
 

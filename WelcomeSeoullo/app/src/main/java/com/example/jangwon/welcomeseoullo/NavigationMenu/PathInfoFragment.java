@@ -30,7 +30,7 @@ public class PathInfoFragment extends Fragment {
     Button startPointAddress;
     LinearLayout categoryLinearLayout;
 
-    Button byCarButton;
+    static Button byCarButton;
     static Button byBusButton;
     Button onFootButton;
     boolean isFragmentShownAgain = false;
@@ -192,10 +192,8 @@ public class PathInfoFragment extends Fragment {
                 }
             });
             byCarButton.callOnClick();
-
         }
         else{
-
         }
         return view;
     }
@@ -203,7 +201,7 @@ public class PathInfoFragment extends Fragment {
     public static Handler buttonClickHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            byBusButton.callOnClick();
+            byCarButton.callOnClick();
         }
     };
 
@@ -220,7 +218,7 @@ public class PathInfoFragment extends Fragment {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_place, fr);
+        fragmentTransaction.add(R.id.fragment_place, fr);
         fragmentTransaction.commitAllowingStateLoss();
     }
 

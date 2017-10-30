@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,18 @@ public class FootFragment extends Fragment {
         drawLine();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("TestBus",String.valueOf(currentLatitude));
+        Log.e("TestBus",String.valueOf(currentLongitude));
+        if((int)currentLatitude==0) {
+            currentLatitude=ManagementLocation.getInstance().getCurrentLatitude();
+            currentLongitude=ManagementLocation.getInstance().getCurrentLongitude();
+            drawLine();
+        }
     }
 
     //맵 띄우기
