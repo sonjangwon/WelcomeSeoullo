@@ -11,37 +11,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.jangwon.welcomeseoullo.MainActivity;
 import com.example.jangwon.welcomeseoullo.R;
-
-import java.util.ArrayList;
-import java.util.Timer;
 
 public class HomeFragment extends Fragment {
 
     View view;
     Fragment fragment;
 
-    ArrayList<String> urlList = new ArrayList<String>(10);
-    //현재화면인덱스
-
-    //AutoScrollViewPager viewPager;
     ClickableAutoViewPager viewPager;
-    private Integer[] Images;
-    private ArrayList<Integer> ImgArray = new ArrayList<Integer>();
-    //InfiniteViewPager view;
-    final long DELAY_MS = 500;
-    final long PERIOD_MS = 3000;
-    int currentPage = 0;
-    Timer timer;
-
-    private TextView[] dots;
-    private int[] layouts;
-    private LinearLayout dotsLayout;
-    //load more recyclerView list
-    TextView loadMoreText;
 
     //메인버튼
     ImageButton imageNotice;

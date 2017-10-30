@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,5 +46,22 @@ public class MainHomeFragment extends Fragment {
         fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.main_home_fragment_place, fragment).addToBackStack(null).commit();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            if(homeFragment != null){
+                Log.v("jae", "visible");
+                homeFragment.viewPager.startAutoScroll();
+            }
+        }
+        else {
+            if(homeFragment != null){
+                Log.v("jae", "invisible");
+                homeFragment.viewPager.stopAutoScroll();
+            }
+        }
     }
 }
