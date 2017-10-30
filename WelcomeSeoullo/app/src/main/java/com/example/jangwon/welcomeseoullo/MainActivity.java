@@ -198,7 +198,6 @@ public class MainActivity extends Activity {
         adapter.addFragment(settingsFragment);
 
         viewPager.setAdapter(adapter);
-
     }
 
     @Override

@@ -1,15 +1,13 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,9 +16,7 @@ import com.example.jangwon.welcomeseoullo.R;
 
 import java.util.ArrayList;
 
-public class NoticeFragment extends Fragment {
-
-    View view;
+public class NoticeActivity extends Activity {
 
     //크롤링해서 새소식 데이터담을 리스트
     ArrayList<String> titleList = new ArrayList<String>(10);
@@ -41,29 +37,26 @@ public class NoticeFragment extends Fragment {
     NestedScrollView mScrollView;
     ImageView centerImage;
 
-    public NoticeFragment(){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_notice);
 
-    }
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-
-        view = inflater.inflate(R.layout.fragment_notice, container, false);
-
-        mScrollView = (NestedScrollView) view.findViewById(R.id.nestedScrollView);
-        centerImage = (ImageView) view.findViewById(R.id.newNoticeImage);
+        mScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
+        centerImage = (ImageView) findViewById(R.id.newNoticeImage);
         mScrollView.smoothScrollBy(100, 1000);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
         DividerItemDecoration dividerItemDecoration =
-                new DividerItemDecoration(getActivity().getApplicationContext(),new LinearLayoutManager(getActivity()).getOrientation());
+                new DividerItemDecoration(getApplicationContext(),new LinearLayoutManager(this).getOrientation());
         mRecyclerView.addItemDecoration(dividerItemDecoration);
         mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(getActivity().getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+                new RecyclerItemClickListener(getApplicationContext(), mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Intent intent = new Intent(getActivity().getApplicationContext(), ViewContents.class);
+                        Intent intent = new Intent(getApplicationContext(), ViewContents.class);
                         intent.putExtra("urlNum", NewsCrawling.getInstance().urlNumList.get(position));
                         startActivity(intent);
                     }
@@ -75,25 +68,6 @@ public class NoticeFragment extends Fragment {
 
                 }));
 
-        //items = new ArrayList<>();
-        mRecyclerView.setAdapter(new RecyclerAdapter(getActivity().getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_notice));
-
-        return view;
+        mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_notice));
     }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-
-//        NewThread task = new NewThread();
-//        if (count == 0) {
-//            task.execute();
-//            //Log.e("어싱크실행", task.getStatus().toString());
-//            count++;
-//        } else {
-//            task.cancel(true);
-//        }
-    }
-
 }
