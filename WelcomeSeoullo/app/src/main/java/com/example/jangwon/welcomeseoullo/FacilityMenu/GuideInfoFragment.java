@@ -1,9 +1,11 @@
 package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
+import android.Manifest;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.location.Address;
@@ -15,6 +17,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
@@ -25,13 +28,16 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jangwon.welcomeseoullo.CustomTypefaceSpan;
+import com.example.jangwon.welcomeseoullo.MainActivity;
 import com.example.jangwon.welcomeseoullo.ManagementLocation;
 import com.example.jangwon.welcomeseoullo.R;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 
 public class GuideInfoFragment extends Fragment {
@@ -62,6 +68,8 @@ public class GuideInfoFragment extends Fragment {
     LinearLayout parkinglotLinearLayout;
     LinearLayout parkLinearLayout;
     LinearLayout marketLinearLayout;
+
+    Location currentLocation = null;
 
     public static Context mContext;
 
@@ -238,6 +246,7 @@ public class GuideInfoFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         settingGPS();
         reverseGeocoder();
     }
@@ -304,7 +313,8 @@ public class GuideInfoFragment extends Fragment {
     }
 
     //역 지오코딩(위도경도를 상세주소로 변경)
-    public void reverseGeocoder() {
+    public void reverseGeocoder()
+    {
         final Geocoder geocoder = new Geocoder(getActivity());
         List<Address> list = null;
         try {
@@ -316,7 +326,7 @@ public class GuideInfoFragment extends Fragment {
             e.printStackTrace();
         }
         if (list != null) {
-            if (list.size() == 0) {
+            if (list.size()==0) {
             } else {
                 addressTextView.setText(list.get(0).getAddressLine(0).toString().substring(5));
             }
@@ -360,7 +370,5 @@ public class GuideInfoFragment extends Fragment {
         } else {
 
         }
-
-
     }
 }

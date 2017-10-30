@@ -1,11 +1,10 @@
 package gl.animations;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import gl.Color;
 import gl.HasColor;
 import gl.Renderable;
-
-import javax.microedition.khronos.opengles.GL10;
-
 import util.Log;
 import util.Vec;
 import worldData.Updateable;

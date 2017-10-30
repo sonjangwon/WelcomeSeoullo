@@ -1,7 +1,5 @@
 package actions;
 
-import geo.GeoUtils;
-import system.EventManager;
 import android.app.Activity;
 import android.app.Dialog;
 import android.location.Location;
@@ -12,7 +10,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import de.rwth.R;
+import geo.GeoUtils;
+import system.EventManager;
 
 public abstract class ActionWaitForAccuracy extends Action {
 
@@ -54,7 +55,7 @@ public abstract class ActionWaitForAccuracy extends Action {
 	 *            accurate enough (something around 6)
 	 */
 	public ActionWaitForAccuracy(Activity context, float minAccuracy,
-			int maxPosUpdateCount) {
+                                 int maxPosUpdateCount) {
 		myActivity = context;
 		myMinAccuracy = minAccuracy;
 		myMaxPosUpdateCount = maxPosUpdateCount;

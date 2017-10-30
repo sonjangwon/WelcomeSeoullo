@@ -12,7 +12,7 @@ public class DefaultNodeEdgeListener extends SimpleNodeEdgeListener {
 
 	@Override
 	public MeshComponent getEdgeMesh(GeoGraph targetGraph, GeoObj startPoint,
-			GeoObj endPoint) {
+                                     GeoObj endPoint) {
 		return Edge.getDefaultMesh(targetGraph, startPoint, endPoint, null);
 	}
 

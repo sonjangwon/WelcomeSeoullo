@@ -1,13 +1,14 @@
 package gui;
 
-import util.Log;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import de.rwth.R;
+import util.Log;
 
 public class DefaultListItemView extends LinearLayout {
 

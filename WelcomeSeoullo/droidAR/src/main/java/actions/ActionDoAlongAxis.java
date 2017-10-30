@@ -1,8 +1,9 @@
 package actions;
 
+import android.view.MotionEvent;
+
 import gl.GLCamera;
 import util.Vec;
-import android.view.MotionEvent;
 
 /**
  * This uses the virtual camera rotation to map input from the touchscreen or
@@ -30,7 +31,7 @@ public abstract class ActionDoAlongAxis extends Action {
 	 *            slower the movement
 	 */
 	public ActionDoAlongAxis(GLCamera camera, float trackballFactor,
-			float touchscreenFactor) {
+                             float touchscreenFactor) {
 		myTargetCamera = camera;
 		myTrackballFactor = trackballFactor;
 		myTouchscreenReductionFactor = touchscreenFactor;

@@ -2,8 +2,6 @@ package de.rwth.setups;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.widget.Toast;
-
 import actions.ActionMoveCameraBuffered;
 import actions.ActionRotateCameraBuffered;
 import actions.ActionWASDMovement;

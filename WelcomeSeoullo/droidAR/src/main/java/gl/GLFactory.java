@@ -24,20 +24,6 @@ import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
-/**
- * Use this factory to understand how to create 3D objects with {@link Shape}s
- * and {@link RenderGroup}s. Often it is more efficient to create the objects
- * you need manually and not combine objects created with this factory. The
- * benefits of algorithmic objects are that they are much more flexible and
- * random {@link Vec}tors can be used to add a unique touch to each object.
- * 
- * Loading object from externmal files like md3 is the alternative to this
- * approach.
- * 
- * 
- * @author Spobo
- * 
- */
 public class GLFactory {
 
 	private static final String LOG_TAG = "GLFactory";

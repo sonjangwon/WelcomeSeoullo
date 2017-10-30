@@ -1,13 +1,13 @@
 package gl.scenegraph;
 
-import gl.Color;
-import gl.GLUtilityClass;
-import gl.ObjectPicker;
-
 import java.nio.FloatBuffer;
 import java.util.ArrayList;
 
 import javax.microedition.khronos.opengles.GL10;
+
+import gl.Color;
+import gl.GLUtilityClass;
+import gl.ObjectPicker;
 
 public class MultiColorRenderData extends RenderData {
 

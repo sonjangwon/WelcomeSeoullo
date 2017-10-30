@@ -51,7 +51,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import de.rwth.TechDemoLauncher;
 import de.rwth.setups.StaticDemoSetup;
 import gl.GL1Renderer;
 import gl.GLFactory;
