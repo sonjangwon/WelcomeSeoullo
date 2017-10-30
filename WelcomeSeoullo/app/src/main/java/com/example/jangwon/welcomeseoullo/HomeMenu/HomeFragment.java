@@ -79,6 +79,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 switchFragment(noticeFragment);
                 MainActivity.isHomeFragmentVisible = false;
+//                startActivity(new Intent(getActivity().getApplicationContext(), NoticeActivity.class));
             }
         });
         imageWalkingCourse.setOnClickListener(new Button.OnClickListener() {
@@ -104,6 +105,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 switchFragment(noticeFragment);
                 MainActivity.isHomeFragmentVisible = false;
+//                startActivity(new Intent(getActivity().getApplicationContext(), NoticeActivity.class));
             }
         });
         btn_walkingCourse.setOnClickListener(new Button.OnClickListener() {
@@ -129,6 +131,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 switchFragment(noticeFragment);
                 MainActivity.isHomeFragmentVisible = false;
+//                startActivity(new Intent(getActivity().getApplicationContext(), NoticeActivity.class));
             }
         });
         walkingCourseSection.setOnClickListener(new Button.OnClickListener() {

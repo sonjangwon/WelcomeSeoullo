@@ -198,8 +198,6 @@ public class MainActivity extends Activity {
         adapter.addFragment(settingsFragment);
 
         viewPager.setAdapter(adapter);
-
-//        Toast.makeText(this, "HELLO SETUPVIEWPAGER", Toast.LENGTH_SHORT).show();
     }
 
     @Override
