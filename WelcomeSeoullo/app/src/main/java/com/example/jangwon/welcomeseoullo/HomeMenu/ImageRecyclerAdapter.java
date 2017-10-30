@@ -1,12 +1,15 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.jangwon.welcomeseoullo.R;
 
 import java.util.List;
@@ -19,10 +22,14 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     Context context;
     List<ImageItems> items;
     int item_layout;
+    Bitmap galImage = null;
+    BitmapFactory.Options options;
+
     public ImageRecyclerAdapter(Context context, List<ImageItems> items, int item_layout) {
         this.context = context;
         this.items = items;
         this.item_layout = item_layout;
+        options = new BitmapFactory.Options();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -43,12 +50,20 @@ public class ImageRecyclerAdapter extends RecyclerView.Adapter<ImageRecyclerAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final ImageItems item = items.get(position);
-        holder.icon.setScaleType(ImageView.ScaleType.FIT_XY);
-        holder.icon.setImageResource(item.getImage());
+
+            //galImage = BitmapFactory.decodeResource(context.getResources(), item.getImage());
+            holder.icon.setScaleType(ImageView.ScaleType.FIT_XY);
+            //holder.icon.setImageBitmap(galImage);
+
+        Glide.with(context).load(item.getImage()).into(holder.icon);
+        //holder.icon.setImageResource(item.getImage());
     }
+
+
 
     @Override
     public int getItemCount() {
         return this.items.size();
     }
+
 }

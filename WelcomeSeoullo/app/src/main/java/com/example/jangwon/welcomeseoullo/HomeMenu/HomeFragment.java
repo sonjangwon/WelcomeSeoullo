@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,9 +70,8 @@ public class HomeFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_home, container, false);
         viewPager = (ClickableAutoViewPager) view.findViewById(R.id.viewPager);
-
+        view.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
-        PagerAdapter wrappedAdapter = new InfinitePagerAdapter(imgadapter, getActivity().getApplicationContext());
 
         viewPager.setAdapter(imgadapter);
         viewPager.startAutoScroll();

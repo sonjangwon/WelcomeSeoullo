@@ -40,23 +40,19 @@ public class FirstHistoryFragment extends Fragment {
         String imageURL3 = "http://postfiles10.naver.net/MjAxNzEwMjlfNjIg/MDAxNTA5MjgwODI0MzY4.XiXTUZ9ZlOm4RcOmi1S3tOoXbkl0djKlF5ExIlP64jog.5JDz3OwjhWSSPK9NqJLfsXE_PtD937IPKpZiZ33r8pcg.PNG.qkrgy1206/welcomeseoullo_source1_3.png?type=w1";
         String imageURL4 = "http://postfiles4.naver.net/MjAxNzEwMjlfMjcz/MDAxNTA5MjgwODI4MzQ0.8oVkvXbBK1BDT5UwyWXEaL0hDFJDa-N4vJ__Fiqv2VEg.apMo2j4JO1YcxDyoSNXRCK5_zfk44xB-GkH2UJqEdvMg.PNG.qkrgy1206/welcomeseoullo_source1_4.png?type=w1";
         String imageURL5 = "http://postfiles2.naver.net/MjAxNzEwMjlfMTIg/MDAxNTA5MjgwODMwNzE1.hYuiytE9ZarybsXfnUemEYmncgxuWqXYb7bpS_Kafv8g.uh9owley3vK_xkvXAPK1LMZr-EdG6QR6Otswtvxt-rMg.PNG.qkrgy1206/welcomeseoullo_source1_5.png?type=w1";
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL1)
-                .into(imageView1);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL2)
-                .into(imageView2);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL3)
-                .into(imageView3);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL4)
-                .into(imageView4);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL5)
-                .into(imageView5);
-
+        setImage(imageURL1, imageView1);
+        setImage(imageURL2, imageView2);
+        setImage(imageURL3, imageView3);
+        setImage(imageURL4, imageView4);
+        setImage(imageURL5, imageView5);
 
         return view;
+    }
+    public void setImage(String url, ImageView image)
+    {
+        Picasso.with(getActivity().getApplicationContext())
+                .load(url)
+                .skipMemoryCache()
+                .into(image);
     }
 }
