@@ -14,9 +14,9 @@ import java.net.URLEncoder;
 
 public class PathTracker {
     //경로안내 정보를 제공하는 클래스
-    int totalTime ;
-    int totalDistance ;
-    int taxiFare ;
+    static int PathTrackerTotalTime ;
+    static int PathTrackerTotalDistance ;
+    static int PathTrackerTaxiFare ;
 
     //클래스가 생성될때 경로유형, 출발지, 도착지를 매개변수로 받음
     public PathTracker(final String pathType, final TMapPoint startpoint, final TMapPoint endpoint) {  //final TMapData.TMapPathType type,
@@ -62,9 +62,9 @@ public class PathTracker {
                         Node timeItem = list.item(0);
                         Node distanceItem = list2.item(0);
                         Node taxiFareItem = list3.item(0);
-                        totalDistance = Integer.parseInt(distanceItem.getTextContent());
-                        totalTime = Integer.parseInt(timeItem.getTextContent());
-                        taxiFare = Integer.parseInt(taxiFareItem.getTextContent());
+                        PathTrackerTotalDistance = Integer.parseInt(distanceItem.getTextContent());
+                        PathTrackerTotalTime = Integer.parseInt(timeItem.getTextContent());
+                        PathTrackerTaxiFare = Integer.parseInt(taxiFareItem.getTextContent());
 
                         Integer bun = Integer.parseInt(timeItem.getTextContent()) / 60;
                     }
@@ -75,14 +75,14 @@ public class PathTracker {
     }
     //총 거리
     public int getTotalDistance(){
-        return totalDistance;
+        return PathTrackerTotalDistance;
     }
     //총 시간
     public int getTotalTime(){
-        return totalTime;
+        return PathTrackerTotalTime;
     }
     //택시요금
     public int getTaxiFare(){
-        return taxiFare;
+        return PathTrackerTaxiFare;
     }
 }

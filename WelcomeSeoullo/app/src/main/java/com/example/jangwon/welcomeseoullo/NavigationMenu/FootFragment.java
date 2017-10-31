@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,8 +64,6 @@ public class FootFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.e("TestBus",String.valueOf(currentLatitude));
-        Log.e("TestBus",String.valueOf(currentLongitude));
         if((int)currentLatitude==0) {
             currentLatitude=ManagementLocation.getInstance().getCurrentLatitude();
             currentLongitude=ManagementLocation.getInstance().getCurrentLongitude();
@@ -88,8 +85,8 @@ public class FootFragment extends Fragment {
 //        Bitmap end = BitmapFactory.decodeResource(getActivity().getResources(),R.drawable.arrivalpoint);
 //        tmapview.setTMapPathIcon(start, end);
 
-//        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
-        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
+        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
+//        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
         ArrayList<TMapPoint> point = new ArrayList<TMapPoint>();
 
         point.add(startPoint);

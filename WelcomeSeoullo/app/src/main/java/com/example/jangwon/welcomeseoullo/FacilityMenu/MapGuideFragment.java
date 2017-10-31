@@ -131,9 +131,8 @@ public class MapGuideFragment extends Fragment {
         gpsButton.setOnClickListener(new EditText.OnClickListener(){
             @Override
             public void onClick(View view) {
-//                Toast.makeText(getActivity(),String.valueOf(currentLongitude),Toast.LENGTH_SHORT).show();
                 tmapview.setTrackingMode(true);
-                tmapview.setSightVisible(true);
+//                tmapview.setSightVisible(true);
             }
         });
 

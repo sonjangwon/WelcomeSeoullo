@@ -122,8 +122,8 @@ public class CarFragment extends Fragment {
         startPoint = new TMapPoint(currentLatitude,currentLongitude);    //현재위치
         endPoint = new TMapPoint(37.5536067,126.96961950000002);  //서울로7017
 
-//        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
-        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
+        tmapview.setSKPMapApiKey("cad2cc9b-a3d5-3c32-8709-23279b7247f9");
+//        tmapview.setSKPMapApiKey("500adabd-fcb2-34fd-af42-022c6611b9a7");
         ArrayList<TMapPoint> point = new ArrayList<TMapPoint>();
 
         point.add(startPoint);

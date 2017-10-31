@@ -118,9 +118,6 @@ public class MainActivity extends Activity {
                     case R.id.action_facility:
                         currentMenu = R.id.action_facility;
                         mainViewPager.setCurrentItem(1);
-                        settingGPS();
-                        getMyLocation();
-                        reverseGeocoder();
                         break;
                     case R.id.action_AR:
                         currentMenu = R.id.action_AR;
@@ -189,6 +186,26 @@ public class MainActivity extends Activity {
         viewPager.setAdapter(adapter);
     }
 
+    private void reSetupViewPager(ViewPager viewPager) {
+        adapter = new ViewPagerAdapter(getFragmentManager());
+
+//        mainHomeFragment = new MainHomeFragment();
+//        homeFragment = new HomeFragment();
+        guideInfoFragment = new GuideInfoFragment();
+//        arFragment = new BlankFragment();
+        pathInfoFragment = new PathInfoFragment();
+//        settingsFragment = new SettingsFragment();
+
+        adapter.addFragment(mainHomeFragment);
+        adapter.addFragment(guideInfoFragment);
+        adapter.addFragment(arFragment);
+        adapter.addFragment(pathInfoFragment);
+        adapter.addFragment(settingsFragment);
+
+        viewPager.setAdapter(adapter);
+
+    }
+
     @Override
     public void onBackPressed() {
         long tempTime = System.currentTimeMillis();
@@ -251,10 +268,6 @@ public class MainActivity extends Activity {
     @Override
     public void onResume() {
         super.onResume();
-//        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/barefoot_regular.ttf");
-//        for(int i=0;i<5;i++){
-//            applyFontToMenuItem(bottomNavigationView.getMenu().getItem(i), typeface);
-//        }
 
         settingGPS();
         // 사용자의 현재 위치 //
@@ -290,7 +303,7 @@ public class MainActivity extends Activity {
                 //위도경도를 상세주소로 변경
                 reverseGeocoder();
                 ManagementLocation.getInstance().setCurrentAddress(currentAddress);
-                setupViewPager(mainViewPager);
+                reSetupViewPager(mainViewPager);
                 ManagementLocation.getInstance().setRequestLocationPermission(false);
             }
         }
