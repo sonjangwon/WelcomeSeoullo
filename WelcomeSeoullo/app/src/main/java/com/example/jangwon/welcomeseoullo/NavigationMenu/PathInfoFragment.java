@@ -218,7 +218,7 @@ public class PathInfoFragment extends Fragment {
 
         FragmentManager fm = getFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_place, fr);
+        fragmentTransaction.replace(R.id.fragment_place, fr);
         fragmentTransaction.commitAllowingStateLoss();
     }
 
