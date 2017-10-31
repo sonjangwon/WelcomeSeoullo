@@ -189,14 +189,10 @@ public class MainActivity extends Activity {
     private void reSetupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getFragmentManager());
 
-//        mainHomeFragment = new MainHomeFragment();
-//        homeFragment = new HomeFragment();
         guideInfoFragment = new GuideInfoFragment();
-//        arFragment = new BlankFragment();
         pathInfoFragment = new PathInfoFragment();
-//        settingsFragment = new SettingsFragment();
 
-        adapter.addFragment(mainHomeFragment);
+        adapter.addFragment(homeFragment);
         adapter.addFragment(guideInfoFragment);
         adapter.addFragment(arFragment);
         adapter.addFragment(pathInfoFragment);
