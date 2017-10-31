@@ -136,7 +136,6 @@ public class FootFragment extends Fragment {
         totalDistanceTextView.setText(String.valueOf(totalDistance/(double)1000)+"km");
         calorieTextView.setText(String.valueOf((totalTime/60)*6)+"kcal");
 
-
         tmapdata.findPathDataWithType(TMapData.TMapPathType.CAR_PATH, startPoint, endPoint,  new TMapData.FindPathDataListenerCallback() {
             @Override
             public void onFindPathData(TMapPolyLine tMapPolyLine) {
@@ -145,8 +144,5 @@ public class FootFragment extends Fragment {
                 tmapview.addTMapPath(tMapPolyLine);
             }
         });
-
-
     }
-
 }

@@ -13,10 +13,6 @@ import com.example.jangwon.welcomeseoullo.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Jangwon on 2017-09-19.
- */
-
 public class ListViewAdapter extends BaseAdapter {
 
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList

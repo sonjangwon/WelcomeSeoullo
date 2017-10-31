@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.example.jangwon.welcomeseoullo.LoadingDialog;
 import com.example.jangwon.welcomeseoullo.R;
 
 public class NoticeActivity extends Activity {
@@ -61,14 +59,6 @@ public class NoticeActivity extends Activity {
                 }));
 
         mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_notice));
-
-        LoadingDialog.getInstance().progressON(this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LoadingDialog.getInstance().progressOFF();
-            }
-        }, 2500);
     }
 
     @Override

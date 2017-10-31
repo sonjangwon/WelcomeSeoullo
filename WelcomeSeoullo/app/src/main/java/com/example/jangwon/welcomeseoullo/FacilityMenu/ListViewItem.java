@@ -2,10 +2,6 @@ package com.example.jangwon.welcomeseoullo.FacilityMenu;
 
 import android.graphics.drawable.Drawable;
 
-/**
- * Created by Jangwon on 2017-09-19.
- */
-
 public class ListViewItem {
 
     private Drawable iconDrawable ;

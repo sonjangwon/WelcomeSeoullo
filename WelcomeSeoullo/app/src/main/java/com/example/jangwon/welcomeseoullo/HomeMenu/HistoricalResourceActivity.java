@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.Window;
@@ -13,7 +12,6 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.jangwon.welcomeseoullo.LoadingDialog;
 import com.example.jangwon.welcomeseoullo.R;
 
 public class HistoricalResourceActivity extends Activity {
@@ -81,14 +79,6 @@ public class HistoricalResourceActivity extends Activity {
 
             }
         });
-
-        LoadingDialog.getInstance().progressON(this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                LoadingDialog.getInstance().progressOFF();
-            }
-        }, 2500);
     }
 
     View.OnClickListener movePageListener = new View.OnClickListener()

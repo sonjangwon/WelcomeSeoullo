@@ -54,35 +54,7 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
-
-//        final ListPreference languageList = (ListPreference) findPreference("language_list");
-//        languageList.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener(){
-//            @Override
-//            public boolean onPreferenceChange(Preference preference, Object newValue){
-//                if(newValue.toString().equals("영어")){
-//                    languageList.setTitle("언어 : English");
-//                    languageList.setSummary("눌러서 언어 변경");
-//                    savePreferences("language", "English");
-//                }
-//                else{
-//                    languageList.setTitle("언어 : 한국어");
-//                    languageList.setSummary("Click to change language");
-//                    savePreferences("language", "Korean");
-//                }
-//                return true;
-//            }
-//        });
     }
-
-//    public void startLoading(){
-//        LoadingDialog.getInstance().progressON(getActivity());
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                LoadingDialog.getInstance().progressOFF();
-//            }
-//        }, 3500);
-//    }
 
     //SharedPreference 값 불러오기
     private String getPreferences(String key){

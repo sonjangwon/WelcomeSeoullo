@@ -171,9 +171,6 @@ public class GuideAppInfo extends Activity {
         }
     };
 
-    /**
-     * Making notification bar transparent
-     */
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -182,9 +179,6 @@ public class GuideAppInfo extends Activity {
         }
     }
 
-    /**
-     * View pager adapter
-     */
     public class MyViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 
@@ -318,8 +312,6 @@ public class GuideAppInfo extends Activity {
     // GPS 설정화면으로 이동
     private void moveConfigGPS() {
 
-//        Intent gpsOptionsIntent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-//        startActivity(gpsOptionsIntent);
         ManagementLocation.getInstance().setRequestLocationPermission(true);
         Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivityForResult(myIntent,100);
