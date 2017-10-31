@@ -2,36 +2,26 @@ package com.example.jangwon.welcomeseoullo.HomeMenu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.example.jangwon.welcomeseoullo.LoadingDialog;
 import com.example.jangwon.welcomeseoullo.R;
-
-import java.util.ArrayList;
 
 public class NoticeActivity extends Activity {
 
-    //크롤링해서 새소식 데이터담을 리스트
-    ArrayList<String> titleList = new ArrayList<String>(10);
-    ArrayList<String> urlNumList = new ArrayList<String>(10);
-    ArrayList<String> dateList = new ArrayList<String>(10);
-    int count = 0;
     //카드뷰 선언--------------------------------
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    public ArrayList<Item> items;
-
-    private TextView[] dots;
-    private int[] layouts;
-    private LinearLayout dotsLayout;
 
     //SwipeRefreshLayout mSwipeRefreshLayout;
     NestedScrollView mScrollView;
@@ -41,6 +31,8 @@ public class NoticeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_notice);
+
+        changeStatusBarColor();
 
         mScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
         centerImage = (ImageView) findViewById(R.id.newNoticeImage);
@@ -69,5 +61,29 @@ public class NoticeActivity extends Activity {
                 }));
 
         mRecyclerView.setAdapter(new RecyclerAdapter(getApplicationContext(), NewsCrawling.getInstance().items, R.layout.fragment_notice));
+
+        LoadingDialog.getInstance().progressON(this);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LoadingDialog.getInstance().progressOFF();
+            }
+        }, 2500);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.animation3, R.anim.animation4);
+    }
+
+    //상태바 없애기
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryTranslucent));
+        }
     }
 }

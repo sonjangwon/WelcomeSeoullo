@@ -1,38 +1,42 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.jangwon.welcomeseoullo.LoadingDialog;
 import com.example.jangwon.welcomeseoullo.R;
 
-//서울로 도보 관광코스를 보여주는 액티베이터
-public class SeoulloCourseFragment extends Fragment{
-
-    View view;
+public class SeoulloCourseActivity extends Activity {
 
     //버튼 클릭시 남산코스 무슨코스 다 보여줌 목록으로 근데 그 하위프래그먼트 생기게해서 보여줄것같은데 조사 필요
     ViewPager vp;
     LinearLayout linearLayout;
     String tagName = "SeoulloCourse";
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_seoullo_course);
 
-        view = inflater.inflate(R.layout.fragment_seoullo_course, container, false);
+        changeStatusBarColor();
 
-        vp = (ViewPager) view.findViewById(R.id.pager);
-        linearLayout = (LinearLayout) view.findViewById(R.id.tabLinearLayout);
+        vp = (ViewPager) findViewById(R.id.pager);
+        linearLayout = (LinearLayout) findViewById(R.id.tabLinearLayout);
 
-        TextView tab_first = (TextView) view.findViewById(R.id.NamsanCourse);
-        TextView tab_second = (TextView) view.findViewById(R.id.JunglimCourse);
-        TextView tab_third = (TextView) view.findViewById(R.id.ChungpaCourse);
-        TextView tab_fourth = (TextView) view.findViewById(R.id.allCourse);
+        TextView tab_first = (TextView) findViewById(R.id.NamsanCourse);
+        TextView tab_second = (TextView) findViewById(R.id.JunglimCourse);
+        TextView tab_third = (TextView) findViewById(R.id.ChungpaCourse);
+        TextView tab_fourth = (TextView) findViewById(R.id.allCourse);
 
         vp.setAdapter(new pagerAdapter(getFragmentManager()));
         vp.setCurrentItem(0);
@@ -74,7 +78,13 @@ public class SeoulloCourseFragment extends Fragment{
             }
         });
 
-        return view;
+        LoadingDialog.getInstance().progressON(this);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                LoadingDialog.getInstance().progressOFF();
+            }
+        }, 2500);
     }
 
     View.OnClickListener movePageListener = new View.OnClickListener() {
@@ -120,6 +130,22 @@ public class SeoulloCourseFragment extends Fragment{
         @Override
         public int getCount() {
             return 4;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.animation3, R.anim.animation4);
+    }
+
+    //상태바 없애기
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryTranslucent));
         }
     }
 }

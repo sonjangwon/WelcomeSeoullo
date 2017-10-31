@@ -1,8 +1,7 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
+import android.app.ActivityOptions;
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import com.example.jangwon.welcomeseoullo.MainActivity;
 import com.example.jangwon.welcomeseoullo.R;
 
 public class HomeFragment extends Fragment {
@@ -35,11 +33,6 @@ public class HomeFragment extends Fragment {
     LinearLayout walkingCourseSection;
     LinearLayout historicalSection;
     LinearLayout guidanceSection;
-
-    NoticeFragment noticeFragment;
-    SeoulloCourseFragment seoulloCourseFragment;
-    HistoricalResourceFragment historicalResourceFragment;
-    GuidanceFragment guidanceFragment;
 
     public HomeFragment(){
 
@@ -70,88 +63,91 @@ public class HomeFragment extends Fragment {
         historicalSection = (LinearLayout) view.findViewById(R.id.historical_section);
         guidanceSection = (LinearLayout) view.findViewById(R.id.guidance_section);
 
-        noticeFragment = new NoticeFragment();
-        seoulloCourseFragment = new SeoulloCourseFragment();
-        historicalResourceFragment = new HistoricalResourceFragment();
-        guidanceFragment = new GuidanceFragment();
+
+
+        final Bundle bndlanimation = ActivityOptions.makeCustomAnimation(
+                getActivity().getApplicationContext(), R.anim.animation, R.anim.animation2).toBundle();
 
         imageNotice.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(noticeFragment);
-                MainActivity.isHomeFragmentVisible = false;
-//                startActivity(new Intent(getActivity().getApplicationContext(), NoticeActivity.class));
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), NoticeActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         imageWalkingCourse.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(seoulloCourseFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), SeoulloCourseActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         imageHistorical.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(historicalResourceFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), HistoricalResourceActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         imageGuidance.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(guidanceFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), GuidanceActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
 
+
+
         btn_newNotice.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(noticeFragment);
-                MainActivity.isHomeFragmentVisible = false;
-//                startActivity(new Intent(getActivity().getApplicationContext(), NoticeActivity.class));
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), NoticeActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         btn_walkingCourse.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(seoulloCourseFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), SeoulloCourseActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         btn_history.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(historicalResourceFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), HistoricalResourceActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         btn_usingTime.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(guidanceFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), GuidanceActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
 
+
+
         noticeSection.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(noticeFragment);
-                MainActivity.isHomeFragmentVisible = false;
-//                startActivity(new Intent(getActivity().getApplicationContext(), NoticeActivity.class));
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), NoticeActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         walkingCourseSection.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(seoulloCourseFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), SeoulloCourseActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         historicalSection.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(historicalResourceFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), HistoricalResourceActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
         guidanceSection.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                switchFragment(guidanceFragment);
-                MainActivity.isHomeFragmentVisible = false;
+                Intent slideactivity = new Intent(getActivity().getApplicationContext(), GuidanceActivity.class);
+                startActivity(slideactivity, bndlanimation);
             }
         });
+
+
 
         viewPager.setOnItemClickListener(new ClickableAutoViewPager.OnItemClickListener() {
             @Override
@@ -159,21 +155,10 @@ public class HomeFragment extends Fragment {
                 int pageNum = position % 8;
                 Intent intent = new Intent(getActivity().getApplicationContext(), EmoJeoMoImages.class);
                 intent.putExtra("position", String.valueOf(pageNum));
-                //Toast.makeText(getActivity().getApplicationContext(), String.valueOf(position)+String.valueOf(pageNum), Toast.LENGTH_SHORT).show();
                 startActivity(intent);
             }
         });
 
         return view;
-    }
-
-    public void switchFragment(Fragment switchingFragment){
-
-        fragment = switchingFragment;
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.main_home_fragment_place, fragment);
-        fragmentTransaction.commitAllowingStateLoss();
     }
 }

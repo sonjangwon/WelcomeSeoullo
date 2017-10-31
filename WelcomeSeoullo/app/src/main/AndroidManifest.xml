@@ -51,6 +51,12 @@
             android:name=".HomeMenu.EmoJeoMoImages"/>
         <activity android:name=".HomeMenu.NoticeActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".HomeMenu.SeoulloCourseActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HomeMenu.HistoricalResourceActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HomeMenu.GuidanceActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

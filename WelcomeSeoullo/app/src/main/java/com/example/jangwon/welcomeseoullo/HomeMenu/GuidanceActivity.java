@@ -1,17 +1,18 @@
 package com.example.jangwon.welcomeseoullo.HomeMenu;
 
-import android.app.Fragment;
+import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -25,10 +26,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-//메인에서 이용안내 및 시간
-public class GuidanceFragment extends Fragment{
-    //리플릿다운로드?부분 보여주고 안내시간 이용 시간은 이미지뷰로 나타냄
-    View view;
+
+public class GuidanceActivity extends Activity {
+
     Button korean;
     Button english;
     Button japanese;
@@ -38,19 +38,18 @@ public class GuidanceFragment extends Fragment{
     String FileName;
     private final int  MEGABYTE = 1024 * 1024;
 
-    public GuidanceFragment(){
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_guidance);
 
-    }
+        changeStatusBarColor();
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-
-        view = inflater.inflate(R.layout.fragment_guidance, container, false);
-
-        korean = (Button) view.findViewById(R.id.btn_korean);
-        english = (Button) view.findViewById(R.id.btn_english);
-        japanese = (Button) view.findViewById(R.id.btn_japan);
-        chinese = (Button) view.findViewById(R.id.btn_china);
-        guideDownload = (Button) view.findViewById(R.id.btn_guide);
+        korean = (Button) findViewById(R.id.btn_korean);
+        english = (Button) findViewById(R.id.btn_english);
+        japanese = (Button) findViewById(R.id.btn_japan);
+        chinese = (Button) findViewById(R.id.btn_china);
+        guideDownload = (Button) findViewById(R.id.btn_guide);
 
         korean.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
@@ -97,43 +96,34 @@ public class GuidanceFragment extends Fragment{
                 new DownloadFile().execute(DownloadURL,FileName);
             }
         });
-
-        return view;
     }
 
     final Handler downtoastHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
-            Toast.makeText(getActivity().getApplicationContext(), FileName+"다운로드 중", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), FileName+"다운로드 중", Toast.LENGTH_LONG).show();
         }
     };
     final Handler waittoastHandler = new Handler(){
         @Override
         public void handleMessage(Message msg){
-            Toast.makeText(getActivity().getApplicationContext(), "잠시만 기다려주세요", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "잠시만 기다려주세요", Toast.LENGTH_LONG).show();
         }
     };
 
     public void LoadFile(String url, String file)
     {
-
         File pdfFile = new File(Environment.getExternalStorageDirectory() +"/Download/"+ file);  // -> filename = maven.pdf
-        //if(pdfFile.exists()) {
-            Uri path = Uri.fromFile(pdfFile);
-            Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
-            pdfIntent.setDataAndType(path, "application/pdf");
-            pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        Uri path = Uri.fromFile(pdfFile);
+        Intent pdfIntent = new Intent(Intent.ACTION_VIEW);
+        pdfIntent.setDataAndType(path, "application/pdf");
+        pdfIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-            try {
-                startActivity(pdfIntent);
-            } catch (ActivityNotFoundException e) {
-                Toast.makeText(getActivity().getApplicationContext(), "No Application available to view PDF", Toast.LENGTH_SHORT).show();
-            }
-        //}
-        //else{
-            //Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-            //startActivity(browserIntent);
-        //}
+        try {
+            startActivity(pdfIntent);
+        } catch (ActivityNotFoundException e) {
+            Toast.makeText(getApplicationContext(), "No Application available to view PDF", Toast.LENGTH_SHORT).show();
+        }
     }
     public class DownloadFile extends AsyncTask<String, Void, String> {
 
@@ -157,11 +147,9 @@ public class GuidanceFragment extends Fragment{
         }
         @Override
         protected void onPostExecute(String result) {
-
             LoadFile(DownloadURL,FileName);
         }
     }
-
 
     public void downloadFile(String fileUrl, File directory){
         try {
@@ -188,6 +176,22 @@ public class GuidanceFragment extends Fragment{
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.animation3, R.anim.animation4);
+    }
+
+    //상태바 없애기
+    private void changeStatusBarColor() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryTranslucent));
         }
     }
 }

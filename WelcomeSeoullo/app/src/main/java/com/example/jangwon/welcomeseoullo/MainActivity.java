@@ -3,9 +3,6 @@ package com.example.jangwon.welcomeseoullo;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,7 +24,6 @@ import android.support.v4.view.ViewPager;
 import android.telephony.TelephonyManager;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -38,7 +34,6 @@ import android.widget.Toast;
 import com.example.jangwon.welcomeseoullo.ARMenu.BlankFragment;
 import com.example.jangwon.welcomeseoullo.FacilityMenu.GuideInfoFragment;
 import com.example.jangwon.welcomeseoullo.HomeMenu.HomeFragment;
-import com.example.jangwon.welcomeseoullo.HomeMenu.MainHomeFragment;
 import com.example.jangwon.welcomeseoullo.NavigationMenu.PathInfoFragment;
 import com.example.jangwon.welcomeseoullo.SettingsMenu.SettingsFragment;
 
@@ -63,7 +58,6 @@ public class MainActivity extends Activity {
     ViewPagerAdapter adapter;
     MenuItem prevMenuItem;
 
-    MainHomeFragment mainHomeFragment;
     HomeFragment homeFragment;
     GuideInfoFragment guideInfoFragment;
     BlankFragment arFragment;
@@ -119,7 +113,6 @@ public class MainActivity extends Activity {
                     case R.id.action_home:
                         currentMenu = R.id.action_home;
                         mainViewPager.setCurrentItem(0);
-                        switchFragment(homeFragment);
                         isHomeFragmentVisible = true;
                         break;
                     case R.id.action_facility:
@@ -175,23 +168,19 @@ public class MainActivity extends Activity {
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.colorPrimaryTranslucent));
-
-            //상태바 남는 공간 활용
-            //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         }
     }
 
     private void setupViewPager(ViewPager viewPager) {
         adapter = new ViewPagerAdapter(getFragmentManager());
 
-        mainHomeFragment = new MainHomeFragment();
         homeFragment = new HomeFragment();
         guideInfoFragment = new GuideInfoFragment();
         arFragment = new BlankFragment();
         pathInfoFragment = new PathInfoFragment();
         settingsFragment = new SettingsFragment();
 
-        adapter.addFragment(mainHomeFragment);
+        adapter.addFragment(homeFragment);
         adapter.addFragment(guideInfoFragment);
         adapter.addFragment(arFragment);
         adapter.addFragment(pathInfoFragment);
@@ -219,19 +208,8 @@ public class MainActivity extends Activity {
         }
         else{
             bottomNavigationView.setSelectedItemId(R.id.action_home);
-            switchFragment(homeFragment);
             isHomeFragmentVisible = true;
         }
-    }
-
-    public void switchFragment(Fragment switchingFragment){
-
-        Fragment fragment = switchingFragment;
-
-        FragmentManager fm = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.main_home_fragment_place, fragment).addToBackStack(null).commit();
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
     }
 
     //앱 종료 시, SharedPreference 값(ALL Data) 삭제하기
