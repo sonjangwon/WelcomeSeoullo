@@ -13,8 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 import com.example.jangwon.welcomeseoullo.R;
+
+import java.util.ArrayList;
 /**
  * Created by younghov on 2017. 10. 20..
  */
