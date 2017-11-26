@@ -66,6 +66,10 @@ public class ClickableAutoViewPager extends ViewPager {
         setup();
         setViewPagerScroller();
     }
+    public void stopAutoScroll() {
+        isAutoScroll = false;
+        handler.removeMessages(SCROLL_WHAT);
+    }
     public void startAutoScroll() {
         isAutoScroll = true;
         sendScrollMessage((long)(interval + scroller.getDuration() / autoScrollFactor * swipeScrollFactor));

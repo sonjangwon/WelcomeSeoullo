@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import util.Log;
-
 public class MainActivity extends Activity {
 
     private final long FINISH_INTERVAL_TIME = 2000;
@@ -128,7 +126,6 @@ public class MainActivity extends Activity {
                         settingGPS();
                         getMyLocation();
                         reverseGeocoder();
-                        Toast.makeText(MainActivity.this, "1 button click", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.action_AR:
                         currentMenu = R.id.action_AR;

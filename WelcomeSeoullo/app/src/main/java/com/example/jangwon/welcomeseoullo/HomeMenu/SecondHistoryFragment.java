@@ -54,7 +54,6 @@ public class SecondHistoryFragment extends Fragment {
     {
         Picasso.with(getActivity().getApplicationContext())
                 .load(url)
-                .skipMemoryCache()
                 .into(image);
     }
 }

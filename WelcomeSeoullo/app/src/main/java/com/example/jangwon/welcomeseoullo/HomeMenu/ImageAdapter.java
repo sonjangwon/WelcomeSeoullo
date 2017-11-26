@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -61,7 +62,7 @@ public class ImageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View v = null;
+        Log.e("ViewPager new", String.valueOf(position));
         ImageView imageView = new ImageView(context);
 
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
@@ -72,15 +73,13 @@ public class ImageAdapter extends PagerAdapter {
 
         imageView.setImageBitmap(galImage);
 
-        ((ViewPager) container).addView(imageView, 0);
-
+        ((ViewPager)container).addView(imageView, 0);
         return imageView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-
+        Log.e("POSITION", "Destroy Position::" + position);
         ((ViewPager)container).removeView((ImageView) object);
     }
-
   }

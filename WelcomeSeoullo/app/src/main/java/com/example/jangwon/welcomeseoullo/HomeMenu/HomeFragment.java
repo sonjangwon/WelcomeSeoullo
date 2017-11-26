@@ -74,8 +74,8 @@ public class HomeFragment extends Fragment {
         ImageAdapter imgadapter = new ImageAdapter(getActivity());
 
         viewPager.setAdapter(imgadapter);
-        viewPager.startAutoScroll();
-
+        //viewPager.startAutoScroll();
+        viewPager.setOffscreenPageLimit(1);
         imageNotice = (ImageButton) view.findViewById(R.id.image_notice);
         imageWalkingCourse = (ImageButton) view.findViewById(R.id.image_walking_course);
         imageHistorical = (ImageButton) view.findViewById(R.id.image_historical);

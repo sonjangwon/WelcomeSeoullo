@@ -50,7 +50,7 @@ public class FourthHistoryFragment extends Fragment {
     {
        Picasso.with(getActivity().getApplicationContext())
                 .load(url)
-                .skipMemoryCache()
+               .skipMemoryCache()
                 .into(image);
     }
 

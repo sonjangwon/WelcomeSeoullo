@@ -40,31 +40,26 @@ public class FourthCourseFragment extends Fragment {
         String imageURL3 = "http://postfiles11.naver.net/MjAxNzEwMjlfMjk5/MDAxNTA5MjI1ODE4Njc2.L1_h5Ev99FLhu2NVIoXzWdJns1VMGw9cUQtKz2gwW8og.zJxNKGL85bTHT2jAcdcGI8C--tr5P3sqtlAtbVqctoUg.PNG.qkrgy1206/welcomeseoullo4_3.png?type=w1";
         String imageURL4 = "http://postfiles7.naver.net/MjAxNzEwMjlfMTg0/MDAxNTA5MjI1ODIwMzAy.j9Sav5JBKLYS5Gte3sZ0uomnMB2ZOxR3roQmtdts8_0g._v9DaZ8yFauMU_XAj2coUUAgWrLY3CGREXg7dbucC8gg.PNG.qkrgy1206/welcomeseoullo4_4.png?type=w1";
         String imageURL5 = "http://postfiles1.naver.net/MjAxNzEwMjlfMTYg/MDAxNTA5MjI1ODIxOTE2.jaVmfgyAfcF-2WeCCkY3pNgy4vplcUqtwYv-JBjZASYg.5DFiK-jx08t5DDOgmPvsAmdo03BR8VYdE_tqfdOucGIg.PNG.qkrgy1206/welcomeseoullo4_5.png?type=w1";
-//        setImage(imageURL1, imageView);
-//        setImage(imageURL2, imageView2);
-//        setImage(imageURL3, imageView3);
-//        setImage(imageURL4, imageView4);
-//        setImage(imageURL5, imageView5);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL1)
-                .skipMemoryCache()
-                .into(imageView);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL2)
-                .skipMemoryCache()
-                .into(imageView2);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL3)
-                .skipMemoryCache()
-                .into(imageView3);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL4)
-                .skipMemoryCache()
-                .into(imageView4);
-        Picasso.with(getActivity().getApplicationContext())
-                .load(imageURL5)
-                .skipMemoryCache()
-                .into(imageView5);
+        setImage(imageURL1, imageView);
+        setImage(imageURL2, imageView2);
+        setImage(imageURL3, imageView3);
+        setImage(imageURL4, imageView4);
+        setImage(imageURL5, imageView5);
+//        Picasso.with(getActivity().getApplicationContext())
+//                .load(imageURL1)
+//                .into(imageView);
+//        Picasso.with(getActivity().getApplicationContext())
+//                .load(imageURL2)
+//                .into(imageView2);
+//        Picasso.with(getActivity().getApplicationContext())
+//                .load(imageURL3)
+//                .into(imageView3);
+//        Picasso.with(getActivity().getApplicationContext())
+//                .load(imageURL4)
+//                .into(imageView4);
+//        Picasso.with(getActivity().getApplicationContext())
+//                .load(imageURL5)
+//                .into(imageView5);
         return view;
     }
     public void setImage(String url, ImageView image)

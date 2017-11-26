@@ -16,7 +16,6 @@ import com.example.jangwon.welcomeseoullo.R;
 public class SeoulloCourseFragment extends Fragment{
 
     View view;
-
     //버튼 클릭시 남산코스 무슨코스 다 보여줌 목록으로 근데 그 하위프래그먼트 생기게해서 보여줄것같은데 조사 필요
     ViewPager vp;
     LinearLayout linearLayout;
@@ -122,4 +121,5 @@ public class SeoulloCourseFragment extends Fragment{
             return 4;
         }
     }
+
 }
