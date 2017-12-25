@@ -59,8 +59,7 @@
 본 애플리케이션은 사용자의 현재 위치에서 서울로7017을 방문하는 길 안내를 자동차, 도보뿐만 아니라 대중교통까지 제공합니다.
 자동차 길 안내 시 Tmap과 연동하여 서울로7017까지 내비게이션 기능을 제공받을 수 있습니다.
 
-## 3. 영상
-<iframe width="560" height="315" src="https://www.youtube.com/embed/3eRe8qF3iKg" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+## [3. 영상 링크](https://www.youtube.com/embed/3eRe8qF3iKg)
 
 ## 4. 수상
 - 2017 서울시 앱 공모전 열정상 수상
