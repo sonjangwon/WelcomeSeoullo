@@ -30,13 +30,7 @@
 
 ### 2.2. 서비스 내용
 
-<img src="http://cfile3.uf.tistory.com/image/99AF9E3359FF2CE01BF35C" width="22.2%">
-
-<img src="http://cfile10.uf.tistory.com/image/9925453359FF2CE110D986" width="21%">
-
-<img src="http://cfile8.uf.tistory.com/image/99DCF83359FF2CE13111C1" width="21.5%">
-
-<img src="http://cfile28.uf.tistory.com/image/996C613359FF2CE2231C95" width="21%">
+<img src="http://cfile3.uf.tistory.com/image/99AF9E3359FF2CE01BF35C" width="22.2%"><img src="http://cfile10.uf.tistory.com/image/9925453359FF2CE110D986" width="21%"><img src="http://cfile8.uf.tistory.com/image/99DCF83359FF2CE13111C1" width="21.5%"><img src="http://cfile28.uf.tistory.com/image/996C613359FF2CE2231C95" width="21%">
 
 #### - 서울로7017에 대한 정보를 안내
  현재 서울로7017 안내 애플리케이션이 존재하지 않고 서울로7017 안내소가 부족하기 때문에 서울로7017 내부시설과 주요행사의 정보를 얻기 어렵습니다.
